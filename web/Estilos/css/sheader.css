@@ -1,0 +1,606 @@
+    /*General*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+*{
+    margin:0;
+    padding:0;
+    font-family:"Calibri Light", Arial;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+::-webkit-scrollbar{
+    width:15px;
+    background-color:#87A2D1;
+}
+::-webkit-scrollbar-thumb{
+    /*-webkit-border-radius:5px;*/
+    /*border-radius:5px;*/
+    background-color:#87A2D1;
+}
+::-webkit-scrollbar-track{
+    -webkit-border-radius:0;
+    border-radius:0;
+    border-left:solid 2px #87A2D1;
+    background-color:#fff;
+}
+
+.me{
+    display:block;
+    margin-top:5px;
+}
+
+.inpDesa{
+    position:absolute !important;
+    visibility:hidden !important;
+    left:0;
+    top:0;
+}
+
+header{
+    width:100%;
+    font-size:1em;
+}
+
+.menuprin-slogo .header-active{
+    background:#2B4675 !important;
+    border-radius:0 !important;
+    border-bottom-right-radius:15px !important;
+    border-top-left-radius:15px !important;
+}
+    .menuprin-slogo .header-active:hover{
+        background:#2B4675 !important;
+        color:#fff !important;
+        border-radius:0 !important;
+        border-bottom-right-radius:15px !important;
+        border-top-left-radius:15px !important;
+    }
+
+/*Logo Cabecera*/
+.logoheader{
+    width:100%;
+    height:auto;
+    background:#fff;
+}
+    .logoheader a img{
+        padding:15px 0;
+        display:block;
+        margin:auto;
+    }
+
+/*Rutas Anteriores*/
+.breadcrumb li a{
+    text-decoration:none;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    color:#446EB6;
+    height:65%;
+    padding:0 3px;
+    margin-right:3px;
+    font-size:18px;
+    -webkit-transition:all 200ms ease;
+    -o-transition:all 200ms ease;
+    transition:all 200ms ease;
+}
+    .breadcrumb li a:hover{
+        text-decoration:none;
+        letter-spacing:1pt;
+    }
+
+/*Caja de Rango*/
+.p-rango{
+    position:absolute;
+    top:0;
+    right:25px;
+    padding:9px 11px;
+    background:#446EB6;
+    color:#fff;
+    text-align:center;
+    font-size:18px;
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+    letter-spacing:1pt;
+    cursor:text;
+    -webkit-transition:all 200ms ease;
+    -o-transition:all 200ms ease;
+    transition:all 200ms ease;
+}
+    .p-rango:hover{
+        padding-top:18px;
+    }
+
+/*Caja de Reloj*/
+.p-reloj{
+    position:fixed;
+    z-index:3000;
+    bottom:0;
+    left:40px;
+    border:solid .5px #fff;
+    border-bottom:none;
+    padding:9px 11px;
+    background:#446EB6;
+    color:#fff;
+    text-align:center;
+    font-size:18px;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+    letter-spacing:1pt;
+    cursor:text;
+    -webkit-transition:all 200ms ease;
+    -o-transition:all 200ms ease;
+    transition:all 200ms ease;
+}
+/* </editor-fold> */
+
+    /*Navegadores en General*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+.singup{
+    width:50%;
+    height:100%;
+    display:flex;
+
+    justify-content:flex-end;
+    align-items:center;
+}
+
+    .singup ul{
+        list-style:none;
+        margin:0 20px 0 0;
+        padding:0;
+        height:100%;
+        display:flex;
+
+        flex-flow:row nowrap;
+    }
+        .singup ul li{
+            display:inline-block;
+            height:100%;
+            position:relative;
+        }
+            .singup ul li a{
+                text-decoration:none;
+                display:flex;
+                flex-flow:column;
+                justify-content:center;
+                align-items:center;
+                color:#fff;
+                height:100%;
+                padding:0 15px;
+                margin:0 5px;
+                -webkit-transition:color 500ms;
+                -o-transition:color 500ms;
+                transition:color 500ms;
+            }
+                .singup ul li a:hover{
+                    color:#446EB6;
+                    background:#fff;
+                    border-top-right-radius:15px;
+                    border-bottom-left-radius:15px;
+                    -webkit-transition:all 500ms;
+                    -o-transition:all 500ms;
+                    transition:all 500ms;
+                }
+            .singup ul li button{
+                display:flex;
+                flex-flow:column;
+                justify-content:center;
+                align-items:center;
+                color:#fff;
+                height:100%;
+                padding:0 15px;
+                margin:0 5px;
+                background:none;
+                border:none;
+                -webkit-transition:color 500ms;
+                -o-transition:color 500ms;
+                transition:color 500ms;
+            }
+                .singup ul li button:hover{
+                    color:#446EB6;
+                    background:#fff;
+                    border-top-right-radius:15px;
+                    border-bottom-left-radius:15px;
+                    -webkit-transition:all 500ms;
+                    -o-transition:all 500ms;
+                    transition:all 500ms;
+                }
+                .singup ul li button:focus{
+                    outline:none;
+                }
+/* </editor-fold> */
+
+    /*Navegador sin Logo*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+.logonav-slogo{
+    width:0%;
+    height:100%;
+}
+    .logonav-slogo a{
+        height:100%;
+        width:100%;
+        display:flex;
+        align-items:center;
+    }
+        .logonav-slogo a img{
+            height:0px;
+            display:inline-block;
+        }
+        
+nav.navslogo{
+    width:100%;
+    height:55px;
+    z-index:1000;
+    background:#446EB6;
+    display:flex;
+
+    flex-flow:row nowrap;
+    -webkit-transition:all 200ms ease;
+    -o-transition:all 200ms ease;
+    transition:all 200ms ease;
+}
+    .menuprin-slogo{
+        width:50%;
+        height:100%;
+        display:flex;
+
+        align-items:center;
+    }
+        .menuprin-slogo ul{
+            list-style:none;
+            margin:0 0 0 20px;
+            padding:0;
+            height:100%;
+            display:flex;
+
+            flex-flow:row nowrap;
+        }
+            .menuprin-slogo ul li{
+                display:inline-block;
+                height:100%;
+                position:relative;
+            }
+                .menuprin-slogo ul li a{
+                    text-decoration:none;
+                    display:flex;
+                    flex-flow:column;
+                    justify-content:center;
+                    align-items:center;
+                    color:#fff;
+                    height:100%;
+                    padding:0 15px;
+                    margin:0 5px;
+                    -webkit-transition:color 500ms;
+                    -o-transition:color 500ms;
+                    transition:color 500ms;
+                }
+                    .menuprin-slogo ul li a:hover{
+                        color:#446EB6;
+                        background:#fff;
+                        border-top-right-radius:15px;
+                        border-bottom-left-radius:15px;
+                        -webkit-transition:all 500ms;
+                        -o-transition:all 500ms;
+                        transition:all 500ms;
+                    }
+/* </editor-fold> */
+
+    /*Navegador con Logo*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+.logonav-clogo{
+    width:15%;
+    height:100%;
+    display:flex;
+
+    align-items:center;
+}
+    .logonav-clogo a{
+        height:100%;
+        width:100%;
+    }
+        .logonav-clogo a img{
+            height:80%;
+            display:block;
+            margin:auto;
+            -webkit-transition:all 200ms ease;
+            -o-transition:all 200ms ease;
+            transition:all 200ms ease;
+        }
+
+nav.navclogo{
+    width:100%;
+    height:70px;
+    background:#446EB6;
+    border-radius:0;
+    display:flex;
+    position:fixed;
+    z-index:1000;
+    top:0;
+
+    flex-flow:row nowrap;
+    -webkit-transition:all 200ms ease;
+    -o-transition:all 200ms ease;
+    transition:all 200ms ease;
+}
+    .menuprin-clogo{
+        width:50%;
+        height:100%;
+        display:flex;
+
+        align-items:center;
+    }
+        .menuprin-clogo ul{
+            list-style:none;
+            margin:0;
+            padding:0;
+            height:100%;
+            display:flex;
+
+            flex-flow:row nowrap;
+        }
+            .menuprin-clogo ul li{
+                display:inline-block;
+                height:100%;
+            }
+                .menuprin-clogo ul li a{
+                    text-decoration:none;
+                    display:flex;
+                    flex-flow:column;
+                    justify-content:center;
+                    align-items:center;
+                    color:#fff;
+                    height:100%;
+                    padding:0 15px;
+                    margin:0 5px;
+                    -webkit-transition:color 500ms;
+                    -o-transition:color 500ms;
+                    transition:color 500ms;
+                }
+                    .menuprin-clogo ul li a:hover{
+                        color:#446EB6;
+                        background:#fff;
+                        border-top-right-radius:15px;
+                        border-bottom-left-radius:15px;
+                        -webkit-transition:all 500ms;
+                        -o-transition:all 500ms;
+                        transition:all 500ms;
+                    }
+/* </editor-fold> */
+
+    /*Navegadores de Reemplazo*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+/*Navegador Reemplazo NONE*/
+.navrnlogo{
+    display:none;
+}
+
+/*Navegador Reemplazo*/
+nav.navrlogo{
+    width:100%;
+    height:70px;
+    display:block;
+    -webkit-transition:all 200ms ease;
+    -o-transition:all 200ms ease;
+    transition:all 200ms ease;
+}
+/* </editor-fold> */
+
+    /*Navegador propio de IndexUsuario y IndexCliente*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+.logonaviu{
+    width:100%;
+    background:#446EB6;
+    height:60px;
+    display:flex;
+
+    justify-content:center;
+}
+    .logonaviu img{
+        height:100%;
+    }
+
+nav.naviu{
+    width:100%;
+    height:auto;
+    border-radius:0;
+    display:flex;
+    position:fixed;
+    z-index:1000;
+    top:0;
+
+    flex-flow:column nowrap;
+    -webkit-transition:all 200ms ease;
+    -o-transition:all 200ms ease;
+    transition:all 200ms ease;
+}
+    .menupriniu{
+        width:100%;
+        height:auto;
+        background:#446EB6;
+    }
+        .menupriniu ul{
+            list-style:none;
+            margin:0;
+            padding:0;
+            width:100%;
+            display:flex;
+            
+            justify-content:center;
+            flex-flow:row nowrap;
+        }
+            .menupriniu ul li{
+                display:inline-block;
+                height:100%;
+            }
+                .menupriniu ul li a{
+                    text-decoration:none;
+                    display:flex;
+                    flex-flow:column;
+                    justify-content:center;
+                    align-items:center;
+                    color:#fff;
+                    height:100%;
+                    box-shadow:none;
+                    border-top-left-radius:10px;
+                    border-top-right-radius:10px;
+                    letter-spacing:1pt;
+                    padding:10px 15px;
+                    margin:0 5px;
+                    -webkit-transition:color 500ms;
+                    -o-transition:color 500ms;
+                    transition:color 500ms;
+                }
+                    .menupriniu ul li a:hover{
+                        color:#446EB6;
+                        background:#fff;
+                        -webkit-box-shadow: inset 0px 65px 118px -73px rgba(68,110,182,1);
+                        -moz-box-shadow: inset 0px 65px 118px -73px rgba(68,110,182,1);
+                        box-shadow: inset 0px 65px 118px -73px rgba(68,110,182,1);
+                        -webkit-transition:all 500ms;
+                        -o-transition:all 500ms;
+                        transition:all 500ms;
+                    }
+                    
+                .menupriniu ul li button{
+                    display:flex;
+                    flex-flow:column;
+                    justify-content:center;
+                    align-items:center;
+                    color:#fff;
+                    height:100%;
+                    box-shadow:none;
+                    border-top-left-radius:10px;
+                    border-top-right-radius:10px;
+                    letter-spacing:1pt;
+                    padding:10px 15px;
+                    margin:0 5px;
+                    background:none;
+                    border:none;
+                    -webkit-transition:color 500ms;
+                    -o-transition:color 500ms;
+                    transition:color 500ms;
+                }
+                    .menupriniu ul li button:hover{
+                        color:#446EB6;
+                        background:#fff;
+                        -webkit-box-shadow: inset 0px 65px 118px -73px rgba(68,110,182,1);
+                        -moz-box-shadow: inset 0px 65px 118px -73px rgba(68,110,182,1);
+                        box-shadow: inset 0px 65px 118px -73px rgba(68,110,182,1);
+                        -webkit-transition:all 500ms;
+                        -o-transition:all 500ms;
+                        transition:all 500ms;
+                    }
+                    .menupriniu ul li button:focus{
+                        outline:none;
+                    }
+
+    .menuperfil{
+        width:100%;
+        height:auto;
+        display:flex;
+            
+        justify-content:flex-end;
+    }
+        .menuperfil .caj-menuperfil{
+            width:auto;
+            height:auto;
+            margin-right:30px;
+            display:flex;
+            border-bottom-right-radius:22px;
+            border-bottom-left-radius:22px;
+            background:#446EB6;
+
+            flex-flow:column nowrap;
+        }
+            .menuperfil .caj-menuperfil ul{
+                list-style:none;
+                margin:0;
+                padding:0;
+                width:100%;
+            }
+                .menuperfil .caj-menuperfil ul li{
+                    width:100%;
+                }
+                    .menuperfil .caj-menuperfil ul li a{
+                        text-decoration:none;
+                        display:flex;
+                        flex-flow:column;
+                        justify-content:center;
+                        align-items:center;
+                        color:#fff;
+                        width:100%;
+                        box-shadow:none;
+                        letter-spacing:1pt;
+                        padding:10px 15px;
+                        -webkit-transition:color 500ms;
+                        -o-transition:color 500ms;
+                        transition:color 500ms;
+                    }
+                        .menuperfil .caj-menuperfil ul li a:hover{
+                            color:#446EB6;
+                            background:#fff;
+                            -webkit-transition:all 500ms;
+                            -o-transition:all 500ms;
+                            transition:all 500ms;
+                        }
+                        .menuperfil .caj-menuperfil ul li:last-child a:hover{
+                            color:#446EB6;
+                            background:#fff;
+                            -webkit-box-shadow: inset 0px -28px 23px -16px rgba(68,110,182,1);
+                            -moz-box-shadow: inset 0px -28px 23px -16px rgba(68,110,182,1);
+                            box-shadow: inset 0px -28px 23px -16px rgba(68,110,182,1);
+                            -webkit-transition:all 500ms;
+                            -o-transition:all 500ms;
+                            transition:all 500ms;
+                        }
+
+                    .menuperfil .caj-menuperfil ul li button{
+                        display:flex;
+                        flex-flow:column;
+                        justify-content:center;
+                        align-items:center;
+                        color:#fff;
+                        width:100%;
+                        box-shadow:none;
+                        letter-spacing:1pt;
+                        padding:10px 15px;
+                        background:none;
+                        border:none;
+                        -webkit-transition:color 500ms;
+                        -o-transition:color 500ms;
+                        transition:color 500ms;
+                    }
+                        .menuperfil .caj-menuperfil ul li button:hover{
+                            color:#446EB6;
+                            background:#fff;
+                            -webkit-box-shadow: inset 0px -28px 23px -16px rgba(68,110,182,1);
+                            -moz-box-shadow: inset 0px -28px 23px -16px rgba(68,110,182,1);
+                            box-shadow: inset 0px -28px 23px -16px rgba(68,110,182,1);
+                            -webkit-transition:all 500ms;
+                            -o-transition:all 500ms;
+                            transition:all 500ms;
+                        }
+                        .menuperfil .caj-menuperfil ul li button:focus{
+                            outline:none;
+                        }
+            
+            .menuperfil .caj-menuperfil .menuperfil-nom{
+                width:100%;
+                padding:15px;
+                background:#fff;
+                color:#446EB6;
+                letter-spacing:1pt;
+                text-align:center;
+                border-bottom-right-radius:18px;
+                border-bottom-left-radius:18px;
+                -webkit-box-shadow: inset 0px 30px 23px -16px rgba(68,110,182,1);
+                -moz-box-shadow: inset 0px 30px 23px -16px rgba(68,110,182,1);
+                box-shadow: inset 0px 30px 23px -16px rgba(68,110,182,1);
+            }
+            
+nav.naviu-Rem{
+    width:100%;
+    background:#446EB6;
+    height:43px;
+}
+/* </editor-fold> */

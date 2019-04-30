@@ -1,0 +1,128 @@
+.section-bodys h1{
+    display:block;
+    height:auto;
+    padding:10px 20px;
+    width:105%;
+    color:#fff;
+    background:#446EB6;
+    margin:0 0 30px -2.5%;
+    border: 1px solid #999;
+    border: 1px solid rgba(68,110,182, .2);
+    border-radius: 6px;
+    outline: 0;
+    /*-webkit-box-shadow: 0 3px 9px rgba(68,110,182, .9);
+    box-shadow: 0 3px 9px rgba(68,110,182, .9);*/
+}
+/*table tbody tr{
+    background:#fff;
+    -webkit-transition:all 200ms ease;
+    -o-transition:all 200ms ease;
+    transition:all 200ms ease;
+}
+    table tbody tr:hover{
+        transform: translateY(-15px) rotateX(360deg);
+        -webkit-transition:all 200ms ease;
+        -o-transition:all 200ms ease;
+        transition:all 200ms ease;
+    }*/
+
+    /*Boton de Registrar*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+.tabla-reg{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    flex-flow:row nowrap;
+    margin:20px 0;
+    font-family:"Calibri Light", Arial;
+    font-size:40px;
+}
+    .tabla-reg button{
+        outline:none;
+        background:#446EB6;
+        font-size:40px;
+        border-radius:8px;
+        letter-spacing:2pt;
+        color:#fff;
+        margin:10px;
+        padding: 8px 16px;
+        border:solid 1px #fff;
+        -webkit-transition:all 200ms ease;
+        -o-transition:all 200ms ease;
+        transition:all 200ms ease;
+    }
+        .tabla-reg button:hover{
+            border:solid 1px #446EB6;
+            outline:none;
+            background:#fff;
+            color:#446EB6;
+        }
+        .tabla-reg button:focus{
+            border:solid 1px #446EB6;
+            outline:none;
+            background:#fff;
+            color:#446EB6;
+        }
+        
+    .tabla-reg button .tabla-reg-m{
+        background:#fff;
+        display:inline-block;
+        font-size:31px;
+        color:#446EB6;
+        border-radius:5px;
+        padding: 8px 12px 6px 14px;
+        border:solid 1px #446EB6;
+        -webkit-transition:all 200ms ease;
+        -o-transition:all 200ms ease;
+        transition:all 200ms ease;
+    }
+        .tabla-reg button:hover .tabla-reg-m{
+            border:solid 1px #fff;
+            background:#446EB6;
+            color:#fff;
+        }
+        .tabla-reg button:focus .tabla-reg-m{
+            border:solid 1px #fff;
+            background:#446EB6;
+            color:#fff;
+        }
+/* </editor-fold> */
+
+    /*Botones de Acciones*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+.td-espaciado{
+    display:flex;
+    justify-content:space-around;
+}
+    .td-espaciado .btn{
+        margin:0 2px;
+    }
+        .td-espaciado .btn:focus{
+            outline:none;
+        }
+/* </editor-fold> */
+
+    /*Columna Estado*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+table tbody > tr > td.active:hover{
+    background-color: #D7DBDD;
+}
+table tbody > tr > td.active-os:hover{
+    background-color: #BDC3C7;
+}
+table tbody > tr > td.success:hover{
+    background-color: #A9DFBF;
+}
+table tbody > tr > td.info:hover{
+    background-color: #AED6F1;
+}
+table tbody > tr > td.warning:hover{
+    background-color: #F9E79F;
+}
+table tbody > tr > td.danger:hover{
+    background-color: #F5B7B1;
+}
+table tbody > tr > td.purple:hover{
+    background-color: #C887C9;
+}
+/* </editor-fold> */

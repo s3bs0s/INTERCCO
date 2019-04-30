@@ -1,0 +1,1900 @@
+    /*Bodys en General*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+/*Bodys Comunes*/
+*{
+    margin:0;
+    padding:0;
+    font-family:"Calibri Light", Arial;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+.s-c{
+    width:90%;
+    height:auto;
+    font-family:"Calibri Light", Arial;
+    margin:50px auto;
+    background:#fff;
+    border:solid 4px #c58;
+    display:flex;
+    flex-flow:column nowrap;
+}
+    .s-c article{
+        width:95%;
+        height:300px;
+        background:#c58;
+        margin:25px auto;
+        box-sizing:border-box;
+    }
+
+/*Bodys y demás necesario*/
+
+.section-bodys{
+    width:90%;
+    height:auto;
+    font-family:"Calibri Light", Arial;
+    margin:50px auto;
+    background:#fff;
+}
+    .section-bodys .input-group{
+        margin:15px 1.5%;
+    }
+    .section-bodys .input-group-addon{
+        background:#446EB6;
+        color:#fff;
+        border:1px solid #446EB6;
+    }
+    .section-bodys input{
+        outline:none;
+        height:40px;
+        font-size:17px;
+        border:1px solid #446EB6;
+    }
+    .section-bodys select{
+        outline:none;
+        height:40px;
+        font-size:17px;
+        border:1px solid #446EB6;
+    }
+/* </editor-fold> */
+
+    /*Body auditoria & parametros*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+.s-aye button.bc{
+    width:100%;
+    outline:none;
+    letter-spacing:1pt;
+    padding:10px 0;
+    position:relative;
+    height:100%;
+    border-top-left-radius:6px;
+    border-top-right-radius:6px;
+    font-size:23px;
+    border:solid 2px #446EB6;
+    color:#fff;
+    background:#446EB6;
+    -webkit-transition:all 200ms ease;
+    -o-transition:all 200ms ease;
+    transition:all 200ms ease;
+}
+    .s-aye button.bc:hover{
+        color:#446EB6;
+        border:solid 2px #446EB6;
+        background:#fff;
+    }
+        .s-aye button.bc .btn-collap{
+            position:absolute;
+            right:13px;
+            height:90%;
+            display:flex;
+            align-items:center;
+        }
+
+.s-aye .panel-body{
+    border:solid 2px #446EB6;
+    border-bottom-left-radius:6px;
+    border-bottom-right-radius:6px;
+    border-top:none;
+}
+    .s-aye .panel-body .tabla-reg{
+        margin:0;
+    }
+        
+.s-aye td{
+    text-align:center;
+}
+    .s-aye td button{
+        margin:0 5px;
+    }
+    .s-aye td button.btn:focus{
+        outline:none;
+    }
+    
+.s-aye thead th{
+    text-align:center;
+}
+.s-aye tfoot th{
+    text-align:center;
+}
+.s-aye tbody th{
+    background:#365892;
+}
+
+.s-aye .panel-body .coll-iva-titulo{
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+    .s-aye .panel-body .coll-iva-titulo p{
+        background:#446EB6;
+        color:#fff;
+        font-size:28px;
+        letter-spacing:1pt;
+        padding:8px 24px;
+        display:block;
+        border-top-left-radius:12px;
+        border-bottom-right-radius:12px;
+    }
+    
+.s-aye .panel-body .coll-iva-cj{
+    margin-top:10px;
+    width:100%;
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content:center;
+    align-items:center;
+}
+    .s-aye .panel-body .coll-iva-cj-btn button{
+        outline:none;
+        background:#446EB6;
+        font-size:20px;
+        border-radius:8px;
+        letter-spacing:1.5pt;
+        color:#fff;
+        margin:10px;
+        padding:8px 16px;
+        border:solid 1px #fff;
+        -webkit-transition:all 200ms ease;
+        -o-transition:all 200ms ease;
+        transition:all 200ms ease;
+    }
+        .s-aye .panel-body .coll-iva-cj-btn button:hover,button:focus{
+            border:solid 1px #446EB6;
+            outline:none;
+            background:#fff;
+            color:#446EB6;
+        }
+        
+    .s-aye .panel-body .coll-iva-cj .coll-iva-cj-porcen{
+        font-size:75px;
+        color:#616A6B;
+        margin-left:8px;
+        font-family:"Calibri Light", Arial;
+    }
+/* </editor-fold> */
+
+    /*Body indexUsuario y Cliente*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+.cjAlert{
+    width:100%;
+    position:fixed;
+    top:55px;
+    z-index:100;
+}
+    .cjAlert .alert{
+        margin:0 auto;
+        width:50%;
+    }
+    
+#btn-subir{
+    position:fixed;
+    left:0;
+    bottom:35px;
+    z-index:999;
+}
+    #btn-subir p{
+        padding:15px 20px;
+        background:#22385E;
+        border-top-right-radius:15px;
+        border-bottom-right-radius:15px;
+        color:#fff;
+        font-size:28px;
+        -webkit-transition:all 200ms ease;
+        -o-transition:all 200ms ease;
+        transition:all 200ms ease;
+    }
+        #btn-subir p:hover{
+            padding-left:30px;
+            cursor:pointer;
+        }
+
+#share-social{
+    position:fixed;
+    right:13px;
+    bottom:0;
+    display:flex;
+    flex-flow:column nowrap;
+    z-index:999;
+}
+    #share-social p{
+        width:100%;
+        text-align:center;
+        background:#fff;
+        padding:9px 54px;
+        color:#446EB6;
+        -webkit-box-shadow: inset 2px -44px 120px -73px rgba(68,110,182,1);
+        -moz-box-shadow: inset 2px -44px 120px -73px rgba(68,110,182,1);
+        box-shadow: inset 2px -44px 120px -73px rgba(68,110,182,1);
+        letter-spacing:1pt;
+        border-top-left-radius:20px;
+        font-size:19px;
+    }
+    #share-social ul{
+        list-style:none;
+        display:flex;
+        flex-flow:row nowrap;
+    }
+        #share-social ul li a{
+            display:inline-block;
+            color:#fff;
+            background:#446EB6;
+            font-size:20px;
+            padding:15px 20px;
+            text-decoration:none;
+            -webkit-box-shadow: inset 2px 86px 55px -73px rgba(255,255,255,1);
+            -moz-box-shadow: inset 2px 86px 55px -73px rgba(255,255,255,1);
+            box-shadow: inset 2px 86px 55px -73px rgba(255,255,255,1);
+            -webkit-transition:all 500ms ease;
+            -o-transition:all 500ms ease;
+            transition:all 500ms ease;
+        }
+            #share-social ul li a:hover{
+                background:#fff;
+                color:#446EB6;
+                -webkit-box-shadow: inset 2px 51px 120px -73px rgba(68,110,182,1);
+                -moz-box-shadow: inset 2px 51px 120px -73px rgba(68,110,182,1);
+                box-shadow: inset 2px 51px 120px -73px rgba(68,110,182,1);
+            }
+    
+.mainiu{
+    width:100%;
+}
+    .mainiu .bf-Des{
+        display:none;
+    }
+
+/* <editor-fold defaultstate="collapsed" desc="Section Acceder"> */
+.mainiu .sectionAcceso{
+    width:100%;
+    position:relative;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(87,125,189,1) 90%, rgba(68,110,182,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(90%, rgba(87,125,189,1)), color-stop(100%, rgba(68,110,182,1)));
+    background: -webkit-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(87,125,189,1) 90%, rgba(68,110,182,1) 100%);
+    background: -o-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(87,125,189,1) 90%, rgba(68,110,182,1) 100%);
+    background: -ms-linear-gradient(bottom, rgba(255,255,255,1) 0%, rgba(87,125,189,1) 90%, rgba(68,110,182,1) 100%);
+    background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(87,125,189,1) 90%, rgba(68,110,182,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#446eb6', GradientType=0 );
+}
+    .sectionAcceso .saContent{
+        margin:auto;
+    }
+        .sectionAcceso .saContent .saAContent{
+            background: #fff;
+            width:auto;
+            max-width:430px;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            border: 1px solid #999;
+            border: 1px solid rgba(0, 0, 0, .2);
+            border-radius: 20px;
+            outline:0;
+            margin:20px;
+        }
+            .sectionAcceso .saContent .saAContent .saAContentH{
+                background:#446EB6;
+                border-top-left-radius:15px;
+                border-top-right-radius:15px;
+                border-bottom:1px solid #698BC5;
+                text-align:center;
+                padding:30px 60px;
+                color:#fff;
+            }
+                .sectionAcceso .saContent .saAContent .saAContentH .saAContentHTitle{
+                    display:flex;
+                    justify-content:center;
+                    flex-flow:column nowrap;
+                    font-size:30px;
+                    margin:0;
+                    font-family:"Calibri Light", Arial;
+                    letter-spacing:2pt;
+                }
+                    .sectionAcceso .saContent .saAContent .saAContentH .saAContentHTitle label{
+                        margin:0;
+                    }
+            
+            .sectionAcceso .saContent .saAContent form{
+                padding:0 15px;
+            }
+                .sectionAcceso .saContent .saAContent form .saAContentFormCJBtns {
+                    margin:10px 0;
+                    display:flex;
+                    flex-flow:column nowrap;
+                }
+                    .sectionAcceso .saContent .saAContent form .saAContentFormCJBtns .saAContentFormCJBtnPrincipal{
+                        display:flex;
+                        width:100%;
+                        justify-content:center;
+                    }
+                        .sectionAcceso .saContent .saAContent form .saAContentFormCJBtns .saAContentFormCJBtnPrincipal .btn-principal{
+                            font-size:21px;
+                        }
+
+                    .sectionAcceso .saContent .saAContent form .saAContentFormCJBtns .saAContentFormCJBtnsSecundarios{
+                        display:flex;
+                        margin-top:6px;
+                        width:100%;
+                        justify-content:center;
+                    }
+                        .sectionAcceso .saContent .saAContent form .saAContentFormCJBtns .saAContentFormCJBtnsSecundarios .btn-secundario{
+                            font-size:18px;
+                            margin:0 10px;
+                        }
+
+                .sectionAcceso .saContent .saAContent form .saAContentBtns{
+                    outline:none;
+                    background:#446EB6;
+                    letter-spacing:1pt;
+                    color:#fff;
+                    border:solid 1px #fff;
+                    -webkit-transition:all 200ms ease;
+                    -o-transition:all 200ms ease;
+                    transition:all 200ms ease;
+                }
+                    .sectionAcceso .saContent .saAContent form .saAContentBtns:hover,.saAContentBtns:focus{
+                        background:#fff;
+                        border:solid 1px #446EB6;
+                        color:#446EB6;
+                    }
+
+                .sectionAcceso .saContent .saAContent form .saAContentFormCJOC{
+                    margin:10px auto;
+                }
+                    .sectionAcceso .saContent .saAContent form .saAContentFormCJOC .saAContentFormBtnOC,.saAContentFormBtnOC:visited{
+                        outline:none;
+                        color:#446EB6;
+                        font-size:18px;
+                        font-family:"Calibri Light", Arial;
+                        letter-spacing:0.5pt;
+                        display:inline-block;
+                        padding:6px 25px;
+                        background:none;
+                        border:none;
+                        border-radius:10px;
+                        -webkit-transition:all 200ms ease;
+                        -o-transition:all 200ms ease;
+                        transition:all 200ms ease;
+                    }
+                        .sectionAcceso .saContent .saAContent form .saAContentFormCJOC .saAContentFormBtnOC:hover,.saAContentFormBtnOC:focus{
+                            outline:none;
+                            color:#fff;
+                            font-family:"Calibri Light", Arial;
+                            letter-spacing:1.5pt;
+                            background:#446EB6;
+                            display:inline-block;
+                            -webkit-transition:all 200ms ease;
+                            -o-transition:all 200ms ease;
+                            transition:all 200ms ease;
+                        }
+
+                .sectionAcceso .saContent .saAContent form .saAContentFormCJInputs{
+                    margin:10px 0;
+                }
+
+                .sectionAcceso .saContent .saAContent form .saAContentFormCJInputs .input-group{
+                    width:auto;
+                    margin:5px 0;
+                }
+
+                .sectionAcceso .saContent .saAContent form .input-group-addon{
+                    background:#446EB6;
+                    color:#fff;
+                    border:1px solid #446EB6;
+                }
+
+                .sectionAcceso .saContent .saAContent form input{
+                    outline:none;
+                    height:auto;
+                    width:100%;
+                    font-size:15px;
+                    border:1px solid #446EB6;
+                }
+
+        .sectionAcceso .saContent .saAContent .saAContentF{
+            background:#446EB6;
+            border-bottom-left-radius:15px;
+            border-bottom-right-radius:15px;
+            border-top:1px solid #698BC5;
+            padding:15px;
+        }
+    
+    .sectionAcceso .saABtnFlecha{
+        position:absolute;
+        bottom:10px;
+        left:0;
+        width:100%;
+        height:auto;
+        display:flex;
+        justify-content:center;
+    }
+        .sectionAcceso .saABtnFlecha a{
+            text-decoration:none;
+            display:block;
+            margin:10px auto;
+            font-size:40px;
+            color:#446EB6;
+        }
+            .sectionAcceso .saABtnFlecha a:hover{
+                text-decoration:none;
+                color:#839dc8;
+                font-size:48px;
+            }
+/* </editor-fold> */
+
+/* <editor-fold defaultstate="collapsed" desc="Section Carrusel"> */
+.mainiu .sectionCarrusel{
+    width:100%;
+}
+/* </editor-fold> */
+
+/* <editor-fold defaultstate="collapsed" desc="Section Carta"> */
+.mainiu .sectionCarta{
+    width:100%;
+    padding:20px 0;
+    background:#698BC5;
+}
+    .sectionCarta .scCajaBtn{
+        width:85%;
+        height:auto;
+        margin:auto;
+        display:flex;
+
+        flex-flow:column nowrap;
+    }  
+        .sectionCarta .scCajaBtn .scBtnTitulo{
+            width:85%;
+            padding:8px 10px;
+            background:#fff;
+            border-top-right-radius:10px;
+            border-bottom-left-radius:10px;
+            text-align:center;
+            margin:auto;
+            margin-bottom:20px;
+        }
+            .sectionCarta .scCajaBtn .scBtnTitulo p:first-child{
+                font-family:"Calibri Light", Arial;
+                font-size:30px;
+                letter-spacing:1.5pt;
+                color:#446EB6;
+            }
+            .sectionCarta .scCajaBtn .scBtnTitulo p:last-child{
+                font-family:"Calibri Light", Arial;
+                font-size:21px;
+                letter-spacing:.5pt;
+                color:#446EB6;
+            }
+            
+        .sectionCarta .scCajaBtn .scBtnSedes{
+            width:100%;
+            height:auto;
+            display:flex;
+            flex-flow:row wrap;
+            justify-content:space-around;
+        }
+            .sectionCarta .scCajaBtn .scBtnSedes button{
+                outline:none;
+                background:#446EB6;
+                font-size:22px;
+                border-radius:8px;
+                letter-spacing:1pt;
+                color:#fff;
+                font-family:"Calibri Light", Arial;
+                padding:8px 16px;
+                margin:5px 15px;
+                -webkit-transition:all 200ms ease;
+                -o-transition:all 200ms ease;
+                transition:all 200ms ease;
+            }
+                .sectionCarta .scCajaBtn .scBtnSedes button:hover{
+                    outline:none;
+                    background:#fff;
+                    color:#446EB6;
+                }
+                .sectionCarta .scCajaBtn .scBtnSedes button:focus{
+                    outline:none;
+                    background:#fff;
+                    color:#446EB6;
+                }
+/* </editor-fold> */
+
+/* <editor-fold defaultstate="collapsed" desc="Section 4 - Domicilios"> */
+.mainiu .section4-domi{
+    width:100%;
+    background:#365892;
+    padding:50px 0;
+}
+
+    /* Registrar */
+    .mainiu .section4-domi .section4-domiRegistrar{
+        width:80%;
+        margin: auto;
+    }
+        .mainiu .section4-domi .section4-domiRegistrar .div-content{
+            background: #fff;
+            width:auto;
+            display:flex;
+            position:relative;
+            flex-flow:column nowrap;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            border: 1px solid #999;
+            border: 1px solid rgba(0, 0, 0, .2);
+            border-radius: 20px;
+            outline: 0;
+        }
+            .mainiu .section4-domi .section4-domiRegistrar .div-content .section4-domiR-Desactivado{
+                background:rgba(105,139,197,0.8);
+                position:absolute;
+                top:0;
+                left:0;
+                width:100%;
+                height:100%;
+                border-radius:18px;
+                z-index:998;
+                display:grid;
+                grid-template-columns: 39.8% 20.3% 39.8%;
+                grid-template-rows: 44.3% 11.3% 44.3%;
+            }
+                .mainiu .section4-domi .section4-domiRegistrar .div-content .section4-domiR-Desactivado button.btn-div{
+                    outline:none;
+                    background:#fff;
+                    letter-spacing:1pt;
+                    color:#446EB6;
+                    font-size:28px;
+                    -webkit-transition:all 200ms ease;
+                    -o-transition:all 200ms ease;
+                    transition:all 200ms ease;
+                }
+                    .mainiu .section4-domi .section4-domiRegistrar .div-content .section4-domiR-Desactivado button.btn-div:hover,button.btn-div:focus{
+                        background:#446EB6;
+                        color:#fff;
+                        letter-spacing:2pt;
+                    }
+            
+            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-header{
+                background:#446EB6;
+                border-top-left-radius:15px;
+                border-top-right-radius:15px;
+                border-bottom:1px solid #698BC5;
+                padding:15px;
+                text-align:center;
+                color:#fff;
+            }
+                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-header .div-title{
+                    display:flex;
+                    justify-content:center;
+                    flex-flow:column nowrap;
+                    font-size:30px;
+                    padding-top:12px;
+                    font-family:"Calibri Light", Arial;
+                    letter-spacing:2pt;
+                }
+
+        .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body{
+            width:100%;
+            height:93%;
+            display:flex;
+            text-align:center;
+        }
+            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body form{
+                padding:15px;
+                width:100%;
+            }
+                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body form .cont-btn{
+                    width:97%;
+                    margin:15px auto 0 auto;
+                    display:flex;
+                    flex-flow:column nowrap;
+                }
+                    .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body form .cont-btn .cont-btn-principal{
+                        display:flex;
+                        width:100%;
+                        justify-content:center;
+                    }
+                        .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body form .cont-btn .cont-btn-principal .btn-principal{
+                            font-size:24px;
+                        }
+                        
+                    .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body form .cont-btn .cont-btns-secundario{
+                        display:flex;
+                        margin:15px auto 0 auto;
+                        width:100%;
+                        justify-content:center;
+                    }
+                        .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body form .cont-btn .cont-btns-secundario .btn-secundario{
+                            font-size:19px;
+                            margin:0 10px;
+                        }
+
+            .mainiu .section4-domi .section4-domiRegistrar .div-body button.btn-div{
+                outline:none;
+                background:#446EB6;
+                letter-spacing:1pt;
+                color:#fff;
+                border:solid 1px #fff;
+                -webkit-transition:all 200ms ease;
+                -o-transition:all 200ms ease;
+                transition:all 200ms ease;
+            }
+                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body button.btn-div:hover,button.btn-div:focus{
+                    border:solid 1px #446EB6;
+                    background:#fff;
+                    color:#446EB6;
+                }
+
+            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .filas-i .estado-domi{
+                margin:10px auto;
+                width:35%;
+            }
+                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .filas-i .estado-domi input{
+                    background:#fff;
+                    text-align:center;
+                }
+                
+            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .recuadroDomi{
+                border:solid 1px #446EB6;
+                display:flex;
+                flex-flow:column nowrap;
+                border-radius:16px;
+            }
+            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .recuadroDomiObser{
+                border:none;
+            }
+                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .recuadroDomi .titulo-recuadroDomi{
+                    width:100%;
+                    padding:8px;
+                    text-align:center;
+                    border-top-left-radius:12px;
+                    border-top-right-radius:12px;
+                    background:#446EB6;
+                    font-size:19px;
+                    color:#fff;
+                    letter-spacing:1.5pt;
+                }
+                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .recuadroDomi textarea.contenido-recuadroDomi{
+                    outline:none;
+                    width:100%;
+                    padding:10px;
+                    font-size:17px;
+                    resize:vertical;
+                    min-height:120px;
+                    border-top-left-radius:0;
+                    border-top-right-radius:0;
+                    border-bottom-left-radius:16px;
+                    border-bottom-right-radius:16px;
+                }
+                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .recuadroDomi .contenido-recuadroDomi{
+                    width:100%;
+                    padding:10px;
+                }
+                    .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .recuadroDomi .contenido-recuadroDomi table{
+                        border-bottom:none;
+                        margin-bottom:0;
+                    }
+                
+            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .input-group{
+                margin:10px 1.5%;
+                width:97%;
+            }
+                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .input-group button.btn-div{
+                    font-size:20px;
+                    letter-spacing:2pt;
+                }
+                
+            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .input-group-addon{
+                background:#446EB6;
+                color:#fff;
+                border:1px solid #446EB6;
+            }
+            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body input{
+                outline:none;
+                height:40px;
+                font-size:17px;
+                border:1px solid #446EB6;
+            }
+            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body textarea{
+                outline:none;
+                font-size:17px;
+                resize:vertical;
+                min-height:120px;
+                max-height:220px;
+                border:1px solid #446EB6;
+            }
+            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body select{
+                outline:none;
+                height:40px;
+                font-size:17px;
+                border:1px solid #446EB6;
+            }
+                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body select:focus > option:checked{
+                    background:#446EB6 !important;
+                    color:#fff;
+                }
+
+        .mainiu .section4-domi .section4-domiRegistrar .div-content .div-footer{
+            background:#446EB6;
+            padding:15px;
+            border-bottom-left-radius:15px;
+            border-bottom-right-radius:15px;
+            border-top:1px solid #698BC5;
+            width:100%;
+        }
+
+    /* Listar */
+    .mainiu .section4-domi .section4-domiListar{
+        width:85%;
+        margin:auto;
+    }
+        .mainiu .section4-domi .section4-domiListar .dataTables_length{
+            font-size:17px;
+            letter-spacing:.5pt;
+        }
+        .mainiu .section4-domi .section4-domiListar .dataTables_filter{
+            font-size:17px;
+            letter-spacing:.5pt;
+        }
+        .mainiu .section4-domi .section4-domiListar .dataTables_info{
+            font-size:17px;
+            letter-spacing:.5pt;
+        }
+        .mainiu .section4-domi .section4-domiListar .DataTables_Table_0_filter{
+            font-size:17px;
+            letter-spacing:.5pt;
+        }
+        .mainiu .section4-domi .section4-domiListar .titulo-domiListar{
+            width:100%;
+            padding:14px 0;
+            margin-bottom:15px;
+            text-align:center;
+            background:#446EB6;
+            border-top-right-radius:10px;
+            border-bottom-left-radius:10px;
+        }
+            .mainiu .section4-domi .section4-domiListar .titulo-domiListar p{
+                font-size:30px;
+                color:#fff;
+                letter-spacing:2.5pt;
+            }
+            
+    .mainiu .section4-domi .section4-domiListar .tabla-reg{
+        width:100%;
+        display:flex;
+        justify-content:center;
+        flex-flow:row nowrap;
+        margin:20px 0;
+        font-family:"Calibri Light", Arial;
+        font-size:40px;
+    }
+        .mainiu .section4-domi .section4-domiListar .tabla-reg button{
+            outline:none;
+            background:#446EB6;
+            font-size:32px;
+            border-radius:8px;
+            letter-spacing:2pt;
+            color:#fff;
+            margin:10px;
+            padding: 8px 16px;
+            border:none;
+            -webkit-transition:all 200ms ease;
+            -o-transition:all 200ms ease;
+            transition:all 200ms ease;
+        }
+            .mainiu .section4-domi .section4-domiListar .tabla-reg button:hover{
+                outline:none;
+                border:none;
+                background:#fff;
+                color:#446EB6;
+            }
+            .mainiu .section4-domi .section4-domiListar .tabla-reg button:focus{
+                outline:none;
+                border:none;
+                background:#fff;
+                color:#446EB6;
+            }
+
+        .mainiu .section4-domi .section4-domiListar .tabla-reg button .tabla-reg-m{
+            background:#fff;
+            display:inline-block;
+            font-size:21px;
+            color:#446EB6;
+            border-radius:5px;
+            padding: 8px 12px 6px 14px;
+            border:solid 1px #fff;
+            -webkit-transition:all 200ms ease;
+            -o-transition:all 200ms ease;
+            transition:all 200ms ease;
+        }
+            .mainiu .section4-domi .section4-domiListar .tabla-reg button:hover .tabla-reg-m{
+                border:solid 1px #fff;
+                background:#446EB6;
+                color:#fff;
+            }
+            .mainiu .section4-domi .section4-domiListar .tabla-reg button:focus .tabla-reg-m{
+                border:solid 1px #fff;
+                background:#446EB6;
+                color:#fff;
+            }
+            
+    .mainiu .section4-domi .section4-domiListar table{
+        background:#fff;
+        border-bottom:none;
+    }
+
+/* </editor-fold> */
+
+/* <editor-fold defaultstate="collapsed" desc="Section Información de SUCCO"> */
+.mainiu .sectionInformacion{
+    width:100%;
+    padding:40px 0;
+    height:auto;
+    background:#446EB6 url("../img/Backgrounds/FondoIUInfo.jpg");
+    background-size:100%;
+    background-position-x:center;
+    background-position-y:center;
+    background-attachment:fixed;
+}
+    .sectionInformacion .siBody{
+        width:85%;
+        max-width:90%;
+        margin:0 auto;
+    }
+        /* Titulo */
+        .sectionInformacion .siBody .siBodyTitulo{
+            width:100%;
+            padding:14px 0;
+            margin-bottom:15px;
+            text-align:center;
+            background:#446EB6;
+            border-top-right-radius:10px;
+            border-bottom-left-radius:10px;
+        }
+            .sectionInformacion .siBody .siBodyTitulo p{
+                font-size:34px;
+                color:#fff;
+                letter-spacing:2.5pt;
+            }
+        
+        /* Navegación */
+        .sectionInformacion .siBody .siBodyNav{
+            width:100%;
+            list-style:none;
+            display:flex;
+            flex-flow:row wrap;
+            padding:12px 0;
+            justify-content:space-around;
+            background:#fff;
+            border-top-left-radius:10px;
+            border-bottom-right-radius:10px;
+            margin-bottom:18px;
+        }
+            .sectionInformacion .siBody .siBodyNav li .siBNavBtns:link,.siBNavBtns:visited{
+                color:#fff;
+                font-size:16px;
+                background:#446EB6;
+                display:block;
+                letter-spacing:1pt;
+                padding: 12px 20px;
+                border-radius:15px;
+                text-align:center;
+                margin:2px 4px;
+                text-decoration:none;
+                -webkit-transition:all 200ms ease;
+                -o-transition:all 200ms ease;
+                transition:all 200ms ease;
+            }
+                .sectionInformacion .siBody .siBodyNav li .siBNavBtns:hover,.siBNavBtns:focus{
+                    background:#698BC5;
+                    color:#fff;
+                }
+
+            .sectionInformacion .siBody .siBodyNav li .active{
+                background:#698BC5 !important;
+                letter-spacing:2.5pt !important;
+                border-radius:8px !important;
+                -webkit-transition:all 200ms ease;
+                -o-transition:all 200ms ease;
+                transition:all 200ms ease;
+            }
+                    
+        /* Secciones */
+        .sectionInformacion .siBody .siBArticulos{
+            width:100%;
+        }
+            .sectionInformacion .siBody .siBArticulos article{
+                display:flex;
+                flex-flow:row nowrap;
+            }
+                .sectionInformacion .siBody .siBArticulos article .siBArticulosT{
+                    border-bottom-left-radius:20px;
+                    background:#446EB6;
+                    padding:10px 30px;
+                    display:flex;
+                    flex-flow:column nowrap;
+                    justify-content:space-around;
+                }
+                    .sectionInformacion .siBody .siBArticulos article .siBArticulosT p{
+                        color:#fff;
+                        font-size:34px;
+                        text-align:center;
+                        font-family:monospace;
+                        display:inline-block;
+                    }
+                    
+                .sectionInformacion .siBody .siBArticulos article .siBArticulosTPC{
+                    border-bottom-left-radius:20px;
+                    background:#446EB6;
+                    padding:10px 15px;
+                    display:flex;
+                    flex-flow:row nowrap;
+                    justify-content:space-around;
+                }
+                    .sectionInformacion .siBody .siBArticulos article .siBArticulosTPC .siBArticulosTPCColum{
+                        padding:0 10px;
+                        display:flex;
+                        flex-flow:column nowrap;
+                        justify-content:space-between;
+                    }
+                        .sectionInformacion .siBody .siBArticulos article .siBArticulosTPC .siBArticulosTPCColum p{
+                            color:#fff;
+                            font-size:34px;
+                            text-align:center;
+                            font-family:monospace;
+                            display:inline-block;
+                        }
+                        .sectionInformacion .siBody .siBArticulos article .siBArticulosTPC .siBArticulosTPCColum:nth-child(2) p:nth-child(2){
+                            margin-bottom:15px;
+                        }
+                    
+                .sectionInformacion .siBody .siBArticulos article .siBArticulosC{
+                    width:100%;
+                    border-top-right-radius:23px;
+                    background:#fff;
+                }
+                    /* <editor-fold defaultstate="collapsed" desc="Información"> */
+                    .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosCJBtn{
+                        width:100%;
+                        height:auto;
+                        padding-bottom:10px;
+                        border-top-right-radius:26px;
+                        background:#fff;
+                        display:flex;
+                        
+                        flex-flow:column nowrap;
+                    }
+                        .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosCJBtn .siBArticulosBtnTitulo{
+                            width:100%;
+                            height:auto;
+                            padding:14px;
+                            background:#698BC5;
+                            border-top-right-radius:23px;
+                            word-wrap:break-word;
+                            text-align:center;
+                            margin-bottom:10px;
+                        }
+                            .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosCJBtn .siBArticulosBtnTitulo p{
+                                font-family:"Calibri Light";
+                                font-size:28px;
+                                letter-spacing:1pt;
+                                color:#fff;
+                            }
+                            
+                        .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosCJBtn .siBArticulosBtnSede{
+                            width:100%;
+                            height:auto;
+                            display:flex;
+                            flex-flow:row wrap;
+                            justify-content:space-around;
+                        }
+                            .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosCJBtn .siBArticulosBtnSede button{
+                                outline:none;
+                                background:#446EB6;
+                                font-size:22px;
+                                border-radius:8px;
+                                letter-spacing:1pt;
+                                color:#fff;
+                                font-family:"Calibri Light", Arial;
+                                padding: 8px 16px;
+                                margin:5px 15px;
+                                text-align:center;
+                                border:solid 1px #fff;
+                                -webkit-transition:all 200ms ease;
+                                -o-transition:all 200ms ease;
+                                transition:all 200ms ease;
+                            }
+                                .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosCJBtn .siBArticulosBtnSede button:hover,button:focus{
+                                    border:solid 1px #446EB6;
+                                    outline:none;
+                                    background:#fff;
+                                    color:#446EB6;
+                                }
+
+                    .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC{
+                        display:flex;
+                        flex-flow:row wrap;
+                    }
+                        .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLIzq{
+                            width:35%;
+                            min-width:200px;
+                            display:flex;
+                            flex-flow:column wrap;
+                            justify-content:space-around;
+                        }
+                            .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLIzq div{
+                                width:100%;
+                                text-align:center;
+                            }
+                                .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLIzq div p:nth-child(1){
+                                    display:inline-block;
+                                    margin-bottom:4px;
+                                    font-size:22px;
+                                    color:#446EB6;
+                                    letter-spacing:1.5pt;
+                                    font-family:"Calibri Light", Arial;
+                                }
+                                .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLIzq div p:nth-child(2){
+                                    font-size:18px;
+                                    color:#3C3E3E;
+                                    font-family:"Calibri Light", Arial;
+                                }
+                                .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLIzq div:nth-child(1) p{
+                                    font-size:43px;
+                                    color:#365892;
+                                    font-weight:600;
+                                    letter-spacing:1.5pt;
+                                    font-family:"Calibri Light", Arial;
+                                }
+                            
+                        .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLDch{
+                            width:65%;
+                            min-width:200px;
+                            display:flex;
+                            border-top-right-radius:20px;
+                            background:#446EB6;
+                            position:relative;
+                            flex-flow:column nowrap;
+                        }
+                            .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLDch button{
+                                outline:none;
+                                background:#fff;
+                                font-size:18px;
+                                border-radius:8px;
+                                letter-spacing:1.5pt;
+                                color:#446EB6;
+                                position:absolute;
+                                top:18px;
+                                right:18px;
+                                padding: 8px 16px;
+                                border:solid 1px #446EB6;
+                                -webkit-transition:all 200ms ease;
+                                -o-transition:all 200ms ease;
+                                transition:all 200ms ease;
+                            }
+                                .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLDch button:hover,button:focus{
+                                    border:solid 1px #fff;
+                                    outline:none;
+                                    background:#446EB6;
+                                    color:#fff;
+                                }
+                            
+                            .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLDch div:nth-child(1){
+                                width:100%;
+                                text-align:center;
+                                padding:26px 0;
+                            }
+                                .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLDch div:nth-child(1) p:nth-child(1){
+                                    display:inline-block;
+                                    margin-bottom:4px;
+                                    font-size:24px;
+                                    color:#fff;
+                                    letter-spacing:1.5pt;
+                                    font-family:"Calibri Light", Arial;
+                                }
+                                    .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLDch div:nth-child(1) p:nth-child(2){
+                                        font-size:18px;
+                                        color:#fff;
+                                        letter-spacing:1.5pt;
+                                        font-family:"Calibri Light", Arial;
+                                    }
+                            
+                            .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLDch div:nth-child(2){
+                                width:100%;
+                                height:100%;
+                                display:flex;
+                                justify-content:center;
+                            }
+                                .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLDch div:nth-child(2) iframe{
+                                    border:solid 5px #698BC5;
+                                }
+                    /* </editor-fold> */
+                    
+                    /* <editor-fold defaultstate="collapsed" desc="Historia"> */
+                    .sectionInformacion .siBody .siBArticulos #siBArticulo2 .siBArticulosC{
+                        background:#fff;
+                    }
+                        .sectionInformacion .siBody .siBArticulos #siBArticulo2 .siBArticulosC .siBArticulosCTexto{
+                           display:flex;
+                           flex-flow:column nowrap;
+                           justify-content:space-around;
+                           height:100%;
+                           width:100%;
+                           padding:15px;
+                        }
+                            .sectionInformacion .siBody .siBArticulos #siBArticulo2 .siBArticulosC .siBArticulosCTexto p{
+                               display:block;
+                               font-size:19px;
+                               letter-spacing:.8pt;
+                               text-align:center;
+                               color:#3C3E3E;
+                               font-family:"Calibri Light", Arial;
+                            }
+                    /* </editor-fold> */
+                    
+                    /* <editor-fold defaultstate="collapsed" desc="Misión"> */
+                    .sectionInformacion .siBody .siBArticulos #siBArticulo3 .siBArticulosC{
+                        background:#fff;
+                    }
+                        .sectionInformacion .siBody .siBArticulos #siBArticulo3 .siBArticulosC .siBArticulosCTexto{
+                           display:flex;
+                           flex-flow:column nowrap;
+                           justify-content:center;
+                           height:100%;
+                           width:100%;
+                           padding:15px;
+                        }
+                            .sectionInformacion .siBody .siBArticulos #siBArticulo3 .siBArticulosC .siBArticulosCTexto p{
+                               display:block;
+                               font-size:23px;
+                               letter-spacing:.8pt;
+                               text-align:center;
+                               color:#3C3E3E;
+                               font-family:"Calibri Light", Arial;
+                            }
+                    /* </editor-fold> */
+                    
+                    /* <editor-fold defaultstate="collapsed" desc="Visión"> */
+                    .sectionInformacion .siBody .siBArticulos #siBArticulo4 .siBArticulosC{
+                        display:flex;
+                        padding:0 40px;
+                        flex-flow:row nowrap;
+                        background:#fff;
+                    }
+                        .sectionInformacion .siBody .siBArticulos #siBArticulo4 .siBArticulosC .siBArticulosCTexto{
+                           display:flex;
+                           flex-flow:column nowrap;
+                           justify-content:center;
+                           height:100%;
+                           width:100%;
+                           padding:15px;
+                        }
+                            .sectionInformacion .siBody .siBArticulos #siBArticulo4 .siBArticulosC .siBArticulosCTexto p{
+                               display:block;
+                               font-size:23px;
+                               letter-spacing:.8pt;
+                               text-align:center;
+                               color:#3C3E3E;
+                               font-family:"Calibri Light", Arial;
+                            }
+                    /* </editor-fold> */
+                    
+                    /* <editor-fold defaultstate="collapsed" desc="Política de Calidad"> */
+                    .sectionInformacion .siBody .siBArticulos #siBArticulo5 .siBArticulosC{
+                        background:#fff;
+                    }
+                        .sectionInformacion .siBody .siBArticulos #siBArticulo5 .siBArticulosC .siBArticulosCTexto{
+                           display:flex;
+                           flex-flow:column nowrap;
+                           justify-content:space-around;
+                           height:100%;
+                           width:100%;
+                           padding:15px;
+                        }
+                            .sectionInformacion .siBody .siBArticulos #siBArticulo5 .siBArticulosC .siBArticulosCTexto p{
+                               display:block;
+                               font-size:19px;
+                               margin:5px 0;
+                               letter-spacing:.8pt;
+                               text-align:center;
+                               color:#3C3E3E;
+                               font-family:"Calibri Light", Arial;
+                            }
+                    /* </editor-fold> */
+/* </editor-fold> */
+
+/* <editor-fold defaultstate="collapsed" desc="Section PQRSF"> */
+.mainiu .sectionPqrsf{
+    width:100%;
+    padding:50px 0;
+    background:#698BC5;
+}
+
+    /* <editor-fold defaultstate="collapsed" desc="Listar"> */
+    /* Listar */
+    .sectionPqrsf .sectionPqrsfL{
+        width:85%;
+        margin:auto;
+    }
+        .sectionPqrsf .sectionPqrsfL .dataTables_length{
+            color:#fff;
+            font-size:18px;
+            letter-spacing:.5pt;
+        }
+        .sectionPqrsf .sectionPqrsfL .dataTables_filter{
+            color:#fff;
+            font-size:18px;
+            letter-spacing:.5pt;
+        }
+        .sectionPqrsf .sectionPqrsfL .dataTables_info{
+            color:#fff;
+            font-size:18px;
+            letter-spacing:.5pt;
+        }
+        .sectionPqrsf .sectionPqrsfL .DataTables_Table_0_filter{
+            color:#fff;
+            font-size:18px;
+            letter-spacing:.5pt;
+        }
+        .sectionPqrsf .sectionPqrsfL .sectionPqrsfLTitulo{
+            width:100%;
+            padding:14px 0;
+            margin-bottom:15px;
+            text-align:center;
+            background:#fff;
+            border-top-right-radius:10px;
+            border-bottom-left-radius:10px;
+        }
+            .sectionPqrsf .sectionPqrsfL .sectionPqrsfLTitulo p{
+                font-size:30px;
+                color:#446EB6;
+                letter-spacing:2.5pt;
+            }
+            
+    .sectionPqrsf .sectionPqrsfL .tabla-reg{
+        width:100%;
+        display:flex;
+        justify-content:center;
+        flex-flow:row nowrap;
+        margin:20px 0;
+        font-family:"Calibri Light", Arial;
+        font-size:40px;
+    }
+        .sectionPqrsf .sectionPqrsfL .tabla-reg button{
+            outline:none;
+            background:#fff;
+            font-size:32px;
+            border-radius:8px;
+            letter-spacing:2pt;
+            color:#446EB6;
+            margin:10px;
+            padding: 8px 16px;
+            -webkit-transition:all 200ms ease;
+            -o-transition:all 200ms ease;
+            transition:all 200ms ease;
+        }
+            .sectionPqrsf .sectionPqrsfL .tabla-reg button:hover{
+                outline:none;
+                background:#446EB6;
+                color:#fff;
+            }
+            .sectionPqrsf .sectionPqrsfL .tabla-reg button:focus{
+                outline:none;
+                background:#446EB6;
+                color:#fff;
+            }
+
+        .sectionPqrsf .sectionPqrsfL .tabla-reg button .tabla-reg-m{
+            background:#446EB6;
+            display:inline-block;
+            font-size:21px;
+            color:#fff;
+            border-radius:5px;
+            padding: 8px 12px 6px 14px;
+            border:solid 1px #fff;
+            -webkit-transition:all 200ms ease;
+            -o-transition:all 200ms ease;
+            transition:all 200ms ease;
+        }
+            .sectionPqrsf .sectionPqrsfL .tabla-reg button:hover .tabla-reg-m{
+                border:solid 1px #446EB6;
+                background:#fff;
+                color:#446EB6;
+            }
+            .sectionPqrsf .sectionPqrsfL .tabla-reg button:focus .tabla-reg-m{
+                border:solid 1px #446EB6;
+                background:#fff;
+                color:#446EB6;
+            }
+            
+    .sectionPqrsf .sectionPqrsfL table{
+        background:#fff;
+        border-bottom:none;
+    }
+    /* </editor-fold> */
+
+    /* <editor-fold defaultstate="collapsed" desc="Registrar"> */
+    /* Registrar */
+    .sectionPqrsf .sectionPqrsfR{
+        width:60%;
+        margin: auto;
+    }
+        .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent{
+            background: #fff;
+            width:auto;
+            display:flex;
+            position:relative;
+            flex-flow:column nowrap;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            border: 1px solid #999;
+            border: 1px solid rgba(0, 0, 0, .2);
+            border-radius: 20px;
+            outline: 0;
+        }
+            .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentDtdo{
+                background:rgba(43,70,117,0.8);
+                position:absolute;
+                top:0;
+                left:0;
+                width:100%;
+                height:100%;
+                border-radius:20px;
+                z-index:998;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+            }
+                .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentDtdo button{
+                    outline:none;
+                    background:#fff;
+                    letter-spacing:1pt;
+                    color:#446EB6;
+                    font-size:28px;
+                    -webkit-transition:all 200ms ease;
+                    -o-transition:all 200ms ease;
+                    transition:all 200ms ease;
+                }
+                    .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentDtdo button:hover{
+                        background:#446EB6;
+                        color:#fff;
+                        letter-spacing:2pt;
+                    }
+            
+            .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentH{
+                background:#446EB6;
+                border-top-left-radius:15px;
+                border-top-right-radius:15px;
+                border-bottom:1px solid #698BC5;
+                padding:15px;
+                text-align:center;
+                color:#fff;
+            }
+                .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentH .sectionPqrsfRContentHTitulo{
+                    display:flex;
+                    justify-content:center;
+                    flex-flow:column nowrap;
+                    font-size:30px;
+                    padding-top:12px;
+                    font-family:"Calibri Light", Arial;
+                    letter-spacing:2pt;
+                }
+
+        .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB{
+            width:100%;
+            display:flex;
+            text-align:center;
+        }
+            .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB form{
+                padding:15px;
+                width:100%;
+            }
+                .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB form .sectionPqrsfRContentBCJBtns{
+                    width:97%;
+                    margin:15px auto 0 auto;
+                    display:flex;
+                    flex-flow:column nowrap;
+                }
+                    .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB form .sectionPqrsfRContentBCJBtns .sectionPqrsfRContentBCJBtnsP{
+                        display:flex;
+                        width:100%;
+                        justify-content:center;
+                    }
+                        .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB form .sectionPqrsfRContentBCJBtns .sectionPqrsfRContentBCJBtnsP .btn-principal{
+                            font-size:24px;
+                        }
+
+            .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB .sectionPqrsfRContentBtns{
+                outline:none;
+                background:#446EB6;
+                letter-spacing:1pt;
+                color:#fff;
+                border:solid 1px #fff;
+                -webkit-transition:all 200ms ease;
+                -o-transition:all 200ms ease;
+                transition:all 200ms ease;
+            }
+                .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB .sectionPqrsfRContentBtns:hover,.sectionPqrsfRContentBtns:focus{
+                    border:solid 1px #446EB6;
+                    background:#fff;
+                    color:#446EB6;
+                }
+
+            .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB form .input-group{
+                margin:10px 1.5%;
+                width:97%;
+            }
+                .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB form .input-group .sectionPqrsfRContentBtns{
+                    font-size:20px;
+                    letter-spacing:2pt;
+                }
+                
+            .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB form .input-group-addon{
+                background:#446EB6;
+                color:#fff;
+                border:1px solid #446EB6;
+            }
+            .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB form textarea{
+                outline:none;
+                font-size:17px;
+                resize:vertical;
+                min-height:120px;
+                max-height:220px;
+                border:1px solid #446EB6;
+            }
+            .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB form select{
+                outline:none;
+                height:40px;
+                font-size:17px;
+                border:1px solid #446EB6;
+            }
+                .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB form select:focus > option:checked{
+                    background:#446EB6 !important;
+                    color:#fff;
+                }
+
+        .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentF{
+            background:#446EB6;
+            padding:15px;
+            border-bottom-left-radius:15px;
+            border-bottom-right-radius:15px;
+            border-top:1px solid #698BC5;
+            width:100%;
+        }
+    /* </editor-fold> */
+/* </editor-fold> */
+/* </editor-fold> */
+
+    /*Body codigo-recuperarContra*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+.body-codigoRC{
+    width:100%;
+    height:100vh;
+    background:#698BC5;
+    border-radius:40px;
+    border:solid 18px #fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+    .body-codigoRC .codigoRC-modal{
+        width:45%;
+    }
+        .body-codigoRC .codigoRC-modal .div-content{
+            background: #fff;
+            width:auto;
+            display:flex;
+            flex-flow:column nowrap;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            border: 1px solid #999;
+            border: 1px solid rgba(0, 0, 0, .2);
+            border-radius: 20px;
+            outline: 0;
+        }
+            .body-codigoRC .codigoRC-modal .div-content .div-header{
+                background:#446EB6;
+                border-top-left-radius:15px;
+                border-top-right-radius:15px;
+                border-bottom:1px solid #698BC5;
+                padding:15px;
+                text-align:center;
+                color:#fff;
+            }
+                .body-codigoRC .codigoRC-modal .div-content .div-header .div-title{
+                    display:flex;
+                    justify-content:center;
+                    flex-flow:column nowrap;
+                    font-size:30px;
+                    padding-top:12px;
+                    font-family:"Calibri Light", Arial;
+                    letter-spacing:2pt;
+                }
+
+            .body-codigoRC .codigoRC-modal .div-content .div-body{
+                width:100%;
+                height:93%;
+                display:flex;
+                text-align:center;
+            }
+                .body-codigoRC .codigoRC-modal .div-content .div-body form{
+                    padding:15px;
+                    width:100%;
+                }
+                    .body-codigoRC .codigoRC-modal .div-content .div-body form .cont-btn{
+                        width:97%;
+                        margin:0 auto;
+                        display:flex;
+                        flex-flow:column nowrap;
+                    }
+                        .body-codigoRC .codigoRC-modal .div-content .div-body form .cont-btn .cont-btn-principal{
+                            display:flex;
+                            width:100%;
+                            justify-content:center;
+                        }
+                            .body-codigoRC .codigoRC-modal .div-content .div-body form .cont-btn .cont-btn-principal .btn-principal{
+                                font-size:23px;
+                            }
+                            
+                        .body-codigoRC .codigoRC-modal .div-content .div-body form .cont-btn .cont-btns-secundario{
+                            display:flex;
+                            margin:15px auto 0 auto;
+                            width:100%;
+                            justify-content:center;
+                        }
+                            .body-codigoRC .codigoRC-modal .div-content .div-body form .cont-btn .cont-btns-secundario .btn-secundario{
+                                font-size:19px;
+                                margin:0 10px;
+                            }
+
+                .body-codigoRC .codigoRC-modal .div-content .div-body button.btn-div{
+                    outline:none;
+                    background:#446EB6;
+                    letter-spacing:1pt;
+                    color:#fff;
+                    border:solid 1px #fff;
+                    -webkit-transition:all 200ms ease;
+                    -o-transition:all 200ms ease;
+                    transition:all 200ms ease;
+                }
+                    .body-codigoRC .codigoRC-modal .div-content .div-body button.btn-div:hover,button.btn-div:focus{
+                        border:solid 1px #446EB6;
+                        background:#fff;
+                        color:#446EB6;
+                    }
+
+                .body-codigoRC .codigoRC-modal .div-content .div-body .input-group{
+                    margin:20px 1.5%;
+                    width:97%;
+                }
+                .body-codigoRC .codigoRC-modal .div-content .div-body .input-group-addon{
+                    background:#446EB6;
+                    color:#fff;
+                    border:1px solid #446EB6;
+                }
+                .body-codigoRC .codigoRC-modal .div-content .div-body input{
+                    outline:none;
+                    padding:19px 15px;
+                    font-size:20px;
+                    border:1px solid #446EB6;
+                }
+
+            .body-codigoRC .codigoRC-modal .div-content .div-footer{
+                background:#446EB6;
+                padding:15px;
+                border-bottom-left-radius:15px;
+                border-bottom-right-radius:15px;
+                border-top:1px solid #698BC5;
+                width:100%;
+            }
+/* </editor-fold> */
+
+    /*Body index's*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+.me-bi{
+    display:block;
+    margin-top:2px;
+    font-size:16px;
+}
+
+.section-indexs{
+    width:90%;
+    height:auto;
+    font-family:"Calibri Light", Arial;
+    margin:0 auto 50px auto;
+    background:#fff;
+}
+    .section-indexs .CJAccRap{
+        width:95%;
+        height:auto;
+        border:solid 3px #446EB6;
+        border-top-left-radius:15px;
+        border-bottom-right-radius:15px;
+        margin:15px auto 0 auto;
+        box-sizing:border-box;
+        display:flex;
+        flex-flow:column nowrap;
+    }
+        .section-indexs .CJAccRap .CJAccRapTitulo{
+            width:100%;
+            background:#446EB6;
+            padding:8px 10px;
+            font-size:21px;
+            color:#fff;
+            border-top-left-radius:7px;
+            letter-spacing:1.5pt;
+            text-align:center;
+        }
+        .section-indexs .CJAccRap .CJAccRapBtns{
+            width:100%;
+            padding:15px 15px;
+            display:flex;
+            flex-flow:row wrap;
+            justify-content:space-around;
+            align-items:center;
+        }
+            .section-indexs .CJAccRap .CJAccRapBtns button{
+                outline:none;
+                background:#446EB6;
+                font-size:28px;
+                border-radius:8px;
+                letter-spacing:1.5pt;
+                color:#fff;
+                padding:8px 16px;
+                margin:8px 10px;
+                -webkit-transition:all 200ms ease;
+                -o-transition:all 200ms ease;
+                transition:all 200ms ease;
+            }
+            .section-indexs .CJAccRap .CJAccRapBtns button:hover,button:focus{
+                outline:none;
+                background:#365892;
+                color:#fff;
+            }
+
+    .section-indexs article.art-carrusel{
+        width:95%;
+        height:auto;
+        background:#446EB6;
+        margin:35px auto;
+        box-sizing:border-box;
+    }
+    .section-indexs .misCompas{
+        width:95%;
+        height:auto;
+        margin:auto;
+        background:#446EB6;
+        padding-top:15px;
+        box-sizing:border-box;
+        border-radius:20px;
+    }
+        .section-indexs .misCompas .misCompasTitulo{
+            width:90%;
+            height:auto;
+            background:#fff;
+            margin:0 auto 15px auto;
+            padding:15px;
+            border-top-left-radius:15px;
+            border-bottom-right-radius:15px;
+            font-size:30px;
+            letter-spacing:2pt;
+            text-align:center;
+            color:#446EB6;
+        }
+        
+        
+.swiper-container {
+    width: 100%;
+    padding-bottom: 60px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 380px;
+}
+    .swiper-slide .imgBx{
+        width:100%;
+        height:298px;
+        overflow:hidden;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+        .swiper-slide .imgBx img{
+            width:100%;
+        }
+
+.swiper-slide .details{
+    box-sizing:border-box;
+    padding:10px;
+    background:#fff;
+}
+    .swiper-slide .details h3{
+        margin:0;
+        padding:0;
+        font-size:19px;
+        text-align:center;
+    }
+        .swiper-slide .details h3 span{
+            padding:3px 6px;
+            font-size:16px;
+            color:#fff;
+        }
+
+/* <editor-fold defaultstate="collapsed" desc="Detalles de SWIPER para Empleados"> */
+/* Caja de Foto */
+.swiper-slide .imgBx-Gerente{
+    border:solid 2px #446EB6;
+    border-bottom:none;
+}
+.swiper-slide .imgBx-Cocinero{
+    border:solid 2px #78C13A;
+    border-bottom:none;
+}
+.swiper-slide .imgBx-Cajero{
+    border:solid 2px #AC4D44;
+    border-bottom:none;
+}
+.swiper-slide .imgBx-Mesero{
+    border:solid 2px #DAE34E;
+    border-bottom:none;
+}
+.swiper-slide .imgBx-Domiciliario{
+    border:solid 2px #E59030;
+    border-bottom:none;
+}
+
+/* Caja de Detalles */
+.swiper-slide .details-Gerente{
+    border:solid 2px #446EB6;
+    border-top:none;
+}
+.swiper-slide .details-Cocinero{
+    border:solid 2px #78C13A;
+    border-top:none;
+}
+.swiper-slide .details-Cajero{
+    border:solid 2px #AC4D44;
+    border-top:none;
+}
+.swiper-slide .details-Mesero{
+    border:solid 2px #DAE34E;
+    border-top:none;
+}
+.swiper-slide .details-Domiciliaro{
+    border:solid 2px #E59030;
+    border-top:none;
+}
+
+/* Caja de Rol */
+.swiper-slide .details h3 span.span-Gerente{
+    background:#446EB6;
+    border-top-left-radius:6px;
+}
+.swiper-slide .details h3 span.span-Cocinero{
+    background:#78C13A;
+    border-top-left-radius:6px;
+}
+.swiper-slide .details h3 span.span-Cajero{
+    background:#AC4D44;
+    border-top-left-radius:6px;
+}
+.swiper-slide .details h3 span.span-Mesero{
+    background:#DAE34E;
+    border-top-left-radius:6px;
+}
+.swiper-slide .details h3 span.span-Domiciliario{
+    background:#E59030;
+    border-top-left-radius:6px;
+}
+
+/* Caja de Email */
+.swiper-slide .details h3 span.span-GerenteEmail{
+    background:#365892;
+    border-bottom-right-radius:6px;
+    margin-top:0;
+}
+.swiper-slide .details h3 span.span-CocineroEmail{
+    background:#609A2E;
+    border-bottom-right-radius:6px;
+    margin-top:0;
+}
+.swiper-slide .details h3 span.span-CajeroEmail{
+    background:#8A3E36;
+    border-bottom-right-radius:6px;
+    margin-top:0;
+}
+.swiper-slide .details h3 span.span-MeseroEmail{
+    background:#AEB63E;
+    border-bottom-right-radius:6px;
+    margin-top:0;
+}
+.swiper-slide .details h3 span.span-DomiciliarioEmail{
+    background:#B77326;
+    border-bottom-right-radius:6px;
+    margin-top:0;
+}
+/* </editor-fold> */
+/* </editor-fold> */
+
+    /*Body Error404*/
+/* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+.body-error{
+    width:100%;
+    height:100vh;
+    background:#446EB6;
+    display:flex;
+    align-items:center;
+}
+    .body-error button{
+        outline:none;
+        background:#446EB6;
+        letter-spacing:1pt;
+        color:#fff;
+        font-size:20px;
+        -webkit-transition:all 200ms ease;
+        -o-transition:all 200ms ease;
+        transition:all 200ms ease;
+    }
+        .body-error button:hover,button:focus{
+            background:#fff;
+            color:#446EB6;
+        }
+        
+    .body-error .caj-error{
+        background:#698BC5;
+        padding:20px 50px 20px 35%;
+        color:#fff;
+        display:flex;
+        border-top-right-radius:20px;
+        border-bottom-right-radius:20px;
+        flex-flow:column nowrap;
+        justify-content:center;
+        align-items:center;
+    }
+        .body-error .caj-error hr{
+            display:inline-block;
+            margin:20px 0;
+            width:100%;
+        }
+        .body-error .caj-error .caj-error-1{
+            font-size:90px;
+            font-family:"Calibri Light", Arial;
+        }
+        .body-error .caj-error .caj-error-2{
+            font-size:40px;
+            font-family:"Calibri Light", Arial;
+        }
+        .body-error .caj-error .caj-error-3{
+            font-size:30px;
+            font-family:"Calibri Light", Arial;
+        }
+        .body-error .caj-error .caj-error-4{
+            font-size:20px;
+            word-wrap:break-word;
+            font-family:"Calibri Light", Arial;
+        }
+/* </editor-fold> */

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="INTERCCOPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>INTERCCO.beans.Entradas</class>
+    <class>INTERCCO.modelo.Beans.Sedes_1</class>
+    <class>INTERCCO.modelo.Beans.Ciudades_1</class>
+    <class>com.INTERCCO.modelo.Beans.Logs</class>
+    <class>com.INTERCCO.modelo.Beans.Comandas</class>
+    <class>com.INTERCCO.modelo.Beans.Pedidos</class>
+    <class>com.INTERCCO.modelo.Beans.Soportes</class>
+    <class>com.INTERCCO.modelo.Beans.Categorias</class>
+    <class>com.INTERCCO.modelo.Beans.Productos</class>
+    <class>com.INTERCCO.modelo.Beans.Pqrsf</class>
+    <class>com.INTERCCO.modelo.Beans.Usuarios</class>
+    <class>com.INTERCCO.modelo.Beans.Carrusel</class>
+    <class>com.INTERCCO.modelo.Beans.Insumos</class>
+    <class>com.INTERCCO.modelo.Beans.Promociones</class>
+    <class>com.INTERCCO.modelo.Beans.Ciudades</class>
+    <class>com.INTERCCO.modelo.Beans.DetallesPedidos</class>
+    <class>com.INTERCCO.modelo.Beans.Sedes</class>
+    <class>com.INTERCCO.modelo.Beans.InfoUsuarios</class>
+    <class>com.INTERCCO.modelo.Beans.Proveedores</class>
+    <class>com.INTERCCO.modelo.Beans.Facturas</class>
+    <class>com.INTERCCO.modelo.Beans.Iva</class>
+    <class>com.INTERCCO.modelo.Beans.Carruseles</class>
+    <class>com.INTERCCO.modelo.Beans.Permisos</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/intercco?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="1599195"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+    </properties>
+  </persistence-unit>
+</persistence>
