@@ -78,53 +78,59 @@
                             </div>
                         <% } %>
                     <% ArrayList<Proveedores> listaProveedores = (ArrayList) request.getAttribute("listaPro"); %>
-                    <table class="tablaListarProveedores table-bordered table">
-                        <thead>
-                            <tr>
-                                <th>Nombre Proveedor</th>
-                                <th>Ciudad</th>
-                                <th>Persona de contacto</th>
-                                <th>Cargo</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Nombre Proveedor</th>
-                                <th>Ciudad</th>
-                                <th>Persona de contacto</th>
-                                <th>Cargo</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <%  rolSedeUsuario = "";
-                                if (session.getAttribute("rolSedeUsuario") == null){
-                                    rolSedeUsuario = "Secundario";
-                                } else {
-                                    rolSedeUsuario = (String) session.getAttribute("rolSedeUsuario"); 
-                                }
-                                for (Proveedores  prov: listaProveedores) { %>
+                    <div class="table-responsive">
+                        <table class="tablaListarProveedores table-bordered table">
+                            <thead>
                                 <tr>
-                                    <td><%= prov.getNombreCoe()%></td>
-                                    <td><%= prov.getNombreCiudad()%></td>
-                                    <td><%= prov.getNombrePc()%></td>
-                                    <td><%= prov.getCargoPc()%></td>
-                                    <% if (rolSedeUsuario.equals("Secundaria")){ %>
-                                        <td class="td-espaciado">
-                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#proveedoresVerModal" onClick="proveedorVerModal('<%= cA.CifrarASCII(prov.getNombreCoe())%>', '<%= prov.getTipoIf()%>', '<%= cA.CifrarASCII(prov.getNumIt())%>', '<%= cA.CifrarASCII(prov.getTelefonoCoe())%>', '<%= cA.CifrarASCII(prov.getExtensionTelCoe())%>', '<%= cA.CifrarASCII(prov.getMovilCoe())%>', '<%= cA.CifrarASCII(prov.getFaxCoe())%>', '<%= cA.CifrarASCII(prov.getExtensionFaxCoe())%>', '<%= cA.CifrarASCII(prov.getNombreCiudad())%>', '<%= cA.CifrarASCII(prov.getDireccion())%>', '<%= cA.CifrarASCII(prov.getNombrePc())%>', '<%= cA.CifrarASCII(prov.getCargoPc())%>', '<%= prov.getTipoI()%>', '<%= cA.CifrarASCII(prov.getNumI())%>', '<%= cA.CifrarASCII(prov.getEmail())%>', '<%= cA.CifrarASCII(prov.getFaxPc())%>', '<%= cA.CifrarASCII(prov.getExtensionFaxPc())%>', '<%= cA.CifrarASCII(prov.getTelefonoPc())%>', '<%= cA.CifrarASCII(prov.getMovilPc())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                        </td>
-                                    <% } else { %>
-                                        <td class="td-espaciado">
-                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#proveedoresVerModal" onClick="proveedorVerModal('<%= cA.CifrarASCII(prov.getNombreCoe())%>', '<%= prov.getTipoIf()%>', '<%= cA.CifrarASCII(prov.getNumIt())%>', '<%= cA.CifrarASCII(prov.getTelefonoCoe())%>', '<%= cA.CifrarASCII(prov.getExtensionTelCoe())%>', '<%= cA.CifrarASCII(prov.getMovilCoe())%>', '<%= cA.CifrarASCII(prov.getFaxCoe())%>', '<%= cA.CifrarASCII(prov.getExtensionFaxCoe())%>', '<%= cA.CifrarASCII(prov.getNombreCiudad())%>', '<%= cA.CifrarASCII(prov.getDireccion())%>', '<%= cA.CifrarASCII(prov.getNombrePc())%>', '<%= cA.CifrarASCII(prov.getCargoPc())%>', '<%= prov.getTipoI()%>', '<%= cA.CifrarASCII(prov.getNumI())%>', '<%= cA.CifrarASCII(prov.getEmail())%>', '<%= cA.CifrarASCII(prov.getFaxPc())%>', '<%= cA.CifrarASCII(prov.getExtensionFaxPc())%>', '<%= cA.CifrarASCII(prov.getTelefonoPc())%>', '<%= cA.CifrarASCII(prov.getMovilPc())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#proveedoresAGerenteModal" onClick="proveedorActualizarModal('<%= prov.getIdProveedores()%>', '<%= cA.CifrarASCII(prov.getNombreCoe())%>', '<%= prov.getTipoIf()%>', '<%= cA.CifrarASCII(prov.getNumIt())%>', '<%= cA.CifrarASCII(prov.getTelefonoCoe())%>', '<%= cA.CifrarASCII(prov.getExtensionTelCoe())%>', '<%= cA.CifrarASCII(prov.getMovilCoe())%>', '<%= cA.CifrarASCII(prov.getFaxCoe())%>', '<%= cA.CifrarASCII(prov.getExtensionFaxCoe())%>', '<%= prov.getIdCiudad()%>', '<%= cA.CifrarASCII(prov.getDireccion())%>', '<%= cA.CifrarASCII(prov.getNombrePc())%>', '<%= cA.CifrarASCII(prov.getCargoPc())%>', '<%= prov.getTipoI()%>', '<%= cA.CifrarASCII(prov.getNumI())%>', '<%= cA.CifrarASCII(prov.getEmail())%>', '<%= cA.CifrarASCII(prov.getFaxPc())%>', '<%= cA.CifrarASCII(prov.getExtensionFaxPc())%>', '<%= cA.CifrarASCII(prov.getTelefonoPc())%>', '<%= cA.CifrarASCII(prov.getMovilPc())%>')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                            <button type="button" onClick="window.location = 'ProveedorE?idProv='+<%= prov.getIdProveedores()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
-                                        </td>
-                                    <% } %>
+                                    <th>Nombre Proveedor</th>
+                                    <th>Ciudad</th>
+                                    <th>Persona de contacto</th>
+                                    <th>Cargo</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            <% } %>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Nombre Proveedor</th>
+                                    <th>Ciudad</th>
+                                    <th>Persona de contacto</th>
+                                    <th>Cargo</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <%  rolSedeUsuario = "";
+                                    if (session.getAttribute("rolSedeUsuario") == null){
+                                        rolSedeUsuario = "Secundario";
+                                    } else {
+                                        rolSedeUsuario = (String) session.getAttribute("rolSedeUsuario"); 
+                                    }
+                                    for (Proveedores  prov: listaProveedores) { %>
+                                    <tr>
+                                        <td><%= prov.getNombreCoe()%></td>
+                                        <td><%= prov.getNombreCiudad()%></td>
+                                        <td><%= prov.getNombrePc()%></td>
+                                        <td><%= prov.getCargoPc()%></td>
+                                        <% if (rolSedeUsuario.equals("Secundaria")){ %>
+                                            <td>
+                                                <div class="td-espaciado">
+                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#proveedoresVerModal" onClick="proveedorVerModal('<%= cA.CifrarASCII(prov.getNombreCoe())%>', '<%= prov.getTipoIf()%>', '<%= cA.CifrarASCII(prov.getNumIt())%>', '<%= cA.CifrarASCII(prov.getTelefonoCoe())%>', '<%= cA.CifrarASCII(prov.getExtensionTelCoe())%>', '<%= cA.CifrarASCII(prov.getMovilCoe())%>', '<%= cA.CifrarASCII(prov.getFaxCoe())%>', '<%= cA.CifrarASCII(prov.getExtensionFaxCoe())%>', '<%= cA.CifrarASCII(prov.getNombreCiudad())%>', '<%= cA.CifrarASCII(prov.getDireccion())%>', '<%= cA.CifrarASCII(prov.getNombrePc())%>', '<%= cA.CifrarASCII(prov.getCargoPc())%>', '<%= prov.getTipoI()%>', '<%= cA.CifrarASCII(prov.getNumI())%>', '<%= cA.CifrarASCII(prov.getEmail())%>', '<%= cA.CifrarASCII(prov.getFaxPc())%>', '<%= cA.CifrarASCII(prov.getExtensionFaxPc())%>', '<%= cA.CifrarASCII(prov.getTelefonoPc())%>', '<%= cA.CifrarASCII(prov.getMovilPc())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                </div>
+                                            </td>
+                                        <% } else { %>
+                                            <td>
+                                                <div class="td-espaciado">
+                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#proveedoresVerModal" onClick="proveedorVerModal('<%= cA.CifrarASCII(prov.getNombreCoe())%>', '<%= prov.getTipoIf()%>', '<%= cA.CifrarASCII(prov.getNumIt())%>', '<%= cA.CifrarASCII(prov.getTelefonoCoe())%>', '<%= cA.CifrarASCII(prov.getExtensionTelCoe())%>', '<%= cA.CifrarASCII(prov.getMovilCoe())%>', '<%= cA.CifrarASCII(prov.getFaxCoe())%>', '<%= cA.CifrarASCII(prov.getExtensionFaxCoe())%>', '<%= cA.CifrarASCII(prov.getNombreCiudad())%>', '<%= cA.CifrarASCII(prov.getDireccion())%>', '<%= cA.CifrarASCII(prov.getNombrePc())%>', '<%= cA.CifrarASCII(prov.getCargoPc())%>', '<%= prov.getTipoI()%>', '<%= cA.CifrarASCII(prov.getNumI())%>', '<%= cA.CifrarASCII(prov.getEmail())%>', '<%= cA.CifrarASCII(prov.getFaxPc())%>', '<%= cA.CifrarASCII(prov.getExtensionFaxPc())%>', '<%= cA.CifrarASCII(prov.getTelefonoPc())%>', '<%= cA.CifrarASCII(prov.getMovilPc())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#proveedoresAGerenteModal" onClick="proveedorActualizarModal('<%= prov.getIdProveedores()%>', '<%= cA.CifrarASCII(prov.getNombreCoe())%>', '<%= prov.getTipoIf()%>', '<%= cA.CifrarASCII(prov.getNumIt())%>', '<%= cA.CifrarASCII(prov.getTelefonoCoe())%>', '<%= cA.CifrarASCII(prov.getExtensionTelCoe())%>', '<%= cA.CifrarASCII(prov.getMovilCoe())%>', '<%= cA.CifrarASCII(prov.getFaxCoe())%>', '<%= cA.CifrarASCII(prov.getExtensionFaxCoe())%>', '<%= prov.getIdCiudad()%>', '<%= cA.CifrarASCII(prov.getDireccion())%>', '<%= cA.CifrarASCII(prov.getNombrePc())%>', '<%= cA.CifrarASCII(prov.getCargoPc())%>', '<%= prov.getTipoI()%>', '<%= cA.CifrarASCII(prov.getNumI())%>', '<%= cA.CifrarASCII(prov.getEmail())%>', '<%= cA.CifrarASCII(prov.getFaxPc())%>', '<%= cA.CifrarASCII(prov.getExtensionFaxPc())%>', '<%= cA.CifrarASCII(prov.getTelefonoPc())%>', '<%= cA.CifrarASCII(prov.getMovilPc())%>')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                    <button type="button" onClick="window.location = 'ProveedorE?idProv='+<%= prov.getIdProveedores()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                </div>
+                                            </td>
+                                        <% } %>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
             </body>
             <%@include file="proveedoresGerenteModales.jsp" %>

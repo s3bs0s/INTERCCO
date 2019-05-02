@@ -89,76 +89,80 @@
                         <button data-toggle="modal" data-target="#insumoRGerenteModal" type="button" class="btn">Registrar <span class="tabla-reg-m"><span class="glyphicon glyphicon-plus"></span></span></button>
                     </div>
                     <% ArrayList<Insumos> listaInsumos = (ArrayList) request.getAttribute("listaInsu"); %>
-                    <table class="tablaListarInsumos table-bordered table">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Cantidad</th>
-                                <th>Unidad de Medida</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Cantidad</th>
-                                <th>Unidad de Medida</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <% for (Insumos  insu: listaInsumos) { %>
-                                <% if(insu.getIdSede().equals(nomSedeUsuario)){ %>
-                                    <% Date date = new Date();
-                                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                                        
-                                        Calendar calendarInsumo = Calendar.getInstance();
-                                        calendarInsumo.setTime(dateFormat.parse(String.valueOf(insu.getFchIngreso())));
-                                        calendarInsumo.add(Calendar.DAY_OF_YEAR, 7);
-                                        Date dateLimite = dateFormat.parse(dateFormat.format(calendarInsumo.getTime()));
-                                        
-                                        if ((insu.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date))) || insu.getFchCaducidad().equals(dateFormat.parse(dateFormat.format(date)))) && !insu.getExistencia().equals("D")){%>
-                                    <tr class="purple">
-                                        <% } else { %>
-                                    <tr>
-                                        <% } %>
-                                        <td><%= insu.getNombre()%></td>
-                                        <td><%= insu.getCantidad()%></td>
-                                        <td><%= insu.getUnidadMedida()%></td>
-                                        <% if (insu.getExistencia().equals("D")) { %>
-                                            <td class="info">Devuelto</td>
-                                        <% } else { %>
-                                            <% if (insu.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date))) || insu.getFchCaducidad().equals(dateFormat.parse(dateFormat.format(date)))){%>
-                                                <td class="purple">Vencido</td>
-                                            <% } else {%>
-                                                <% if (insu.getCantidad() < 1) { %>
-                                                <td class="danger">¡Agotado!</td>
-                                                <% } else if (insu.getCantidad() >= 1 && insu.getCantidad() <= 20) { %>
-                                                <td class="warning">Por agota</td>
-                                                <% } else if (insu.getCantidad() > 20) { %>
-                                                <td class="success">Hay suficiente</td>
+                    <div class="table-responsive">
+                        <table class="tablaListarInsumos table-bordered table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Cantidad</th>
+                                    <th>Unidad de Medida</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Cantidad</th>
+                                    <th>Unidad de Medida</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <% for (Insumos  insu: listaInsumos) { %>
+                                    <% if(insu.getIdSede().equals(nomSedeUsuario)){ %>
+                                        <% Date date = new Date();
+                                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                                            Calendar calendarInsumo = Calendar.getInstance();
+                                            calendarInsumo.setTime(dateFormat.parse(String.valueOf(insu.getFchIngreso())));
+                                            calendarInsumo.add(Calendar.DAY_OF_YEAR, 7);
+                                            Date dateLimite = dateFormat.parse(dateFormat.format(calendarInsumo.getTime()));
+
+                                            if ((insu.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date))) || insu.getFchCaducidad().equals(dateFormat.parse(dateFormat.format(date)))) && !insu.getExistencia().equals("D")){%>
+                                        <tr class="purple">
+                                            <% } else { %>
+                                        <tr>
+                                            <% } %>
+                                            <td><%= insu.getNombre()%></td>
+                                            <td><%= insu.getCantidad()%></td>
+                                            <td><%= insu.getUnidadMedida()%></td>
+                                            <% if (insu.getExistencia().equals("D")) { %>
+                                                <td class="info">Devuelto</td>
+                                            <% } else { %>
+                                                <% if (insu.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date))) || insu.getFchCaducidad().equals(dateFormat.parse(dateFormat.format(date)))){%>
+                                                    <td class="purple">Vencido</td>
+                                                <% } else {%>
+                                                    <% if (insu.getCantidad() < 1) { %>
+                                                    <td class="danger">¡Agotado!</td>
+                                                    <% } else if (insu.getCantidad() >= 1 && insu.getCantidad() <= 20) { %>
+                                                    <td class="warning">Por agota</td>
+                                                    <% } else if (insu.getCantidad() > 20) { %>
+                                                    <td class="success">Hay suficiente</td>
+                                                    <% } %>
                                                 <% } %>
                                             <% } %>
-                                        <% } %>
-                                        <td class="td-espaciado">
-                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#insumosVerModal" onClick="insumoVerModal('<%= cA.CifrarASCII(insu.getReferencia())%>', '<%= cA.CifrarASCII(insu.getNombre())%>', '<%= insu.getFchIngreso()%>', '<%= insu.getFchCaducidad()%>', '<%= insu.getUnidadMedida()%>', '<%= insu.getCantidad()%>', '<%= insu.getPrecioUnitario()%>', '<%= cA.CifrarASCII(insu.getNombreProveedor())%>', '<%= insu.getTipoIf()%>', '<%= cA.CifrarASCII(insu.getNumIt())%>', '<%= cA.CifrarASCII(insu.getNombrePc())%>', '<%= cA.CifrarASCII(insu.getCargoPc())%>', '<%= cA.CifrarASCII(insu.getEmail())%>', '<%= cA.CifrarASCII(insu.getFaxPc())%>', '<%= cA.CifrarASCII(insu.getExtensionFaxPc())%>', '<%= cA.CifrarASCII(insu.getTelefonoPc())%>', '<%= cA.CifrarASCII(insu.getMovilPc())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#insumoAGerenteModal" onClick="insumoActualizarModal('<%= insu.getIdInsumos()%>', '<%= cA.CifrarASCII(insu.getReferencia())%>', '<%= cA.CifrarASCII(insu.getNombre())%>', '<%= insu.getFchCaducidad()%>', '<%= insu.getUnidadMedida()%>', '<%= insu.getCantidad()%>', '<%= insu.getPrecioUnitario()%>', '<%= insu.getIdProveedor()%>')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                            <% if ((dateLimite.equals(dateFormat.parse(dateFormat.format(date))) || dateLimite.after(dateFormat.parse(dateFormat.format(date)))) && !insu.getExistencia().equals("D") && insu.getFchCaducidad().after(dateFormat.parse(dateFormat.format(date)))) { %>
-                                            <button type="button" class="btn btn-active-os" data-toggle="modal" data-target="#insumoDGerenteModal" onClick="insumoDevolverModal('<%= insu.getIdInsumos()%>', '<%= cA.CifrarASCII(insu.getEmail())%>', '<%= cA.CifrarASCII(insu.getNombre())%>', '<%= cA.CifrarASCII(insu.getNombrePc())%>')"><span class="glyphicon glyphicon-transfer"></span> Devolver</button>
-                                            <% } %>
-                                            <% if ((insu.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date))) || insu.getFchCaducidad().equals(dateFormat.parse(dateFormat.format(date)))) && !insu.getExistencia().equals("D")) { %>
-                                                <button type="button" onClick="window.location = 'InsumoE?idIns='+<%= insu.getIdInsumos()%>;" class="btn btn-purple"><span class="icon-hour-glass"></span> Venció</button>
-                                            <% } else { %>
-                                                <button type="button" onClick="window.location = 'InsumoE?idIns='+<%= insu.getIdInsumos()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
-                                            <% } %>
-                                        </td>
-                                    </tr>
+                                            <td>
+                                                <div class="td-espaciado">
+                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#insumosVerModal" onClick="insumoVerModal('<%= cA.CifrarASCII(insu.getReferencia())%>', '<%= cA.CifrarASCII(insu.getNombre())%>', '<%= insu.getFchIngreso()%>', '<%= insu.getFchCaducidad()%>', '<%= insu.getUnidadMedida()%>', '<%= insu.getCantidad()%>', '<%= insu.getPrecioUnitario()%>', '<%= cA.CifrarASCII(insu.getNombreProveedor())%>', '<%= insu.getTipoIf()%>', '<%= cA.CifrarASCII(insu.getNumIt())%>', '<%= cA.CifrarASCII(insu.getNombrePc())%>', '<%= cA.CifrarASCII(insu.getCargoPc())%>', '<%= cA.CifrarASCII(insu.getEmail())%>', '<%= cA.CifrarASCII(insu.getFaxPc())%>', '<%= cA.CifrarASCII(insu.getExtensionFaxPc())%>', '<%= cA.CifrarASCII(insu.getTelefonoPc())%>', '<%= cA.CifrarASCII(insu.getMovilPc())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#insumoAGerenteModal" onClick="insumoActualizarModal('<%= insu.getIdInsumos()%>', '<%= cA.CifrarASCII(insu.getReferencia())%>', '<%= cA.CifrarASCII(insu.getNombre())%>', '<%= insu.getFchCaducidad()%>', '<%= insu.getUnidadMedida()%>', '<%= insu.getCantidad()%>', '<%= insu.getPrecioUnitario()%>', '<%= insu.getIdProveedor()%>')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                    <% if ((dateLimite.equals(dateFormat.parse(dateFormat.format(date))) || dateLimite.after(dateFormat.parse(dateFormat.format(date)))) && !insu.getExistencia().equals("D") && insu.getFchCaducidad().after(dateFormat.parse(dateFormat.format(date)))) { %>
+                                                    <button type="button" class="btn btn-active-os" data-toggle="modal" data-target="#insumoDGerenteModal" onClick="insumoDevolverModal('<%= insu.getIdInsumos()%>', '<%= cA.CifrarASCII(insu.getEmail())%>', '<%= cA.CifrarASCII(insu.getNombre())%>', '<%= cA.CifrarASCII(insu.getNombrePc())%>')"><span class="glyphicon glyphicon-transfer"></span> Devolver</button>
+                                                    <% } %>
+                                                    <% if ((insu.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date))) || insu.getFchCaducidad().equals(dateFormat.parse(dateFormat.format(date)))) && !insu.getExistencia().equals("D")) { %>
+                                                        <button type="button" onClick="window.location = 'InsumoE?idIns='+<%= insu.getIdInsumos()%>;" class="btn btn-purple"><span class="icon-hour-glass"></span> Venció</button>
+                                                    <% } else { %>
+                                                        <button type="button" onClick="window.location = 'InsumoE?idIns='+<%= insu.getIdInsumos()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                    <% } %>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <% } %>
                                 <% } %>
-                            <% } %>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
             </body>
             <%@include file="insumosGerenteModales.jsp" %>

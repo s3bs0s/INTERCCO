@@ -180,53 +180,57 @@
                                         </div>
                                         <% ArrayList<Productos> listaProductos = (ArrayList) request.getAttribute("listaProd"); %>
                                         <% if (rolUsuario.equals("Gerente")){ %>
-                                            <table class="tablaListarProductos table-bordered table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Categoría</th>
-                                                        <th>Nombre</th>
-                                                        <th>Precio</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>Categoría</th>
-                                                        <th>Nombre</th>
-                                                        <th>Precio</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    <%  nomSedeUsuario = "";
-                                                        if (session.getAttribute("nomSedeUsuario") == null){
-                                                            nomSedeUsuario = "Sin Sede";
-                                                        } else {
-                                                            nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario"); 
-                                                        }
-                                                        for (Productos prod : listaProductos) {%>
-                                                        <% if (prod.getNombreSede().equals(nomSedeUsuario)) {
-                                                            
-                                                            String numero = String.valueOf(prod.getPrecio());
-                                                            String resultado = "";
-                                                            for (int j = 0, i = numero.length() - 1; i >= 0; i--) {
-                                                                resultado = numero.charAt(i) + ((j > 0) && (j % 3 == 0) ? "." : "") + resultado;
-                                                                j++;
-                                                            } %>
-                                                            <tr>
-                                                                <td><%= prod.getNombreCategoria()%></td>
-                                                                <td><%= prod.getNombre()%></td>
-                                                                <td><%= resultado%></td>
-                                                                <td class="td-espaciado">
-                                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productosVerModal" onClick="productosVerModal('<%= cA.CifrarASCII(prod.getNombreCategoria()) %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#productosAGerenteModal" onClick="productosActualizarModal('<%= prod.getIdProductos()%>' ,'<%= prod.getIdCategoria() %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                                    <button type="button" onClick="window.location = 'ProductoE?idProd='+<%= prod.getIdProductos()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
-                                                                </td>
-                                                            </tr>
-                                                        <% } %>
-                                                    <% }%>
-                                                </tbody>
-                                            </table>
+                                            <div class="table-responsive">
+                                                <table class="tablaListarProductos table-bordered table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Categoría</th>
+                                                            <th>Nombre</th>
+                                                            <th>Precio</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Categoría</th>
+                                                            <th>Nombre</th>
+                                                            <th>Precio</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                        <%  nomSedeUsuario = "";
+                                                            if (session.getAttribute("nomSedeUsuario") == null){
+                                                                nomSedeUsuario = "Sin Sede";
+                                                            } else {
+                                                                nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario"); 
+                                                            }
+                                                            for (Productos prod : listaProductos) {%>
+                                                            <% if (prod.getNombreSede().equals(nomSedeUsuario)) {
+
+                                                                String numero = String.valueOf(prod.getPrecio());
+                                                                String resultado = "";
+                                                                for (int j = 0, i = numero.length() - 1; i >= 0; i--) {
+                                                                    resultado = numero.charAt(i) + ((j > 0) && (j % 3 == 0) ? "." : "") + resultado;
+                                                                    j++;
+                                                                } %>
+                                                                <tr>
+                                                                    <td><%= prod.getNombreCategoria()%></td>
+                                                                    <td><%= prod.getNombre()%></td>
+                                                                    <td><%= resultado%></td>
+                                                                    <td>
+                                                                        <div class="td-espaciado">
+                                                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productosVerModal" onClick="productosVerModal('<%= cA.CifrarASCII(prod.getNombreCategoria()) %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#productosAGerenteModal" onClick="productosActualizarModal('<%= prod.getIdProductos()%>' ,'<%= prod.getIdCategoria() %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                                            <button type="button" onClick="window.location = 'ProductoE?idProd='+<%= prod.getIdProductos()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            <% } %>
+                                                        <% }%>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         <% } else {%>
                                             <table class="tablaListarProductos table-bordered table">
                                                 <thead>
@@ -261,10 +265,12 @@
                                                             <td><%= prod.getNombreCategoria()%></td>
                                                             <td><%= prod.getNombre()%></td>
                                                             <td><%= resultado%></td>
-                                                            <td class="td-espaciado">
-                                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productosVerModal" onClick="productosVerModal('<%= cA.CifrarASCII(prod.getNombreCategoria()) %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#productosAGerenteModal" onClick="productosActualizarModal('<%= prod.getIdProductos()%>' ,'<%= prod.getIdCategoria() %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                                <button type="button" onClick="window.location = 'ProductoE?idProd='+<%= prod.getIdProductos()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                            <td>
+                                                                <div class="td-espaciado">
+                                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productosVerModal" onClick="productosVerModal('<%= cA.CifrarASCII(prod.getNombreCategoria()) %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#productosAGerenteModal" onClick="productosActualizarModal('<%= prod.getIdProductos()%>' ,'<%= prod.getIdCategoria() %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                                    <button type="button" onClick="window.location = 'ProductoE?idProd='+<%= prod.getIdProductos()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     <% }%>
@@ -285,68 +291,76 @@
                                         </div>
                                         <% ArrayList<Categorias> listaCategorias = (ArrayList) request.getAttribute("listaCat"); %>
                                         <% if (rolUsuario.equals("Gerente")){ %>
-                                            <table class="tablaListarCategorias table-bordered table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Nombre</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>Nombre</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    <%  nomSedeUsuario = "";
-                                                        if (session.getAttribute("nomSedeUsuario") == null){
-                                                            nomSedeUsuario = "Sin Sede";
-                                                        } else {
-                                                            nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario"); 
-                                                        }
-                                                        for (Categorias cate : listaCategorias) {%>
-                                                        <% if (cate.getNombreSede().equals(nomSedeUsuario)) {%>
+                                            <div class="table-responsive">
+                                                <table class="tablaListarCategorias table-bordered table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nombre</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Nombre</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                        <%  nomSedeUsuario = "";
+                                                            if (session.getAttribute("nomSedeUsuario") == null){
+                                                                nomSedeUsuario = "Sin Sede";
+                                                            } else {
+                                                                nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario"); 
+                                                            }
+                                                            for (Categorias cate : listaCategorias) {%>
+                                                            <% if (cate.getNombreSede().equals(nomSedeUsuario)) {%>
+                                                                <tr>
+                                                                    <td><%= cate.getNombre()%></td>
+                                                                    <td>
+                                                                        <div class="td-espaciado">
+                                                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#categoriasAGerenteModal" onClick="categoriasActualizarModal('<%= cate.getIdCategorias() %>', '<%= cA.CifrarASCII(cate.getNombre()) %>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                                            <button type="button" onClick="window.location = 'CategoriaE?idCate='+<%= cate.getIdCategorias()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            <% } %>
+                                                        <% }%>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        <% } else {%>
+                                            <div class="table-responsive">
+                                                <table class="tablaListarCategorias table-bordered table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sede</th>
+                                                            <th>Nombre</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Sede</th>
+                                                            <th>Nombre</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                        <% for (Categorias cate : listaCategorias) {%>
                                                             <tr>
+                                                                <td><%= cate.getNombreSede()%></td>
                                                                 <td><%= cate.getNombre()%></td>
-                                                                <td class="td-espaciado">
-                                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#categoriasAGerenteModal" onClick="categoriasActualizarModal('<%= cate.getIdCategorias() %>', '<%= cA.CifrarASCII(cate.getNombre()) %>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                                    <button type="button" onClick="window.location = 'CategoriaE?idCate='+<%= cate.getIdCategorias()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                <td>
+                                                                    <div class="td-espaciado">
+                                                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#categoriasAGerenteModal" onClick="categoriasActualizarModal('<%= cate.getIdCategorias() %>', '<%= cA.CifrarASCII(cate.getNombre()) %>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                                        <button type="button" onClick="window.location = 'CategoriaE?idCate='+<%= cate.getIdCategorias()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
-                                                        <% } %>
-                                                    <% }%>
-                                                </tbody>
-                                            </table>
-                                        <% } else {%>
-                                            <table class="tablaListarCategorias table-bordered table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Sede</th>
-                                                        <th>Nombre</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>Sede</th>
-                                                        <th>Nombre</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    <% for (Categorias cate : listaCategorias) {%>
-                                                        <tr>
-                                                            <td><%= cate.getNombreSede()%></td>
-                                                            <td><%= cate.getNombre()%></td>
-                                                            <td class="td-espaciado">
-                                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#categoriasAGerenteModal" onClick="categoriasActualizarModal('<%= cate.getIdCategorias() %>', '<%= cA.CifrarASCII(cate.getNombre()) %>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                                <button type="button" onClick="window.location = 'CategoriaE?idCate='+<%= cate.getIdCategorias()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
-                                                            </td>
-                                                        </tr>
-                                                    <% }%>
-                                                </tbody>
-                                            </table>
+                                                        <% }%>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         <% } %>
                                     </div>
                                 </div>
@@ -362,38 +376,97 @@
                                         </div>
                                         <% ArrayList<Promociones> listaPromociones = (ArrayList) request.getAttribute("listaProm"); %>
                                         <% if (rolUsuario.equals("Gerente")){ %>
-                                            <table class="tablaListarPromociones table-bordered table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Fecha</th>
-                                                        <th>Hora</th>
-                                                        <th>Producto</th>
-                                                        <th>Porcentaje</th>
-                                                        <th>Caducidad</th>
-                                                        <th>Estado</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>Fecha</th>
-                                                        <th>Hora</th>
-                                                        <th>Producto</th>
-                                                        <th>Porcentaje</th>
-                                                        <th>Caducidad</th>
-                                                        <th>Estado</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    <%  nomSedeUsuario = "";
-                                                        if (session.getAttribute("nomSedeUsuario") == null){
-                                                            nomSedeUsuario = "Sin Sede";
-                                                        } else {
-                                                            nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario"); 
-                                                        }
-                                                        for (Promociones prom : listaPromociones) {%>
-                                                        <% if (prom.getNombreSede().equals(nomSedeUsuario)) {
+                                            <div class="table-responsive">
+                                                <table class="tablaListarPromociones table-bordered table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Fecha</th>
+                                                            <th>Hora</th>
+                                                            <th>Producto</th>
+                                                            <th>Porcentaje</th>
+                                                            <th>Caducidad</th>
+                                                            <th>Estado</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Fecha</th>
+                                                            <th>Hora</th>
+                                                            <th>Producto</th>
+                                                            <th>Porcentaje</th>
+                                                            <th>Caducidad</th>
+                                                            <th>Estado</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                        <%  nomSedeUsuario = "";
+                                                            if (session.getAttribute("nomSedeUsuario") == null){
+                                                                nomSedeUsuario = "Sin Sede";
+                                                            } else {
+                                                                nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario"); 
+                                                            }
+                                                            for (Promociones prom : listaPromociones) {%>
+                                                            <% if (prom.getNombreSede().equals(nomSedeUsuario)) {
+                                                                Date date = new Date();
+                                                                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); %>
+                                                                <tr>
+                                                                    <%  EstructuraFYH eFYH = new EstructuraFYH();
+                                                                        String fecha = String.valueOf(prom.getFchRegistro());
+                                                                        String fechaC = String.valueOf(prom.getFchCaducidad());
+                                                                        String hora = String.valueOf(prom.getHoraRegistro()); %>
+                                                                    <td><%= eFYH.estFecha(fecha, "dd")+"/"+eFYH.estFecha(fecha, "mm")+"/"+eFYH.estFecha(fecha, "aa") %></td>
+                                                                    <td><%= eFYH.estHora(hora, "h")+":"+eFYH.estHora(hora, "m") %></td>
+                                                                    <td><%= prom.getNombreProducto()%></td>
+                                                                    <td><%= prom.getPorcentajePromo()%>%</td>
+                                                                    <td><%= eFYH.estFecha(fechaC, "dd")+"/"+eFYH.estFecha(fechaC, "mm")+"/"+eFYH.estFecha(fechaC, "aa") %></td>
+                                                                    <% if (prom.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date)))){ %>
+                                                                        <td class="danger">Caducada</td>
+                                                                    <% } else { %>
+                                                                        <td class="success">Vigente</td>
+                                                                    <% } %>
+                                                                    <td>
+                                                                        <div class="td-espaciado">
+                                                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#promocionesAGerenteModal" onClick="promocionesActualizarModal('<%= prom.getIdPromociones()%>', '<%= prom.getPorcentajePromo()%>', '<%= prom.getFchCaducidad()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                                            <button type="button" onClick="window.location = 'PromocionE?idProm='+<%= prom.getIdPromociones()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            <% } %>
+                                                        <% }%>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        <% } else {%>
+                                            <div class="table-responsive">
+                                                <table class="tablaListarPromocionesAdminS table-bordered table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sede</th>
+                                                            <th>Fecha</th>
+                                                            <th>Hora</th>
+                                                            <th>Producto</th>
+                                                            <th>Porcentaje</th>
+                                                            <th>Caducidad</th>
+                                                            <th>Estado</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Sede</th>
+                                                            <th>Fecha</th>
+                                                            <th>Hora</th>
+                                                            <th>Producto</th>
+                                                            <th>Porcentaje</th>
+                                                            <th>Caducidad</th>
+                                                            <th>Estado</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                        <% for (Promociones prom : listaPromociones) {
                                                             Date date = new Date();
                                                             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); %>
                                                             <tr>
@@ -401,79 +474,28 @@
                                                                     String fecha = String.valueOf(prom.getFchRegistro());
                                                                     String fechaC = String.valueOf(prom.getFchCaducidad());
                                                                     String hora = String.valueOf(prom.getHoraRegistro()); %>
-                                                                <td><%= eFYH.estFecha(fecha, "dd")+" / "+eFYH.estFecha(fecha, "mm")+" / "+eFYH.estFecha(fecha, "aa") %></td>
-                                                                <td><%= eFYH.estHora(hora, "h")+" : "+eFYH.estHora(hora, "m") %></td>
+                                                                <td><%= prom.getNombreSede()%></td>
+                                                                <td><%= eFYH.estFecha(fecha, "dd")+"/"+eFYH.estFecha(fecha, "mm")+"/"+eFYH.estFecha(fecha, "aa") %></td>
+                                                                <td><%= eFYH.estHora(hora, "h")+":"+eFYH.estHora(hora, "m") %></td>
                                                                 <td><%= prom.getNombreProducto()%></td>
                                                                 <td><%= prom.getPorcentajePromo()%>%</td>
-                                                                <td><%= eFYH.estFecha(fechaC, "dd")+" / "+eFYH.estFecha(fechaC, "mm")+" / "+eFYH.estFecha(fechaC, "aa") %></td>
+                                                                <td><%= eFYH.estFecha(fechaC, "dd")+"/"+eFYH.estFecha(fechaC, "mm")+"/"+eFYH.estFecha(fechaC, "aa") %></td>
                                                                 <% if (prom.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date)))){ %>
                                                                     <td class="danger">Caducada</td>
                                                                 <% } else { %>
                                                                     <td class="success">Vigente</td>
                                                                 <% } %>
-                                                                <td class="td-espaciado">
-                                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#promocionesAGerenteModal" onClick="promocionesActualizarModal('<%= prom.getIdPromociones()%>', '<%= prom.getPorcentajePromo()%>', '<%= prom.getFchCaducidad()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                                    <button type="button" onClick="window.location = 'PromocionE?idProm='+<%= prom.getIdPromociones()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                <td>
+                                                                    <div class="td-espaciado">
+                                                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#promocionesAGerenteModal" onClick="promocionesActualizarModal('<%= prom.getIdPromociones()%>', '<%= prom.getPorcentajePromo()%>', '<%= prom.getFchCaducidad()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                                        <button type="button" onClick="window.location = 'PromocionE?idProm='+<%= prom.getIdPromociones()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
-                                                        <% } %>
-                                                    <% }%>
-                                                </tbody>
-                                            </table>
-                                        <% } else {%>
-                                            <table class="tablaListarPromocionesAdminS table-bordered table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Sede</th>
-                                                        <th>Fecha</th>
-                                                        <th>Hora</th>
-                                                        <th>Producto</th>
-                                                        <th>Porcentaje</th>
-                                                        <th>Caducidad</th>
-                                                        <th>Estado</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>Sede</th>
-                                                        <th>Fecha</th>
-                                                        <th>Hora</th>
-                                                        <th>Producto</th>
-                                                        <th>Porcentaje</th>
-                                                        <th>Caducidad</th>
-                                                        <th>Estado</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    <% for (Promociones prom : listaPromociones) {
-                                                        Date date = new Date();
-                                                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); %>
-                                                        <tr>
-                                                            <%  EstructuraFYH eFYH = new EstructuraFYH();
-                                                                String fecha = String.valueOf(prom.getFchRegistro());
-                                                                String fechaC = String.valueOf(prom.getFchCaducidad());
-                                                                String hora = String.valueOf(prom.getHoraRegistro()); %>
-                                                            <td><%= prom.getNombreSede()%></td>
-                                                            <td><%= eFYH.estFecha(fecha, "dd")+" / "+eFYH.estFecha(fecha, "mm")+" / "+eFYH.estFecha(fecha, "aa") %></td>
-                                                            <td><%= eFYH.estHora(hora, "h")+" : "+eFYH.estHora(hora, "m") %></td>
-                                                            <td><%= prom.getNombreProducto()%></td>
-                                                            <td><%= prom.getPorcentajePromo()%>%</td>
-                                                            <td><%= eFYH.estFecha(fechaC, "dd")+" / "+eFYH.estFecha(fechaC, "mm")+" / "+eFYH.estFecha(fechaC, "aa") %></td>
-                                                            <% if (prom.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date)))){ %>
-                                                                <td class="danger">Caducada</td>
-                                                            <% } else { %>
-                                                                <td class="success">Vigente</td>
-                                                            <% } %>
-                                                            <td class="td-espaciado">
-                                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#promocionesAGerenteModal" onClick="promocionesActualizarModal('<%= prom.getIdPromociones()%>', '<%= prom.getPorcentajePromo()%>', '<%= prom.getFchCaducidad()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                                <button type="button" onClick="window.location = 'PromocionE?idProm='+<%= prom.getIdPromociones()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
-                                                            </td>
-                                                        </tr>
-                                                    <% }%>
-                                                </tbody>
-                                            </table>
+                                                        <% }%>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         <% } %>
                                     </div>
                                 </div>
@@ -489,86 +511,94 @@
                                         </div>
                                         <% ArrayList<Carruseles> listaCarruseles = (ArrayList) request.getAttribute("listaCarr"); %>
                                         <% if (rolUsuario.equals("Gerente")){ %>
-                                            <table class="tablaListarCarruseles table-bordered table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tipo de Imagen</th>
-                                                        <th>Para</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>Tipo de Imagen</th>
-                                                        <th>Para</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    <%  nomSedeUsuario = "";
-                                                        if (session.getAttribute("nomSedeUsuario") == null){
-                                                            nomSedeUsuario = "Sin Sede";
-                                                        } else {
-                                                            nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario"); 
-                                                        }
-                                                        for (Carruseles carr : listaCarruseles) {%>
-                                                        <% if (carr.getNombreSede().equals(nomSedeUsuario)) { %>
+                                            <div class="table-responsive">
+                                                <table class="tablaListarCarruseles table-bordered table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Tipo de Imagen</th>
+                                                            <th>Para</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Tipo de Imagen</th>
+                                                            <th>Para</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                        <%  nomSedeUsuario = "";
+                                                            if (session.getAttribute("nomSedeUsuario") == null){
+                                                                nomSedeUsuario = "Sin Sede";
+                                                            } else {
+                                                                nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario"); 
+                                                            }
+                                                            for (Carruseles carr : listaCarruseles) {%>
+                                                            <% if (carr.getNombreSede().equals(nomSedeUsuario)) { %>
+                                                                <tr>
+                                                                    <% if (carr.getTipo().equals("Publico")){ %>
+                                                                        <td>Público</td>
+                                                                    <% } else { %>
+                                                                        <td><%= carr.getTipo()%></td>
+                                                                    <% } %>
+                                                                    <td><%= carr.getDirigidoA()%></td>
+                                                                    <td>
+                                                                        <div class="td-espaciado">
+                                                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#carruselesVerModal" onClick="carruselesVerModal('<%= rolUsuario %>', '<%= carr.getTipo()%>', '<%= carr.getDirigidoA()%>', '<%= carr.getNombreImg()%>', '<%= cA.CifrarASCII(carr.getNombreSede())%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#carruselesAGerenteModal" onClick="carruselesActualizarModal('<%= carr.getIdCarruseles()%>' ,'<%= carr.getTipo()%>', '<%= carr.getDirigidoA()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#carruselesCGerenteModal" onClick="carruselesCambioModal('<%= carr.getIdCarruseles()%>');"><span class="icon-file-picture"></span> Cambiar Imagen</button>
+                                                                            <button type="button" onClick="window.location = 'CarruselE?idCarr='+<%= carr.getIdCarruseles()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            <% } %>
+                                                        <% }%>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        <% } else {%>
+                                            <div class="table-responsive">
+                                                <table class="tablaListarCarruseles table-bordered table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sede</th>
+                                                            <th>Tipo de Imagen</th>
+                                                            <th>Para</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>Sede</th>
+                                                            <th>Tipo de Imagen</th>
+                                                            <th>Para</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                        <% for (Carruseles carr : listaCarruseles) {%>
                                                             <tr>
+                                                                <td><%= carr.getNombreSede()%></td>
                                                                 <% if (carr.getTipo().equals("Publico")){ %>
                                                                     <td>Público</td>
                                                                 <% } else { %>
                                                                     <td><%= carr.getTipo()%></td>
                                                                 <% } %>
                                                                 <td><%= carr.getDirigidoA()%></td>
-                                                                <td class="td-espaciado">
-                                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#carruselesVerModal" onClick="carruselesVerModal('<%= rolUsuario %>', '<%= carr.getTipo()%>', '<%= carr.getDirigidoA()%>', '<%= carr.getNombreImg()%>', '<%= cA.CifrarASCII(carr.getNombreSede())%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#carruselesAGerenteModal" onClick="carruselesActualizarModal('<%= carr.getIdCarruseles()%>' ,'<%= carr.getTipo()%>', '<%= carr.getDirigidoA()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#carruselesCGerenteModal" onClick="carruselesCambioModal('<%= carr.getIdCarruseles()%>');"><span class="icon-file-picture"></span> Cambiar Imagen</button>
-                                                                    <button type="button" onClick="window.location = 'CarruselE?idCarr='+<%= carr.getIdCarruseles()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                <td>
+                                                                    <div class="td-espaciado">
+                                                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#carruselesVerModal" onClick="carruselesVerModal('<%= rolUsuario %>', '<%= carr.getTipo()%>', '<%= carr.getDirigidoA()%>', '<%= carr.getNombreImg()%>', '<%= cA.CifrarASCII(carr.getNombreSede())%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#carruselesAGerenteModal" onClick="carruselesActualizarModal('<%= carr.getIdCarruseles()%>' ,'<%= carr.getTipo()%>', '<%= carr.getDirigidoA()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#carruselesCGerenteModal" onClick="carruselesCambioModal('<%= carr.getIdCarruseles()%>');"><span class="icon-file-picture"></span> Cambiar Imagen</button>
+                                                                        <button type="button" onClick="window.location = 'CarruselE?idCarr='+<%= carr.getIdCarruseles()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                    </div>
                                                                 </td>
                                                             </tr>
-                                                        <% } %>
-                                                    <% }%>
-                                                </tbody>
-                                            </table>
-                                        <% } else {%>
-                                            <table class="tablaListarCarruseles table-bordered table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Sede</th>
-                                                        <th>Tipo de Imagen</th>
-                                                        <th>Para</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>Sede</th>
-                                                        <th>Tipo de Imagen</th>
-                                                        <th>Para</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
-                                                    <% for (Carruseles carr : listaCarruseles) {%>
-                                                        <tr>
-                                                            <td><%= carr.getNombreSede()%></td>
-                                                            <% if (carr.getTipo().equals("Publico")){ %>
-                                                                <td>Público</td>
-                                                            <% } else { %>
-                                                                <td><%= carr.getTipo()%></td>
-                                                            <% } %>
-                                                            <td><%= carr.getDirigidoA()%></td>
-                                                            <td class="td-espaciado">
-                                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#carruselesVerModal" onClick="carruselesVerModal('<%= rolUsuario %>', '<%= carr.getTipo()%>', '<%= carr.getDirigidoA()%>', '<%= carr.getNombreImg()%>', '<%= cA.CifrarASCII(carr.getNombreSede())%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#carruselesAGerenteModal" onClick="carruselesActualizarModal('<%= carr.getIdCarruseles()%>' ,'<%= carr.getTipo()%>', '<%= carr.getDirigidoA()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#carruselesCGerenteModal" onClick="carruselesCambioModal('<%= carr.getIdCarruseles()%>');"><span class="icon-file-picture"></span> Cambiar Imagen</button>
-                                                                <button type="button" onClick="window.location = 'CarruselE?idCarr='+<%= carr.getIdCarruseles()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
-                                                            </td>
-                                                        </tr>
-                                                    <% }%>
-                                                </tbody>
-                                            </table>
+                                                        <% }%>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         <% } %>
                                     </div>
                                 </div>
@@ -586,96 +616,106 @@
                                                     <button data-toggle="modal" data-target="#soporteRModal" type="button" class="btn">Registrar <span class="tabla-reg-m"><span class="glyphicon glyphicon-plus"></span></span></button>
                                                 </div>
                                         <% } %>
-                                        <table class="tablaListarSoportes table-bordered table">
-                                            <% if (rolUsuario.equals("Gerente")){ %>
-                                            
-                                            <thead>
-                                                <tr>
-                                                    <th>Descripción</th>
-                                                    <th>Ruta o Módulo</th>
-                                                    <th>Estado</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Descripción</th>
-                                                    <th>Ruta o Módulo</th>
-                                                    <th>Estado</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </tfoot>
-                                            <tbody>
-                                                <%  idUsuario = 0;
-                                                    if (session.getAttribute("idUsuario") == null || (int) session.getAttribute("idUsuario") == 0){
-                                                        idUsuario = 0;
-                                                    } else {
-                                                        idUsuario = (int) session.getAttribute("idUsuario"); 
-                                                    }
-                                                    for (Soportes sopo : listaSoportes) {%>
-                                                    <% if (sopo.getIdUsuario() == idUsuario) {%>
+                                        <div class="table-responsive">
+                                            <table class="tablaListarSoportes table-bordered table">
+                                                <% if (rolUsuario.equals("Gerente")){ %>
+
+                                                <thead>
+                                                    <tr>
+                                                        <th>Descripción</th>
+                                                        <th>Ruta o Módulo</th>
+                                                        <th>Estado</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Descripción</th>
+                                                        <th>Ruta o Módulo</th>
+                                                        <th>Estado</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    <%  idUsuario = 0;
+                                                        if (session.getAttribute("idUsuario") == null || (int) session.getAttribute("idUsuario") == 0){
+                                                            idUsuario = 0;
+                                                        } else {
+                                                            idUsuario = (int) session.getAttribute("idUsuario"); 
+                                                        }
+                                                        for (Soportes sopo : listaSoportes) {%>
+                                                        <% if (sopo.getIdUsuario() == idUsuario) {%>
+                                                            <tr>
+                                                                <td><%= cA.DescifrarASCII(sopo.getDescripcion()) %></td>
+                                                                <td><%= cA.DescifrarASCII(sopo.getRuta()) %></td>
+                                                                <% if (sopo.getEstado().equals("P")) { %>
+                                                                <td class="warning">Pendiente</td>
+                                                                <td>
+                                                                    <div class="td-espaciado">
+                                                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soportesVerModal" onClick="soportesVerModal('<%= rolUsuario %>', '<%= sopo.getFchSolicitud() %>', '<%= sopo.getFchResuelto()%>', '<%= sopo.getEmailUsuario()%>', '<%= sopo.getIdSede()%>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#soporteAModal" onClick="soportesActualizarModal('<%= sopo.getIdSoportes() %>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                                    </div>
+                                                                </td>
+                                                                <% } else { %>
+                                                                <td class="success">Corregido</td>
+                                                                <td>
+                                                                    <div class="td-espaciado">
+                                                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soportesVerModal" onClick="soportesVerModal('<%= rolUsuario %>', '<%= sopo.getFchSolicitud() %>', '<%= sopo.getFchResuelto()%>', '<%= sopo.getEmailUsuario()%>', '<%= sopo.getIdSede()%>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                                    </div>
+                                                                </td>
+                                                                <% } %>
+                                                            </tr>
+                                                        <% } %>
+                                                    <% } %>
+                                                </tbody>
+
+                                                <% } else { %>
+
+                                                <thead>
+                                                    <tr>
+                                                        <th>Descripción</th>
+                                                        <th>Ruta o Módulo</th>
+                                                        <th>Estado</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Descripción</th>
+                                                        <th>Ruta o Módulo</th>
+                                                        <th>Estado</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    <%  for (Soportes sopo : listaSoportes) {%>
                                                         <tr>
                                                             <td><%= cA.DescifrarASCII(sopo.getDescripcion()) %></td>
                                                             <td><%= cA.DescifrarASCII(sopo.getRuta()) %></td>
                                                             <% if (sopo.getEstado().equals("P")) { %>
                                                             <td class="warning">Pendiente</td>
-                                                            <td class="td-espaciado">
-                                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soportesVerModal" onClick="soportesVerModal('<%= rolUsuario %>', '<%= sopo.getFchSolicitud() %>', '<%= sopo.getFchResuelto()%>', '<%= sopo.getEmailUsuario()%>', '<%= sopo.getIdSede()%>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#soporteAModal" onClick="soportesActualizarModal('<%= sopo.getIdSoportes() %>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                            <td>
+                                                                <div class="td-espaciado">
+                                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soportesVerModal" onClick="soportesVerModal('<%= rolUsuario %>', '<%= sopo.getFchSolicitud() %>', '<%= sopo.getFchResuelto()%>', '<%= sopo.getEmailUsuario()%>', '<%= sopo.getIdSede()%>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                                    <button type="button" class="btn btn-success" onClick="window.location = 'SoporteE?tipoE=C&idSop='+<%= sopo.getIdSoportes()%>;"><span class="glyphicon glyphicon-ok"></span> Corregido</button>
+                                                                </div>
                                                             </td>
                                                             <% } else { %>
                                                             <td class="success">Corregido</td>
-                                                            <td class="td-espaciado">
-                                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soportesVerModal" onClick="soportesVerModal('<%= rolUsuario %>', '<%= sopo.getFchSolicitud() %>', '<%= sopo.getFchResuelto()%>', '<%= sopo.getEmailUsuario()%>', '<%= sopo.getIdSede()%>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                            <td>
+                                                                <div class="td-espaciado">
+                                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soportesVerModal" onClick="soportesVerModal('<%= rolUsuario %>', '<%= sopo.getFchSolicitud() %>', '<%= sopo.getFchResuelto()%>', '<%= sopo.getEmailUsuario()%>', '<%= sopo.getIdSede()%>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                                    <button type="button" class="btn btn-warning" onClick="window.location = 'SoporteE?tipoE=P&idSop='+<%= sopo.getIdSoportes()%>;"><span class="glyphicon glyphicon-ban-circle"></span> Pendiente</button>
+                                                                </div>
                                                             </td>
                                                             <% } %>
                                                         </tr>
                                                     <% } %>
+                                                </tbody>
+
                                                 <% } %>
-                                            </tbody>
-                                            
-                                            <% } else { %>
-                                            
-                                            <thead>
-                                                <tr>
-                                                    <th>Descripción</th>
-                                                    <th>Ruta o Módulo</th>
-                                                    <th>Estado</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Descripción</th>
-                                                    <th>Ruta o Módulo</th>
-                                                    <th>Estado</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </tfoot>
-                                            <tbody>
-                                                <%  for (Soportes sopo : listaSoportes) {%>
-                                                    <tr>
-                                                        <td><%= cA.DescifrarASCII(sopo.getDescripcion()) %></td>
-                                                        <td><%= cA.DescifrarASCII(sopo.getRuta()) %></td>
-                                                        <% if (sopo.getEstado().equals("P")) { %>
-                                                        <td class="warning">Pendiente</td>
-                                                        <td class="td-espaciado">
-                                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soportesVerModal" onClick="soportesVerModal('<%= rolUsuario %>', '<%= sopo.getFchSolicitud() %>', '<%= sopo.getFchResuelto()%>', '<%= sopo.getEmailUsuario()%>', '<%= sopo.getIdSede()%>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                            <button type="button" class="btn btn-success" onClick="window.location = 'SoporteE?tipoE=C&idSop='+<%= sopo.getIdSoportes()%>;"><span class="glyphicon glyphicon-ok"></span> Corregido</button>
-                                                        </td>
-                                                        <% } else { %>
-                                                        <td class="success">Corregido</td>
-                                                        <td class="td-espaciado">
-                                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soportesVerModal" onClick="soportesVerModal('<%= rolUsuario %>', '<%= sopo.getFchSolicitud() %>', '<%= sopo.getFchResuelto()%>', '<%= sopo.getEmailUsuario()%>', '<%= sopo.getIdSede()%>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                            <button type="button" class="btn btn-warning" onClick="window.location = 'SoporteE?tipoE=P&idSop='+<%= sopo.getIdSoportes()%>;"><span class="glyphicon glyphicon-ban-circle"></span> Pendiente</button>
-                                                        </td>
-                                                        <% } %>
-                                                    </tr>
-                                                <% } %>
-                                            </tbody>
-                                            
-                                            <% } %>
-                                        </table>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -759,52 +799,58 @@
                             <button data-toggle="modal" data-target="#soporteRModal" type="button" class="btn">Registrar <span class="tabla-reg-m"><span class="glyphicon glyphicon-plus"></span></span></button>
                         </div>
                         <% ArrayList<Soportes> listaSoportes = (ArrayList) request.getAttribute("listaSop"); %>
-                        <table class="tablaListarSoportes table-bordered table">
-                            <thead>
-                                <tr>
-                                    <th>Descripción</th>
-                                    <th>Ruta o Módulo</th>
-                                    <th>Estado</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Descripción</th>
-                                    <th>Ruta o Módulo</th>
-                                    <th>Estado</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <%  idUsuario = 0;
-                                    if (session.getAttribute("idUsuario") == null || (int) session.getAttribute("idUsuario") == 0){
-                                        idUsuario = 0;
-                                    } else {
-                                        idUsuario = (int) session.getAttribute("idUsuario"); 
-                                    }
-                                    for (Soportes sopo : listaSoportes) {%>
-                                    <% if (sopo.getIdUsuario() == idUsuario) {%>
-                                        <tr>
-                                            <td><%= cA.DescifrarASCII(sopo.getDescripcion())%></td>
-                                            <td><%= cA.DescifrarASCII(sopo.getRuta())%></td>
-                                            <% if (sopo.getEstado().equals("P")) { %>
-                                            <td class="warning">Pendiente</td>
-                                            <td class="td-espaciado">
-                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soportesVerModal" onClick="soportesVerModal('<%= rolUsuario %>', '<%= sopo.getFchSolicitud() %>', '<%= sopo.getFchResuelto()%>', '<%= sopo.getEmailUsuario()%>', '<%= sopo.getIdSede()%>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                            </td>
-                                            <% } else { %>
-                                            <td class="success">Corregido</td>
-                                            <td class="td-espaciado">
-                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soportesVerModal" onClick="soportesVerModal('<%= rolUsuario %>', '<%= sopo.getFchSolicitud() %>', '<%= sopo.getFchResuelto()%>', '<%= sopo.getEmailUsuario()%>', '<%= sopo.getIdSede()%>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                            </td>
-                                            <% } %>
-                                        </tr>
+                        <div class="table-responsive">
+                            <table class="tablaListarSoportes table-bordered table">
+                                <thead>
+                                    <tr>
+                                        <th>Descripción</th>
+                                        <th>Ruta o Módulo</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Descripción</th>
+                                        <th>Ruta o Módulo</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <%  idUsuario = 0;
+                                        if (session.getAttribute("idUsuario") == null || (int) session.getAttribute("idUsuario") == 0){
+                                            idUsuario = 0;
+                                        } else {
+                                            idUsuario = (int) session.getAttribute("idUsuario"); 
+                                        }
+                                        for (Soportes sopo : listaSoportes) {%>
+                                        <% if (sopo.getIdUsuario() == idUsuario) {%>
+                                            <tr>
+                                                <td><%= cA.DescifrarASCII(sopo.getDescripcion())%></td>
+                                                <td><%= cA.DescifrarASCII(sopo.getRuta())%></td>
+                                                <% if (sopo.getEstado().equals("P")) { %>
+                                                <td class="warning">Pendiente</td>
+                                                <td>
+                                                    <div class="td-espaciado">
+                                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soportesVerModal" onClick="soportesVerModal('<%= rolUsuario %>', '<%= sopo.getFchSolicitud() %>', '<%= sopo.getFchResuelto()%>', '<%= sopo.getEmailUsuario()%>', '<%= sopo.getIdSede()%>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                        <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                    </div>
+                                                </td>
+                                                <% } else { %>
+                                                <td class="success">Corregido</td>
+                                                <td>
+                                                    <div class="td-espaciado">
+                                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soportesVerModal" onClick="soportesVerModal('<%= rolUsuario %>', '<%= sopo.getFchSolicitud() %>', '<%= sopo.getFchResuelto()%>', '<%= sopo.getEmailUsuario()%>', '<%= sopo.getIdSede()%>', '<%= sopo.getRuta()%>', '<%= sopo.getDescripcion()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                    </div>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                        <% } %>
                                     <% } %>
-                                <% } %>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </section>
                 </body>
                 <%@include file="soportesModales.jsp" %>

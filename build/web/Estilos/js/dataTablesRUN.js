@@ -174,7 +174,8 @@ $(document).ready(function () {
     });
     
     $('.tablaListarUsuarios').DataTable({
-        "order": [[5, "desc"],[0, "desc"],[1, "desc"]],
+//        "ajax": '../ajax/data/arrays.txt',
+        "order": [[5, "desc"],[0, "asc"],[1, "asc"]],
         "pageLength": 5,
         language: {
             "sProcessing": "Procesando...",
@@ -387,6 +388,35 @@ $(document).ready(function () {
             "sInfo": "Mostrando categorias del _START_ al _END_ de un total de _TOTAL_ categorias",
             "sInfoEmpty": "Mostrando categorias del 0 al 0 de un total de 0 categorias",
             "sInfoFiltered": "(Filtrado de _MAX_ categorias).",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente.",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente."
+            }
+        }
+    });
+    
+    $('.tablaListarProductosPedido').DataTable({
+        "order": [[2, "desc"],[0, "asc"],[1, "asc"]],
+        "pageLength": 5,
+        language: {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Límite de productos por página: _MENU_",
+            "sZeroRecords": "No se encontraron resultados.",
+            "sEmptyTable": "Ningún producto disponible en esta tabla.",
+            "sInfo": "Mostrando productos del _START_ al _END_ de un total de _TOTAL_ productos",
+            "sInfoEmpty": "Mostrando productos del 0 al 0 de un total de 0 productos",
+            "sInfoFiltered": "(Filtrado de un total de _MAX_ productos).",
             "sInfoPostFix": "",
             "sSearch": "Buscar:",
             "sUrl": "",

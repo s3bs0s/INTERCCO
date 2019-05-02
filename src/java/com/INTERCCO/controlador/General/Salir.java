@@ -15,6 +15,7 @@ public class Salir extends HttpServlet {
         String mensaje = request.getParameter("mensaje");
         HttpSession session = request.getSession();
         session.setAttribute("idUsuario", null);
+        session.setAttribute("verificadoUsuario", null);
         session.setAttribute("emailUsuario", null);
         session.setAttribute("passwordUsuario", null);
         session.setAttribute("nomUsuario", null);

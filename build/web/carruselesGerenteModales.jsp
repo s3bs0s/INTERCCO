@@ -1,7 +1,7 @@
 <body>
     <!-- Modal de Registrar -->
     <div class="modal fade" id="carruselesRGerenteModal" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal">
 
             <div class="modal-content">
                 <div class="modal-header">
@@ -11,41 +11,35 @@
                 <div class="mb-textaling modal-body">
                     <p class="mi-obli">Los campos que contengan el símbolo asterisco <span class="a-mi">*</span> son obligatorios, de no ser así, son totalmente opcional.</p>
                     <form action="Carrusel" method="POST" enctype="multipart/form-data">
-                        <div class="filas-i">
-                            <div class="input-group inpDesa">
-                                <span class="input-group-addon">Hay Imagen:</span>
-                                <input type="text" class="form-control" id="regHayImagenCarrusel">
-                            </div>
+                        <div class="input-group inpDesa">
+                            <span class="input-group-addon">Hay Imagen:</span>
+                            <input type="text" class="form-control" id="regHayImagenCarrusel">
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:50%;">
-                                <span class="input-group-addon">Tipo:</span>
-                                <select required onchange="cambioDeSelectCarrusel(this, 'reg')" class="form-control" name="regTipoCarrusel">
-                                    <option value="Empresarial">Empresarial</option>
-                                    <option value="Publico">Público</option>
-                                </select>
-                                <span class="input-group-addon i-obli">*</span>
-                            </div>
-                            <div class="input-group" style="width:50%;">
-                                <span class="input-group-addon">Dirigido a:</span>
-                                <select required class="form-control" id="regDirigidoAEmpresarialCarrusel" name="regDirigidoAEmpresarialCarrusel">
-                                    <option value="Mi Sede">Mi Sede</option>
-                                    <option value="Sedes de mi Ciudad">Sedes de mi Ciudad</option>
-                                    <option value="Todas las Sedes">Todas las Sedes</option>
-                                </select>
-                                <select required class="form-control" id="regDirigidoAPublicoCarrusel" name="regDirigidoAPublicoCarrusel">
-                                    <option value="Mi Ciudad">Mi Ciudad</option>
-                                    <option value="Nacional">Nacional</option>
-                                </select>
-                                <span class="input-group-addon i-obli">*</span>
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Tipo:</span>
+                            <select required onchange="cambioDeSelectCarrusel(this, 'reg')" class="form-control" name="regTipoCarrusel">
+                                <option value="Empresarial">Empresarial</option>
+                                <option value="Publico">Público</option>
+                            </select>
+                            <span class="input-group-addon i-obli">*</span>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Dirigido a:</span>
+                            <select required class="form-control" id="regDirigidoAEmpresarialCarrusel" name="regDirigidoAEmpresarialCarrusel">
+                                <option value="Mi Sede">Mi Sede</option>
+                                <option value="Sedes de mi Ciudad">Sedes de mi Ciudad</option>
+                                <option value="Todas las Sedes">Todas las Sedes</option>
+                            </select>
+                            <select required class="form-control" id="regDirigidoAPublicoCarrusel" name="regDirigidoAPublicoCarrusel">
+                                <option value="Mi Ciudad">Mi Ciudad</option>
+                                <option value="Nacional">Nacional</option>
+                            </select>
+                            <span class="input-group-addon i-obli">*</span>
                         </div>
                         <p class="mi-obli"><span class="a-mi-sp">Recuerde seguir las siguientes reglas:</span> el tamaño máximo es de 4MB, se recomienda usar una medida de 4500 píxeles de ancho y 1365 píxeles de alto, y los formatos permitidos son .png, .bmp, .jpg, .svg y .jpeg</p>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon">Imagen:</span>
-                                <input type="file" onchange="validarFileCarrusel(this, 'reg')" class="form-control" id="regArchivoCarrusel" name="regArchivoCarrusel">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Imagen:</span>
+                            <input type="file" onchange="validarFileCarrusel(this, 'reg')" class="form-control" id="regArchivoCarrusel" name="regArchivoCarrusel">
                         </div>
 
                         <div class="input-group cont-btn">
@@ -113,7 +107,7 @@
     
     <!-- Modal de Editar -->
     <div class="modal fade" id="carruselesAGerenteModal" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal">
 
             <div class="modal-content">
                 <div class="modal-header">
@@ -122,32 +116,28 @@
                 </div>
                 <div class="mb-textaling modal-body">
                     <form action="CarruselA" method="POST">
-                        <div class="filas-i">
                             <div class="input-group inpDesa">
-                                <span class="input-group-addon">ID:</span>
-                                <input type="text" class="form-control" id="actuaIDCarrusel" name="actuaIDCarrusel">
-                            </div>
+                            <span class="input-group-addon">ID:</span>
+                            <input type="text" class="form-control" id="actuaIDCarrusel" name="actuaIDCarrusel">
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:50%;">
-                                <span class="input-group-addon">Tipo:</span>
-                                <select required onchange="cambioDeSelectCarrusel(this, 'actua'); this.style.color = '#87A2D1';" class="form-control" id="actuaTipoCarrusel" name="actuaTipoCarrusel">
-                                    <option value="Empresarial">Empresarial</option>
-                                    <option value="Publico">Público</option>
-                                </select>
-                            </div>
-                            <div class="input-group" style="width:50%;">
-                                <span class="input-group-addon">Dirigido a:</span>
-                                <select required onchange="this.style.color = '#87A2D1';" class="form-control" id="actuaDirigidoAEmpresarialCarrusel" name="actuaDirigidoAEmpresarialCarrusel">
-                                    <option value="Mi Sede">Mi Sede</option>
-                                    <option value="Sedes de mi Ciudad">Sedes de mi Ciudad</option>
-                                    <option value="Todas las Sedes">Todas las Sedes</option>
-                                </select>
-                                <select required onchange="this.style.color = '#87A2D1';" class="form-control" id="actuaDirigidoAPublicoCarrusel" name="actuaDirigidoAPublicoCarrusel">
-                                    <option value="Mi Ciudad">Mi Ciudad</option>
-                                    <option value="Nacional">Nacional</option>
-                                </select>
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Tipo:</span>
+                            <select required onchange="cambioDeSelectCarrusel(this, 'actua'); this.style.color = '#87A2D1';" class="form-control" id="actuaTipoCarrusel" name="actuaTipoCarrusel">
+                                <option value="Empresarial">Empresarial</option>
+                                <option value="Publico">Público</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Dirigido a:</span>
+                            <select required onchange="this.style.color = '#87A2D1';" class="form-control" id="actuaDirigidoAEmpresarialCarrusel" name="actuaDirigidoAEmpresarialCarrusel">
+                                <option value="Mi Sede">Mi Sede</option>
+                                <option value="Sedes de mi Ciudad">Sedes de mi Ciudad</option>
+                                <option value="Todas las Sedes">Todas las Sedes</option>
+                            </select>
+                            <select required onchange="this.style.color = '#87A2D1';" class="form-control" id="actuaDirigidoAPublicoCarrusel" name="actuaDirigidoAPublicoCarrusel">
+                                <option value="Mi Ciudad">Mi Ciudad</option>
+                                <option value="Nacional">Nacional</option>
+                            </select>
                         </div>
 
                         <div class="input-group cont-btn">
@@ -167,7 +157,7 @@
     
     <!-- Modal de Cambiar IMG -->
     <div class="modal fade" id="carruselesCGerenteModal" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal">
 
             <div class="modal-content">
                 <div class="modal-header">
@@ -176,22 +166,18 @@
                 </div>
                 <div class="mb-textaling modal-body">
                     <form action="CarruselC" method="POST" enctype="multipart/form-data">
-                        <div class="filas-i">
-                            <div class="input-group inpDesa">
-                                <span class="input-group-addon">ID:</span>
-                                <input type="text" class="form-control" id="cambIDCarrusel" name="cambIDCarrusel">
-                            </div>
-                            <div class="input-group inpDesa">
-                                <span class="input-group-addon">Hay Imagen:</span>
-                                <input type="text" class="form-control" id="cambHayImagenCarrusel">
-                            </div>
+                        <div class="input-group inpDesa">
+                            <span class="input-group-addon">ID:</span>
+                            <input type="text" class="form-control" id="cambIDCarrusel" name="cambIDCarrusel">
+                        </div>
+                        <div class="input-group inpDesa">
+                            <span class="input-group-addon">Hay Imagen:</span>
+                            <input type="text" class="form-control" id="cambHayImagenCarrusel">
                         </div>
                         <p class="mi-obli"><span class="a-mi-sp">Recuerde seguir las siguientes reglas:</span> el tamaño máximo es de 4MB, se recomienda usar una medida de 4500 píxeles de ancho y 1365 píxeles de alto, y los formatos permitidos son .png, .bmp, .jpg, .svg y .jpeg</p>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon">Imagen:</span>
-                                <input type="file" onchange="validarFileCarrusel(this, 'camb')" class="form-control" id="cambArchivoCarrusel" name="cambArchivoCarrusel">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Imagen:</span>
+                            <input type="file" onchange="validarFileCarrusel(this, 'camb')" class="form-control" id="cambArchivoCarrusel" name="cambArchivoCarrusel">
                         </div>
 
                         <div class="input-group cont-btn">

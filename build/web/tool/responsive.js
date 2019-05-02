@@ -1,7 +1,7 @@
 var locationUrl = window.location.href,
     locationIndex = locationUrl.indexOf("tool_responsive.html"),
     locationPath = locationUrl.substring(0, locationIndex),
-    defaultURL = locationPath + 'indexClientes.jsp';
+    defaultURL = locationPath + 'index';
     
     console.log('locationUrl: ' + locationUrl);
     console.log('locationIndex: ' + locationIndex);

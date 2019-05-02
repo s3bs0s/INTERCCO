@@ -99,68 +99,73 @@
                         <button data-toggle="modal" data-target="#usuariosRGerenteModal" type="button" class="btn">Registrar <span class="tabla-reg-m"><span class="glyphicon glyphicon-plus"></span></span></button>
                     </div>
                     <% ArrayList<InfoUsuarios> listaInfoUsuarios = (ArrayList) request.getAttribute("listaInfUsu"); %>
-                    <table class="tablaListarUsuarios table-bordered table">
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Hora</th>
-                                <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Rol</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Hora</th>
-                                <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Rol</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <% for (InfoUsuarios  usua: listaInfoUsuarios) { %>
-                                <% if(usua.getSede().equals(nomSedeUsuario)){ %>
-                                    <tr>
-                                        <%  EstructuraFYH eFYH = new EstructuraFYH();
-                                            String fecha = String.valueOf(usua.getFchRegistro());
-                                            String hora = String.valueOf(usua.getHoraRegistro()); %>
-                                        <td><%= eFYH.estFecha(fecha, "dd")+" / "+eFYH.estFecha(fecha, "mm")+" / "+eFYH.estFecha(fecha, "aa") %></td>
-                                        <td><%= eFYH.estHora(hora, "h")+" : "+eFYH.estHora(hora, "m") %></td>
-                                        <td><%= usua.getNombres()%> <%= usua.getApellidos()%></td>
-                                        <td><%= cA.DescifrarASCII(usua.getEmail()) %></td>
-                                        <td><%= usua.getRol() %></td>
-                                        <% if (usua.getRol().equals("Gerente")){ %>
-                                            <td class="info">¡Gerente!</td>
-                                            <td class="td-espaciado"></td>
-                                        <% } else { %>
-                                            <% if (usua.getExistenciaSancion().equals("Y")){ %>
-                                                <td class="danger">Sancionado</td>
-                                                <td class="td-espaciado">
-                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#usuariosVerModal" onClick="usuarioVerModal('<%= cA.CifrarASCII(usua.getRol())%>', '<%= cA.CifrarASCII(usua.getNombres())%>', '<%= cA.CifrarASCII(usua.getApellidos())%>', '<%= usua.getEmail()%>', '<%= usua.getPassword()%>', '<%= usua.getTipoI()%>', '<%= cA.CifrarASCII(usua.getNumI())%>', '<%= cA.CifrarASCII(usua.getTelefono())%>', '<%= cA.CifrarASCII(usua.getMovil())%>', '<%= usua.getGenero()%>', '<%= usua.getFchNaci()%>', '<%= cA.CifrarASCII(usua.getDireccion())%>', '<%= usua.getEmailModerador()%>', '<%= usua.getFchLimite()%>', '<%= usua.getJustificacion()%>', '<%= usua.getExistenciaSancion()%>', '<%= usua.getVerificado()%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#usuariosAGerenteModal" onClick="usuarioActualizarModal('<%= usua.getIdUsuario()%>', '<%= cA.CifrarASCII(usua.getRol())%>', '<%= cA.CifrarASCII(usua.getNombres())%>', '<%= cA.CifrarASCII(usua.getApellidos())%>', '<%= usua.getEmail()%>', '<%= usua.getPassword()%>', '<%= usua.getTipoI()%>', '<%= cA.CifrarASCII(usua.getNumI())%>', '<%= cA.CifrarASCII(usua.getTelefono())%>', '<%= cA.CifrarASCII(usua.getMovil())%>', '<%= usua.getGenero()%>', '<%= usua.getFchNaci()%>', '<%= cA.CifrarASCII(usua.getDireccion())%>')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                    <button type="button" onClick="window.location = 'UsuarioE?idUsua='+<%= usua.getIdUsuario()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
-                                                    <button type="button" onClick="window.location = 'UsuarioL?idUsuaL='+<%= usua.getIdUsuario()%>;" class="btn btn-success"><span class="icon-accessibility"></span> Liberar</button>
-                                                </td>
+                    <div class="table-responsive">
+                        <table class="tablaListarUsuarios table-bordered table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Rol</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Rol</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <% for (InfoUsuarios  usua: listaInfoUsuarios) { %>
+                                    <% if(usua.getSede().equals(nomSedeUsuario)){ %>
+                                        <tr>
+                                            <%  EstructuraFYH eFYH = new EstructuraFYH();
+                                                String fecha = String.valueOf(usua.getFchRegistro());
+                                                String hora = String.valueOf(usua.getHoraRegistro()); %>
+                                            <td><%= eFYH.estFecha(fecha, "dd")+"/"+eFYH.estFecha(fecha, "mm")+"/"+eFYH.estFecha(fecha, "aa") %></td>
+                                            <td><%= eFYH.estHora(hora, "h")+":"+eFYH.estHora(hora, "m") %></td>
+                                            <td><%= usua.getNombres()%> <%= usua.getApellidos()%></td>
+                                            <td><%= cA.DescifrarASCII(usua.getEmail()) %></td>
+                                            <td><%= usua.getRol() %></td>
+                                            <% if (usua.getRol().equals("Gerente")){ %>
+                                                <td class="info">¡Gerente!</td>
+                                                <td><div class="td-espaciado"></div></td>
                                             <% } else { %>
-                                                <td class="success">Libre</td>
-                                                <td class="td-espaciado">
-                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#usuariosVerModal" onClick="usuarioVerModal('<%= cA.CifrarASCII(usua.getRol())%>', '<%= cA.CifrarASCII(usua.getNombres())%>', '<%= cA.CifrarASCII(usua.getApellidos())%>', '<%= usua.getEmail()%>', '<%= usua.getPassword()%>', '<%= usua.getTipoI()%>', '<%= cA.CifrarASCII(usua.getNumI())%>', '<%= cA.CifrarASCII(usua.getTelefono())%>', '<%= cA.CifrarASCII(usua.getMovil())%>', '<%= usua.getGenero()%>', '<%= usua.getFchNaci()%>', '<%= cA.CifrarASCII(usua.getDireccion())%>', '<%= usua.getEmailModerador()%>', '<%= usua.getFchLimite()%>', '<%= usua.getJustificacion()%>', '<%= usua.getExistenciaSancion()%>', '<%= usua.getVerificado()%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#usuariosAGerenteModal" onClick="usuarioActualizarModal('<%= usua.getIdUsuario()%>', '<%= cA.CifrarASCII(usua.getRol())%>', '<%= cA.CifrarASCII(usua.getNombres())%>', '<%= cA.CifrarASCII(usua.getApellidos())%>', '<%= usua.getEmail()%>', '<%= usua.getPassword()%>', '<%= usua.getTipoI()%>', '<%= cA.CifrarASCII(usua.getNumI())%>', '<%= cA.CifrarASCII(usua.getTelefono())%>', '<%= cA.CifrarASCII(usua.getMovil())%>', '<%= usua.getGenero()%>', '<%= usua.getFchNaci()%>', '<%= cA.CifrarASCII(usua.getDireccion())%>')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                    <button type="button" onClick="window.location = 'UsuarioE?idUsua='+<%= usua.getIdUsuario()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
-                                                    <button type="button" class="btn btn-active-os" data-toggle="modal" data-target="#usuariosSGerenteModal" onClick="usuarioSancionarModal('<%= usua.getIdUsuario()%>', '<%= usua.getEmail()%>')"><span class="icon-library"></span> Sancionar</button>
-                                                </td>
+                                                <% if (usua.getExistenciaSancion().equals("Y")){ %>
+                                                    <td class="danger">Sancionado</td>
+                                                    <td>
+                                                        <div class="td-espaciado">
+                                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#usuariosVerModal" onClick="usuarioVerModal('<%= cA.CifrarASCII(usua.getRol())%>', '<%= cA.CifrarASCII(usua.getNombres())%>', '<%= cA.CifrarASCII(usua.getApellidos())%>', '<%= usua.getEmail()%>', '<%= usua.getPassword()%>', '<%= usua.getTipoI()%>', '<%= cA.CifrarASCII(usua.getNumI())%>', '<%= cA.CifrarASCII(usua.getTelefono())%>', '<%= cA.CifrarASCII(usua.getMovil())%>', '<%= usua.getGenero()%>', '<%= usua.getFchNaci()%>', '<%= cA.CifrarASCII(usua.getDireccion())%>', '<%= usua.getEmailModerador()%>', '<%= usua.getFchLimite()%>', '<%= usua.getJustificacion()%>', '<%= usua.getExistenciaSancion()%>', '<%= usua.getVerificado()%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#usuariosAGerenteModal" onClick="usuarioActualizarModal('<%= usua.getIdUsuario()%>', '<%= cA.CifrarASCII(usua.getRol())%>', '<%= cA.CifrarASCII(usua.getNombres())%>', '<%= cA.CifrarASCII(usua.getApellidos())%>', '<%= usua.getEmail()%>', '<%= usua.getPassword()%>', '<%= usua.getTipoI()%>', '<%= cA.CifrarASCII(usua.getNumI())%>', '<%= cA.CifrarASCII(usua.getTelefono())%>', '<%= cA.CifrarASCII(usua.getMovil())%>', '<%= usua.getGenero()%>', '<%= usua.getFchNaci()%>', '<%= cA.CifrarASCII(usua.getDireccion())%>')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                            <button type="button" onClick="window.location = 'UsuarioL?idUsuaL='+<%= usua.getIdUsuario()%>;" class="btn btn-success"><span class="icon-accessibility"></span> Liberar</button>
+                                                        </div>
+                                                    </td>
+                                                <% } else { %>
+                                                    <td class="success">Libre</td>
+                                                    <td>
+                                                        <div class="td-espaciado">
+                                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#usuariosVerModal" onClick="usuarioVerModal('<%= cA.CifrarASCII(usua.getRol())%>', '<%= cA.CifrarASCII(usua.getNombres())%>', '<%= cA.CifrarASCII(usua.getApellidos())%>', '<%= usua.getEmail()%>', '<%= usua.getPassword()%>', '<%= usua.getTipoI()%>', '<%= cA.CifrarASCII(usua.getNumI())%>', '<%= cA.CifrarASCII(usua.getTelefono())%>', '<%= cA.CifrarASCII(usua.getMovil())%>', '<%= usua.getGenero()%>', '<%= usua.getFchNaci()%>', '<%= cA.CifrarASCII(usua.getDireccion())%>', '<%= usua.getEmailModerador()%>', '<%= usua.getFchLimite()%>', '<%= usua.getJustificacion()%>', '<%= usua.getExistenciaSancion()%>', '<%= usua.getVerificado()%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#usuariosAGerenteModal" onClick="usuarioActualizarModal('<%= usua.getIdUsuario()%>', '<%= cA.CifrarASCII(usua.getRol())%>', '<%= cA.CifrarASCII(usua.getNombres())%>', '<%= cA.CifrarASCII(usua.getApellidos())%>', '<%= usua.getEmail()%>', '<%= usua.getPassword()%>', '<%= usua.getTipoI()%>', '<%= cA.CifrarASCII(usua.getNumI())%>', '<%= cA.CifrarASCII(usua.getTelefono())%>', '<%= cA.CifrarASCII(usua.getMovil())%>', '<%= usua.getGenero()%>', '<%= usua.getFchNaci()%>', '<%= cA.CifrarASCII(usua.getDireccion())%>')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                            <button type="button" onClick="window.location = 'UsuarioE?idUsua='+<%= usua.getIdUsuario()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                            <button type="button" class="btn btn-active-os" data-toggle="modal" data-target="#usuariosSGerenteModal" onClick="usuarioSancionarModal('<%= usua.getIdUsuario()%>', '<%= usua.getEmail()%>')"><span class="icon-library"></span> Sancionar</button>
+                                                        </div>
+                                                    </td>
+                                                <% } %>
                                             <% } %>
-                                        <% } %>
-                                    </tr>
+                                        </tr>
+                                    <% } %>
                                 <% } %>
-                            <% } %>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
             </body>
             <%@include file="usuariosGerenteModales.jsp" %>

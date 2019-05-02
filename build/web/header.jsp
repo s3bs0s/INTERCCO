@@ -63,7 +63,7 @@
     }
     
     if (rolUsuario.equals("Usuario")){ %>
-    <body>
+    <body onload="agregarCookies()">
         <header>
             <nav class="naviu">
                 <div class="logonaviu">
@@ -83,7 +83,7 @@
         </header>
         
     <% } else if (rolUsuario.equals("Cliente")) { %>
-    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
         <header>
             <nav class="naviu">
                 <div class="logonaviu">
@@ -116,7 +116,7 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } else if (rolUsuario.equals("Domiciliario")) { %>
-    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
         <header>
             <div class="logoheader">
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
@@ -150,7 +150,7 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } else if (rolUsuario.equals("Mesero")) { %>
-    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
         <header>
             <div class="logoheader">
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
@@ -184,7 +184,7 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } else if (rolUsuario.equals("Cocinero")) { %>
-    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
         <header>
             <div class="logoheader">
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
@@ -218,7 +218,7 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } else if (rolUsuario.equals("Cajero")) { %>
-    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
         <header>
             <div class="logoheader">
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
@@ -253,7 +253,7 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } else if (rolUsuario.equals("Gerente")) { %>
-    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
     <!--<body onload="mueveReloj()">-->
         <header>
             <div class="logoheader">
@@ -294,7 +294,7 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } else if (rolUsuario.equals("AdminS")) { %>
-    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
         <header>
             <div class="logoheader">
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
@@ -330,4 +330,54 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } %>
+    <script>
+        /*function agregarCookies(){
+            var lSt = localStorage;
+            if (lSt.getItem("nomUsuario") === "" || lSt.getItem("nomUsuario") === null){
+                lSt.setItem("idUsuario", "<%-- session.getAttribute("idUsuario") %>");
+                lSt.setItem("verificadoUsuario", "<%= session.getAttribute("verificadoUsuario") %>");
+                lSt.setItem("emailUsuario", "<%= session.getAttribute("emailUsuario") %>");
+                lSt.setItem("passwordUsuario", "<%= session.getAttribute("passwordUsuario") %>");
+                lSt.setItem("nomUsuario", "<%= cA.CifrarASCII((String)session.getAttribute("nomUsuario")) %>");
+                lSt.setItem("apeUsuario", "<%= session.getAttribute("apeUsuario") %>");
+                lSt.setItem("fotUsuario", "<%= session.getAttribute("fotUsuario") %>");
+                lSt.setItem("rolUsuario", "<%= session.getAttribute("rolUsuario") %>");
+                lSt.setItem("tipoUsuario", "<%= session.getAttribute("tipoUsuario") %>");
+                lSt.setItem("numUsuario", "<%= session.getAttribute("numUsuario") %>");
+                lSt.setItem("telUsuario", "<%= session.getAttribute("telUsuario") %>");
+                lSt.setItem("movUsuario", "<%= session.getAttribute("movUsuario") %>");
+                lSt.setItem("genUsuario", "<%= session.getAttribute("genUsuario") %>");
+                lSt.setItem("fnaUsuario", "<%= session.getAttribute("fnaUsuario") %>");
+                lSt.setItem("dirUsuario", "<%= session.getAttribute("dirUsuario") %>");
+                lSt.setItem("idSedeUsuario", "<%= session.getAttribute("idSedeUsuario") %>");
+                lSt.setItem("nomSedeUsuario", "<%= cA.CifrarASCII((String)session.getAttribute("nomSedeUsuario")) %>");
+                lSt.setItem("rolSedeUsuario", "<%= session.getAttribute("rolSedeUsuario") %>");
+                lSt.setItem("idCiudadUsuario", "<%= session.getAttribute("idCiudadUsuario") %>");
+                lSt.setItem("nomCiudadUsuario", "<%= session.getAttribute("nomCiudadUsuario") --%>");
+            }
+        }
+        function removerCookies(){
+            var sSt = sessionStorage;
+            sSt.removeItem("idUsuario");
+            sSt.removeItem("verificadoUsuario");
+            sSt.removeItem("emailUsuario");
+            sSt.removeItem("passwordUsuario");
+            sSt.removeItem("nomUsuario");
+            sSt.removeItem("apeUsuario");
+            sSt.removeItem("fotUsuario");
+            sSt.removeItem("rolUsuario");
+            sSt.removeItem("tipoUsuario");
+            sSt.removeItem("numUsuario");
+            sSt.removeItem("telUsuario");
+            sSt.removeItem("movUsuario");
+            sSt.removeItem("genUsuario");
+            sSt.removeItem("fnaUsuario");
+            sSt.removeItem("dirUsuario");
+            sSt.removeItem("idSedeUsuario");
+            sSt.removeItem("nomSedeUsuario");
+            sSt.removeItem("rolSedeUsuario");
+            sSt.removeItem("idCiudadUsuario");
+            sSt.removeItem("nomCiudadUsuario");
+        }*/
+    </script>
 </body>

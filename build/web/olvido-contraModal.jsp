@@ -10,11 +10,9 @@
                 <div class="mb-textaling modal-body">
                     <form action="UsuarioRC" method="POST">
                         <p class="mi-intru">Ingrese su dirección de correo electrónico y le enviaremos instrucciones sobre cómo restablecer su contraseña SUCCO.</p>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input required type="email" class="form-control" name="recupEmailUsuario" placeholder="Email">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input required type="email" class="form-control" name="recupEmailUsuario" placeholder="Email">
                         </div>
 
                         <div class="input-group cont-btn">

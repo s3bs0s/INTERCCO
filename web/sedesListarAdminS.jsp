@@ -65,49 +65,53 @@
                         <button data-toggle="modal" data-target="#sedesRGerenteModal" type="button" class="btn">Registrar <span class="tabla-reg-m"><span class="glyphicon glyphicon-plus"></span></span></button>
                     </div>
                     <% ArrayList<Sedes> listaSedes = (ArrayList) request.getAttribute("listaSedes"); %>
-                    <table class="tablaListarSedes table-bordered table">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Rango</th>
-                                <th>Ciudad</th>
-                                <th>Dirección</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Rango</th>
-                                <th>Ciudad</th>
-                                <th>Dirección</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <% for (Sedes sede : listaSedes) {%>
+                    <div class="table-responsive">
+                        <table class="tablaListarSedes table-bordered table">
+                            <thead>
                                 <tr>
-                                    <td><%= sede.getNombre()%></td>
-                                    <td><%= sede.getRango()%></td>
-                                    <td><%= sede.getNombreCiudad()%></td>
-                                    <td><%= sede.getDireccion()%></td>
-                                    <td class="td-espaciado">
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#sedesVerModal" onClick="sedesVerModal('<%= cA.CifrarASCII(sede.getNombre())%>', '<%= sede.getRango()%>', '<%= cA.CifrarASCII(sede.getNombreCiudad())%>', '<%= cA.CifrarASCII(sede.getDireccion())%>', '<%= sede.getSrcMapa()%>', '<%= sede.getHorasHorario()%>', '<%= sede.getDiasHorario()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#sedesAGerenteModal" onClick="sedesActualizarModal('<%= sede.getIdSedes()%>', '<%= cA.CifrarASCII(sede.getNombre())%>', '<%= sede.getRango()%>', '<%= sede.getIdCiudad()%>', '<%= cA.CifrarASCII(sede.getDireccion())%>', '<%= sede.getSrcMapa()%>', '<%= sede.getHorasHorario()%>', '<%= sede.getDiasHorario()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                        <% if (sede.getTienePrincipal().equals("Y")){
-                                            if (sede.getRango().equals("Principal")){ %>
-                                                <button type="button" class="btn btn-active-os" onClick="window.location = 'SedeAR?rgo=S&idSede='+<%= sede.getIdSedes()%>;"><span class="glyphicon glyphicon-chevron-down"></span> Descender</button>
-                                        <% }
-                                        } else {
-                                            if (sede.getRango().equals("Secundaria")){ %>
-                                                <button type="button" class="btn btn-purple" onClick="window.location = 'SedeAR?rgo=P&idSede='+<%= sede.getIdSedes()%>;"><span class="glyphicon glyphicon-chevron-up"></span> Ascender</button>
-                                        <% }
-                                        } %>
-                                    </td>
+                                    <th>Nombre</th>
+                                    <th>Rango</th>
+                                    <th>Ciudad</th>
+                                    <th>Dirección</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            <% }%>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Rango</th>
+                                    <th>Ciudad</th>
+                                    <th>Dirección</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <% for (Sedes sede : listaSedes) {%>
+                                    <tr>
+                                        <td><%= sede.getNombre()%></td>
+                                        <td><%= sede.getRango()%></td>
+                                        <td><%= sede.getNombreCiudad()%></td>
+                                        <td><%= sede.getDireccion()%></td>
+                                        <td>
+                                            <div class="td-espaciado">
+                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#sedesVerModal" onClick="sedesVerModal('<%= cA.CifrarASCII(sede.getNombre())%>', '<%= sede.getRango()%>', '<%= cA.CifrarASCII(sede.getNombreCiudad())%>', '<%= cA.CifrarASCII(sede.getDireccion())%>', '<%= sede.getSrcMapa()%>', '<%= sede.getHorasHorario()%>', '<%= sede.getDiasHorario()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#sedesAGerenteModal" onClick="sedesActualizarModal('<%= sede.getIdSedes()%>', '<%= cA.CifrarASCII(sede.getNombre())%>', '<%= sede.getRango()%>', '<%= sede.getIdCiudad()%>', '<%= cA.CifrarASCII(sede.getDireccion())%>', '<%= sede.getSrcMapa()%>', '<%= sede.getHorasHorario()%>', '<%= sede.getDiasHorario()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                <% if (sede.getTienePrincipal().equals("Y")){
+                                                    if (sede.getRango().equals("Principal")){ %>
+                                                        <button type="button" class="btn btn-active-os" onClick="window.location = 'SedeAR?rgo=S&idSede='+<%= sede.getIdSedes()%>;"><span class="glyphicon glyphicon-chevron-down"></span> Descender</button>
+                                                <% }
+                                                } else {
+                                                    if (sede.getRango().equals("Secundaria")){ %>
+                                                        <button type="button" class="btn btn-purple" onClick="window.location = 'SedeAR?rgo=P&idSede='+<%= sede.getIdSedes()%>;"><span class="glyphicon glyphicon-chevron-up"></span> Ascender</button>
+                                                <% }
+                                                } %>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <% }%>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
             </body>
             <%@include file="sedesAdminSModales.jsp" %>

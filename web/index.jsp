@@ -102,7 +102,7 @@
                     </div>
                     <% } else if (mens.equals("NuAcc")) { %>
                     <div class="cjAlert">
-                        <div class="alert alert-info alert-dismissible">
+                        <div class="alert alert-warning alert-dismissible">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <strong>¡Intentelo de Nuevo!</strong> El email o la contraseña SUCCO son incorrectos.
                         </div>
@@ -157,6 +157,7 @@
                 <% } %>
                 
                 <%@include file="seccionPrincipalIndex.jsp" %>
+                <%@include file="seccionElijaSedeIndex.jsp" %>
                 <%@include file="seccionCarruselIndex.jsp" %>
                 <%@include file="seccionCartaIndex.jsp" %>
                 <%@include file="seccionAcercadeIndex.jsp" %>

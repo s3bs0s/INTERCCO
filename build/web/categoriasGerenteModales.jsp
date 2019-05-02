@@ -1,7 +1,7 @@
 <body>
     <!-- Modal de Registrar -->
     <div class="modal fade" id="categoriasRGerenteModal" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal">
 
             <div class="modal-content">
                 <div class="modal-header">
@@ -11,12 +11,10 @@
                 <div class="mb-textaling modal-body">
                     <p class="mi-obli">Los campos que contengan el símbolo asterisco <span class="a-mi">*</span> son obligatorios, de no ser así, son totalmente opcional.</p>
                     <form action="Categoria" method="POST" autocomplete="off">
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon">Nombre:</span>
-                                <input required type="text" onkeypress="return refuseCPyP(event)" maxlength="80" minlength="2" class="form-control" name="regNombreCategoria" placeholder="Categoría.">
-                                <span class="input-group-addon i-obli">*</span>
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Nombre:</span>
+                            <input required type="text" onkeypress="return refuseCPyP(event)" maxlength="80" minlength="2" class="form-control" name="regNombreCategoria" placeholder="Categoría.">
+                            <span class="input-group-addon i-obli">*</span>
                         </div>
 
                         <div class="input-group cont-btn">
@@ -37,7 +35,7 @@
     
     <!-- Modal de Editar -->
     <div class="modal fade" id="categoriasAGerenteModal" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal">
 
             <div class="modal-content">
                 <div class="modal-header">
@@ -46,17 +44,13 @@
                 </div>
                 <div class="mb-textaling modal-body">
                     <form action="CategoriaA" method="POST">
-                        <div class="filas-i">
-                            <div class="input-group inpDesa">
-                                <span class="input-group-addon">ID:</span>
-                                <input type="text" class="form-control" id="actuaIDCategoria" name="actuaIDCategoria">
-                            </div>
+                        <div class="input-group inpDesa">
+                            <span class="input-group-addon">ID:</span>
+                            <input type="text" class="form-control" id="actuaIDCategoria" name="actuaIDCategoria">
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon">Nombre:</span>
-                                <input required type="text" onkeypress="this.style.color = '#87A2D1'; return refuseCPyP(event)" maxlength="80" minlength="2" class="form-control" id="actuaNombreCategoria" name="actuaNombreCategoria">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Nombre:</span>
+                            <input required type="text" onkeypress="this.style.color = '#87A2D1'; return refuseCPyP(event)" maxlength="80" minlength="2" class="form-control" id="actuaNombreCategoria" name="actuaNombreCategoria">
                         </div>
 
                         <div class="input-group cont-btn">

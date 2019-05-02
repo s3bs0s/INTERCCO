@@ -49,9 +49,9 @@ public class ListarParametros extends HttpServlet {
                 sp.setIdUsuario(rs.getInt("idUsuario"));
                 
                 
-                ps2 = con.prepareStatement("SELECT email FROM usuarios WHERE idUsuarios=? AND existencia=?;");
+                ps2 = con.prepareStatement("SELECT email FROM usuarios WHERE idUsuarios=? AND rol!=?;");
                 ps2.setInt(1, rs.getInt("idUsuario"));
-                ps2.setString(2, "Y");
+                ps2.setString(2, "Cliente");
                 rs2 = ps2.executeQuery();
                 if (rs2.next()) {
                     sp.setEmailUsuario(rs2.getString("email"));

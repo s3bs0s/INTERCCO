@@ -33,24 +33,46 @@ function DescifrarASCII(texto){
 }
 // </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="MOPass">
+function MOPassME (mod, id) {
+    var typeInp = document.getElementById(id).type;
+    if (typeInp === "password"){
+        document.getElementById(id).type = 'text';
+        document.getElementById('BtnMOPassword'+mod).innerText = "Ocultar";
+    } else {
+        document.getElementById(id).type = 'password';
+        document.getElementById('BtnMOPassword'+mod).innerText = "Mostrar";
+    }
+}
+// </editor-fold>
+
 // <editor-fold defaultstate="collapsed" desc="Validación de Códigos">
 function CodigoCorrecto(codigoCorrecto, email){
     var codigoUsuario = document.getElementById("recupCodigo").value;
     var codigoCDescifrado = DescifrarASCII(codigoCorrecto);
     
-    if(codigoCDescifrado === codigoUsuario){
-        window.location = "codigo-nuevaContra.jsp?emailU="+email;
-    } else {
-        document.getElementById("recupCodigo").value = "Código incorrecto!";
+    if(codigoUsuario.length < 11 || codigoUsuario.length > 11){
+        document.getElementById("recupCodigo").value = "Solo 10 caracteres!";
         document.getElementById("recupCodigo").style.color = "#E06666";
         $("#BtnConfirmarRC").attr("disabled","");
+        alert("Aja");
+    } else {
+        alert("Aja2");
+        if(codigoCDescifrado === codigoUsuario){
+            window.location = "codigo-nuevaContra.jsp?emailU="+email;
+        } else {
+            document.getElementById("recupCodigo").value = "Código incorrecto!";
+            document.getElementById("recupCodigo").style.color = "#E06666";
+            $("#BtnConfirmarRC").attr("disabled","");
+        }
     }
 }
 function CodigoCorrectoV(codigoCorrecto, email){
     var codigoUsuario = document.getElementById("verifCodigo").value;
     var codigoCDescifrado = DescifrarASCII(codigoCorrecto);
     var emailDescifrado = DescifrarASCII(email);
-    if(codigoCDescifrado.length > 10){
+    
+    if(codigoUsuario.length < 10 || codigoUsuario.length > 10){
         document.getElementById("verifCodigo").value = "Solo 10 caracteres!";
         document.getElementById("verifCodigo").style.color = "#E06666";
         $("#BtnConfirmarRC").attr("disabled","");

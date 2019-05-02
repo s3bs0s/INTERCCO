@@ -32,7 +32,7 @@
                                 <h4 class="div-title"><span class="icon-user-check"></span><label for="verifCodigo" class="me">Código de Verificación</label></h4>
                             </div>
                             <div class="div-body">
-                                <form>
+                                <form autocomplete="off">
                                     <p class="mi-intru">Se ha enviado un código de verificación a su correo electrónico, escribalo en el campo inferior. La verificación se repite una sola vez en su cuenta, no evité ejercerla.</p>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="icon-user-check"></i></span>

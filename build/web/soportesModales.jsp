@@ -1,7 +1,7 @@
 <body>
     <!-- Modal de Registrar -->
     <div class="modal fade" id="soporteRModal" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal">
 
             <div class="modal-content">
                 <div class="modal-header">
@@ -11,25 +11,21 @@
                 <div class="mb-textaling modal-body">
                     <p class="mi-obli">Los campos que contengan el símbolo asterisco <span class="a-mi">*</span> son obligatorios, de no ser así, son totalmente opcional.</p>
                     <form action="Soporte" method="POST">
-                        <div class="filas-i">
-                            <div class="input-group" style="width:66%;">
-                                <span class="input-group-addon">Ruta o Módulo:</span>
-                                <input required type="text" maxlength="250" minlength="4" class="form-control" name="regRoMSoportes" placeholder="Ubicación del caso.">
-                                <span class="input-group-addon i-obli">*</span>
-                            </div>
-                            <div class="input-group" style="width:34%;">
-                                <span class="input-group-addon">¿Urgencia?</span>
-                                <select class="form-control" name="regUrgenciaSoportes">
-                                    <option value="NU">No es Urgente</option>
-                                    <option value="U">Es Urgente</option>
-                                </select>
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Ruta o Módulo:</span>
+                            <input required type="text" maxlength="250" minlength="4" class="form-control" name="regRoMSoportes" placeholder="Ubicación del caso.">
+                            <span class="input-group-addon i-obli">*</span>
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon">Descripción:</span>
-                                <textarea required class="form-control" placeholder="Descripción de su caso." name="regDescripcionSoportes"></textarea>
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">¿Urgencia?</span>
+                            <select class="form-control" name="regUrgenciaSoportes">
+                                <option value="NU">No es Urgente</option>
+                                <option value="U">Es Urgente</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Descripción:</span>
+                            <textarea required class="form-control" placeholder="Descripción de su caso." name="regDescripcionSoportes"></textarea>
                         </div>
 
                         <div class="input-group cont-btn">
@@ -105,7 +101,7 @@
     
     <!-- Modal de Editar -->
     <div class="modal fade" id="soporteAModal" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal">
 
             <div class="modal-content">
                 <div class="modal-header">
@@ -114,23 +110,17 @@
                 </div>
                 <div class="mb-textaling modal-body">
                     <form action="SoporteA" method="POST">
-                        <div class="filas-i">
-                            <div class="input-group inpDesa">
-                                <span class="input-group-addon">ID:</span>
-                                <input type="text" class="form-control" id="actuaIDSoportes" name="actuaIDSoportes">
-                            </div>
+                        <div class="input-group inpDesa">
+                            <span class="input-group-addon">ID:</span>
+                            <input type="text" class="form-control" id="actuaIDSoportes" name="actuaIDSoportes">
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon">Ruta o Módulo:</span>
-                                <input required type="text" onkeypress="this.style.color = '#87A2D1';" maxlength="250" minlength="4" class="form-control" id="actuaRoMSoportes" name="actuaRoMSoportes">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Ruta o Módulo:</span>
+                            <input required type="text" onkeypress="this.style.color = '#87A2D1';" maxlength="250" minlength="4" class="form-control" id="actuaRoMSoportes" name="actuaRoMSoportes">
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon">Descripción:</span>
-                                <textarea required onkeypress="this.style.color = '#87A2D1';" class="form-control" id="actuaDescripcionSoportes" name="actuaDescripcionSoportes"></textarea>
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Descripción:</span>
+                            <textarea required onkeypress="this.style.color = '#87A2D1';" class="form-control" id="actuaDescripcionSoportes" name="actuaDescripcionSoportes"></textarea>
                         </div>
 
                         <div class="input-group cont-btn">

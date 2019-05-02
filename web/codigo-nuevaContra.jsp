@@ -24,7 +24,7 @@
                     <article class="codigoRC-modal">
                         <div class="div-content">
                             <div class="div-header">
-                                <h4 class="div-title"><span class="glyphicon glyphicon-plus"></span><label for="#" class="me">Nueva Contraseña</label></h4>
+                                <h4 class="div-title"><span class="icon-key"></span><label for="#" class="me">Nueva Contraseña</label></h4>
                             </div>
                             <div class="div-body">
                                 <form action="UsuarioNC" method="POST">
@@ -35,12 +35,12 @@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="icon-key"></i></span>
                                         <input required type="password" onkeyup="ContrasIguales()" class="form-control" id="recupNuevaContra" name="recupNuevaContra" placeholder="Nueva Contraseña">
-                                        <span class="input-group-addon i-pass" id="BtnMOPassword1" onClick="MOPass(1)">Mostrar</span>
+                                        <span class="input-group-addon i-pass" id="BtnMOPassword1" onClick="MOPassME(1, 'recupNuevaContra')">Mostrar</span>
                                     </div>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-repeat"></i></span>
                                         <input required type="password" onkeyup="ContrasIguales()" class="form-control" id="recupRepitaNuevaContra" placeholder="Repita la Nueva Contraseña">
-                                        <span class="input-group-addon i-pass" id="BtnMOPassword2" onClick="MOPass(2)">Mostrar</span>
+                                        <span class="input-group-addon i-pass" id="BtnMOPassword2" onClick="MOPassME(2, 'recupRepitaNuevaContra')">Mostrar</span>
                                     </div>
 
                                     <div class="input-group cont-btn">

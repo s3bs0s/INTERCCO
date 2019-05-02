@@ -1,9 +1,10 @@
 .section-bodys h1{
     display:block;
     height:auto;
-    padding:10px 20px;
+    padding:10px 25px;
     width:105%;
     color:#fff;
+    letter-spacing:.5pt;
     background:#446EB6;
     margin:0 0 30px -2.5%;
     border: 1px solid #999;
@@ -46,22 +47,17 @@
         color:#fff;
         margin:10px;
         padding: 8px 16px;
-        border:solid 1px #fff;
         -webkit-transition:all 200ms ease;
         -o-transition:all 200ms ease;
         transition:all 200ms ease;
     }
         .tabla-reg button:hover{
-            border:solid 1px #446EB6;
             outline:none;
-            background:#fff;
-            color:#446EB6;
+            background:#365892;
         }
         .tabla-reg button:focus{
-            border:solid 1px #446EB6;
             outline:none;
-            background:#fff;
-            color:#446EB6;
+            background:#365892;
         }
         
     .tabla-reg button .tabla-reg-m{
@@ -77,25 +73,25 @@
         transition:all 200ms ease;
     }
         .tabla-reg button:hover .tabla-reg-m{
-            border:solid 1px #fff;
-            background:#446EB6;
-            color:#fff;
+            color:#365892;
         }
         .tabla-reg button:focus .tabla-reg-m{
-            border:solid 1px #fff;
-            background:#446EB6;
-            color:#fff;
+            color:#365892;
         }
 /* </editor-fold> */
 
     /*Botones de Acciones*/
 /* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
 .td-espaciado{
+    width:100%;
+    height:100%;
     display:flex;
+    flex-flow:row wrap;
+    align-items:center;
     justify-content:space-around;
 }
     .td-espaciado .btn{
-        margin:0 2px;
+        margin:2px 2px;
     }
         .td-espaciado .btn:focus{
             outline:none;

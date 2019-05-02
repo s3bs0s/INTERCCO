@@ -1,7 +1,7 @@
 <body>
     <!-- Modal de Responder -->
     <div class="modal fade" id="pqrsfRGerenteModal" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal">
 
             <div class="modal-content">
                 <div class="modal-header">
@@ -10,27 +10,21 @@
                 </div>
                 <div class="mb-textaling modal-body">
                     <form action="PqrsfR" method="POST">
-                        <div class="filas-i">
-                            <div class="input-group inpDesa">
-                                <span class="input-group-addon">ID PQRSF:</span>
-                                <input type="text" id="respIDResPQRSF" class="form-control" name="respIDResPQRSF">
-                            </div>
-                            <div class="input-group inpDesa">
-                                <span class="input-group-addon">Cliente:</span>
-                                <input type="text" id="respEmailCliOcultoResPQRSF" class="form-control" name="respEmailCliOcultoResPQRSF">
-                            </div>
+                        <div class="input-group inpDesa">
+                            <span class="input-group-addon">ID PQRSF:</span>
+                            <input type="text" id="respIDResPQRSF" class="form-control" name="respIDResPQRSF">
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon">Cliente:</span>
-                                <input disabled type="text" id="respEmailCliResPQRSF" class="form-control" name="respEmailCliResPQRSF">
-                            </div>
+                        <div class="input-group inpDesa">
+                            <span class="input-group-addon">Cliente:</span>
+                            <input type="text" id="respEmailCliOcultoResPQRSF" class="form-control" name="respEmailCliOcultoResPQRSF">
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon">Respuesta:</span>
-                                <textarea required class="form-control" placeholder="Respuesta a la Solicitud PQRSF." name="respRespuestaResPQRSF"></textarea>
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Cliente:</span>
+                            <input disabled type="text" id="respEmailCliResPQRSF" class="form-control" name="respEmailCliResPQRSF">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Respuesta:</span>
+                            <textarea required class="form-control" placeholder="Respuesta a la Solicitud PQRSF." name="respRespuestaResPQRSF"></textarea>
                         </div>
 
                         <div class="input-group cont-btn">

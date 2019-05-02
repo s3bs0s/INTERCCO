@@ -10,10 +10,8 @@
                 </div>
                 <div class="mb-textaling modal-body">
                     <form action="IVAA" method="POST">
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <input required onkeypress="return acceptNP(event)" style="text-align:center;" placeholder="Porcentaje" type="tel" pattern="[0-9.]+" maxlength="5" minlength="3" class="form-control" name="actPorcentajeIVA">
-                            </div>
+                        <div class="input-group" style="width:97%;">
+                            <input required onkeypress="return acceptNP(event)" style="text-align:center;" placeholder="Porcentaje" type="tel" pattern="[0-9.]+" maxlength="5" minlength="3" class="form-control" name="actPorcentajeIVA">
                         </div>
 
                         <div class="input-group cont-btn">

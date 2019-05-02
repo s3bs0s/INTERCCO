@@ -182,6 +182,7 @@ public class Acceder extends HttpServlet {
                     } else {
                         HttpSession session = request.getSession(true);
                         session.setAttribute("idUsuario", idusu);
+                        session.setAttribute("verificadoUsuario", verificacion);
                         session.setAttribute("emailUsuario", emailUsuario);
                         session.setAttribute("passwordUsuario", passUsuario);
                         session.setAttribute("nomUsuario", nomusu);

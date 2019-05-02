@@ -29,11 +29,11 @@
                                 <h4 class="div-title"><span class="icon-qrcode"></span><label for="codigo-recu" class="me">Código de Recuperación</label></h4>
                             </div>
                             <div class="div-body">
-                                <form>
+                                <form autocomplete="off">
                                     <p class="mi-intru">Escriba el código que ha sido enviado a su correo electrónico en el campo inferior.</p>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="icon-qrcode"></i></span>
-                                        <input required type="text" onkeyup="HayCodigo(this)" class="form-control" id="recupCodigo" placeholder="Código de Recuperación">
+                                        <input required type="text" onfocus="if (this.value === 'Solo 10 caracteres!' || this.value === 'Código incorrecto!'){this.value = '';}" onkeyup="HayCodigo(this)" class="form-control" id="recupCodigo" placeholder="Código de Recuperación">
                                     </div>
 
                                     <div class="input-group cont-btn">

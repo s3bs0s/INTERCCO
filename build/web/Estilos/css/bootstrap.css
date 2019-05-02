@@ -2675,6 +2675,7 @@ output {
 .form-control {
   display: block;
   width: 100%;
+  min-width:200px;
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;
@@ -4097,10 +4098,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .input-group-addon {
   padding: 6px 15px;
-  font-size: 14px;
   font-weight: normal;
   line-height: 1;
-  color: #555;
   text-align: center;
   background-color: #eee;
   border: 1px solid #ccc;

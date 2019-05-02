@@ -76,9 +76,9 @@ public class ListarPqrsfs extends HttpServlet {
                 rs2.close();
 
 
-                ps2 = con.prepareStatement("SELECT * FROM usuarios WHERE idUsuarios=? AND existencia=?;");
+                ps2 = con.prepareStatement("SELECT * FROM usuarios WHERE idUsuarios=? AND rol=?;");
                 ps2.setInt(1, rs.getInt("idInterlocutor"));
-                ps2.setString(2, "Y");
+                ps2.setString(2, "Gerente");
                 rs2 = ps2.executeQuery();
                 if (rs2.next()){
                     pq.setIdInterlocutor(rs2.getString("email"));

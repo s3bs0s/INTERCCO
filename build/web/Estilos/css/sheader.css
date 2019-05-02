@@ -136,7 +136,6 @@ header{
     /*Navegadores en General*/
 /* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
 .singup{
-    width:50%;
     height:100%;
     display:flex;
 
@@ -213,19 +212,9 @@ header{
     /*Navegador sin Logo*/
 /* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
 .logonav-slogo{
-    width:0%;
     height:100%;
+    display:none;
 }
-    .logonav-slogo a{
-        height:100%;
-        width:100%;
-        display:flex;
-        align-items:center;
-    }
-        .logonav-slogo a img{
-            height:0px;
-            display:inline-block;
-        }
         
 nav.navslogo{
     width:100%;
@@ -234,13 +223,13 @@ nav.navslogo{
     background:#446EB6;
     display:flex;
 
-    flex-flow:row nowrap;
+    flex-flow:row wrap;
+    justify-content:space-between;
     -webkit-transition:all 200ms ease;
     -o-transition:all 200ms ease;
     transition:all 200ms ease;
 }
     .menuprin-slogo{
-        width:50%;
         height:100%;
         display:flex;
 
@@ -253,7 +242,7 @@ nav.navslogo{
             height:100%;
             display:flex;
 
-            flex-flow:row nowrap;
+            flex-flow:row wrap;
         }
             .menuprin-slogo ul li{
                 display:inline-block;
@@ -288,23 +277,22 @@ nav.navslogo{
     /*Navegador con Logo*/
 /* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
 .logonav-clogo{
-    width:15%;
     height:100%;
     display:flex;
+    padding-left:10px;
+    padding-right:10px;
 
     align-items:center;
 }
     .logonav-clogo a{
         height:100%;
         width:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
     }
         .logonav-clogo a img{
             height:80%;
-            display:block;
-            margin:auto;
-            -webkit-transition:all 200ms ease;
-            -o-transition:all 200ms ease;
-            transition:all 200ms ease;
         }
 
 nav.navclogo{
@@ -317,13 +305,13 @@ nav.navclogo{
     z-index:1000;
     top:0;
 
-    flex-flow:row nowrap;
+    flex-flow:row wrap;
+    justify-content:space-between;
     -webkit-transition:all 200ms ease;
     -o-transition:all 200ms ease;
     transition:all 200ms ease;
 }
     .menuprin-clogo{
-        width:50%;
         height:100%;
         display:flex;
 
@@ -336,7 +324,7 @@ nav.navclogo{
             height:100%;
             display:flex;
 
-            flex-flow:row nowrap;
+            flex-flow:row wrap;
         }
             .menuprin-clogo ul li{
                 display:inline-block;

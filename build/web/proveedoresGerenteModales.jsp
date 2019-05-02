@@ -10,7 +10,7 @@
         } 
         if (rolSedeUsuarioPro.equals("Principal")){ %>
         <div class="modal fade" id="proveedoresRGerenteModal" role="dialog">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal">
 
                 <div class="modal-content">
                     <div class="modal-header">
@@ -23,126 +23,108 @@
                             <div class="cont-titulo-sect">
                                 <h1 class="titulo-sect">Información de la empresa o compañía</h1>
                             </div>
-                            <p class="mi-obli">Por favor escoja entre el <span onClick="document.getElementById('telefono-coe').focus()" class="a-mi">télefono</span>, <span onClick="document.getElementById('movil-coe').focus()" class="a-mi">móvil</span> o <span onClick="document.getElementById('fax-coe').focus()" class="a-mi">fax</span>, pero debe ingresar uno de los mencionados anteriormente.</p>
-                            <div class="filas-i">
-                                <div class="input-group" style="width:100%;">
-                                    <span class="input-group-addon">Nombre de la compañía o empresa:</span>
-                                    <input required autofocus type="text" maxlength="90" minlength="3" class="form-control" name="regNombreCOEProveedor" placeholder="Nombre de la Compañía o Empresa.">
-                                    <span class="input-group-addon i-obli">*</span>
-                                </div>
+                            <p class="mi-obli">Por favor escoja entre el <span onClick="document.getElementById('regTelefonoCOEProveedor').focus()" class="a-mi">télefono</span>, <span onClick="document.getElementById('regMovilCOEProveedor').focus()" class="a-mi">móvil</span> o <span onClick="document.getElementById('regFaxCOEProveedor').focus()" class="a-mi">fax</span>, pero debe ingresar uno de los mencionados anteriormente.</p>
+                            <div class="input-group">
+                                <span class="input-group-addon">Nombre de la compañía o empresa:</span>
+                                <input required autofocus type="text" maxlength="90" minlength="3" class="form-control" name="regNombreCOEProveedor" placeholder="Nombre de la Compañía o Empresa.">
+                                <span class="input-group-addon i-obli">*</span>
                             </div>
-                            <div class="filas-i">
-                                <div class="input-group" style="width:40%;">
-                                    <span class="input-group-addon">Tipo de identificación fiscal:</span>
-                                    <select required class="form-control" title="Seleccione su tipo de identificación fiscal." name="regTipoIdentiFiscalCOEProveedor">
-                                        <option value="A">A - Número de identificación de empleador de los EE.UU. (EIN)</option>
-                                        <option value="N">N - Número de identificación nacional</option>
-                                        <option value="R">R - RUT / RUC / RFC Número de identificación fiscal</option>
-                                    </select>
-                                    <span class="input-group-addon i-obli">*</span>
-                                </div>
-                                <div class="input-group" style="width:60%;">
-                                    <span class="input-group-addon">Número de identificación tributaria:</span>
-                                    <input required type="text" minlength="5" maxlength="20" class="form-control" name="regNumIdentiTribuCOEProveedor" placeholder="Número de Identificación Tributaria.">
-                                    <span class="input-group-addon i-obli">*</span>
-                                </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Tipo de identificación fiscal:</span>
+                                <select required class="form-control" title="Seleccione su tipo de identificación fiscal." name="regTipoIdentiFiscalCOEProveedor">
+                                    <option value="A">A - Número de identificación de empleador de los EE.UU. (EIN)</option>
+                                    <option value="N">N - Número de identificación nacional</option>
+                                    <option value="R">R - RUT / RUC / RFC Número de identificación fiscal</option>
+                                </select>
+                                <span class="input-group-addon i-obli">*</span>
                             </div>
-                            <div class="filas-i">
-                                <div class="input-group" style="width:70%;">
-                                    <span class="input-group-addon">Teléfono:</span>
-                                    <input type="tel" pattern="[0-9]+" minlength="4" maxlength="20" class="form-control" name="regTelefonoCOEProveedor" placeholder="Teléfono.">
-                                </div>
-                                <div class="input-group" style="width:30%;">
-                                    <span class="input-group-addon">Extensión:</span>
-                                    <input type="tel" minlength="1" maxlength="15" class="form-control" name="regExtTelefonoCOEProveedor" placeholder="Extensión.">
-                                </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Número de identificación tributaria:</span>
+                                <input required type="text" minlength="5" maxlength="20" class="form-control" name="regNumIdentiTribuCOEProveedor" placeholder="Número de Identificación Tributaria.">
+                                <span class="input-group-addon i-obli">*</span>
                             </div>
-                            <div class="filas-i">
-                                <div class="input-group" style="width:45%;">
-                                    <span class="input-group-addon">Móvil:</span>
-                                    <input type="tel" minlength="2" maxlength="18" class="form-control" name="regMovilCOEProveedor" placeholder="Móvil.">
-                                </div>
-                                <div class="input-group" style="width:37%;">
-                                    <span class="input-group-addon">FAX:</span>
-                                    <input type="tel" minlength="2" maxlength="15" class="form-control" name="regFaxCOEProveedor" placeholder="FAX.">
-                                </div>
-                                <div class="input-group" style="width:28%;">
-                                    <span class="input-group-addon">Extensión:</span>
-                                    <input type="tel" minlength="1" maxlength="15" class="form-control" name="regExtFaxCOEProveedor" placeholder="Extensión.">
-                                </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Teléfono:</span>
+                                <input type="tel" pattern="[0-9]+" minlength="4" maxlength="20" class="form-control" name="regTelefonoCOEProveedor" placeholder="Teléfono.">
                             </div>
-                            <div class="filas-i">
-                                <div class="input-group" style="width:45%;">
-                                    <span class="input-group-addon">Ciudad:</span>
-                                    <% ArrayList<Ciudades> listaCiudadesSPro = (ArrayList) request.getAttribute("listaCiuSPro"); %>
-                                    <select required class="form-control" title="Seleccione su ciudad de residencia." name="regCiudadCOEProveedor">
-                                        <% for (Ciudades  ciudSP: listaCiudadesSPro) { %>
-                                            <option value="<%= ciudSP.getIdCiudades()%>"><%= ciudSP.getNombre()%></option>
-                                        <% } %>
-                                    </select>
-                                    <span class="input-group-addon i-obli">*</span>
-                                </div>
-                                <div class="input-group" style="width:55%;">
-                                    <span class="input-group-addon">Dirección:</span>
-                                    <input required type="text" minlength="8" maxlength="150" class="form-control" name="regDireccionCOEProveedor" placeholder="Dirección residencial.">
-                                    <span class="input-group-addon i-obli">*</span>
-                                </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Extensión:</span>
+                                <input type="tel" minlength="1" maxlength="15" class="form-control" name="regExtTelefonoCOEProveedor" placeholder="Extensión.">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Móvil:</span>
+                                <input type="tel" minlength="2" maxlength="18" class="form-control" name="regMovilCOEProveedor" placeholder="Móvil.">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">FAX:</span>
+                                <input type="tel" minlength="2" maxlength="15" class="form-control" name="regFaxCOEProveedor" placeholder="FAX.">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Extensión:</span>
+                                <input type="tel" minlength="1" maxlength="15" class="form-control" name="regExtFaxCOEProveedor" placeholder="Extensión.">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Ciudad:</span>
+                                <% ArrayList<Ciudades> listaCiudadesSPro = (ArrayList) request.getAttribute("listaCiuSPro"); %>
+                                <select required class="form-control" title="Seleccione su ciudad de residencia." name="regCiudadCOEProveedor">
+                                    <% for (Ciudades  ciudSP: listaCiudadesSPro) { %>
+                                        <option value="<%= ciudSP.getIdCiudades()%>"><%= ciudSP.getNombre()%></option>
+                                    <% } %>
+                                </select>
+                                <span class="input-group-addon i-obli">*</span>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Dirección:</span>
+                                <input required type="text" minlength="8" maxlength="150" class="form-control" name="regDireccionCOEProveedor" placeholder="Dirección residencial.">
+                                <span class="input-group-addon i-obli">*</span>
                             </div>
                             <div class="cont-titulo-sect cont-titulo-sect-m">
                                 <h1 class="titulo-sect">Información de la persona de contacto</h1>
                             </div>
-                            <p class="mi-obli">Por favor escoja entre el <span onClick="document.getElementById('email-pc').focus()" class="a-mi">email</span>, <span onClick="document.getElementById('fax-pc').focus()" class="a-mi">fax</span>, <span onClick="document.getElementById('telefono-pc').focus()" class="a-mi">télefono</span> o <span onClick="document.getElementById('movil-pc').focus()" class="a-mi">móvil</span>, pero debe ingresar uno los mencionados anteriormente.</p>
-                            <div class="filas-i">
-                                <div class="input-group" style="width:60%;">
-                                    <span class="input-group-addon">Nombre completo:</span>
-                                    <input required type="text" pattern="[a-zA-z ]+" maxlength="110" minlength="5" class="form-control" name="regNombrePCProveedor" placeholder="Nombre completo.">
-                                    <span class="input-group-addon i-obli">*</span>
-                                </div>
-                                <div class="input-group" style="width:40%;">
-                                    <span class="input-group-addon">Cargo:</span>
-                                    <input required type="text" maxlength="60" minlength="3" class="form-control" name="regCargoPCProveedor" placeholder="Cargo en la Compañía o Empresa.">
-                                    <span class="input-group-addon i-obli">*</span>
-                                </div>
+                            <p class="mi-obli">Por favor escoja entre el <span onClick="document.getElementById('regEmailPCProveedor').focus()" class="a-mi">email</span>, <span onClick="document.getElementById('regFaxPCProveedor').focus()" class="a-mi">fax</span>, <span onClick="document.getElementById('regTelefonoPCProveedor').focus()" class="a-mi">télefono</span> o <span onClick="document.getElementById('regMovilPCProveedor').focus()" class="a-mi">móvil</span>, pero debe ingresar uno los mencionados anteriormente.</p>
+                            <div class="input-group">
+                                <span class="input-group-addon">Nombre completo:</span>
+                                <input required type="text" pattern="[a-zA-z ]+" maxlength="110" minlength="5" class="form-control" name="regNombrePCProveedor" placeholder="Nombre completo.">
+                                <span class="input-group-addon i-obli">*</span>
                             </div>
-                            <div class="filas-i">
-                                <div class="input-group" style="width:35%;">
-                                    <span class="input-group-addon">Tipo:</span>
-                                    <select required class="form-control" title="Seleccione su tipo de identificación." name="regTipoIdentiPCProveedor">
-                                        <option value="CC">CC (Cédula de Ciudadanía)</option>
-                                        <option value="TP">TP (Tarjeta Pasaporte)</option>
-                                        <option value="CE">CE (Cédula de Extranjería)</option>
-                                    </select>
-                                    <span class="input-group-addon i-obli">*</span>
-                                </div>
-                                <div class="input-group" style="width:65%;">
-                                    <span class="input-group-addon">Número de identificación:</span>
-                                    <input required type="text" minlength="5" maxlength="20" class="form-control" name="regNumIdentiPCProveedor" placeholder="Número de Identificación.">
-                                    <span class="input-group-addon i-obli">*</span>
-                                </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Cargo:</span>
+                                <input required type="text" maxlength="60" minlength="3" class="form-control" name="regCargoPCProveedor" placeholder="Cargo en la Compañía o Empresa.">
+                                <span class="input-group-addon i-obli">*</span>
                             </div>
-                            <div class="filas-i">
-                                <div class="input-group" style="width:48%;">
-                                    <span class="input-group-addon">Email:</span>
-                                    <input type="email" minlength="10" maxlength="150" class="form-control" name="regEmailPCProveedor" placeholder="user@succo.com">
-                                </div>
-                                <div class="input-group" style="width:30%;">
-                                    <span class="input-group-addon">FAX:</span>
-                                    <input type="tel" minlength="2" maxlength="15" class="form-control" name="regFaxPCProveedor" placeholder="FAX.">
-                                </div>
-                                <div class="input-group" style="width:22%;">
-                                    <span class="input-group-addon">Extensión:</span>
-                                    <input type="tel" minlength="1" maxlength="15" class="form-control" name="regExtFaxPCProveedor" placeholder="Extensión.">
-                                </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Tipo:</span>
+                                <select required class="form-control" title="Seleccione su tipo de identificación." name="regTipoIdentiPCProveedor">
+                                    <option value="CC">CC (Cédula de Ciudadanía)</option>
+                                    <option value="TP">TP (Tarjeta Pasaporte)</option>
+                                    <option value="CE">CE (Cédula de Extranjería)</option>
+                                </select>
+                                <span class="input-group-addon i-obli">*</span>
                             </div>
-                            <div class="filas-i">
-                                <div class="input-group" style="width:50%;">
-                                    <span class="input-group-addon">Teléfono:</span>
-                                    <input type="tel" pattern="[0-9]+" minlength="4" maxlength="15" class="form-control" name="regTelefonoPCProveedor" placeholder="Teléfono Fijo.">
-                                </div>
-                                <div class="input-group" style="width:50%;">
-                                    <span class="input-group-addon">Móvil:</span>
-                                    <input type="tel" pattern="[0-9]+" minlength="6" maxlength="28" class="form-control" name="regMovilPCProveedor" placeholder="Teléfono Móvil.">
-                                </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Número de identificación:</span>
+                                <input required type="text" minlength="5" maxlength="20" class="form-control" name="regNumIdentiPCProveedor" placeholder="Número de Identificación.">
+                                <span class="input-group-addon i-obli">*</span>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Email:</span>
+                                <input type="email" minlength="10" maxlength="150" class="form-control" name="regEmailPCProveedor" placeholder="user@succo.com">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">FAX:</span>
+                                <input type="tel" minlength="2" maxlength="15" class="form-control" name="regFaxPCProveedor" placeholder="FAX.">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Extensión:</span>
+                                <input type="tel" minlength="1" maxlength="15" class="form-control" name="regExtFaxPCProveedor" placeholder="Extensión.">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Teléfono:</span>
+                                <input type="tel" pattern="[0-9]+" minlength="4" maxlength="15" class="form-control" name="regTelefonoPCProveedor" placeholder="Teléfono Fijo.">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">Móvil:</span>
+                                <input type="tel" pattern="[0-9]+" minlength="6" maxlength="28" class="form-control" name="regMovilPCProveedor" placeholder="Teléfono Móvil.">
                             </div>
 
                             <div class="input-group cont-btn">
@@ -284,7 +266,7 @@
     
     <!-- Modal para Actualizar -->
     <div class="modal fade" id="proveedoresAGerenteModal" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal">
 
             <div class="modal-content">
                 <div class="modal-header">
@@ -293,126 +275,106 @@
                 </div>
                 <div class="mb-textaling modal-body">
                     <form action="ProveedorA" method="POST">
-                        <div class="filas-i">
-                            <div class="input-group inpDesa">
-                                <span class="input-group-addon">ID:</span>
-                                <input type="text" class="form-control" id="actuaIDProveedor" name="actuaIDProveedor">
-                            </div>
+                        <div class="input-group inpDesa">
+                            <span class="input-group-addon">ID:</span>
+                            <input type="text" class="form-control" id="actuaIDProveedor" name="actuaIDProveedor">
                         </div>
                         <div class="cont-titulo-sect">
                             <h1 class="titulo-sect">Información de la empresa o compañía</h1>
                         </div>
-                        <p class="mi-obli">Por favor escoja entre el <span onClick="document.getElementById('telefono-coe').focus()" class="a-mi">télefono</span>, <span onClick="document.getElementById('movil-coe').focus()" class="a-mi">móvil</span> o <span onClick="document.getElementById('fax-coe').focus()" class="a-mi">fax</span>, pero debe ingresar uno de los mencionados anteriormente.</p>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon">Nombre de la compañía o empresa:</span>
-                                <input required type="text" onkeypress="this.style.color = '#87A2D1';" maxlength="90" minlength="3" class="form-control" id="actuaNombreCOEProveedor" name="actuaNombreCOEProveedor">
-                            </div>
+                        <p class="mi-obli">Por favor escoja entre el <span onClick="document.getElementById('actuaTelefonoCOEProveedor').focus()" class="a-mi">télefono</span>, <span onClick="document.getElementById('actuaMovilCOEProveedor').focus()" class="a-mi">móvil</span> o <span onClick="document.getElementById('actuaFaxCOEProveedor').focus()" class="a-mi">fax</span>, pero debe ingresar uno de los mencionados anteriormente.</p>
+                        <div class="input-group">
+                            <span class="input-group-addon">Nombre de la compañía o empresa:</span>
+                            <input required type="text" onkeypress="this.style.color = '#87A2D1';" maxlength="90" minlength="3" class="form-control" id="actuaNombreCOEProveedor" name="actuaNombreCOEProveedor">
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:40%;">
-                                <span class="input-group-addon">Tipo de identificación fiscal:</span>
-                                <select required onchange="this.style.color = '#87A2D1';" class="form-control" title="Seleccione su tipo de identificación fiscal." id="actuaTipoIdentiFiscalCOEProveedor" name="actuaTipoIdentiFiscalCOEProveedor">
-                                    <option value="A">A - Número de identificación de empleador de los EE.UU. (EIN)</option>
-                                    <option value="N">N - Número de identificación nacional</option>
-                                    <option value="R">R - RUT / RUC / RFC Número de identificación fiscal</option>
-                                </select>
-                            </div>
-                            <div class="input-group" style="width:60%;">
-                                <span class="input-group-addon">Número de identificación tributaria:</span>
-                                <input required type="text" onkeypress="this.style.color = '#87A2D1';" minlength="5" maxlength="20" class="form-control" id="actuaNumIdentiTribuCOEProveedor" name="actuaNumIdentiTribuCOEProveedor">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Tipo de identificación fiscal:</span>
+                            <select required onchange="this.style.color = '#87A2D1';" class="form-control" title="Seleccione su tipo de identificación fiscal." id="actuaTipoIdentiFiscalCOEProveedor" name="actuaTipoIdentiFiscalCOEProveedor">
+                                <option value="A">A - Número de identificación de empleador de los EE.UU. (EIN)</option>
+                                <option value="N">N - Número de identificación nacional</option>
+                                <option value="R">R - RUT / RUC / RFC Número de identificación fiscal</option>
+                            </select>
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:70%;">
-                                <span class="input-group-addon">Teléfono:</span>
-                                <input type="tel" onkeypress="this.style.color = '#87A2D1';" pattern="[0-9]+" minlength="4" maxlength="20" class="form-control" id="actuaTelefonoCOEProveedor" name="actuaTelefonoCOEProveedor">
-                            </div>
-                            <div class="input-group" style="width:30%;">
-                                <span class="input-group-addon">Extensión:</span>
-                                <input type="tel" onkeypress="this.style.color = '#87A2D1';" minlength="1" maxlength="15" class="form-control" id="actuaExtTelefonoCOEProveedor" name="actuaExtTelefonoCOEProveedor">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Número de identificación tributaria:</span>
+                            <input required type="text" onkeypress="this.style.color = '#87A2D1';" minlength="5" maxlength="20" class="form-control" id="actuaNumIdentiTribuCOEProveedor" name="actuaNumIdentiTribuCOEProveedor">
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:45%;">
-                                <span class="input-group-addon">Móvil:</span>
-                                <input type="tel" onkeypress="this.style.color = '#87A2D1';" minlength="2" maxlength="18" class="form-control" id="actuaMovilCOEProveedor" name="actuaMovilCOEProveedor">
-                            </div>
-                            <div class="input-group" style="width:37%;">
-                                <span class="input-group-addon">FAX:</span>
-                                <input type="tel" onkeypress="this.style.color = '#87A2D1';" minlength="2" maxlength="15" class="form-control" id="actuaFaxCOEProveedor" name="actuaFaxCOEProveedor">
-                            </div>
-                            <div class="input-group" style="width:28%;">
-                                <span class="input-group-addon">Extensión:</span>
-                                <input type="tel" onkeypress="this.style.color = '#87A2D1';" minlength="1" maxlength="15" class="form-control" id="actuaExtFaxCOEProveedor" name="actuaExtFaxCOEProveedor">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Teléfono:</span>
+                            <input type="tel" onkeypress="this.style.color = '#87A2D1';" pattern="[0-9]+" minlength="4" maxlength="20" class="form-control" id="actuaTelefonoCOEProveedor" name="actuaTelefonoCOEProveedor">
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:45%;">
-                                <span class="input-group-addon">Ciudad:</span>
-                                <% ArrayList<Ciudades> listaCiudadesSPro = (ArrayList) request.getAttribute("listaCiuSPro"); %>
-                                <select required onchange="this.style.color = '#87A2D1';" class="form-control" title="Seleccione su ciudad de residencia." id="actuaCiudadCOEProveedor" name="actuaCiudadCOEProveedor">
-                                    <% for (Ciudades  ciudSP: listaCiudadesSPro) { %>
-                                        <option value="<%= ciudSP.getIdCiudades()%>"><%= ciudSP.getNombre()%></option>
-                                    <% } %>
-                                </select>
-                            </div>
-                            <div class="input-group" style="width:55%;">
-                                <span class="input-group-addon">Dirección:</span>
-                                <input required type="text" onkeypress="this.style.color = '#87A2D1';" minlength="8" maxlength="150" class="form-control" id="actuaDireccionCOEProveedor" name="actuaDireccionCOEProveedor">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Extensión:</span>
+                            <input type="tel" onkeypress="this.style.color = '#87A2D1';" minlength="1" maxlength="15" class="form-control" id="actuaExtTelefonoCOEProveedor" name="actuaExtTelefonoCOEProveedor">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Móvil:</span>
+                            <input type="tel" onkeypress="this.style.color = '#87A2D1';" minlength="2" maxlength="18" class="form-control" id="actuaMovilCOEProveedor" name="actuaMovilCOEProveedor">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">FAX:</span>
+                            <input type="tel" onkeypress="this.style.color = '#87A2D1';" minlength="2" maxlength="15" class="form-control" id="actuaFaxCOEProveedor" name="actuaFaxCOEProveedor">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Extensión:</span>
+                            <input type="tel" onkeypress="this.style.color = '#87A2D1';" minlength="1" maxlength="15" class="form-control" id="actuaExtFaxCOEProveedor" name="actuaExtFaxCOEProveedor">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Ciudad:</span>
+                            <% ArrayList<Ciudades> listaCiudadesSPro = (ArrayList) request.getAttribute("listaCiuSPro"); %>
+                            <select required onchange="this.style.color = '#87A2D1';" class="form-control" title="Seleccione su ciudad de residencia." id="actuaCiudadCOEProveedor" name="actuaCiudadCOEProveedor">
+                                <% for (Ciudades  ciudSP: listaCiudadesSPro) { %>
+                                    <option value="<%= ciudSP.getIdCiudades()%>"><%= ciudSP.getNombre()%></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Dirección:</span>
+                            <input required type="text" onkeypress="this.style.color = '#87A2D1';" minlength="8" maxlength="150" class="form-control" id="actuaDireccionCOEProveedor" name="actuaDireccionCOEProveedor">
                         </div>
                         <div class="cont-titulo-sect">
                             <h1 class="titulo-sect">Información de la persona de contacto</h1>
                         </div>
-                        <p class="mi-obli">Por favor escoja entre el <span onClick="document.getElementById('email-pc').focus()" class="a-mi">email</span>, <span onClick="document.getElementById('fax-pc').focus()" class="a-mi">fax</span>, <span onClick="document.getElementById('telefono-pc').focus()" class="a-mi">télefono</span> o <span onClick="document.getElementById('movil-pc').focus()" class="a-mi">móvil</span>, pero debe ingresar uno los mencionados anteriormente.</p>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:60%;">
-                                <span class="input-group-addon">Nombre completo:</span>
-                                <input required type="text" onkeypress="this.style.color = '#87A2D1';" pattern="[a-zA-z ]+" maxlength="110" minlength="5" class="form-control" id="actuaNombrePCProveedor" name="actuaNombrePCProveedor">
-                            </div>
-                            <div class="input-group" style="width:40%;">
-                                <span class="input-group-addon">Cargo:</span>
-                                <input required type="text" onkeypress="this.style.color = '#87A2D1';" maxlength="60" minlength="3" class="form-control" id="actuaCargoPCProveedor" name="actuaCargoPCProveedor">
-                            </div>
+                        <p class="mi-obli">Por favor escoja entre el <span onClick="document.getElementById('actuaEmailPCProveedor').focus()" class="a-mi">email</span>, <span onClick="document.getElementById('actuaFaxPCProveedor').focus()" class="a-mi">fax</span>, <span onClick="document.getElementById('actuaTelefonoPCProveedor').focus()" class="a-mi">télefono</span> o <span onClick="document.getElementById('actuaMovilPCProveedor').focus()" class="a-mi">móvil</span>, pero debe ingresar uno los mencionados anteriormente.</p>
+                        <div class="input-group">
+                            <span class="input-group-addon">Nombre completo:</span>
+                            <input required type="text" onkeypress="this.style.color = '#87A2D1';" pattern="[a-zA-z ]+" maxlength="110" minlength="5" class="form-control" id="actuaNombrePCProveedor" name="actuaNombrePCProveedor">
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:35%;">
-                                <span class="input-group-addon">Tipo:</span>
-                                <select required onchange="this.style.color = '#87A2D1';" class="form-control" title="Seleccione su tipo de identificación." id="actuaTipoIdentiPCProveedor" name="actuaTipoIdentiPCProveedor">
-                                    <option value="CC">CC (Cédula de Ciudadanía)</option>
-                                    <option value="TP">TP (Tarjeta Pasaporte)</option>
-                                    <option value="CE">CE (Cédula de Extranjería)</option>
-                                </select>
-                            </div>
-                            <div class="input-group" style="width:65%;">
-                                <span class="input-group-addon">Número de identificación:</span>
-                                <input required type="text" onkeypress="this.style.color = '#87A2D1';" minlength="5" maxlength="20" class="form-control" id="actuaNumIdentiPCProveedor" name="actuaNumIdentiPCProveedor">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Cargo:</span>
+                            <input required type="text" onkeypress="this.style.color = '#87A2D1';" maxlength="60" minlength="3" class="form-control" id="actuaCargoPCProveedor" name="actuaCargoPCProveedor">
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:48%;">
-                                <span class="input-group-addon">Email:</span>
-                                <input type="email" onkeypress="this.style.color = '#87A2D1';" minlength="10" maxlength="150" class="form-control" id="actuaEmailPCProveedor" name="actuaEmailPCProveedor">
-                            </div>
-                            <div class="input-group" style="width:30%;">
-                                <span class="input-group-addon">FAX:</span>
-                                <input type="tel" onkeypress="this.style.color = '#87A2D1';" minlength="2" maxlength="15" class="form-control" id="actuaFaxPCProveedor" name="actuaFaxPCProveedor">
-                            </div>
-                            <div class="input-group" style="width:22%;">
-                                <span class="input-group-addon">Extensión:</span>
-                                <input type="tel" onkeypress="this.style.color = '#87A2D1';" minlength="1" maxlength="15" class="form-control" id="actuaExtFaxPCProveedor" name="actuaExtFaxPCProveedor">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Tipo:</span>
+                            <select required onchange="this.style.color = '#87A2D1';" class="form-control" title="Seleccione su tipo de identificación." id="actuaTipoIdentiPCProveedor" name="actuaTipoIdentiPCProveedor">
+                                <option value="CC">CC (Cédula de Ciudadanía)</option>
+                                <option value="TP">TP (Tarjeta Pasaporte)</option>
+                                <option value="CE">CE (Cédula de Extranjería)</option>
+                            </select>
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:50%;">
-                                <span class="input-group-addon">Teléfono:</span>
-                                <input type="tel" onkeypress="this.style.color = '#87A2D1';" pattern="[0-9]+" minlength="4" maxlength="15" class="form-control" id="actuaTelefonoPCProveedor" name="actuaTelefonoPCProveedor">
-                            </div>
-                            <div class="input-group" style="width:50%;">
-                                <span class="input-group-addon">Móvil:</span>
-                                <input type="tel" onkeypress="this.style.color = '#87A2D1';" pattern="[0-9]+" minlength="6" maxlength="28" class="form-control" id="actuaMovilPCProveedor" name="actuaMovilPCProveedor">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Número de identificación:</span>
+                            <input required type="text" onkeypress="this.style.color = '#87A2D1';" minlength="5" maxlength="20" class="form-control" id="actuaNumIdentiPCProveedor" name="actuaNumIdentiPCProveedor">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Email:</span>
+                            <input type="email" onkeypress="this.style.color = '#87A2D1';" minlength="10" maxlength="150" class="form-control" id="actuaEmailPCProveedor" name="actuaEmailPCProveedor">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">FAX:</span>
+                            <input type="tel" onkeypress="this.style.color = '#87A2D1';" minlength="2" maxlength="15" class="form-control" id="actuaFaxPCProveedor" name="actuaFaxPCProveedor">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Extensión:</span>
+                            <input type="tel" onkeypress="this.style.color = '#87A2D1';" minlength="1" maxlength="15" class="form-control" id="actuaExtFaxPCProveedor" name="actuaExtFaxPCProveedor">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Teléfono:</span>
+                            <input type="tel" onkeypress="this.style.color = '#87A2D1';" pattern="[0-9]+" minlength="4" maxlength="15" class="form-control" id="actuaTelefonoPCProveedor" name="actuaTelefonoPCProveedor">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Móvil:</span>
+                            <input type="tel" onkeypress="this.style.color = '#87A2D1';" pattern="[0-9]+" minlength="6" maxlength="28" class="form-control" id="actuaMovilPCProveedor" name="actuaMovilPCProveedor">
                         </div>
 
                         <div class="input-group cont-btn">

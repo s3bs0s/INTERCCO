@@ -17,17 +17,12 @@
             </div>
             <div class="sectionPqrsfRContentB">
                 <form>
-                    <div class="filas-i">
-                        <div class="input-group" style="width:85%;">
-                            <span class="input-group-addon">Sede:</span>
-                            <select class="form-control">
-                                <option value="1">Mi Sede</option>
-                            </select>
-                            <span class="input-group-addon i-obli">*</span>
-                        </div>
-                        <div class="input-group" style="width:15%;">
-                            <button type="button" class="sectionPqrsfRContentBtns btn">Atrás</button>
-                        </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Sede:</span>
+                        <select class="form-control">
+                            <option value="1">Mi Sede</option>
+                        </select>
+                        <span class="input-group-addon i-obli">*</span>
                     </div>
                       
 <% } else { %>
@@ -40,67 +35,77 @@
             <button type="button" class="btn">Enviar Solicitud <span class="tabla-reg-m"><span class="glyphicon glyphicon-plus"></span></span></button>
         </div>
         <% ArrayList<Pqrsf> listaPqrsfIndex = (ArrayList) request.getAttribute("listaPqrsfIndex"); %>
-        <table class="tablaListarPQRSF table-bordered table">
-            <thead>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Dirigido a</th>
-                    <th>Tipo de Solicitud</th>
-                    <th>Para</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Dirigido a</th>
-                    <th>Tipo de Solicitud</th>
-                    <th>Para</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </tfoot>
-            <tbody>
-                <% for (Pqrsf pqrsfIndex: listaPqrsfIndex) { %>
+        <div class="table-responsive">
+            <table class="tablaListarPQRSF table-bordered table">
+                <thead>
                     <tr>
-                        <%  EstructuraFYH eFYH = new EstructuraFYH();
-                            CifradoASCII cAIndexPqrsf = new CifradoASCII();
-                            String fecha = String.valueOf(pqrsfIndex.getFchRegistro());
-                            String hora = String.valueOf(pqrsfIndex.getHoraRegistro()); %>
-                        <td><%= eFYH.estFecha(fecha, "dd")+" / "+eFYH.estFecha(fecha, "mm")+" / "+eFYH.estFecha(fecha, "aa") %></td>
-                        <td><%= eFYH.estHora(hora, "h")+" : "+eFYH.estHora(hora, "m") %></td>
-                        <td><%= pqrsfIndex.getIdSedeDirigido() %></td>
-                        <td><%= pqrsfIndex.getTipoSolicitud()%></td>
-                        <td><%= pqrsfIndex.getDirigidoA()%></td>
-                        <% if (pqrsfIndex.getEstado().equals("Atendido")){ %>
-                            <td class="success">¡Atendida!</td>
-                            <td class="td-espaciado">
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pqrsfVerModal" onClick="pqrsfVerModal('<%= pqrsfIndex.getFchRegistro()%>', '<%= pqrsfIndex.getHoraRegistro()%>', '<%= pqrsfIndex.getTipoSolicitud()%>', '<%= pqrsfIndex.getDirigidoA()%>', '<%= pqrsfIndex.getConsulta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getNombreInterlocutor())%>', '<%= pqrsfIndex.getRespuesta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getIdSedeDirigido())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                            </td>
-                        <% } else if (pqrsfIndex.getEstado().equals("Descartado")){ %>
-                            <td class="danger">Descartado</td>
-                            <td class="td-espaciado">
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pqrsfVerModal" onClick="pqrsfVerModal('<%= pqrsfIndex.getFchRegistro()%>', '<%= pqrsfIndex.getHoraRegistro()%>', '<%= pqrsfIndex.getTipoSolicitud()%>', '<%= pqrsfIndex.getDirigidoA()%>', '<%= pqrsfIndex.getConsulta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getNombreInterlocutor())%>', '<%= pqrsfIndex.getRespuesta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getIdSedeDirigido())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                            </td>
-                        <% } else if (pqrsfIndex.getEstado().equals("Cancelado")){ %>
-                            <td class="purple">Cancelado</td>
-                            <td class="td-espaciado">
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pqrsfVerModal" onClick="pqrsfVerModal('<%= pqrsfIndex.getFchRegistro()%>', '<%= pqrsfIndex.getHoraRegistro()%>', '<%= pqrsfIndex.getTipoSolicitud()%>', '<%= pqrsfIndex.getDirigidoA()%>', '<%= pqrsfIndex.getConsulta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getNombreInterlocutor())%>', '<%= pqrsfIndex.getRespuesta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getIdSedeDirigido())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                            </td>
-                        <% } else if (pqrsfIndex.getRespuesta().equals("83S105S110S32S114S101S115S112S117S101S115S116S97")) { %>
-                            <td class="warning">Pendiente</td>
-                            <td class="td-espaciado">
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pqrsfVerModal" onClick="pqrsfVerModal('<%= pqrsfIndex.getFchRegistro()%>', '<%= pqrsfIndex.getHoraRegistro()%>', '<%= pqrsfIndex.getTipoSolicitud()%>', '<%= pqrsfIndex.getDirigidoA()%>', '<%= pqrsfIndex.getConsulta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getNombreInterlocutor())%>', '<%= pqrsfIndex.getRespuesta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getIdSedeDirigido())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                <button type="button" onClick="window.location = 'PqrsfDyC?mensa=Cancelado&idPqrsf='+<%= pqrsfIndex.getIdPqrsf()%>;" class="btn btn-purple"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
-                            </td>
-                        <% } %>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Dirigido a</th>
+                        <th>Tipo de Solicitud</th>
+                        <th>Para</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
-                <% } %>
-            </tbody>
-        </table>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Dirigido a</th>
+                        <th>Tipo de Solicitud</th>
+                        <th>Para</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <% for (Pqrsf pqrsfIndex: listaPqrsfIndex) { %>
+                        <tr>
+                            <%  EstructuraFYH eFYH = new EstructuraFYH();
+                                CifradoASCII cAIndexPqrsf = new CifradoASCII();
+                                String fecha = String.valueOf(pqrsfIndex.getFchRegistro());
+                                String hora = String.valueOf(pqrsfIndex.getHoraRegistro()); %>
+                            <td><%= eFYH.estFecha(fecha, "dd")+"/"+eFYH.estFecha(fecha, "mm")+"/"+eFYH.estFecha(fecha, "aa") %></td>
+                            <td><%= eFYH.estHora(hora, "h")+":"+eFYH.estHora(hora, "m") %></td>
+                            <td><%= pqrsfIndex.getIdSedeDirigido() %></td>
+                            <td><%= pqrsfIndex.getTipoSolicitud()%></td>
+                            <td><%= pqrsfIndex.getDirigidoA()%></td>
+                            <% if (pqrsfIndex.getEstado().equals("Atendido")){ %>
+                                <td class="success">¡Atendida!</td>
+                                <td>
+                                    <div class="td-espaciado">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pqrsfVerModal" onClick="pqrsfVerModal('<%= pqrsfIndex.getFchRegistro()%>', '<%= pqrsfIndex.getHoraRegistro()%>', '<%= pqrsfIndex.getTipoSolicitud()%>', '<%= pqrsfIndex.getDirigidoA()%>', '<%= pqrsfIndex.getConsulta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getNombreInterlocutor())%>', '<%= pqrsfIndex.getRespuesta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getIdSedeDirigido())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                    </div>
+                                </td>
+                            <% } else if (pqrsfIndex.getEstado().equals("Descartado")){ %>
+                                <td class="danger">Descartado</td>
+                                <td>
+                                    <div class="td-espaciado">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pqrsfVerModal" onClick="pqrsfVerModal('<%= pqrsfIndex.getFchRegistro()%>', '<%= pqrsfIndex.getHoraRegistro()%>', '<%= pqrsfIndex.getTipoSolicitud()%>', '<%= pqrsfIndex.getDirigidoA()%>', '<%= pqrsfIndex.getConsulta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getNombreInterlocutor())%>', '<%= pqrsfIndex.getRespuesta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getIdSedeDirigido())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                    </div>
+                                </td>
+                            <% } else if (pqrsfIndex.getEstado().equals("Cancelado")){ %>
+                                <td class="purple">Cancelado</td>
+                                <td>
+                                    <div class="td-espaciado">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pqrsfVerModal" onClick="pqrsfVerModal('<%= pqrsfIndex.getFchRegistro()%>', '<%= pqrsfIndex.getHoraRegistro()%>', '<%= pqrsfIndex.getTipoSolicitud()%>', '<%= pqrsfIndex.getDirigidoA()%>', '<%= pqrsfIndex.getConsulta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getNombreInterlocutor())%>', '<%= pqrsfIndex.getRespuesta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getIdSedeDirigido())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                    </div>
+                                </td>
+                            <% } else if (pqrsfIndex.getRespuesta().equals("83S105S110S32S114S101S115S112S117S101S115S116S97")) { %>
+                                <td class="warning">Pendiente</td>
+                                <td>
+                                    <div class="td-espaciado">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pqrsfVerModal" onClick="pqrsfVerModal('<%= pqrsfIndex.getFchRegistro()%>', '<%= pqrsfIndex.getHoraRegistro()%>', '<%= pqrsfIndex.getTipoSolicitud()%>', '<%= pqrsfIndex.getDirigidoA()%>', '<%= pqrsfIndex.getConsulta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getNombreInterlocutor())%>', '<%= pqrsfIndex.getRespuesta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getIdSedeDirigido())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                        <button type="button" onClick="window.location = 'PqrsfDyC?mensa=Cancelado&idPqrsf='+<%= pqrsfIndex.getIdPqrsf()%>;" class="btn btn-purple"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
+                                    </div>
+                                </td>
+                            <% } %>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
     </article>
     <article id="PqrsfRegistrar" class="sectionPqrsfR">
         <div class="sectionPqrsfRContent">
@@ -109,49 +114,42 @@
             </div>
             <div class="sectionPqrsfRContentB">
                 <form action="Pqrsf" method="POST">
-                    <div class="filas-i">
-                        <div class="input-group" style="width:85%;">
-                            <span class="input-group-addon">Sede:</span>
-                            <% ArrayList<Sedes> listaSedSIndexP = (ArrayList) request.getAttribute("listaSedSIndex"); %>
-                            <select class="form-control" name="regSedePqrsf">
-                                <option value="<%= session.getAttribute("idSedeUsuario") %>">Mi Sede</option>
-                                <% for (Sedes  sedeSIndexP: listaSedSIndexP) { %>
-                                    <option value="<%= sedeSIndexP.getIdSedes()%>"><%= sedeSIndexP.getNombre()%></option>
-                                <% } %>
-                            </select>
-                            <span class="input-group-addon i-obli">*</span>
-                        </div>
-                        <div class="input-group" style="width:15%;">
-                            <button id="MisSolis" type="button" class="sectionPqrsfRContentBtns btn">Atrás</button>
-                        </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Sede:</span>
+                        <% ArrayList<Sedes> listaSedSIndexP = (ArrayList) request.getAttribute("listaSedSIndex"); %>
+                        <select class="form-control" name="regSedePqrsf">
+                            <option value="<%= session.getAttribute("idSedeUsuario") %>">Mi Sede</option>
+                            <% for (Sedes  sedeSIndexP: listaSedSIndexP) { %>
+                                <option value="<%= sedeSIndexP.getIdSedes()%>"><%= sedeSIndexP.getNombre()%></option>
+                            <% } %>
+                        </select>
+                        <span class="input-group-addon i-obli">*</span>
                     </div>
                     
 <% } %>
 
-                    <div class="filas-i">
-                        <div class="input-group" style="width:50%;">
-                            <span class="input-group-addon">Tipo de solicitud:</span>
-                            <select required onchange="document.getElementById('regBtnPqrsf').innerText = 'Enviar '+ this.value;" class="form-control" name="regTipoSolicitudPqrsf">
-                                <option value="Petición">Petición</option>
-                                <option value="Queja">Queja</option>
-                                <option value="Reclamo">Reclamo</option>
-                                <option value="Sugerencia">Sugerencia</option>
-                                <option value="Felicitaciones">Felicitación</option>
-                            </select>
-                            <span class="input-group-addon i-obli">*</span>
-                        </div>
-                        <div class="input-group" style="width:50%;">
-                            <span class="input-group-addon">Para:</span>
-                            <select required class="form-control" name="regDirigidoAPqrsf">
-                                <option value="General">General</option>
-                                <option value="Gerente">Gerente</option>
-                                <option value="Cajero">Cajero</option>
-                                <option value="Cocinero">Cocinero</option>
-                                <option value="Mesero">Mesero</option>
-                                <option value="Domiciliario">Domiciliario</option>
-                            </select>
-                            <span class="input-group-addon i-obli">*</span>
-                        </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Tipo de solicitud:</span>
+                        <select required onchange="document.getElementById('regBtnPqrsf').innerText = 'Enviar '+ this.value;" class="form-control" name="regTipoSolicitudPqrsf">
+                            <option value="Petición">Petición</option>
+                            <option value="Queja">Queja</option>
+                            <option value="Reclamo">Reclamo</option>
+                            <option value="Sugerencia">Sugerencia</option>
+                            <option value="Felicitaciones">Felicitación</option>
+                        </select>
+                        <span class="input-group-addon i-obli">*</span>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Para:</span>
+                        <select required class="form-control" name="regDirigidoAPqrsf">
+                            <option value="General">General</option>
+                            <option value="Gerente">Gerente</option>
+                            <option value="Cajero">Cajero</option>
+                            <option value="Cocinero">Cocinero</option>
+                            <option value="Mesero">Mesero</option>
+                            <option value="Domiciliario">Domiciliario</option>
+                        </select>
+                        <span class="input-group-addon i-obli">*</span>
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon">Mensaje:</span>
@@ -161,6 +159,7 @@
                     <div class="input-group sectionPqrsfRContentBCJBtns">
                         <div class="sectionPqrsfRContentBCJBtnsP">
                             <button type="" id="regBtnPqrsf" class="sectionPqrsfRContentBtns btn btn-principal">Enviar Petición</button>
+                            <button id="MisSolis" type="button" class="sectionPqrsfRContentBtns btn btn-principal">Atrás</button>
                         </div>
                     </div>
                 </form>
