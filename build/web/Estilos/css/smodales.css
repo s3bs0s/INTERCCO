@@ -30,6 +30,9 @@ p.mi-obli{
     p.mi-obli .a-mi-sp{
         color:#446EB6;
     }
+    p.mi-obli .a-mi-elim-sp{
+        color:#B65344 !important;
+    }
 
 form .i-obli{
     font-size:23px;
@@ -125,6 +128,20 @@ form .cont-btn{
     .modal-body button.btn-modal:hover,button.btn-modal:focus{
         background:#365892;
     }
+    
+.modal-body-elim button.btn-modal-elim{
+    outline:none;
+    background:#B65344;
+    letter-spacing:1pt;
+    color:#fff;
+    border:solid 1px #fff;
+    -webkit-transition:all 200ms ease;
+    -o-transition:all 200ms ease;
+    transition:all 200ms ease;
+}
+    .modal-body-elim button.btn-modal-elim:hover,button.btn-modal-elim:focus{
+        background:#924236;
+    }
 
 /*Header de modal y Textos del mismo*/
 .modal-content .modal-header{
@@ -135,6 +152,10 @@ form .cont-btn{
     text-align:center;
     color:#fff;
 }
+    .modal-content .modal-header-elim{
+        background:#B65344 !important;
+        border-bottom:1px solid #C57569 !important;
+    }
     .modal-content .modal-header .modal-title{
         display:flex;
         justify-content:center;
@@ -146,7 +167,7 @@ form .cont-btn{
     }
 
 /*Body de modal y demás cosas necesarias*/
-.modal-dialog .modal-content{
+.modal .modal-content{
     border-radius:20px;
 }
     .modal-content .mb-textaling{
@@ -178,7 +199,7 @@ form .cont-btn{
         }
         
     .modal-content .modal-body .input-group{
-        margin:15px 1.5%;
+        margin:15px;
     }
         .modal-content .modal-body .input-group .btnMyM{
             margin:0 10px;
@@ -191,21 +212,22 @@ form .cont-btn{
             letter-spacing:1pt;
             color:#fff;
             font-size:19px;
-            border:solid 1px #fff;
             -webkit-transition:all 200ms ease;
             -o-transition:all 200ms ease;
             transition:all 200ms ease;
         }
             .modal-content .modal-body .input-group .btn-modal-form:hover,.btn-modal-form:focus{
-                border:solid 1px #446EB6;
-                background:#fff;
-                color:#446EB6;
+                background:#365892;
             }
     
     .modal-content .modal-body .input-group-addon{
         background:#446EB6;
         color:#fff;
         border:1px solid #446EB6;
+    }
+    .modal-content .modal-body-elim .input-group-addon{
+        background:#B65344 !important;
+        border:1px solid #B65344 !important;
     }
     .modal-content .modal-body input{
         outline:none;
@@ -239,9 +261,12 @@ form .cont-btn{
     border-bottom-right-radius:15px;
     border-top:1px solid #698BC5;
 }
+.modal-content .modal-footer-elim{
+    background:#B65344 !important;
+    border-top:1px solid #C57569 !important;
+}
     .modal-content .modal-footer button{
         outline:none;
-        border:solid 1px #446EB6;
         background:#fff;
         color:#446EB6;
         font-size:18px;
@@ -250,9 +275,8 @@ form .cont-btn{
         transition:all 200ms ease;
     }
         .modal-content .modal-footer button:hover,button:focus{
-            background:#446EB6;
+            background:#365892;
             color:#fff;
-            border:solid 1px #fff;
         }
         
 /*Botones Acordeon Modales*/
@@ -421,7 +445,7 @@ p.mi-intru{
                 }
 
             .modal-perfil .contenido-modal-perfil .modal-body-perfil .input-group{
-                margin:15px 1.5%;
+                margin:15px;
             }
             .modal-perfil .contenido-modal-perfil .modal-body-perfil .input-group-addon{
                 background:#446EB6;

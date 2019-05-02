@@ -19,7 +19,7 @@
     background:#fff;
 }
     .section-bodys .input-group{
-        margin:15px 1.5%;
+        margin:15px;
     }
     .section-bodys .input-group-addon{
         background:#446EB6;
@@ -725,7 +725,7 @@
                     }
                 
             .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .input-group{
-                margin:10px 1.5%;
+                margin:10px;
                 width:97%;
             }
                 .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .input-group button.btn-div{
@@ -1463,7 +1463,7 @@
                 }
 
             .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB form .input-group{
-                margin:10px 1.5%;
+                margin:10px;
                 width:97%;
             }
                 .sectionPqrsf .sectionPqrsfR .sectionPqrsfRContent .sectionPqrsfRContentB form .input-group .sectionPqrsfRContentBtns{
@@ -1603,7 +1603,7 @@
                     }
 
                 .body-codigoRC .codigoRC-modal .div-content .div-body .input-group{
-                    margin:20px 1.5%;
+                    margin:20px;
                     width:97%;
                 }
                 .body-codigoRC .codigoRC-modal .div-content .div-body .input-group-addon{
@@ -1926,31 +1926,28 @@
     background:#fff;
 }
     .section-rp article{
-        width:100;
+        width:100%;
         display:flex;
         flex-flow:row wrap;
         align-items:center;
-        justify-content:center;
+        justify-content:space-around;
     }
         .section-rp article .srpAPP{
-            width:auto;
-            min-width:200px;
             padding:0 10px;
         }
         .section-rp article .srpIG{
-            width:auto;
-            min-width:200px;
             padding:0 10px;
         }
         
     .section-rp h1{
         display:block;
         height:auto;
-        padding:12px 20px;
+        padding:12px 30px;
         text-align:center;
         font-family:"Calibri Light", Arial;
         width:100%;
         color:#fff;
+        font-size:21px;
         letter-spacing:.5pt;
         background:#446EB6;
         border: 1px solid #999;
@@ -1974,7 +1971,7 @@
         }
         
     .section-rp .input-group{
-        margin:15px 1.5%;
+        margin:15px;
     }
     .section-rp .input-group-addon{
         background:#446EB6;

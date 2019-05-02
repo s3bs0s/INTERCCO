@@ -36,7 +36,7 @@
                         <input required type="text" minlength="5" maxlength="20" class="form-control" name="regNumIdentiUsuario" placeholder="Número de Identificación.">
                         <span class="input-group-addon i-obli">*</span>
                     </div>
-                <p>
+                    <p style="margin-bottom:0;" class="mi-obli">Recuerde que luego de registrar su cuenta, se debe <span class="a-mi">verificar</span> su email con un correo electrónico, por lo tanto le pedimos que ingrese uno válido.</p>
                     <div class="input-group">
                         <span class="input-group-addon">Email:</span>
                         <input required type="email" minlength="10" maxlength="150" class="form-control" name="regEmailUsuario" placeholder="user@succo.com">

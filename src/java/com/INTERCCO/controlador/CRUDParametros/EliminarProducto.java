@@ -17,7 +17,7 @@ public class EliminarProducto extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         try {
-            String idProducto = request.getParameter("idProd");
+            String idProducto = request.getParameter("elimIDProducto");
             
             ConectaDB cdb = new ConectaDB();
             Connection con = cdb.conectar();
@@ -32,13 +32,19 @@ public class EliminarProducto extends HttpServlet {
                 String nombreProd = rs.getString("nombre");
                 
                 ps.close();
-                rs.close();
                 ps = con.prepareStatement("UPDATE productos SET existencia=? WHERE idProductos=?;");
                 ps.setString(1, "N");
                 ps.setInt(2, Integer.parseInt(idProducto));
                 int res = ps.executeUpdate();
 
                 if (res > 0){
+                    ps.close();
+                    ps = con.prepareStatement("UPDATE promociones SET existencia=? WHERE idProducto=? AND existencia=?;");
+                    ps.setString(1, "N");
+                    ps.setInt(2, Integer.parseInt(idProducto));
+                    ps.setString(3, "Y");
+                    ps.executeUpdate();
+
                     request.getRequestDispatcher("Parametros?mensaje=YEliminarProducto&nomProd="+nombreProd).forward(request, response);
                 } else {
                     request.getRequestDispatcher("Parametros?mensaje=Ne&nomMod=El producto&accMod=eliminar").forward(request, response);

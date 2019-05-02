@@ -17,11 +17,12 @@ public class EliminarCategoria extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         try {
-            String idCategoria = request.getParameter("idCate");
+            String idCategoria = request.getParameter("elimIDCategoria");
             
             ConectaDB cdb = new ConectaDB();
             Connection con = cdb.conectar();
             PreparedStatement ps;
+            PreparedStatement ps2;
             ResultSet rs;
             
             ps = con.prepareStatement("SELECT * FROM categorias WHERE idCategorias=?;");
@@ -39,6 +40,31 @@ public class EliminarCategoria extends HttpServlet {
                 int res = ps.executeUpdate();
 
                 if (res > 0){
+                    ps.close();
+                    rs.close();
+                    ps = con.prepareStatement("SELECT idProductos FROM productos WHERE idCategoria=? AND existencia=?;");
+                    ps.setInt(1, Integer.parseInt(idCategoria));
+                    ps.setString(2, "Y");
+                    rs = ps.executeQuery();
+
+                    while (rs.next()){
+                        
+                        ps2 = con.prepareStatement("UPDATE promociones SET existencia=? WHERE idProducto=? AND existencia=?;");
+                        ps2.setString(1, "N");
+                        ps2.setInt(2, rs.getInt("idProductos"));
+                        ps2.setString(3, "Y");
+                        ps2.executeUpdate();
+                        ps2.close();
+                        
+                    }
+                    
+                    ps.close();
+                    ps = con.prepareStatement("UPDATE productos SET existencia=? WHERE idCategoria=? AND existencia=?;");
+                    ps.setString(1, "N");
+                    ps.setInt(2, Integer.parseInt(idCategoria));
+                    ps.setString(3, "Y");
+                    ps.executeUpdate();
+
                     request.getRequestDispatcher("Parametros?mensaje=YEliminarCategoria&nomCateg="+nombreCate).forward(request, response);
                 } else {
                     request.getRequestDispatcher("Parametros?mensaje=Ne&nomMod=La categoría&accMod=eliminar").forward(request, response);

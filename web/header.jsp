@@ -122,7 +122,7 @@
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
             </div>
             
-            <p class="p-rango"><span><%= rolUsuario%></span><span class="me">de <%= nomSedeUsuario%></span></p>
+            <p class="p-rango"><span>Domiciliari<%= genUsuario.equals("Masculino")?"o":"a" %></span><span class="me">de <%= nomSedeUsuario%></span></p>
             <!--<p class="p-reloj"><span id="RhActual">00:00:00</span><span id="RfActual" class="me">0 de 0 del 0</span></p>-->
             
             <nav class="navslogo">
@@ -156,7 +156,7 @@
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
             </div>
             
-            <p data-toggle="modal" data-target="#llamadaMesaMeseroModal" class="p-rango"><span><%= rolUsuario%></span><span class="me">de <%= nomSedeUsuario%></span></p>
+            <p data-toggle="modal" data-target="#llamadaMesaMeseroModal" class="p-rango"><span>Meser<%= genUsuario.equals("Masculino")?"o":"a" %></span><span class="me">de <%= nomSedeUsuario%></span></p>
             <!--<p class="p-reloj"><span id="RhActual">00:00:00</span><span id="RfActual" class="me">0 de 0 del 0</span></p>-->
             
             <nav class="navslogo">
@@ -190,7 +190,7 @@
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
             </div>
             
-            <p class="p-rango"><span><%= rolUsuario%></span><span class="me">de <%= nomSedeUsuario%></span></p>
+            <p class="p-rango"><span>Cociner<%= genUsuario.equals("Masculino")?"o":"a" %></span><span class="me">de <%= nomSedeUsuario%></span></p>
             <!--<p class="p-reloj"><span id="RhActual">00:00:00</span><span id="RfActual" class="me">0 de 0 del 0</span></p>-->
             
             <nav class="navslogo">
@@ -224,7 +224,7 @@
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
             </div>
             
-            <p class="p-rango"><span><%= rolUsuario%></span><span class="me">de <%= nomSedeUsuario%></span></p>
+            <p class="p-rango"><span>Cajer<%= genUsuario.equals("Masculino")?"o":"a" %></span><span class="me">de <%= nomSedeUsuario%></span></p>
             <!--<p class="p-reloj"><span id="RhActual">00:00:00</span><span id="RfActual" class="me">0 de 0 del 0</span></p>-->
             
             <nav class="navslogo">
@@ -300,7 +300,7 @@
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
             </div>
             
-            <p class="p-rango">Administrador</p>
+            <p class="p-rango">Administrador<%= genUsuario.equals("Masculino")?"":"a" %></p>
             <!--<p class="p-reloj"><span id="RhActual">00:00:00</span><span id="RfActual" class="me">0 de 0 del 0</span></p>-->
             
             <nav class="navslogo">

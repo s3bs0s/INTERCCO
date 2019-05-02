@@ -532,7 +532,7 @@
                         </div>
                         <div class="CJAccRapBtns">
                             <button onClick="window.open('interccoAdminS.jsp', '_self')" type="button" class="btn"><span class="icon-rocket"></span> INTERCCO</button>
-                            <button onClick="window.open('Sedes', '_self')" type="button" class="btn"><span class="glyphicon glyphicon-globe"></span> Sedes<span class="me-bi"><%= request.getAttribute("estadoSedeExistentes") %> Sedes en Total</span></button>
+                            <button onClick="window.open('Sedes', '_self')" type="button" class="btn"><span class="glyphicon glyphicon-globe"></span> Sedes<span class="me-bi"><%= request.getAttribute("estadoSedeExistentes") %> Sedes en Total</span><span class="me-bi"><%= request.getAttribute("estadoSedePExistentes") %> Sedes Principales</span></button>
                             <button onClick="window.open('Auditoria', '_self')" type="button" class="btn"><span class="icon-stats-dots"></span> Auditoría</button>
                             <button onClick="window.open('Parametros', '_self')" type="button" class="btn"><span class="icon-cog"></span> Parámetros<span class="me-bi"><%= request.getAttribute("estadoSopoPendientesAdmin") %> Peticiones Pendiente en Soporte</span></button>
                         </div>
@@ -540,78 +540,67 @@
 
                 <% } %>
 
-                <article class="art-carrusel">
-                    <% ArrayList<Carruseles> listaCarruselesIndex = (ArrayList) request.getAttribute("listaCarrIndex");
-                        CifradoASCII cAIndexEmpleado = new CifradoASCII(); %>
-                    <div id="CarruselMesero" class="carousel slide" data-ride="carousel">
-                        <!-- Circulos Indicadores -->
-                        <ol class="carousel-indicators">
-                            <% int contEmpre = 0;
-                            int contActives = 0;
-                            if (listaCarruselesIndex.size() > 0){
-                                for (Carruseles carrIndex : listaCarruselesIndex) {
-                                    if (carrIndex.getTipo().equals("Empresarial")){
-                                        contEmpre++;
-                                        if (carrIndex.getDirigidoA().equals("Todas las Sedes")){
-                                            //Solo los que son Todas las Sedes
-                                            if (contActives<1){ %>
-                                                <li data-target="#CarruselMesero" data-slide-to="<%= contActives %>" class="active"></li>
-                                            <% } else { %>
-                                                <li data-target="#CarruselMesero" data-slide-to="<%= contActives %>"></li>
-                                        <%  } contActives++;
-                                        } else if (carrIndex.getDirigidoA().equals("Sedes de mi Ciudad")) {
-                                            if ((int) session.getAttribute("idCiudadUsuario") == carrIndex.getIdCiudad()){
-                                                //Solo los de su Ciudad
+                <% if(!rolUsuario.equals("AdminS")){ %>
+                    <article class="art-carrusel">
+                        <% ArrayList<Carruseles> listaCarruselesIndex = (ArrayList) request.getAttribute("listaCarrIndex");
+                            CifradoASCII cAIndexEmpleado = new CifradoASCII(); %>
+                        <div id="CarruselMesero" class="carousel slide" data-ride="carousel">
+                            <!-- Circulos Indicadores -->
+                            <ol class="carousel-indicators">
+                                <% int contEmpre = 0;
+                                int contActives = 0;
+                                if (listaCarruselesIndex.size() > 0){
+                                    for (Carruseles carrIndex : listaCarruselesIndex) {
+                                        if (carrIndex.getTipo().equals("Empresarial")){
+                                            contEmpre++;
+                                            if (carrIndex.getDirigidoA().equals("Todas las Sedes")){
+                                                //Solo los que son Todas las Sedes
                                                 if (contActives<1){ %>
                                                     <li data-target="#CarruselMesero" data-slide-to="<%= contActives %>" class="active"></li>
                                                 <% } else { %>
                                                     <li data-target="#CarruselMesero" data-slide-to="<%= contActives %>"></li>
                                             <%  } contActives++;
-                                            }
-                                        } else {
-                                            if ((int) session.getAttribute("idSedeUsuario") == carrIndex.getIdSede()){
-                                                //Solo los de su sede
-                                                if (contActives<1){ %>
-                                                    <li data-target="#CarruselMesero" data-slide-to="<%= contActives %>" class="active"></li>
-                                                <% } else { %>
-                                                    <li data-target="#CarruselMesero" data-slide-to="<%= contActives %>"></li>
-                                            <%  } contActives++;
+                                            } else if (carrIndex.getDirigidoA().equals("Sedes de mi Ciudad")) {
+                                                if ((int) session.getAttribute("idCiudadUsuario") == carrIndex.getIdCiudad()){
+                                                    //Solo los de su Ciudad
+                                                    if (contActives<1){ %>
+                                                        <li data-target="#CarruselMesero" data-slide-to="<%= contActives %>" class="active"></li>
+                                                    <% } else { %>
+                                                        <li data-target="#CarruselMesero" data-slide-to="<%= contActives %>"></li>
+                                                <%  } contActives++;
+                                                }
+                                            } else {
+                                                if ((int) session.getAttribute("idSedeUsuario") == carrIndex.getIdSede()){
+                                                    //Solo los de su sede
+                                                    if (contActives<1){ %>
+                                                        <li data-target="#CarruselMesero" data-slide-to="<%= contActives %>" class="active"></li>
+                                                    <% } else { %>
+                                                        <li data-target="#CarruselMesero" data-slide-to="<%= contActives %>"></li>
+                                                <%  } contActives++;
+                                                }
                                             }
                                         }
                                     }
-                                }
-                                if (contEmpre < 1){ %>
-                                    <!--No hay ningun carrusel empresarial, foto sin informacion-->
+                                    if (contEmpre < 1){ %>
+                                        <!--No hay ningun carrusel empresarial, foto sin informacion-->
+                                        <li data-target="#CarruselMesero" data-slide-to="0" class="active"></li>
+                                    <% }
+                                } else { %>
+                                    <!--No hay ningun carrusel, foto sin informacion-->
                                     <li data-target="#CarruselMesero" data-slide-to="0" class="active"></li>
-                                <% }
-                            } else { %>
-                                <!--No hay ningun carrusel, foto sin informacion-->
-                                <li data-target="#CarruselMesero" data-slide-to="0" class="active"></li>
-                            <% } %>
-                        </ol>
+                                <% } %>
+                            </ol>
 
-                        <!-- Imagenes Carrusel -->
-                        <div class="carousel-inner">
-                            <% contEmpre = 0;
-                            contActives = 0;
-                            if (listaCarruselesIndex.size() > 0){
-                                for (Carruseles carrIndex : listaCarruselesIndex) {
-                                    if (carrIndex.getTipo().equals("Empresarial")){
-                                        contEmpre++;
-                                        if (carrIndex.getDirigidoA().equals("Todas las Sedes")){
-                                            //Solo los que son Todas las Sedes
-                                            if (contActives<1){ %>
-                                                <div class="item active">
-                                                    <img src="ArchivosSistema/Carruseles/<%= carrIndex.getNombreSede() %>/<%= cAIndexEmpleado.DescifrarASCII(carrIndex.getNombreImg()) %>" alt="N<%= contActives %>" style="width:100%;">
-                                                </div>
-                                            <% } else { %>
-                                                <div class="item">
-                                                    <img src="ArchivosSistema/Carruseles/<%= carrIndex.getNombreSede() %>/<%= cAIndexEmpleado.DescifrarASCII(carrIndex.getNombreImg()) %>" alt="N<%= contActives %>" style="width:100%;">
-                                                </div>
-                                        <%  } contActives++;
-                                        } else if (carrIndex.getDirigidoA().equals("Sedes de mi Ciudad")) {
-                                            if ((int) session.getAttribute("idCiudadUsuario") == carrIndex.getIdCiudad()){
-                                                //Solo los de su Ciudad
+                            <!-- Imagenes Carrusel -->
+                            <div class="carousel-inner">
+                                <% contEmpre = 0;
+                                contActives = 0;
+                                if (listaCarruselesIndex.size() > 0){
+                                    for (Carruseles carrIndex : listaCarruselesIndex) {
+                                        if (carrIndex.getTipo().equals("Empresarial")){
+                                            contEmpre++;
+                                            if (carrIndex.getDirigidoA().equals("Todas las Sedes")){
+                                                //Solo los que son Todas las Sedes
                                                 if (contActives<1){ %>
                                                     <div class="item active">
                                                         <img src="ArchivosSistema/Carruseles/<%= carrIndex.getNombreSede() %>/<%= cAIndexEmpleado.DescifrarASCII(carrIndex.getNombreImg()) %>" alt="N<%= contActives %>" style="width:100%;">
@@ -621,182 +610,194 @@
                                                         <img src="ArchivosSistema/Carruseles/<%= carrIndex.getNombreSede() %>/<%= cAIndexEmpleado.DescifrarASCII(carrIndex.getNombreImg()) %>" alt="N<%= contActives %>" style="width:100%;">
                                                     </div>
                                             <%  } contActives++;
-                                            }
-                                        } else {
-                                            if ((int) session.getAttribute("idSedeUsuario") == carrIndex.getIdSede()){
-                                                //Solo los de su sede
-                                                if (contActives<1){ %>
-                                                    <div class="item active">
-                                                        <img src="ArchivosSistema/Carruseles/<%= carrIndex.getNombreSede() %>/<%= cAIndexEmpleado.DescifrarASCII(carrIndex.getNombreImg()) %>" alt="N<%= contActives %>" style="width:100%;">
-                                                    </div>
-                                                <% } else { %>
-                                                    <div class="item">
-                                                        <img src="ArchivosSistema/Carruseles/<%= carrIndex.getNombreSede() %>/<%= cAIndexEmpleado.DescifrarASCII(carrIndex.getNombreImg()) %>" alt="N<%= contActives %>" style="width:100%;">
-                                                    </div>
-                                            <%  } contActives++;
+                                            } else if (carrIndex.getDirigidoA().equals("Sedes de mi Ciudad")) {
+                                                if ((int) session.getAttribute("idCiudadUsuario") == carrIndex.getIdCiudad()){
+                                                    //Solo los de su Ciudad
+                                                    if (contActives<1){ %>
+                                                        <div class="item active">
+                                                            <img src="ArchivosSistema/Carruseles/<%= carrIndex.getNombreSede() %>/<%= cAIndexEmpleado.DescifrarASCII(carrIndex.getNombreImg()) %>" alt="N<%= contActives %>" style="width:100%;">
+                                                        </div>
+                                                    <% } else { %>
+                                                        <div class="item">
+                                                            <img src="ArchivosSistema/Carruseles/<%= carrIndex.getNombreSede() %>/<%= cAIndexEmpleado.DescifrarASCII(carrIndex.getNombreImg()) %>" alt="N<%= contActives %>" style="width:100%;">
+                                                        </div>
+                                                <%  } contActives++;
+                                                }
+                                            } else {
+                                                if ((int) session.getAttribute("idSedeUsuario") == carrIndex.getIdSede()){
+                                                    //Solo los de su sede
+                                                    if (contActives<1){ %>
+                                                        <div class="item active">
+                                                            <img src="ArchivosSistema/Carruseles/<%= carrIndex.getNombreSede() %>/<%= cAIndexEmpleado.DescifrarASCII(carrIndex.getNombreImg()) %>" alt="N<%= contActives %>" style="width:100%;">
+                                                        </div>
+                                                    <% } else { %>
+                                                        <div class="item">
+                                                            <img src="ArchivosSistema/Carruseles/<%= carrIndex.getNombreSede() %>/<%= cAIndexEmpleado.DescifrarASCII(carrIndex.getNombreImg()) %>" alt="N<%= contActives %>" style="width:100%;">
+                                                        </div>
+                                                <%  } contActives++;
+                                                }
                                             }
                                         }
                                     }
-                                }
-                                if (contEmpre < 1){ %>
-                                    <!--No hay ningun carrusel empresarial, foto sin informacion-->
+                                    if (contEmpre < 1){ %>
+                                        <!--No hay ningun carrusel empresarial, foto sin informacion-->
+                                        <div class="item active">
+                                            <img src="Estilos/img/CarrouselGeneral/Sin Informacion.jpg" alt="N1" style="width:100%;">
+                                        </div>
+                                    <% }
+                                } else { %>
+                                    <!--No hay ningun carrusel, foto sin informacion-->
                                     <div class="item active">
                                         <img src="Estilos/img/CarrouselGeneral/Sin Informacion.jpg" alt="N1" style="width:100%;">
                                     </div>
-                                <% }
-                            } else { %>
-                                <!--No hay ningun carrusel, foto sin informacion-->
-                                <div class="item active">
-                                    <img src="Estilos/img/CarrouselGeneral/Sin Informacion.jpg" alt="N1" style="width:100%;">
-                                </div>
-                            <% } %>
-                        </div>
+                                <% } %>
+                            </div>
 
-                        <!-- Botones Izquierda y Derecha -->
-                        <a class="left carousel-control" href="#CarruselMesero" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#CarruselMesero" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </article>
-                
-                
-                
-                <div class="misCompas">
-                    <div class="misCompasTitulo">
-                        <p>Mis Compañeros</p>
-                    </div>
-                    <div class="swiper-container">
-                        <% ArrayList<InfoUsuarios> listaUsuariosIndex = (ArrayList) request.getAttribute("listaUsuaIndex"); %>
-                        <div class="swiper-wrapper">
-                            <%int contUsu = 0;
-                            nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario");
-                            for (InfoUsuarios usuaIndex : listaUsuariosIndex) {
-                                if (usuaIndex.getRol().equals("Gerente")){
-                                    if (nomSedeUsuario.equals(usuaIndex.getSede())){ %>
-                                        <div class="swiper-slide">
-                                            <div class="imgBx imgBx-Gerente">
-                                        <% if (usuaIndex.getNombreImg().equals("86S97S99S105S111")){ 
-                                            if (usuaIndex.getGenero().equals("Masculino")){ %>
-                                                <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoH.jpg" alt="U<%= contUsu %>"> 
-                                            <% } else { %>
-                                                <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoM.jpg" alt="U<%= contUsu %>">
-                                            <% }
-                                        } else { %>
-                                        <img src="ArchivosSistema/Usuarios/<%= usuaIndex.getSede() %>/<%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getNombreImg())%>" alt="U<%= contUsu %>">
-                                        <% } %>
-                                            </div>
-                                            <div class="details details-Gerente">
-                                                <h3><%= usuaIndex.getNombres()+" "+usuaIndex.getApellidos() %><br><span class="span-Gerente me">Gerente</span><span class="span-GerenteEmail me"><%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getEmail()) %></span></h3>
-                                            </div>
-                                        </div>
-                                    <% }
-                                }
-                            }
-                            
-                            for (InfoUsuarios usuaIndex : listaUsuariosIndex) {
-                                if (usuaIndex.getRol().equals("Cocinero")){
-                                    if (nomSedeUsuario.equals(usuaIndex.getSede())){ %>
-                                        <div class="swiper-slide">
-                                            <div class="imgBx imgBx-Cocinero">
-                                        <% if (usuaIndex.getNombreImg().equals("86S97S99S105S111")){ 
-                                            if (usuaIndex.getGenero().equals("Masculino")){ %>
-                                                <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoH.jpg" alt="U<%= contUsu %>"> 
-                                            <% } else { %>
-                                                <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoM.jpg" alt="U<%= contUsu %>">
-                                            <% }
-                                        } else { %>
-                                        <img src="ArchivosSistema/Usuarios/<%= usuaIndex.getSede() %>/<%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getNombreImg())%>" alt="U<%= contUsu %>">
-                                        <% } %>
-                                            </div>
-                                            <div class="details details-Cocinero">
-                                                <h3><%= usuaIndex.getNombres()+" "+usuaIndex.getApellidos() %><br><span class="span-Cocinero me">Cociner<%= usuaIndex.getGenero().equals("Masculino")?"o":"a" %></span><span class="span-CocineroEmail me"><%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getEmail()) %></span></h3>
-                                            </div>
-                                        </div>
-                                    <% }
-                                }
-                            }
-                            
-                            for (InfoUsuarios usuaIndex : listaUsuariosIndex) {
-                                if (usuaIndex.getRol().equals("Cajero")){
-                                    if (nomSedeUsuario.equals(usuaIndex.getSede())){ %>
-                                        <div class="swiper-slide">
-                                            <div class="imgBx imgBx-Cajero">
-                                        <% if (usuaIndex.getNombreImg().equals("86S97S99S105S111")){ 
-                                            if (usuaIndex.getGenero().equals("Masculino")){ %>
-                                                <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoH.jpg" alt="U<%= contUsu %>"> 
-                                            <% } else { %>
-                                                <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoM.jpg" alt="U<%= contUsu %>">
-                                            <% }
-                                        } else { %>
-                                        <img src="ArchivosSistema/Usuarios/<%= usuaIndex.getSede() %>/<%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getNombreImg())%>" alt="U<%= contUsu %>">
-                                        <% } %>
-                                            </div>
-                                            <div class="details details-Cajero">
-                                                <h3><%= usuaIndex.getNombres()+" "+usuaIndex.getApellidos() %><br><span class="span-Cajero me">Cajer<%= usuaIndex.getGenero().equals("Masculino")?"o":"a" %></span><span class="span-CajeroEmail me"><%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getEmail()) %></span></h3>
-                                            </div>
-                                        </div>
-                                    <% }
-                                }
-                            }
-                            
-                            for (InfoUsuarios usuaIndex : listaUsuariosIndex) {
-                                if (usuaIndex.getRol().equals("Mesero")){
-                                    if (nomSedeUsuario.equals(usuaIndex.getSede())){ %>
-                                        <div class="swiper-slide">
-                                            <div class="imgBx imgBx-Mesero">
-                                        <% if (usuaIndex.getNombreImg().equals("86S97S99S105S111")){ 
-                                            if (usuaIndex.getGenero().equals("Masculino")){ %>
-                                                <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoH.jpg" alt="U<%= contUsu %>"> 
-                                            <% } else { %>
-                                                <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoM.jpg" alt="U<%= contUsu %>">
-                                            <% }
-                                        } else { %>
-                                        <img src="ArchivosSistema/Usuarios/<%= usuaIndex.getSede() %>/<%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getNombreImg())%>" alt="U<%= contUsu %>">
-                                        <% } %>
-                                            </div>
-                                            <div class="details details-Mesero">
-                                                <h3><%= usuaIndex.getNombres()+" "+usuaIndex.getApellidos() %><br><span class="span-Mesero me">Meser<%= usuaIndex.getGenero().equals("Masculino")?"o":"a" %></span><span class="span-MeseroEmail me"><%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getEmail()) %></span></h3>
-                                            </div>
-                                        </div>
-                                    <% }
-                                }
-                            }
-                            
-                            for (InfoUsuarios usuaIndex : listaUsuariosIndex) {
-                                if (usuaIndex.getRol().equals("Domiciliario")){
-                                    if (nomSedeUsuario.equals(usuaIndex.getSede())){ %>
-                                        <div class="swiper-slide">
-                                            <div class="imgBx imgBx-Domiciliario">
-                                        <% if (usuaIndex.getNombreImg().equals("86S97S99S105S111")){ 
-                                            if (usuaIndex.getGenero().equals("Masculino")){ %>
-                                                <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoH.jpg" alt="U<%= contUsu %>"> 
-                                            <% } else { %>
-                                                <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoM.jpg" alt="U<%= contUsu %>">
-                                            <% }
-                                        } else { %>
-                                        <img src="ArchivosSistema/Usuarios/<%= usuaIndex.getSede() %>/<%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getNombreImg())%>" alt="U<%= contUsu %>">
-                                        <% } %>
-                                            </div>
-                                            <div class="details details-Domiciliario">
-                                                <h3><%= usuaIndex.getNombres()+" "+usuaIndex.getApellidos() %><br><span class="span-Domiciliario me">Domiciliari<%= usuaIndex.getGenero().equals("Masculino")?"o":"a" %></span><span class="span-DomiciliarioEmail me"><%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getEmail()) %></span></h3>
-                                            </div>
-                                        </div>
-                                    <% }
-                                }
-                            } %>
+                            <!-- Botones Izquierda y Derecha -->
+                            <a class="left carousel-control" href="#CarruselMesero" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#CarruselMesero" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
-                        
-                        <div class="swiper-button-next swiper-button-white"></div>
-                        <div class="swiper-button-prev swiper-button-white"></div>
+                    </article>
+                
+                
+                    <div class="misCompas">
+                        <div class="misCompasTitulo">
+                            <p>Mis Compañeros</p>
+                        </div>
+                        <div class="swiper-container">
+                            <% ArrayList<InfoUsuarios> listaUsuariosIndex = (ArrayList) request.getAttribute("listaUsuaIndex"); %>
+                            <div class="swiper-wrapper">
+                                <%int contUsu = 0;
+                                nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario");
+                                for (InfoUsuarios usuaIndex : listaUsuariosIndex) {
+                                    if (usuaIndex.getRol().equals("Gerente")){
+                                        if (nomSedeUsuario.equals(usuaIndex.getSede())){ %>
+                                            <div class="swiper-slide">
+                                                <div class="imgBx imgBx-Gerente">
+                                            <% if (usuaIndex.getNombreImg().equals("86S97S99S105S111")){ 
+                                                if (usuaIndex.getGenero().equals("Masculino")){ %>
+                                                    <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoH.jpg" alt="U<%= contUsu %>"> 
+                                                <% } else { %>
+                                                    <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoM.jpg" alt="U<%= contUsu %>">
+                                                <% }
+                                            } else { %>
+                                            <img src="ArchivosSistema/Usuarios/<%= usuaIndex.getSede() %>/<%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getNombreImg())%>" alt="U<%= contUsu %>">
+                                            <% } %>
+                                                </div>
+                                                <div class="details details-Gerente">
+                                                    <h3><%= usuaIndex.getNombres()+" "+usuaIndex.getApellidos() %><br><span class="span-Gerente me">Gerente</span><span class="span-GerenteEmail me"><%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getEmail()) %></span></h3>
+                                                </div>
+                                            </div>
+                                        <% }
+                                    }
+                                }
 
-                        <div class="swiper-pagination"></div>
+                                for (InfoUsuarios usuaIndex : listaUsuariosIndex) {
+                                    if (usuaIndex.getRol().equals("Cocinero")){
+                                        if (nomSedeUsuario.equals(usuaIndex.getSede())){ %>
+                                            <div class="swiper-slide">
+                                                <div class="imgBx imgBx-Cocinero">
+                                            <% if (usuaIndex.getNombreImg().equals("86S97S99S105S111")){ 
+                                                if (usuaIndex.getGenero().equals("Masculino")){ %>
+                                                    <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoH.jpg" alt="U<%= contUsu %>"> 
+                                                <% } else { %>
+                                                    <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoM.jpg" alt="U<%= contUsu %>">
+                                                <% }
+                                            } else { %>
+                                            <img src="ArchivosSistema/Usuarios/<%= usuaIndex.getSede() %>/<%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getNombreImg())%>" alt="U<%= contUsu %>">
+                                            <% } %>
+                                                </div>
+                                                <div class="details details-Cocinero">
+                                                    <h3><%= usuaIndex.getNombres()+" "+usuaIndex.getApellidos() %><br><span class="span-Cocinero me">Cociner<%= usuaIndex.getGenero().equals("Masculino")?"o":"a" %></span><span class="span-CocineroEmail me"><%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getEmail()) %></span></h3>
+                                                </div>
+                                            </div>
+                                        <% }
+                                    }
+                                }
+
+                                for (InfoUsuarios usuaIndex : listaUsuariosIndex) {
+                                    if (usuaIndex.getRol().equals("Cajero")){
+                                        if (nomSedeUsuario.equals(usuaIndex.getSede())){ %>
+                                            <div class="swiper-slide">
+                                                <div class="imgBx imgBx-Cajero">
+                                            <% if (usuaIndex.getNombreImg().equals("86S97S99S105S111")){ 
+                                                if (usuaIndex.getGenero().equals("Masculino")){ %>
+                                                    <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoH.jpg" alt="U<%= contUsu %>"> 
+                                                <% } else { %>
+                                                    <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoM.jpg" alt="U<%= contUsu %>">
+                                                <% }
+                                            } else { %>
+                                            <img src="ArchivosSistema/Usuarios/<%= usuaIndex.getSede() %>/<%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getNombreImg())%>" alt="U<%= contUsu %>">
+                                            <% } %>
+                                                </div>
+                                                <div class="details details-Cajero">
+                                                    <h3><%= usuaIndex.getNombres()+" "+usuaIndex.getApellidos() %><br><span class="span-Cajero me">Cajer<%= usuaIndex.getGenero().equals("Masculino")?"o":"a" %></span><span class="span-CajeroEmail me"><%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getEmail()) %></span></h3>
+                                                </div>
+                                            </div>
+                                        <% }
+                                    }
+                                }
+
+                                for (InfoUsuarios usuaIndex : listaUsuariosIndex) {
+                                    if (usuaIndex.getRol().equals("Mesero")){
+                                        if (nomSedeUsuario.equals(usuaIndex.getSede())){ %>
+                                            <div class="swiper-slide">
+                                                <div class="imgBx imgBx-Mesero">
+                                            <% if (usuaIndex.getNombreImg().equals("86S97S99S105S111")){ 
+                                                if (usuaIndex.getGenero().equals("Masculino")){ %>
+                                                    <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoH.jpg" alt="U<%= contUsu %>"> 
+                                                <% } else { %>
+                                                    <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoM.jpg" alt="U<%= contUsu %>">
+                                                <% }
+                                            } else { %>
+                                            <img src="ArchivosSistema/Usuarios/<%= usuaIndex.getSede() %>/<%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getNombreImg())%>" alt="U<%= contUsu %>">
+                                            <% } %>
+                                                </div>
+                                                <div class="details details-Mesero">
+                                                    <h3><%= usuaIndex.getNombres()+" "+usuaIndex.getApellidos() %><br><span class="span-Mesero me">Meser<%= usuaIndex.getGenero().equals("Masculino")?"o":"a" %></span><span class="span-MeseroEmail me"><%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getEmail()) %></span></h3>
+                                                </div>
+                                            </div>
+                                        <% }
+                                    }
+                                }
+
+                                for (InfoUsuarios usuaIndex : listaUsuariosIndex) {
+                                    if (usuaIndex.getRol().equals("Domiciliario")){
+                                        if (nomSedeUsuario.equals(usuaIndex.getSede())){ %>
+                                            <div class="swiper-slide">
+                                                <div class="imgBx imgBx-Domiciliario">
+                                            <% if (usuaIndex.getNombreImg().equals("86S97S99S105S111")){ 
+                                                if (usuaIndex.getGenero().equals("Masculino")){ %>
+                                                    <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoH.jpg" alt="U<%= contUsu %>"> 
+                                                <% } else { %>
+                                                    <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoM.jpg" alt="U<%= contUsu %>">
+                                                <% }
+                                            } else { %>
+                                            <img src="ArchivosSistema/Usuarios/<%= usuaIndex.getSede() %>/<%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getNombreImg())%>" alt="U<%= contUsu %>">
+                                            <% } %>
+                                                </div>
+                                                <div class="details details-Domiciliario">
+                                                    <h3><%= usuaIndex.getNombres()+" "+usuaIndex.getApellidos() %><br><span class="span-Domiciliario me">Domiciliari<%= usuaIndex.getGenero().equals("Masculino")?"o":"a" %></span><span class="span-DomiciliarioEmail me"><%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getEmail()) %></span></h3>
+                                                </div>
+                                            </div>
+                                        <% }
+                                    }
+                                } %>
+                            </div>
+
+                            <div class="swiper-button-next swiper-button-white"></div>
+                            <div class="swiper-button-prev swiper-button-white"></div>
+
+                            <div class="swiper-pagination"></div>
+                        </div>
                     </div>
-                </div>
+                <% } %>
             </section>
         </body>
         <%@include file="mayorEdadModal.jsp" %>

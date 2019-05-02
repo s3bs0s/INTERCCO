@@ -50,6 +50,7 @@ public class index extends HttpServlet {
             ArrayList<Sedes> listaSedeIndex = new ArrayList<>();
             
             int contSedeExistentes = 0;
+            int contSedePExistentes = 0;
             ps = con.prepareStatement("SELECT * FROM sedes;");
             rs = ps.executeQuery();
             while (rs.next()){
@@ -74,6 +75,9 @@ public class index extends HttpServlet {
                 
                 
                 listaSedeIndex.add(sd);
+                if (rs.getString("rango").equals("Principal")){
+                    contSedePExistentes++;
+                }
                 contSedeExistentes++;
             }
             
@@ -495,6 +499,7 @@ public class index extends HttpServlet {
             request.setAttribute("estadoPqrsfSResponder", contPqrsfSResponder);
             request.setAttribute("estadoSopoPendientes", contSopoPendientes);
             request.setAttribute("estadoSedeExistentes", contSedeExistentes);
+            request.setAttribute("estadoSedePExistentes", contSedePExistentes);
             request.setAttribute("estadoSopoPendientesAdmin", contSopoPendientesAdmin);
             request.getRequestDispatcher("index.jsp").forward(request, response);
             cdb.cierraConexion();

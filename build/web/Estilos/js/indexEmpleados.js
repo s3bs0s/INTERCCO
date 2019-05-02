@@ -328,7 +328,7 @@ function promocionesActualizarModal(idprom,
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="productosVerModal y productosActualizarModal">
+// <editor-fold defaultstate="collapsed" desc="productosVerModal, productosActualizarModal, productosEliminarModal">
 function productosVerModal(cate,
         nombre,
         descrip,
@@ -360,15 +360,27 @@ function productosActualizarModal(idprod,
         document.getElementById('actuaDescripcionProducto').value = DescifrarASCII(descri);
     }
 }
+function productosEliminarModal(idprod,
+        nombre) {
+            
+    document.getElementById('elimIDProducto').value = idprod;
+    document.getElementById('elimNombreProducto').innerText = DescifrarASCII(nombre);
+}
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="categoriasActualizarModal">
+// <editor-fold defaultstate="collapsed" desc="categoriasActualizarModal y categoriasEliminarModal">
 function categoriasActualizarModal(idcate,
         nombre) {
             
     $("#categoriasAGerenteModal input,select,textarea").css('color', '#555555');
     document.getElementById('actuaIDCategoria').value = idcate;
     document.getElementById('actuaNombreCategoria').value = DescifrarASCII(nombre);
+}
+function categoriasEliminarModal(idcate,
+        nombre) {
+            
+    document.getElementById('elimIDCategoria').value = idcate;
+    document.getElementById('elimNombreCategoria').innerText = DescifrarASCII(nombre);
 }
 // </editor-fold>
 
@@ -690,9 +702,15 @@ function usuarioVerModal(roleusu,
         $('#usuariosVerModal #verTituloInformacionUsuario').hide();
     }
 }
+function usuarioEliminarModal(idusu,
+        emusu) {
+            
+    document.getElementById('elimIDUsuario').value = idusu;
+    document.getElementById('elimEmailUsuario').innerText = DescifrarASCII(emusu);
+}
 // </editor-fold> 
 
-// <editor-fold defaultstate="collapsed" desc="proveedorVerModal y proveedorActualizarModal"> 
+// <editor-fold defaultstate="collapsed" desc="proveedorVerModal, proveedorActualizarModal y proveedorEliminarModal"> 
 function proveedorActualizarModal(idprov,
         nombreCOE,
         tipoidentifiscal,
@@ -829,6 +847,12 @@ function proveedorVerModal(nombreCOE,
     } else {
         document.getElementById('verMovilPCProveedor').innerText = DescifrarASCII(movilPC);
     }
+}
+function proveedorEliminarModal(idProveedor,
+        nombreCOE) {
+            
+    document.getElementById('elimIDProveedor').value = idProveedor;
+    document.getElementById('elimCOEProveedor').innerText = DescifrarASCII(nombreCOE);
 }
 // </editor-fold>
 

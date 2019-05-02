@@ -306,7 +306,6 @@
     <div class="modal fade" id="usuariosSGerenteModal" role="dialog">
         <div class="modal-dialog modal">
 
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -356,6 +355,37 @@
                     </form>
                 </div>
                 <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para Eliminar -->
+    <div class="modal fade" id="usuariosEGerenteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            
+            <div class="modal-content">
+                <div class="modal-header modal-header-elim">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-remove"></span><label class="me">¿Desea eliminar el Usuario?</label></h4>
+                </div>
+                <div class="modal-body modal-body-elim">
+                    <form action="UsuarioE" method="POST">
+                        <div class="input-group inpDesa">
+                            <span class="input-group-addon">ID:</span>
+                            <input type="text" class="form-control" id="elimIDUsuario" name="elimIDUsuario">
+                        </div>
+                        <p class="mi-obli">Recuerde que cuando eliminé el usuario <span class="a-mi-elim-sp" id="elimEmailUsuario"></span>, también se eliminarán todas las solicitudes PQRSF de el.</p>
+                        <div class="input-group cont-btn">
+                            <div class="cont-btn-principal">
+                                <button type="submit" class="btn-modal-elim btn btn-principal">Estoy Segur<%= session.getAttribute("genUsuario").equals("Masculino")?"o":"a" %>, ¡Eliminar!</button>
+                            </div>
+                            <div class="cont-btns-secundario">
+                                <button data-dismiss="modal" type="button" class="btn-modal-elim btn btn-secundario">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer modal-footer-elim"></div>
             </div>
         </div>
     </div>

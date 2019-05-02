@@ -2,6 +2,7 @@ package com.INTERCCO.controlador.CRUDUsuarios;
 
 import com.INTERCCO.controlador.General.CifradoASCII;
 import com.INTERCCO.modelo.Conexion.ConectaDB;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class EliminarUsuario extends HttpServlet {
 
@@ -18,7 +20,10 @@ public class EliminarUsuario extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         try {
-            String idUsuario = request.getParameter("idUsua");
+            String idUsuario = request.getParameter("elimIDUsuario");
+            
+            HttpSession session = request.getSession();
+            String nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario");
             
             ConectaDB cdb = new ConectaDB();
             Connection con = cdb.conectar();
@@ -33,7 +38,6 @@ public class EliminarUsuario extends HttpServlet {
             if (rs.next()){
                 String emailUsua = cA.DescifrarASCII(rs.getString("email"));
                 ps.close();
-                rs.close();
                 ps = con.prepareStatement("UPDATE usuarios SET existencia=? WHERE idUsuarios=?;");
                 ps.setString(1, "N");
                 ps.setInt(2, Integer.parseInt(idUsuario));
@@ -41,13 +45,43 @@ public class EliminarUsuario extends HttpServlet {
 
                 if (res > 0){
                     ps.close();
-                    rs.close();
                     ps = con.prepareStatement("UPDATE info_usuarios SET existencia=? WHERE idUsuario=?;");
                     ps.setString(1, "N");
                     ps.setInt(2, Integer.parseInt(idUsuario));
                     int res2 = ps.executeUpdate();
 
                     if (res2 > 0){
+                        ps.close();
+                        ps = con.prepareStatement("UPDATE pqrsf SET estado=? WHERE idCliente=? AND estado!=?;");
+                        ps.setString(1, "Cancelado");
+                        ps.setInt(2, Integer.parseInt(idUsuario));
+                        ps.setString(3, "Cancelado");
+                        ps.executeUpdate();
+                        
+                        ps.close();
+                        rs.close();
+                        ps = con.prepareStatement("SELECT * FROM info_usuarios WHERE idUsuario=?;");
+                        ps.setInt(1, Integer.parseInt(idUsuario));
+                        rs = ps.executeQuery();
+                        String nomImg = "86S97S99S105S111";
+                        
+                        if (rs.next()){
+                            nomImg = rs.getString("nombre_img");
+                        }
+                        
+                        if (!nomImg.equals("86S97S99S105S111")){
+                            String nomImgDescifrado = cA.DescifrarASCII(nomImg);
+                
+                            String SAVE_DIR = "ArchivosSistema" + File.separator + "Usuarios" + File.separator + nomSedeUsuario;
+                            String appPath = request.getServletContext().getRealPath("");
+                            String savePath = appPath + SAVE_DIR + File.separator + nomImgDescifrado;
+
+                            File img = new File(savePath);
+                            if (img.exists()) {
+                                img.delete();
+                            }
+                        }
+                        
                         request.getRequestDispatcher("Usuarios?mensaje=YEliminar&emailusu="+emailUsua).forward(request, response);
                     } else {
                         request.getRequestDispatcher("Usuarios?mensaje=Ne").forward(request, response);

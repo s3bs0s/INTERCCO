@@ -18,22 +18,18 @@
                     
                     <div class="srpIG">
                         <h1>Información General</h1>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon">Número de mesa:</span>
-                                <select required class="form-control" name="">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                </select>
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Número de mesa:</span>
+                            <select required class="form-control" name="">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon">Subtotal:</span>
-                                <input disabled type="text" class="form-control" name="">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Subtotal:</span>
+                            <input disabled type="text" class="form-control" name="">
                         </div>
 
                         <div class="input-group cont-btn">
@@ -45,29 +41,25 @@
                     
                     <div class="srpAPP">
                         <h1>Agregar producto al pedido</h1>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:33.3%;">
-                                <span class="input-group-addon">Categoría:</span>
-                                <select required class="form-control" name="">
-                                    <option value="Combos">Combos</option>
-                                </select>
-                            </div>
-                            <div class="input-group" style="width:33.3%;">
-                                <span class="input-group-addon">Producto:</span>
-                                <select required class="form-control" name="">
-                                    <option value="Combo Familiar">Combo Familiar</option>
-                                </select>
-                            </div>
-                            <div class="input-group" style="width:33.3%;">
-                                <span class="input-group-addon">Cantidad:</span>
-                                <input required type="text" class="form-control" name="" placeholder="Cantidad.">
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Categoría:</span>
+                            <select required class="form-control" name="">
+                                <option value="Combos">Combos</option>
+                            </select>
                         </div>
-                        <div class="filas-i">
-                            <div class="input-group" style="width:100%;">
-                                <span class="input-group-addon">Observación:</span>
-                                <textarea required class="form-control" placeholder="¿Alguna observación para el producto pedido?" name=""></textarea>
-                            </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Producto:</span>
+                            <select required class="form-control" name="">
+                                <option value="Combo Familiar">Combo Familiar</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Cantidad:</span>
+                            <input required type="text" class="form-control" name="" placeholder="Cantidad.">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Observación:</span>
+                            <textarea required class="form-control" placeholder="¿Alguna observación para el producto pedido?" name=""></textarea>
                         </div>
 
                         <div class="input-group cont-btn">
