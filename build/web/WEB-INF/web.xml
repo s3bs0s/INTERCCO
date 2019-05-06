@@ -78,6 +78,22 @@
         <servlet-name>ActualizarRangoSede</servlet-name>
         <servlet-class>com.INTERCCO.controlador.CRUDSedes.ActualizarRangoSede</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListarPedidos</servlet-name>
+        <servlet-class>com.INTERCCO.controlador.CRUDPedidos.ListarPedidos</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegistrarPedido</servlet-name>
+        <servlet-class>com.INTERCCO.controlador.CRUDPedidos.RegistrarPedido</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelarPedido</servlet-name>
+        <servlet-class>com.INTERCCO.controlador.CRUDPedidos.CancelarPedido</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DevolverPedido</servlet-name>
+        <servlet-class>com.INTERCCO.controlador.CRUDPedidos.DevolverPedido</servlet-class>
+    </servlet>
     <servlet-mapping>
         <!-- Nombre que se puso arriba para identificar el JSP de nuevo -->
         <servlet-name>DesignEmail</servlet-name>
@@ -439,6 +455,22 @@
     <servlet-mapping>
         <servlet-name>ActualizarRangoSede</servlet-name>
         <url-pattern>/SedeAR</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListarPedidos</servlet-name>
+        <url-pattern>/Pedidos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrarPedido</servlet-name>
+        <url-pattern>/Pedido</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelarPedido</servlet-name>
+        <url-pattern>/PedidoC</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DevolverPedido</servlet-name>
+        <url-pattern>/PedidoD</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

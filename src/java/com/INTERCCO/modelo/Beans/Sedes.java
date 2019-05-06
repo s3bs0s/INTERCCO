@@ -6,6 +6,7 @@ public class Sedes {
     private String nombre;
     private String rango;
     private String direccion;
+    private Integer numMesas;
     private String srcMapa;
     private int idCiudad;
     private String NombreCiudad;
@@ -21,11 +22,12 @@ public class Sedes {
         this.idSedes = idSedes;
     }
 
-    public Sedes(Integer idSedes, String nombre, String rango, String direccion, String srcMapa) {
+    public Sedes(Integer idSedes, String nombre, String rango, String direccion, Integer numMesas, String srcMapa) {
         this.idSedes = idSedes;
         this.nombre = nombre;
         this.rango = rango;
         this.direccion = direccion;
+        this.numMesas = numMesas;
         this.srcMapa = srcMapa;
     }
 
@@ -61,6 +63,14 @@ public class Sedes {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public Integer getNumMesas() {
+        return numMesas;
+    }
+
+    public void setNumMesas(Integer numMesas) {
+        this.numMesas = numMesas;
     }
 
     public String getSrcMapa() {

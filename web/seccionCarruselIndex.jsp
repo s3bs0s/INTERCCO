@@ -119,21 +119,21 @@
                 if (contPublicos < 1){ %>
                     <!--No hay ningun carrusel publico, foto sin informacion-->
                     <div class="item active">
-                        <img src="Estilos/img/CarrouselGeneral/Sin Informacion.jpg" alt="N1" style="width:100%;">
+                        <img src="Estilos/img/CarrouselGeneral/SinInformacion.jpg" alt="N1" style="width:100%;">
                     </div>
                 <% }
                 if (session.getAttribute("rolUsuario") != null && !session.getAttribute("rolUsuario").equals("Usuario")){
                     if (contPublicosCliente < 1 && contPublicos > 0){ %>
                         <!--No hay ningun carrusel publico para cliente, foto sin informacion-->
                         <div class="item active">
-                            <img src="Estilos/img/CarrouselGeneral/Sin Informacion.jpg" alt="N1" style="width:100%;">
+                            <img src="Estilos/img/CarrouselGeneral/SinInformacion.jpg" alt="N1" style="width:100%;">
                         </div>
                     <% }
                 }
             } else { %>
                 <!--No hay ningun carrusel, foto sin informacion-->
                 <div class="item active">
-                    <img src="Estilos/img/CarrouselGeneral/Sin Informacion.jpg" alt="N1" style="width:100%;">
+                    <img src="Estilos/img/CarrouselGeneral/SinInformacion.jpg" alt="N1" style="width:100%;">
                 </div>
             <% } %>
         </div>

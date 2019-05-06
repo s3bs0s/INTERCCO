@@ -22,6 +22,7 @@ public class RegistrarSede extends HttpServlet {
             String rango = request.getParameter("regRangoSedes");
             String ciudad = request.getParameter("regCiudadSedes");
             String direccion = request.getParameter("regDireccionSedes");
+            int numMesas = Integer.parseInt(request.getParameter("regMesasSedes"));
             String mapaSrc = request.getParameter("regSrcSedes");
             int numeroHorarios = Integer.parseInt(request.getParameter("regNumInpSedes"));
             String diasHorario = "";
@@ -86,17 +87,22 @@ public class RegistrarSede extends HttpServlet {
                             System.out.println("ERROR de REGISTRAR el dato de SEDE.");
                         } else {
                             ps.close();
-                            ps = con.prepareStatement("INSERT INTO sedes (nombre,rango,direccion,src_mapa,dias_horario,horas_horario,idCiudad) VALUES (?,?,?,?,?,?,?);");
+                            ps = con.prepareStatement("INSERT INTO sedes (nombre,rango,direccion,num_mesas,src_mapa,dias_horario,horas_horario,idCiudad) VALUES (?,?,?,?,?,?,?,?);");
                             ps.setString(1, nomSede);
                             ps.setString(2, "Principal");
                             ps.setString(3, direccion);
+                            if (numMesas < 1){
+                                ps.setInt(4, 1);
+                            } else {
+                                ps.setInt(4, numMesas);
+                            }
                             String mapaSCifrada = cA.CifrarASCII(mapaSrc);
-                            ps.setString(4, mapaSCifrada);
+                            ps.setString(5, mapaSCifrada);
                             String diasHCifrada = cA.CifrarASCII(diasHorario);
-                            ps.setString(5, diasHCifrada);
+                            ps.setString(6, diasHCifrada);
                             String horasHCifrada = cA.CifrarASCII(horasHorario);
-                            ps.setString(6, horasHCifrada);
-                            ps.setInt(7, Integer.parseInt(ciudad));
+                            ps.setString(7, horasHCifrada);
+                            ps.setInt(8, Integer.parseInt(ciudad));
                             int res = ps.executeUpdate();
 
                             if (res > 0){
@@ -108,17 +114,22 @@ public class RegistrarSede extends HttpServlet {
                         }
                     } else {
                         ps.close();
-                        ps = con.prepareStatement("INSERT INTO sedes (nombre,rango,direccion,src_mapa,dias_horario,horas_horario,idCiudad) VALUES (?,?,?,?,?,?,?);");
+                        ps = con.prepareStatement("INSERT INTO sedes (nombre,rango,direccion,num_mesas,src_mapa,dias_horario,horas_horario,idCiudad) VALUES (?,?,?,?,?,?,?,?);");
                         ps.setString(1, nomSede);
                         ps.setString(2, "Secundaria");
                         ps.setString(3, direccion);
+                        if (numMesas < 1){
+                                ps.setInt(4, 1);
+                            } else {
+                                ps.setInt(4, numMesas);
+                            }
                         String mapaSCifrada = cA.CifrarASCII(mapaSrc);
-                        ps.setString(4, mapaSCifrada);
+                        ps.setString(5, mapaSCifrada);
                         String diasHCifrada = cA.CifrarASCII(diasHorario);
-                        ps.setString(5, diasHCifrada);
+                        ps.setString(6, diasHCifrada);
                         String horasHCifrada = cA.CifrarASCII(horasHorario);
-                        ps.setString(6, horasHCifrada);
-                        ps.setInt(7, Integer.parseInt(ciudad));
+                        ps.setString(7, horasHCifrada);
+                        ps.setInt(8, Integer.parseInt(ciudad));
                         int res = ps.executeUpdate();
 
                         if (res > 0){
@@ -136,8 +147,8 @@ public class RegistrarSede extends HttpServlet {
             request.getRequestDispatcher("Sedes?mensaje=Ne").forward(request, response);
             System.out.println("ERROR en MySQL REGISTRANDO los datos de SEDES.");
             sql.getStackTrace();
-        } catch (NullPointerException npe){
-            request.getRequestDispatcher("Error404.jsp?mensaje="+npe.toString()).forward(request, response);
+        } catch (Exception alle){
+            request.getRequestDispatcher("Error404.jsp?mensaje="+alle.toString()).forward(request, response);
         }
     }
 

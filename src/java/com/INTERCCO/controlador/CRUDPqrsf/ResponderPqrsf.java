@@ -120,8 +120,8 @@ public class ResponderPqrsf extends HttpServlet {
             request.getRequestDispatcher("Pqrsfs?mensaje=Ne").forward(request, response);
             System.out.println("ERROR en MySQL RESPONDIENDO CORREO AL CLIENTE los datos de PQRSF.");
             e.getStackTrace();
-        } catch (NullPointerException npe){
-            request.getRequestDispatcher("Error404.jsp?mensaje="+npe.toString()).forward(request, response);
+        } catch (Exception alle){
+            request.getRequestDispatcher("Error404.jsp?mensaje="+alle.toString()).forward(request, response);
         }
     }
 

@@ -132,7 +132,7 @@
                 <div class="menuprin-slogo">
                     <ul>
                         <li><a href="index"><span class="icon-office"></span><span class="me">Inicio</span></a></li>
-                        <li><a href="pedidosListar.jsp"><span class="icon-truck"></span><span class="me">Domicilios</span></a></li>
+                        <li><a href="Pedidos"><span class="icon-truck"></span><span class="me">Domicilios</span></a></li>
                         <li><a href="Parametros"><span class="icon-phone"></span><span class="me">Soporte</span></a></li>
                     </ul>
                 </div>
@@ -166,7 +166,7 @@
                 <div class="menuprin-slogo">
                     <ul>
                         <li><a href="index"><span class="icon-office"></span><span class="me">Inicio</span></a></li>
-                        <li><a href="pedidosListar.jsp"><span class="icon-clipboard"></span><span class="me">Pedidos</span></a></li>
+                        <li><a href="Pedidos"><span class="icon-clipboard"></span><span class="me">Pedidos</span></a></li>
                         <li><a href="Parametros"><span class="icon-phone"></span><span class="me">Soporte</span></a></li>
                     </ul>
                 </div>
@@ -200,7 +200,7 @@
                 <div class="menuprin-slogo">
                     <ul>
                         <li><a href="index"><span class="icon-office"></span><span class="me">Inicio</span></a></li>
-                        <li><a href="pedidosListar.jsp"><span class="icon-clipboard"></span><span class="me">Pedidos</span></a></li>
+                        <li><a href="Pedidos"><span class="icon-clipboard"></span><span class="me">Pedidos</span></a></li>
                         <li><a href="Parametros"><span class="icon-phone"></span><span class="me">Soporte</span></a></li>
                     </ul>
                 </div>
@@ -235,7 +235,7 @@
                     <ul>
                         <li><a href="index"><span class="icon-office"></span><span class="me">Inicio</span></a></li>
                         <li><a href="recibosListar.jsp"><span class="icon-coin-dollar"></span><span class="me">Facturas</span></a></li>
-                        <li><a href="pedidosListar.jsp"><span class="icon-truck"></span><span class="me">Domicilios</span></a></li>
+                        <li><a href="Pedidos"><span class="icon-truck"></span><span class="me">Domicilios</span></a></li>
                         <li><a href="Parametros"><span class="icon-phone"></span><span class="me">Soporte</span></a></li>
                     </ul>
                 </div>
@@ -270,7 +270,7 @@
                 <div class="menuprin-slogo">
                     <ul>
                         <li><a href="index"><span class="icon-office"></span><span class="me">Inicio</span></a></li>
-                        <li><a href="pedidosListar.jsp"><span class="icon-clipboard"></span><span class="me">Pedidos</span></a></li>
+                        <li><a href="Pedidos"><span class="icon-clipboard"></span><span class="me">Pedidos</span></a></li>
                         <li><a href="recibosListar.jsp"><span class="icon-folder-open"></span><span class="me">Recibos</span></a></li>
                         <li><a href="Insumos"><span class="icon-books"></span><span class="me">Insumos</span></a></li>
                         <li><a href="Proveedores"><span class="icon-address-book"></span><span class="me">Proveedores</span></a></li>

@@ -39,6 +39,7 @@ public class ListarSedes extends HttpServlet {
                 sd.setNombre(rs.getString("nombre"));
                 sd.setRango(rs.getString("rango"));
                 sd.setDireccion(rs.getString("direccion"));
+                sd.setNumMesas(rs.getInt("num_mesas"));
                 sd.setSrcMapa(rs.getString("src_mapa"));
                 sd.setDiasHorario(rs.getString("dias_horario"));
                 sd.setHorasHorario(rs.getString("horas_horario"));
@@ -91,8 +92,8 @@ public class ListarSedes extends HttpServlet {
         } catch (SQLException sql) {
             System.out.println("ERROR en MySQL LISTANDO los datos de SEDES.");
             sql.printStackTrace();
-        } catch (NullPointerException npe){
-            request.getRequestDispatcher("Error404.jsp?mensaje="+npe.toString()).forward(request, response);
+        } catch (Exception alle){
+            request.getRequestDispatcher("Error404.jsp?mensaje="+alle.toString()).forward(request, response);
         }
     }
 

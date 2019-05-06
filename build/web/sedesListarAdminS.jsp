@@ -73,6 +73,7 @@
                                     <th>Rango</th>
                                     <th>Ciudad</th>
                                     <th>Dirección</th>
+                                    <th>Mesas</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -82,6 +83,7 @@
                                     <th>Rango</th>
                                     <th>Ciudad</th>
                                     <th>Dirección</th>
+                                    <th>Mesas</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>
@@ -92,10 +94,11 @@
                                         <td><%= sede.getRango()%></td>
                                         <td><%= sede.getNombreCiudad()%></td>
                                         <td><%= sede.getDireccion()%></td>
+                                        <td><%= sede.getNumMesas()%></td>
                                         <td>
                                             <div class="td-espaciado">
-                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#sedesVerModal" onClick="sedesVerModal('<%= cA.CifrarASCII(sede.getNombre())%>', '<%= sede.getRango()%>', '<%= cA.CifrarASCII(sede.getNombreCiudad())%>', '<%= cA.CifrarASCII(sede.getDireccion())%>', '<%= sede.getSrcMapa()%>', '<%= sede.getHorasHorario()%>', '<%= sede.getDiasHorario()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#sedesAGerenteModal" onClick="sedesActualizarModal('<%= sede.getIdSedes()%>', '<%= cA.CifrarASCII(sede.getNombre())%>', '<%= sede.getRango()%>', '<%= sede.getIdCiudad()%>', '<%= cA.CifrarASCII(sede.getDireccion())%>', '<%= sede.getSrcMapa()%>', '<%= sede.getHorasHorario()%>', '<%= sede.getDiasHorario()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#sedesVerModal" onClick="sedesVerModal('<%= cA.CifrarASCII(sede.getNombre())%>', '<%= sede.getRango()%>', '<%= cA.CifrarASCII(sede.getNombreCiudad())%>', '<%= cA.CifrarASCII(sede.getDireccion())%>', '<%= sede.getNumMesas()%>', '<%= sede.getSrcMapa()%>', '<%= sede.getHorasHorario()%>', '<%= sede.getDiasHorario()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#sedesAGerenteModal" onClick="sedesActualizarModal('<%= sede.getIdSedes()%>', '<%= cA.CifrarASCII(sede.getNombre())%>', '<%= sede.getRango()%>', '<%= sede.getIdCiudad()%>', '<%= cA.CifrarASCII(sede.getDireccion())%>', '<%= sede.getNumMesas()%>', '<%= sede.getSrcMapa()%>', '<%= sede.getHorasHorario()%>', '<%= sede.getDiasHorario()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
                                                 <% if (sede.getTienePrincipal().equals("Y")){
                                                     if (sede.getRango().equals("Principal")){ %>
                                                         <button type="button" class="btn btn-active-os" onClick="window.location = 'SedeAR?rgo=S&idSede='+<%= sede.getIdSedes()%>;"><span class="glyphicon glyphicon-chevron-down"></span> Descender</button>

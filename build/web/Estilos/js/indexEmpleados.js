@@ -194,6 +194,26 @@ function refuseCPyP(evt){
     var key4 = nav4 ? evt.which : evt.keyCode;
     return ((key4 <= 156 || key4 >= 158) && (key4 <= 145 || key4 >= 147));
 }
+var nav5 = window.Event ? true : false; 
+function acceptNumCant(evt){
+    var key5 = nav5 ? evt.which : evt.keyCode;
+    return key5 >= 48 && key5 <= 57;
+}
+function formatNumberReturn(numero) {
+    // Variable que contendra el resultado final
+    var resultado = "";
+    var nuevoNumero;
+
+    // Cogemos el numero eliminando los posibles puntos que tenga
+    nuevoNumero = numero.toString().replace(/\./g, '');
+
+    // Ponemos un punto cada 3 caracteres
+    for (var j, i = nuevoNumero.length - 1, j = 0; i >= 0; i--, j++) {
+        resultado = nuevoNumero.charAt(i) + ((j > 0) && (j % 3 === 0) ? "." : "") + resultado;
+    }
+    
+    return resultado;
+}
 function formatNumber(numero, idElem, tipoModal) {
     // Variable que contendra el resultado final
     var resultado = "";
@@ -215,6 +235,211 @@ function formatNumber(numero, idElem, tipoModal) {
 }
 // </editor-fold>
 
+
+// <editor-fold defaultstate="collapsed" desc="pedidosRModal">
+$(document).ready(function () {
+    var bdListarP = document.getElementById("pedidosListar");
+    if (bdListarP !== null){
+        $("#pedidosRegistrar").hide();
+        $("#regSpanWarningPedidos").hide();
+        document.getElementById("regSubtotalPedidos").value = 0;
+        document.getElementById("regCantidadPedidos").value = 1;
+        var lSt = localStorage;
+        lSt.setItem("cantProductosP", "0");
+        
+        $('#btnRegistrarPedidos').click(function(){
+            $('#pedidosRegistrar').show();
+            $('#pedidosListar').hide();
+        });
+        
+        $('#btnListarPedidos').click(function(){
+            $('#pedidosRegistrar').hide();
+            $('#pedidosListar').show();
+        });
+        
+        $('#btnListarRutaPedidos').click(function(){
+            $('#pedidosRegistrar').hide();
+            $('#pedidosListar').show();
+        });
+        
+        $("#regCJSProductosPedidos select").hide();
+        $("#regCJSProductosPedidos #"+document.getElementById("regCategoriaPedidos").value+"C").show();
+    }
+});
+function cambioCategoria(idcate){
+    $("#regCJSProductosPedidos select").hide();
+    $("#regCJSProductosPedidos #"+idcate+"C").show();
+}
+function validacionCantidad(input,content){
+    if (content === "0" || content === 0){
+        input.value = 1;
+    } else {
+        if (content.length > 3){
+            input.value = content.substring(0,content.length-1);
+        }
+    }
+}
+function agregarProductoPedido(btnAgregar){
+    var lSt = localStorage;
+    
+    var numProductoAGGPedido = parseInt(lSt.getItem("cantProductosP"))+1;
+    var selectCategorias = document.getElementById("regCategoriaPedidos");
+    var idCategoria = selectCategorias.value;
+    var nomCategoria = selectCategorias.options[selectCategorias.selectedIndex].text;
+    var selectProductos = document.getElementById(idCategoria+"C");
+    var infoProducto = selectProductos.value.split(";");
+    
+    if (selectProductos.value.length > 0){
+        var nomProducto = selectProductos.options[selectProductos.selectedIndex].text;
+        var optionProducto = selectProductos.options[selectProductos.selectedIndex];
+        var cantidad = document.getElementById("regCantidadPedidos").value;
+        var subTotalProductos = parseInt(infoProducto[2])*cantidad;
+        var observacion = document.getElementById("regObservacionPedidos").value;
+        if (observacion.length === 0){
+            observacion = "Vacio";
+        }
+        
+        lSt.setItem("cantProductosP", numProductoAGGPedido);
+        var campoSubtotal = document.getElementById("regSubtotalPedidos");
+        campoSubtotal.value = formatNumberReturn(parseInt(resetNumberReturn(campoSubtotal.value))+parseInt(subTotalProductos));
+
+        var templateInptHide = `
+            <div class="input-group inpDesa">
+                <input type="text" class="form-control" name="${numProductoAGGPedido}InputPP" id="${numProductoAGGPedido}InputPP">
+            </div>`;
+
+        document.getElementById("regCAJProductosPedidos").insertAdjacentHTML("beforeend",templateInptHide);
+        $('.tablaListarProductosPedido').DataTable().row.add( [
+            nomCategoria,
+            nomProducto,
+            `<div class="td-espaciado">
+                <button type="button" id="${numProductoAGGPedido}BtnMenosRowPP" onclick="cantProductoPedido('resta', '${numProductoAGGPedido}')" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>
+                    <span id="${numProductoAGGPedido}CantRowPP">${cantidad}</span>
+                <button type="button" id="${numProductoAGGPedido}BtnMasRowPP" onclick="cantProductoPedido('suma', '${numProductoAGGPedido}')" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>`,
+            `<span id="${numProductoAGGPedido}SubtotalRowPP">`+formatNumberReturn(subTotalProductos)+`</span>`,
+            `<div class="td-espaciado">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productoPedidoVerModal" onClick="productoPedidoVerModal('${CifrarASCII(nomCategoria)}', '${CifrarASCII(nomProducto)}', '${cantidad}', '${subTotalProductos}', '${CifrarASCII(observacion)}', '${infoProducto[2]}', '${infoProducto[1]}')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                <button type="button" onclick="sacarProductoPedido(this, '${numProductoAGGPedido}', '${idCategoria}C', '${CifrarASCII(nomProducto)}')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Sacar</button>
+            </div>`
+        ] ).draw();
+        document.getElementById("regCantidadPedidos").value = 1;
+        document.getElementById("regObservacionPedidos").value = "";
+        optionProducto.remove();
+        document.getElementById(numProductoAGGPedido+"InputPP").value = infoProducto[0]+";"+infoProducto[1]+";"+infoProducto[2]+";"+cantidad+";"+CifrarASCII(observacion)+";"+subTotalProductos;
+    } else {
+        $("#regBtnAgregarPedidos").attr('disabled', '');
+    }
+}
+function sacarProductoPedido(numPP, numRow, idSelectProd, nomProducto){
+    var infoProductoPPArr = document.getElementById(numRow+"InputPP").value.split(";");
+    var templateOption = '<option value="'+infoProductoPPArr[0]+';'+infoProductoPPArr[1]+';'+infoProductoPPArr[2]+'">'+DescifrarASCII(nomProducto)+'</option>';
+    document.getElementById(idSelectProd).insertAdjacentHTML("beforeend",templateOption);
+    var campSubtotal = document.getElementById("regSubtotalPedidos");
+    campSubtotal.value = formatNumberReturn(parseInt(resetNumberReturn(campSubtotal.value))-parseInt(infoProductoPPArr[5]));
+    $("#"+numRow+"InputPP").parent('div').remove();
+    $('.tablaListarProductosPedido').DataTable().row($(numPP).parents('tr')).remove().draw(false);
+}
+function cantProductoPedido(tipoOpe, numRow){
+    var inpProductoArr = document.getElementById(numRow+"InputPP").value.split(";");
+    if (tipoOpe === "resta"){
+        if (parseInt(inpProductoArr[3]) > 1){
+            var infoNuevaInp = inpProductoArr[0]+";"+inpProductoArr[1]+";"+inpProductoArr[2]+";"+(parseInt(inpProductoArr[3])-1)+";"+inpProductoArr[4]+";"+(parseInt(inpProductoArr[5])-parseInt(inpProductoArr[2]));
+            var campSubtotal = document.getElementById("regSubtotalPedidos");
+            campSubtotal.value = formatNumberReturn(parseInt(resetNumberReturn(campSubtotal.value))-parseInt(inpProductoArr[2]));
+            document.getElementById(numRow+"CantRowPP").innerText = parseInt(inpProductoArr[3])-1;
+            document.getElementById(numRow+"InputPP").value = infoNuevaInp;
+            document.getElementById(numRow+"SubtotalRowPP").innerText = formatNumberReturn(parseInt(inpProductoArr[5])-parseInt(inpProductoArr[2]));
+            $("#"+numRow+"BtnMasRowPP").removeAttr('disabled');
+        } else {
+            $("#"+numRow+"BtnMenosRowPP").attr('disabled','');
+        }
+    } else {
+        if (parseInt(inpProductoArr[3]) < 99){
+            var infoNuevaInp = inpProductoArr[0]+";"+inpProductoArr[1]+";"+inpProductoArr[2]+";"+(parseInt(inpProductoArr[3])+1)+";"+inpProductoArr[4]+";"+(parseInt(inpProductoArr[5])+parseInt(inpProductoArr[2]));
+            var campSubtotal = document.getElementById("regSubtotalPedidos");
+            campSubtotal.value = formatNumberReturn(parseInt(resetNumberReturn(campSubtotal.value))+parseInt(inpProductoArr[2]));
+            document.getElementById(numRow+"CantRowPP").innerText = parseInt(inpProductoArr[3])+1;
+            document.getElementById(numRow+"InputPP").value = infoNuevaInp;
+            document.getElementById(numRow+"SubtotalRowPP").innerText = formatNumberReturn(parseInt(inpProductoArr[5])+parseInt(inpProductoArr[2]));
+            $("#"+numRow+"BtnMenosRowPP").removeAttr('disabled');
+        } else {
+            $("#"+numRow+"BtnMasRowPP").attr('disabled','');
+        }
+    }
+}
+function validacionCantidad(input,content){
+    if (content === "0" || content === 0){
+        input.value = 1;
+    } else {
+        if (content.length > 2){
+            input.value = content.substring(0,content.length-1);
+        }
+    }
+}
+function registrarPedido(){
+    var validarProductos = document.getElementById("regCAJProductosPedidos").innerHTML;
+    if (validarProductos.includes("input-group")){
+        var lSt = localStorage;
+        $("#regSubtotalPedidos").removeAttr("disabled");
+        var templateInptHide = `
+            <div class="input-group inpDesa">
+                <input type="text" class="form-control" name="NumsInputPP" id="NumsInputPP">
+            </div>`;
+        document.getElementById("regCAJProductosPedidos").insertAdjacentHTML("beforeend",templateInptHide);
+        document.getElementById("NumsInputPP").value = lSt.getItem("cantProductosP");
+        document.getElementById("regFormPedidos").action = "Pedido";
+        document.getElementById("regFormPedidos").submit();
+    } else {
+        $("#regSpanWarningPedidos").show();
+        $("#regSpanWarningPedidos").css('margin-top','-2px');
+        $("#regSpanWarningPedidos").css('display','block');
+        $("#regSpanWarningPedidos").css('font-size','16px');
+        $("#regSpanWarningPedidos").css('letter-spacing','.1.5pt');
+        $("#regSpanWarningPedidos").parent("button").css('background','#E06666');
+    }
+}
+function resetNumberReturn(numero) {
+    // Variable que contendra el resultado final
+    var nuevoNumero = numero.toString().replace(/\./g, '');
+    
+    return nuevoNumero;
+}
+function productoPedidoVerModal(nomCate,
+        nomProd,
+        cant,
+        subtotal,
+        observ,
+        precio,
+        descri) {
+    
+    $(".collapse").collapse("hide");
+    document.getElementById("verCategoriaProductoPedido").innerText = DescifrarASCII(nomCate);
+    document.getElementById("verProductoProductoPedido").innerText = DescifrarASCII(nomProd);
+    document.getElementById("verCantidadProductoPedido").innerText = cant;
+    document.getElementById("verSubtotalProductoPedido").innerText = formatNumberReturn(subtotal);
+    if (DescifrarASCII(observ) === "Vacio"){
+        document.getElementById("verObservacionProductoPedido").innerText = "Sin observación.";
+    } else {
+        document.getElementById("verObservacionProductoPedido").innerText = DescifrarASCII(observ);
+    }
+    document.getElementById("verCateProProductoPedido").innerText = DescifrarASCII(nomCate);
+    document.getElementById("verNomProProductoPedido").innerText = DescifrarASCII(nomProd);
+    document.getElementById("verPreProProductoPedido").innerText = formatNumberReturn(precio);
+    if (DescifrarASCII(descri) === "Vacio"){
+        document.getElementById("verDesProProductoPedido").innerText = "Sin descripción.";
+    } else {
+        document.getElementById("verDesProProductoPedido").innerText = DescifrarASCII(descri);
+    }
+}
+function productoPedidoActualizarModal(idcarr,
+        tipo,
+        diriA) {
+            
+    $("#carruselesAGerenteModal input,select,textarea").css('color', '#555555');
+}
+// </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="carruselesRGerenteModal, carruselesVerModal y carruselesActualizarModal">
 $(document).ready(function () {
@@ -449,6 +674,7 @@ function sedesVerModal(nombre,
         rango,
         ciudad,
         direccion,
+        numMesas,
         src,
         horas,
         dias) {
@@ -458,6 +684,11 @@ function sedesVerModal(nombre,
     document.getElementById('verRangoSedes').innerText = rango;
     document.getElementById('verCiudadSedes').innerText = DescifrarASCII(ciudad);
     document.getElementById('verDireccionSedes').innerText = DescifrarASCII(direccion);
+    if (Number(numMesas) === 1){
+        document.getElementById('verMesasSedes').innerText = "1 Mesa";
+    } else {
+        document.getElementById('verMesasSedes').innerText = numMesas+" Mesas";
+    }
     document.getElementById('verSrcSedes').innerText = DescifrarASCII(src);
     var horasDescifrado = DescifrarASCII(horas);
     var diasDescifrado = DescifrarASCII(dias);
@@ -475,6 +706,7 @@ function sedesActualizarModal(id,
         rango,
         ciudad,
         direccion,
+        numMesas,
         src,
         horas,
         dias) {
@@ -486,6 +718,7 @@ function sedesActualizarModal(id,
     document.getElementById('actuaRangoSedes').value = rango;
     document.getElementById('actuaCiudadSedes').value = ciudad;
     document.getElementById('actuaDireccionSedes').value = DescifrarASCII(direccion);
+    document.getElementById('actuaMesasSedes').value = numMesas;
     document.getElementById('actuaSrcSedes').value = DescifrarASCII(src);
     $('.actuaHorarioSedes').hide();
     for (var e = 2; e <= 5; e++) {

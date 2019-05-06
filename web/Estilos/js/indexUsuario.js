@@ -6,6 +6,8 @@ $(document).ready(function () {
     $('#share-social ul').hide();
     $('.menuperfil .caj-menuperfil ul').hide();
     
+    $("#accBtnAcceder").attr('disabled','');
+    
     /* Redirección de botones en el Nav */
     $('.menupriniu ul li #Acceder').click(function(){
         var accederAltura = $('.sectionAcceso').offset().top;
@@ -69,6 +71,22 @@ $('.menuperfil .caj-menuperfil').hover(
         $('.menuperfil .caj-menuperfil ul').hide(10, function(){});
     }
 );
+
+function validacionAcceder(inpActual,idInpContrario){
+    if (idInpContrario === "InpMOPasswordAcceder"){
+        if (!inpActual.value.includes('@succo.com')){
+            if (inpActual.value.includes('@s')){
+                inpActual.value = inpActual.value +'ucco.com';
+            }
+        }
+    }
+    
+    if(inpActual.value.length > 0 && document.getElementById(idInpContrario).value.length > 0){
+        $('#accBtnAcceder').removeAttr('disabled');
+    } else {
+        $('#accBtnAcceder').attr('disabled','');
+    }
+}
 
 function calcularEdad(fecha) {
     var hoy = new Date();

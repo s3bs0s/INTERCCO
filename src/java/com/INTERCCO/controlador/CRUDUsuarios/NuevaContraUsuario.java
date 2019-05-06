@@ -46,8 +46,8 @@ public class NuevaContraUsuario extends HttpServlet {
                 request.getRequestDispatcher("index?mensaje=Ne").forward(request, response);
                 System.out.println("ERROR en MySQL RECUPERANDO CONTRASEÑA los datos de USUARIOS.");
                 sql.getStackTrace();
-            } catch (NullPointerException npe){
-                request.getRequestDispatcher("Error404.jsp?mensaje="+npe.toString()).forward(request, response);
+            } catch (Exception alle){
+                request.getRequestDispatcher("Error404.jsp?mensaje="+alle.toString()).forward(request, response);
             }
             
         } else {
@@ -81,8 +81,8 @@ public class NuevaContraUsuario extends HttpServlet {
                 request.getRequestDispatcher("index?mensaje=Ne").forward(request, response);
                 System.out.println("ERROR en MySQL CAMBIANDO CONTRASEÑA los datos de USUARIOS.");
                 sql.getStackTrace();
-            } catch (NullPointerException npe){
-                request.getRequestDispatcher("Error404.jsp?mensaje="+npe.toString()).forward(request, response);
+            } catch (Exception alle){
+                request.getRequestDispatcher("Error404.jsp?mensaje="+alle.toString()).forward(request, response);
             }
             
         }

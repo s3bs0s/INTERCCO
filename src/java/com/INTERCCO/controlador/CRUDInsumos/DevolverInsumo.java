@@ -107,8 +107,8 @@ public class DevolverInsumo extends HttpServlet {
             request.getRequestDispatcher("Insumos?mensaje=Ne").forward(request, response);
             System.out.println("ERROR en MySQL ENVIANDO CORREO AL PROVEEDOR los datos de INSUMOS.");
             e.getStackTrace();
-        } catch (NullPointerException npe){
-            request.getRequestDispatcher("Error404.jsp?mensaje="+npe.toString()).forward(request, response);
+        } catch (Exception alle){
+            request.getRequestDispatcher("Error404.jsp?mensaje="+alle.toString()).forward(request, response);
         }
     }
 

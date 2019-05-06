@@ -41,8 +41,8 @@ public class EliminarPromocion extends HttpServlet {
             request.getRequestDispatcher("Parametros?mensaje=Ne&nomMod=La promoción&accMod=eliminar").forward(request, response);
             System.out.println("ERROR en MySQL ELIMINANDO los datos de USUARIOS.");
             sql.getStackTrace();
-        } catch (NullPointerException npe){
-            request.getRequestDispatcher("Error404.jsp?mensaje="+npe.toString()).forward(request, response);
+        } catch (Exception alle){
+            request.getRequestDispatcher("Error404.jsp?mensaje="+alle.toString()).forward(request, response);
         }
     }
 

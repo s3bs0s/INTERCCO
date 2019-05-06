@@ -89,7 +89,7 @@ form .i-pass{
 
 /*Botones de los Formulario*/
 form .cont-btn{
-    width:97%;
+    width:calc(100% - 30px);
     display:flex;
     flex-flow:column nowrap;
 }

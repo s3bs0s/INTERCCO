@@ -21,6 +21,7 @@ public class ActualizarSede extends HttpServlet {
             String nomSede = request.getParameter("actuaNombreSedes");
             String ciudad = request.getParameter("actuaCiudadSedes");
             String direccion = request.getParameter("actuaDireccionSedes");
+            int numMesas = Integer.parseInt(request.getParameter("actuaMesasSedes"));
             String mapaSrc = request.getParameter("actuaSrcSedes");
             int numeroHorarios = Integer.parseInt(request.getParameter("actuaNumInpSedes"));
             String diasHorario = "";
@@ -50,17 +51,22 @@ public class ActualizarSede extends HttpServlet {
                 request.getRequestDispatcher("Sedes?mensaje=Ne").forward(request, response);
                 System.out.println("ERROR de REGISTRAR el dato de SEDE.");
             } else {
-                ps = con.prepareStatement("UPDATE sedes SET nombre=?,direccion=?,src_mapa=?,dias_horario=?,horas_horario=?,idCiudad=? WHERE idSedes=?;");
+                ps = con.prepareStatement("UPDATE sedes SET nombre=?,direccion=?,num_mesas=?,src_mapa=?,dias_horario=?,horas_horario=?,idCiudad=? WHERE idSedes=?;");
                 ps.setString(1, nomSede);
                 ps.setString(2, direccion);
+                if (numMesas < 1){
+                    ps.setInt(3, 1);
+                } else {
+                    ps.setInt(3, numMesas);
+                }
                 String mapaSCifrada = cA.CifrarASCII(mapaSrc);
-                ps.setString(3, mapaSCifrada);
+                ps.setString(4, mapaSCifrada);
                 String diasHCifrada = cA.CifrarASCII(diasHorario);
-                ps.setString(4, diasHCifrada);
+                ps.setString(5, diasHCifrada);
                 String horasHCifrada = cA.CifrarASCII(horasHorario);
-                ps.setString(5, horasHCifrada);
-                ps.setInt(6, Integer.parseInt(ciudad));
-                ps.setInt(7, Integer.parseInt(id));
+                ps.setString(6, horasHCifrada);
+                ps.setInt(7, Integer.parseInt(ciudad));
+                ps.setInt(8, Integer.parseInt(id));
                 int res = ps.executeUpdate();
 
                 if (res > 0){
@@ -76,8 +82,8 @@ public class ActualizarSede extends HttpServlet {
             request.getRequestDispatcher("Sedes?mensaje=Ne").forward(request, response);
             System.out.println("ERROR en MySQL ACTUALIZANDO los datos de SEDES.");
             sql.getStackTrace();
-        } catch (NullPointerException npe){
-            request.getRequestDispatcher("Error404.jsp?mensaje="+npe.toString()).forward(request, response);
+        } catch (Exception alle){
+            request.getRequestDispatcher("Error404.jsp?mensaje="+alle.toString()).forward(request, response);
         }
     }
 

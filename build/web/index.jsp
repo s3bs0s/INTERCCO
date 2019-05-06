@@ -642,13 +642,13 @@
                                     if (contEmpre < 1){ %>
                                         <!--No hay ningun carrusel empresarial, foto sin informacion-->
                                         <div class="item active">
-                                            <img src="Estilos/img/CarrouselGeneral/Sin Informacion.jpg" alt="N1" style="width:100%;">
+                                            <img src="Estilos/img/CarrouselGeneral/SinInformacion.jpg" alt="N1" style="width:100%;">
                                         </div>
                                     <% }
                                 } else { %>
                                     <!--No hay ningun carrusel, foto sin informacion-->
                                     <div class="item active">
-                                        <img src="Estilos/img/CarrouselGeneral/Sin Informacion.jpg" alt="N1" style="width:100%;">
+                                        <img src="Estilos/img/CarrouselGeneral/SinInformacion.jpg" alt="N1" style="width:100%;">
                                     </div>
                                 <% } %>
                             </div>

@@ -75,8 +75,8 @@ public class ListarAuditoria extends HttpServlet {
         } catch (SQLException sql) {
             System.out.println("ERROR en MySQL LISTANDO los datos de AUDITORIA.");
             sql.printStackTrace();
-        } catch (NullPointerException npe){
-            request.getRequestDispatcher("Error404.jsp?mensaje="+npe.toString()).forward(request, response);
+        } catch (Exception alle){
+            request.getRequestDispatcher("Error404.jsp?mensaje="+alle.toString()).forward(request, response);
         }
     }
 

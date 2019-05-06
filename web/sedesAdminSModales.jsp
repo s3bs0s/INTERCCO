@@ -45,6 +45,11 @@
                             <span class="input-group-addon i-obli">*</span>
                         </div>
                         <div class="input-group">
+                            <span class="input-group-addon">Número de mesas:</span>
+                            <input required type="tel" onkeypress="return acceptNum(event)" minlength="1" maxlength="3" class="form-control" name="regMesasSedes" placeholder="Número de Mesas en la Sede.">
+                            <span class="input-group-addon i-obli">*</span>
+                        </div>
+                        <div class="input-group">
                             <span class="input-group-addon">Mapa SRC:</span>
                             <input required type="text" class="form-control" minlength="20" name="regSrcSedes" title="La dirección URL que esta en el SRC de la etiqueta HTML del Mapa de Google." placeholder="La dirección URL que esta en el SRC de la etiqueta HTML del Mapa de Google.">
                             <span class="input-group-addon i-obli">*</span>
@@ -154,6 +159,10 @@
                                 <p class="verDetalles-contenido" id="verNombreSedes"></p>
                             </div>
                             <div>
+                                <p class="verDetalles-titulo">Número de Mesas:</p>
+                                <p class="verDetalles-contenido" id="verMesasSedes"></p>
+                            </div>
+                            <div>
                                 <p class="verDetalles-titulo">Rango:</p>
                                 <p class="verDetalles-contenido" id="verRangoSedes"></p>
                             </div>
@@ -232,6 +241,10 @@
                         <div class="input-group">
                             <span class="input-group-addon">Dirección:</span>
                             <input required type="text" onkeypress="this.style.color = '#87A2D1';" minlength="5" maxlength="150" class="form-control" id="actuaDireccionSedes" name="actuaDireccionSedes">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Número de mesas:</span>
+                            <input required type="tel" onkeypress="this.style.color = '#87A2D1'; return acceptNum(event)" minlength="1" maxlength="3" class="form-control" name="actuaMesasSedes" id="actuaMesasSedes">
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">Mapa SRC:</span>

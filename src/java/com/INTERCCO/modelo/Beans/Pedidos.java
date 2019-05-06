@@ -8,7 +8,7 @@ public class Pedidos {
     private Date fchRegistro;
     private Date horaRegistro;
     private String tipoPedido;
-    private String numMesa;
+    private Integer numMesa;
     private String direccionEnt;
     private String observaciones;
     private int subTotal;
@@ -25,7 +25,7 @@ public class Pedidos {
         this.idPedidos = idPedidos;
     }
 
-    public Pedidos(Integer idPedidos, Date fchRegistro, Date horaRegistro, String tipoPedido, String numMesa, String direccionEnt, String observaciones, int subTotal, String estado) {
+    public Pedidos(Integer idPedidos, Date fchRegistro, Date horaRegistro, String tipoPedido, Integer numMesa, String direccionEnt, String observaciones, int subTotal, String estado) {
         this.idPedidos = idPedidos;
         this.fchRegistro = fchRegistro;
         this.horaRegistro = horaRegistro;
@@ -71,11 +71,11 @@ public class Pedidos {
         this.tipoPedido = tipoPedido;
     }
 
-    public String getNumMesa() {
+    public Integer getNumMesa() {
         return numMesa;
     }
 
-    public void setNumMesa(String numMesa) {
+    public void setNumMesa(Integer numMesa) {
         this.numMesa = numMesa;
     }
 

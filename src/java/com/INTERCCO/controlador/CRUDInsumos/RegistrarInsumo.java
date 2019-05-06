@@ -100,8 +100,8 @@ public class RegistrarInsumo extends HttpServlet {
             request.getRequestDispatcher("Insumos?mensaje=NeF").forward(request, response);
             System.out.println("ERROR de REGISTRANDO el dato de INSUMOS.");
             pe.getStackTrace();
-        } catch (NullPointerException npe){
-            request.getRequestDispatcher("Error404.jsp?mensaje="+npe.toString()).forward(request, response);
+        } catch (Exception alle){
+            request.getRequestDispatcher("Error404.jsp?mensaje="+alle.toString()).forward(request, response);
         }
     }
 
