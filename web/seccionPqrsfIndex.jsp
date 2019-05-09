@@ -118,7 +118,7 @@
                         <span class="input-group-addon">Sede:</span>
                         <% ArrayList<Sedes> listaSedSIndexP = (ArrayList) request.getAttribute("listaSedSIndex"); %>
                         <select class="form-control" name="regSedePqrsf">
-                            <option value="<%= session.getAttribute("idSedeUsuario") %>">Mi Sede</option>
+                            <option value="<%= session.getAttribute("idSedeUsuario") %>">Enviar a mi Sede</option>
                             <% for (Sedes  sedeSIndexP: listaSedSIndexP) { %>
                                 <option value="<%= sedeSIndexP.getIdSedes()%>"><%= sedeSIndexP.getNombre()%></option>
                             <% } %>

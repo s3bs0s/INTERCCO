@@ -679,6 +679,7 @@ function sedesVerModal(nombre,
         horas,
         dias) {
             
+    $(".collapse").collapse("hide");
     document.getElementById('verTituloNombreSedes').innerText = "Detalles de "+DescifrarASCII(nombre);
     document.getElementById('verNombreSedes').innerText = DescifrarASCII(nombre);
     document.getElementById('verRangoSedes').innerText = rango;
@@ -690,6 +691,7 @@ function sedesVerModal(nombre,
         document.getElementById('verMesasSedes').innerText = numMesas+" Mesas";
     }
     document.getElementById('verSrcSedes').innerText = DescifrarASCII(src);
+    $('#verMapaSedes iframe').attr("src", DescifrarASCII(src));
     var horasDescifrado = DescifrarASCII(horas);
     var diasDescifrado = DescifrarASCII(dias);
     var arrayHH = horasDescifrado.split(";");

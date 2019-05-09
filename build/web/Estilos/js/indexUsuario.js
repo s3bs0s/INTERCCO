@@ -8,6 +8,33 @@ $(document).ready(function () {
     
     $("#accBtnAcceder").attr('disabled','');
     
+    if (document.getElementById("accederEmail") !== null){
+        var lSt = localStorage;
+        if (lSt.getItem("rEyP") !== null && lSt.getItem("rEyP") !== "null"){
+            var arrRec = lSt.getItem("rEyP").split(";");
+            document.getElementById("accederEmail").value = DescifrarASCII(arrRec[0]);
+            document.getElementById("InpMOPasswordAcceder").value = DescifrarASCII(arrRec[1]);
+            $("#accederRecordar").attr('checked','');
+
+            $('#accBtnAcceder').removeAttr('disabled');
+        }
+
+        var inpE = document.getElementById("accederEmail");
+        var inpP = document.getElementById("InpMOPasswordAcceder");
+        inpE.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("accBtnAcceder").click();
+            }
+        });
+        inpP.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("accBtnAcceder").click();
+            }
+        });
+    }
+    
     /* Redirección de botones en el Nav */
     $('.menupriniu ul li #Acceder').click(function(){
         var accederAltura = $('.sectionAcceso').offset().top;
@@ -53,6 +80,18 @@ $(document).ready(function () {
     });
 });
 
+function btnAcceder(){
+    var lSt = localStorage;
+    if (document.getElementById("accederRecordar").checked === true){
+        var valE = document.getElementById("accederEmail").value;
+        var valP = document.getElementById("InpMOPasswordAcceder").value;
+        lSt.setItem("rEyP", CifrarASCII(valE)+";"+CifrarASCII(valP));
+    } else {
+        lSt.removeItem("rEyP");
+    }
+    document.getElementById("accederForm").submit();
+}
+
 /* Hover de los elementos ocultos en el Nav */
 $('.naviu').hover(
     function () {
@@ -81,10 +120,20 @@ function validacionAcceder(inpActual,idInpContrario){
         }
     }
     
-    if(inpActual.value.length > 0 && document.getElementById(idInpContrario).value.length > 0){
-        $('#accBtnAcceder').removeAttr('disabled');
+    if (idInpContrario === "InpMOPasswordAcceder"){
+        var inpC = document.getElementById(idInpContrario);
+        if((inpActual.value.includes("@") && (inpActual.value.length >= 10 && inpActual.value.length <= 150)) && (inpC.value.length >= 3 && inpC.value.length <= 20)){
+            $('#accBtnAcceder').removeAttr('disabled');
+        } else {
+            $('#accBtnAcceder').attr('disabled','');
+        }
     } else {
-        $('#accBtnAcceder').attr('disabled','');
+        var inpC = document.getElementById(idInpContrario);
+        if((inpActual.value.length >= 3 && inpActual.value.length <= 20) && (inpC.value.includes("@") && (inpC.value.length >= 10 && inpC.value.length <= 150))){
+            $('#accBtnAcceder').removeAttr('disabled');
+        } else {
+            $('#accBtnAcceder').attr('disabled','');
+        }
     }
 }
 
@@ -236,7 +285,33 @@ function MOPass (mod) {
 }
 // </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="Sección Elija Sede">
+function validacionSedeElejida(idSede) {
+    document.getElementById("indexElijaSedeUsuario").value = idSede;
+}
+// </editor-fold>
+
 // <editor-fold defaultstate="collapsed" desc="Sección Carta">
+$(document).ready(function(){
+    $('.sectionCartaCBody .bc').hover(
+        function () {
+            var dataTargetAcc = this.dataset.target;
+            $(dataTargetAcc+" .panel-body").css('border', 'solid 2px #fff');
+            $(dataTargetAcc+" .panel-body").css('border-top', 'none');
+        },
+        function () {
+            var dataTargetAcc = this.dataset.target;
+            $(dataTargetAcc+" .panel-body").css('border', 'solid 2px #365892');
+            $(dataTargetAcc+" .panel-body").css('border-top', 'none');
+        }
+    );
+    $('#elijaOtraSede').click(function(){
+        var elijaSedeAltura = $('.sectionElijaSede').offset().top - 43;
+        $('body, html').animate({
+            scrollTop: elijaSedeAltura+'px'
+        }, 600);
+    });
+});
 function formatNumberReturn(numero) {
     // Variable que contendra el resultado final
     var resultado = "";
@@ -252,7 +327,7 @@ function formatNumberReturn(numero) {
     
     return resultado;
 }
-function verCartaSede(nombreSede,
+/*function verCartaSede(nombreSede,
         rangoSede,
         cadenaCate,
         cadenaProd,
@@ -406,28 +481,7 @@ function verCartaSede(nombreSede,
         document.getElementById("CJAccordion").insertAdjacentHTML("beforeend",`<div class="panel-group" id="accordionCarta"></div>`);
     }
     document.getElementById('ModalCarta').style.display = 'block';
-}
-
-var modalCarta = document.getElementById('ModalCarta');
-var flexCarta = document.getElementById('FlexCarta');
-var cerrarHCarta = document.getElementById('CerrarHeaderCarta');
-var cerrarBCarta = document.getElementById('CerrarBodyCarta');
-
-if (modalCarta !== null){
-    cerrarHCarta.addEventListener('click', function () {
-        modalCarta.style.display = 'none';
-    });
-
-    cerrarBCarta.addEventListener('click', function () {
-        modalCarta.style.display = 'none';
-    });
-
-    window.addEventListener('click', function (e) {
-        if (e.target === flexCarta) {
-            modalCarta.style.display = 'none';
-        }
-    });
-}
+}*/
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Sección Domicilios">

@@ -150,6 +150,9 @@ public class Acceder extends HttpServlet {
                                 session.setAttribute("rolSedeUsuario", rolsede);
                                 session.setAttribute("idCiudadUsuario", idciud);
                                 session.setAttribute("nomCiudadUsuario", nomciud);
+                                session.setAttribute("elijaIdSede", idsede);
+                                session.setAttribute("elijaNomSede", nomsede);
+                                session.setAttribute("elijaRolSede", rolsede);
 
                                 request.getRequestDispatcher("index").forward(request, response);
                             }
@@ -201,6 +204,9 @@ public class Acceder extends HttpServlet {
                         session.setAttribute("rolSedeUsuario", rolsede);
                         session.setAttribute("idCiudadUsuario", idciud);
                         session.setAttribute("nomCiudadUsuario", nomciud);
+                        session.setAttribute("elijaIdSede", idsede);
+                        session.setAttribute("elijaNomSede", nomsede);
+                        session.setAttribute("elijaRolSede", rolsede);
 
                         request.getRequestDispatcher("index").forward(request, response);
                     }

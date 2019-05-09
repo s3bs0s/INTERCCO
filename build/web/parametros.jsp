@@ -206,18 +206,11 @@
                                                                 nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario"); 
                                                             }
                                                             for (Productos prod : listaProductos) {%>
-                                                            <% if (prod.getNombreSede().equals(nomSedeUsuario)) {
-
-                                                                String numero = String.valueOf(prod.getPrecio());
-                                                                String resultado = "";
-                                                                for (int j = 0, i = numero.length() - 1; i >= 0; i--) {
-                                                                    resultado = numero.charAt(i) + ((j > 0) && (j % 3 == 0) ? "." : "") + resultado;
-                                                                    j++;
-                                                                } %>
+                                                            <% if (prod.getNombreSede().equals(nomSedeUsuario)) { %>
                                                                 <tr>
                                                                     <td><%= prod.getNombreCategoria()%></td>
                                                                     <td><%= prod.getNombre()%></td>
-                                                                    <td><%= resultado%></td>
+                                                                    <td><%= dP.formatNumber(prod.getPrecio()) %></td>
                                                                     <td>
                                                                         <div class="td-espaciado">
                                                                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productosVerModal" onClick="productosVerModal('<%= cA.CifrarASCII(prod.getNombreCategoria()) %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
@@ -252,19 +245,12 @@
                                                     </tr>
                                                 </tfoot>
                                                 <tbody>
-                                                    <% for (Productos prod : listaProductos) {
-
-                                                        String numero = String.valueOf(prod.getPrecio());
-                                                        String resultado = "";
-                                                        for (int j = 0, i = numero.length() - 1; i >= 0; i--) {
-                                                            resultado = numero.charAt(i) + ((j > 0) && (j % 3 == 0) ? "." : "") + resultado;
-                                                            j++;
-                                                        } %>
+                                                    <% for (Productos prod : listaProductos) { %>
                                                         <tr>
                                                             <td><%= prod.getNombreSede()%></td>
                                                             <td><%= prod.getNombreCategoria()%></td>
                                                             <td><%= prod.getNombre()%></td>
-                                                            <td><%= resultado%></td>
+                                                            <td><%= dP.formatNumber(prod.getPrecio()) %></td>
                                                             <td>
                                                                 <div class="td-espaciado">
                                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productosVerModal" onClick="productosVerModal('<%= cA.CifrarASCII(prod.getNombreCategoria()) %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>

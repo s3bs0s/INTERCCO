@@ -166,7 +166,7 @@
                                         <th>Hora</th>
                                         <th>Empleado</th>
                                         <th>Mesa</th>
-                                        <th>SubTotal</th>
+                                        <th>Subtotal</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -177,7 +177,7 @@
                                         <th>Hora</th>
                                         <th>Empleado</th>
                                         <th>Mesa</th>
-                                        <th>SubTotal</th>
+                                        <th>Subtotal</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -248,7 +248,7 @@
                                         <th>Hora</th>
                                         <th>Cliente</th>
                                         <th>Dirección Entrega</th>
-                                        <th>SubTotal</th>
+                                        <th>Subtotal</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -259,7 +259,7 @@
                                         <th>Hora</th>
                                         <th>Cliente</th>
                                         <th>Dirección Entrega</th>
-                                        <th>SubTotal</th>
+                                        <th>Subtotal</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -487,7 +487,7 @@
                                         <th>Fecha</th>
                                         <th>Hora</th>
                                         <th>Mesa</th>
-                                        <th>SubTotal</th>
+                                        <th>Subtotal</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -497,7 +497,7 @@
                                         <th>Fecha</th>
                                         <th>Hora</th>
                                         <th>Mesa</th>
-                                        <th>SubTotal</th>
+                                        <th>Subtotal</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -572,7 +572,7 @@
                                         <th>Hora</th>
                                         <th>Cliente</th>
                                         <th>Dirección Entrega</th>
-                                        <th>SubTotal</th>
+                                        <th>Subtotal</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -583,7 +583,7 @@
                                         <th>Hora</th>
                                         <th>Cliente</th>
                                         <th>Dirección Entrega</th>
-                                        <th>SubTotal</th>
+                                        <th>Subtotal</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>

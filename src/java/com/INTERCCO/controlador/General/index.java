@@ -45,12 +45,68 @@ public class index extends HttpServlet {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             
             
+            // Listar de SELECTS //
+            
+            ArrayList<Sedes> listaSedSIndex = new ArrayList<>();
+            
+            ps = con.prepareStatement("SELECT idSedes,nombre FROM sedes ORDER BY idSedes DESC;");
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Sedes sd = new Sedes();
+                sd.setIdSedes(rs.getInt("idSedes"));
+                sd.setNombre(rs.getString("nombre"));
+                
+                listaSedSIndex.add(sd);
+            }
+            
+            int elijaSede = 0;
+            if (session.getAttribute("rolUsuario").equals("Usuario")){
+                if (request.getParameter("elijaIdSede") == null){
+                    ps.close();
+                    rs.close();
+                    ps = con.prepareStatement("SELECT idSedes,nombre,rango FROM sedes ORDER BY idSedes DESC LIMIT 1;");
+                    rs = ps.executeQuery();
+                    if (rs.next()){
+                        session.setAttribute("elijaIdSede", rs.getInt("idSedes"));
+                        session.setAttribute("elijaNomSede", rs.getString("nombre"));
+                        session.setAttribute("elijaRolSede", rs.getString("rango"));
+                        elijaSede = (int)session.getAttribute("elijaIdSede");
+                    }
+                } else {
+                    ps.close();
+                    rs.close();
+                    ps = con.prepareStatement("SELECT idSedes,nombre,rango FROM sedes WHERE idSedes=?;");
+                    ps.setInt(1, Integer.parseInt(request.getParameter("elijaIdSede")));
+                    rs = ps.executeQuery();
+                    if (rs.next()){
+                        session.setAttribute("elijaIdSede", rs.getInt("idSedes"));
+                        session.setAttribute("elijaNomSede", rs.getString("nombre"));
+                        session.setAttribute("elijaRolSede", rs.getString("rango"));
+                        elijaSede = (int)session.getAttribute("elijaIdSede");
+                    }
+                }
+            } else {
+                ps.close();
+                rs.close();
+                ps = con.prepareStatement("SELECT idSedes,nombre,rango FROM sedes WHERE idSedes=?;");
+                ps.setInt(1, (int)session.getAttribute("elijaIdSede"));
+                rs = ps.executeQuery();
+                if (rs.next()){
+                    session.setAttribute("elijaIdSede", rs.getInt("idSedes"));
+                    session.setAttribute("elijaNomSede", rs.getString("nombre"));
+                    session.setAttribute("elijaRolSede", rs.getString("rango"));
+                    elijaSede = (int)session.getAttribute("elijaIdSede");
+                }
+            }
+            
             // Listar de TABLAS //
             
             ArrayList<Sedes> listaSedeIndex = new ArrayList<>();
             
             int contSedeExistentes = 0;
             int contSedePExistentes = 0;
+            ps.close();
+            rs.close();
             ps = con.prepareStatement("SELECT * FROM sedes;");
             rs = ps.executeQuery();
             while (rs.next()){
@@ -85,8 +141,9 @@ public class index extends HttpServlet {
             
             ArrayList<Categorias> listaCateIndex = new ArrayList<>();
             
-            ps = con.prepareStatement("SELECT * FROM categorias WHERE existencia=?;");
+            ps = con.prepareStatement("SELECT * FROM categorias WHERE existencia=? AND idSede=?;");
             ps.setString(1, "Y");
+            ps.setInt(2, elijaSede);
             rs = ps.executeQuery();
             while (rs.next()){
                 Categorias ct = new Categorias();
@@ -115,8 +172,9 @@ public class index extends HttpServlet {
             
             ps.close();
             rs.close();
-            ps = con.prepareStatement("SELECT * FROM productos WHERE existencia=?;");
+            ps = con.prepareStatement("SELECT * FROM productos WHERE existencia=? AND idSede=?;");
             ps.setString(1, "Y");
+            ps.setInt(2, elijaSede);
             rs = ps.executeQuery();
             while (rs.next()){
                 Productos pd = new Productos();
@@ -158,8 +216,9 @@ public class index extends HttpServlet {
             
             ps.close();
             rs.close();
-            ps = con.prepareStatement("SELECT * FROM promociones WHERE existencia=?;");
+            ps = con.prepareStatement("SELECT * FROM promociones WHERE existencia=? AND idSede=?;");
             ps.setString(1, "Y");
+            ps.setInt(2, elijaSede);
             rs = ps.executeQuery();
             while (rs.next()){
                 Promociones pm = new Promociones();
@@ -332,40 +391,6 @@ public class index extends HttpServlet {
                 
                 listaUsuaIndex.add(ifus);
             }
-            
-            
-            // Listar de SELECTS //
-            
-            ArrayList<Sedes> listaSedSIndex = new ArrayList<>();
-            
-            ps.close();
-            rs.close();
-            ps = con.prepareStatement("SELECT idSedes,nombre FROM sedes ORDER BY idSedes DESC;");
-            rs = ps.executeQuery();
-            while (rs.next()){
-                Sedes sd = new Sedes();
-                sd.setIdSedes(rs.getInt("idSedes"));
-                sd.setNombre(rs.getString("nombre"));
-                
-                listaSedSIndex.add(sd);
-            }
-            
-            // --------------------- //
-            
-//            ArrayList<Productos> listaProSPar = new ArrayList<>();
-//            
-//            ps.close();
-//            rs.close();
-//            ps = con.prepareStatement("SELECT idProductos,nombre FROM productos WHERE existencia=? ORDER BY idProductos DESC;");
-//            ps.setString(1, "Y");
-//            rs = ps.executeQuery();
-//            while (rs.next()){
-//                Productos pd = new Productos();
-//                pd.setIdProductos(rs.getInt("idProductos"));
-//                pd.setNombre(rs.getString("nombre"));
-//                
-//                listaProSPar.add(pd);
-//            }
             
 
             // Listar de Estados //

@@ -225,19 +225,23 @@ var cerrarB = document.getElementById('CerrarBodyPerfil');
 if (modal !== null){
     abrir.addEventListener('click', function () {
         modal.style.display = 'block';
+        $('html,body').css('overflow', 'hidden');
     });
 
     cerrarH.addEventListener('click', function () {
         modal.style.display = 'none';
+        $('html,body').css('overflow', 'auto');
     });
 
     cerrarB.addEventListener('click', function () {
         modal.style.display = 'none';
+        $('html,body').css('overflow', 'auto');
     });
 
     window.addEventListener('click', function (e) {
         if (e.target === flex) {
             modal.style.display = 'none';
+            $('html,body').css('overflow', 'auto');
         }
     });
 }

@@ -1,3 +1,4 @@
+<%@page import="com.INTERCCO.controlador.General.DecoracionPesos"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Date"%>
@@ -21,6 +22,7 @@
     <link rel="icon" href="Estilos/img/PapeleriaCorporativaSucco/Favicon/Marca SUCCO COREL (Favicon-ICO).ico">
 <head>
     <%  CifradoASCII cA = new CifradoASCII();
+        DecoracionPesos dP = new DecoracionPesos();
         int idUsuario = 0;
         String verificadoUsuario = "";
         String emailUsuario = "";
@@ -58,12 +60,16 @@
         genUsuario = (String) session.getAttribute("genUsuario");
         fnaUsuario = (String) session.getAttribute("fnaUsuario");
         dirUsuario = (String) session.getAttribute("dirUsuario");
-        idSedeUsuario = (int) session.getAttribute("idSedeUsuario"); 
+        idSedeUsuario = (int) session.getAttribute("idSedeUsuario");
         nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario");
     }
     
     if (rolUsuario.equals("Usuario")){ %>
-    <body onload="agregarCookies()">
+    <% if (session.getAttribute("elijaIdSede") != null){ %>
+    <body onload="validacionSedeElejida('<%= session.getAttribute("elijaIdSede") %>')">
+    <% } else { %>
+    <body>
+    <% } %>
         <header>
             <nav class="naviu">
                 <div class="logonaviu">
@@ -83,7 +89,7 @@
         </header>
         
     <% } else if (rolUsuario.equals("Cliente")) { %>
-    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
         <header>
             <nav class="naviu">
                 <div class="logonaviu">
@@ -116,7 +122,7 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } else if (rolUsuario.equals("Domiciliario")) { %>
-    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
         <header>
             <div class="logoheader">
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
@@ -150,7 +156,7 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } else if (rolUsuario.equals("Mesero")) { %>
-    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
         <header>
             <div class="logoheader">
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
@@ -184,7 +190,7 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } else if (rolUsuario.equals("Cocinero")) { %>
-    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
         <header>
             <div class="logoheader">
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
@@ -218,7 +224,7 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } else if (rolUsuario.equals("Cajero")) { %>
-    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
         <header>
             <div class="logoheader">
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
@@ -253,7 +259,7 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } else if (rolUsuario.equals("Gerente")) { %>
-    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
     <!--<body onload="mueveReloj()">-->
         <header>
             <div class="logoheader">
@@ -294,7 +300,7 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } else if (rolUsuario.equals("AdminS")) { %>
-    <body onload="agregarCookies(); mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
+    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
         <header>
             <div class="logoheader">
                 <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
@@ -330,54 +336,4 @@
         </header>
     <%@include file="perfilModal.jsp" %>
     <% } %>
-    <script>
-        /*function agregarCookies(){
-            var lSt = localStorage;
-            if (lSt.getItem("nomUsuario") === "" || lSt.getItem("nomUsuario") === null){
-                lSt.setItem("idUsuario", "<%-- session.getAttribute("idUsuario") %>");
-                lSt.setItem("verificadoUsuario", "<%= session.getAttribute("verificadoUsuario") %>");
-                lSt.setItem("emailUsuario", "<%= session.getAttribute("emailUsuario") %>");
-                lSt.setItem("passwordUsuario", "<%= session.getAttribute("passwordUsuario") %>");
-                lSt.setItem("nomUsuario", "<%= cA.CifrarASCII((String)session.getAttribute("nomUsuario")) %>");
-                lSt.setItem("apeUsuario", "<%= session.getAttribute("apeUsuario") %>");
-                lSt.setItem("fotUsuario", "<%= session.getAttribute("fotUsuario") %>");
-                lSt.setItem("rolUsuario", "<%= session.getAttribute("rolUsuario") %>");
-                lSt.setItem("tipoUsuario", "<%= session.getAttribute("tipoUsuario") %>");
-                lSt.setItem("numUsuario", "<%= session.getAttribute("numUsuario") %>");
-                lSt.setItem("telUsuario", "<%= session.getAttribute("telUsuario") %>");
-                lSt.setItem("movUsuario", "<%= session.getAttribute("movUsuario") %>");
-                lSt.setItem("genUsuario", "<%= session.getAttribute("genUsuario") %>");
-                lSt.setItem("fnaUsuario", "<%= session.getAttribute("fnaUsuario") %>");
-                lSt.setItem("dirUsuario", "<%= session.getAttribute("dirUsuario") %>");
-                lSt.setItem("idSedeUsuario", "<%= session.getAttribute("idSedeUsuario") %>");
-                lSt.setItem("nomSedeUsuario", "<%= cA.CifrarASCII((String)session.getAttribute("nomSedeUsuario")) %>");
-                lSt.setItem("rolSedeUsuario", "<%= session.getAttribute("rolSedeUsuario") %>");
-                lSt.setItem("idCiudadUsuario", "<%= session.getAttribute("idCiudadUsuario") %>");
-                lSt.setItem("nomCiudadUsuario", "<%= session.getAttribute("nomCiudadUsuario") --%>");
-            }
-        }
-        function removerCookies(){
-            var sSt = sessionStorage;
-            sSt.removeItem("idUsuario");
-            sSt.removeItem("verificadoUsuario");
-            sSt.removeItem("emailUsuario");
-            sSt.removeItem("passwordUsuario");
-            sSt.removeItem("nomUsuario");
-            sSt.removeItem("apeUsuario");
-            sSt.removeItem("fotUsuario");
-            sSt.removeItem("rolUsuario");
-            sSt.removeItem("tipoUsuario");
-            sSt.removeItem("numUsuario");
-            sSt.removeItem("telUsuario");
-            sSt.removeItem("movUsuario");
-            sSt.removeItem("genUsuario");
-            sSt.removeItem("fnaUsuario");
-            sSt.removeItem("dirUsuario");
-            sSt.removeItem("idSedeUsuario");
-            sSt.removeItem("nomSedeUsuario");
-            sSt.removeItem("rolSedeUsuario");
-            sSt.removeItem("idCiudadUsuario");
-            sSt.removeItem("nomCiudadUsuario");
-        }*/
-    </script>
 </body>

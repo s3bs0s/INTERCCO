@@ -338,6 +338,90 @@
                     .sectionAcceso .saContent .saAContent form .saAContentBtns:hover,.saAContentBtns:focus{
                         background:#365892;
                     }
+                    
+                /* <editor-fold defaultstate="collapsed" desc="Recordar"> */
+                .sectionAcceso .saContent .saAContent form .contentInputRecuerdame{
+                    font-family: 'Calibri Ligth', Arial;
+                    font-size: 1.2em;
+                    display: flex;
+                    justify-content:center;
+                    align-items:center;
+                    margin:10px 0;
+                    font-weight:normal;
+                }
+                    .sectionAcceso .saContent .saAContent form .contentInputRecuerdame span{
+                        display:flex;
+                        align-items:center;
+                        margin-right:10px;
+                        color:#446EB6;
+                    }
+                    .sectionAcceso .saContent .saAContent form .contentInputRecuerdame input{
+                        appearance: none;
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        opacity: 0;
+                        position: absolute;
+                        top:50%;
+                        right: 0;
+                    }
+                    .sectionAcceso .saContent .saAContent form .contentInputRecuerdame i,
+                    .sectionAcceso .saContent .saAContent form .contentInputRecuerdame i:before{
+                        transition: all 0.25s ease;
+                    }
+                    .sectionAcceso .saContent .saAContent form .contentInputRecuerdame input[type=checkbox] + i{
+                        width: 52px;
+                        height: 30px;
+                        display:inline-block;
+                        position: relative;
+                        border-radius: 15px;
+                    }
+                    .sectionAcceso .saContent .saAContent form .contentInputRecuerdame input + i{
+                        background: #CDD9EC;
+                        border:2px solid rgba(0,0,0,0.2);
+                    }
+                        .sectionAcceso .saContent .saAContent form .contentInputRecuerdame:hover i{
+                            background: #9FB5DA;
+                        }
+                        
+                    .sectionAcceso .saContent .saAContent form .contentInputRecuerdame input[type=checkbox] + i:before{
+                        content: '';
+                        width: 26px;
+                        height: 26px;
+                        background: #fff;
+                        cursor:pointer;
+                        display:inline-block;
+                        border-radius: 50%;
+                        position: absolute;
+                        left: 0px;
+                        top: 0px;
+                        z-index: 1;
+                        -webkit-box-shadow: 3px 0 3px 0 rgba(0,0,0,0.2);
+                        box-shadow: 3px 0 3px 0 rgba(0,0,0,0.2);
+                    }
+                    .sectionAcceso .saContent .saAContent form .contentInputRecuerdame input[type=checkbox] + i:after{
+                        content: 'SI';
+                        font-size: 12px;
+                        display:inline-block;
+                        color:#fff;
+                        position: absolute;
+                        top: 6.2px;
+                        left: 7.5px;
+                        opacity: 0;
+                        transition: all 0.25s ease 0.25s;
+                    }
+
+                    .sectionAcceso .saContent .saAContent form .contentInputRecuerdame input[type=checkbox]:checked + i{
+                        background: #446EB6;
+                    }
+                    .sectionAcceso .saContent .saAContent form .contentInputRecuerdame input[type=checkbox]:checked + i:before{
+                        left: 22px;
+                        -webkit-box-shadow: -3px 0 3px 0 rgba(0,0,0,0.2);
+                        box-shadow: 3px 0 -3px 0 rgba(0,0,0,0.2);
+                    }
+                    .sectionAcceso .saContent .saAContent form .contentInputRecuerdame input[type=checkbox]:checked + i:after{
+                        opacity: 1;
+                    }
+                /* </editor-fold> */
 
                 .sectionAcceso .saContent .saAContent form .saAContentFormCJOC{
                     margin:10px auto;
@@ -490,68 +574,187 @@
     width:100%;
     padding:20px 0;
     background:#698BC5;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
 }
-    .sectionCarta .scCajaBtn{
-        width:85%;
-        height:auto;
-        margin:auto;
-        display:flex;
-
-        flex-flow:column nowrap;
-    }  
-        .sectionCarta .scCajaBtn .scBtnTitulo{
-            width:85%;
-            padding:8px 10px;
-            background:#fff;
-            border-top-right-radius:10px;
-            border-bottom-left-radius:10px;
-            text-align:center;
-            margin:auto;
-            margin-bottom:20px;
-        }
-            .sectionCarta .scCajaBtn .scBtnTitulo p:first-child{
-                font-family:"Calibri Light", Arial;
-                font-size:30px;
-                letter-spacing:1.5pt;
-                color:#446EB6;
-            }
-            .sectionCarta .scCajaBtn .scBtnTitulo p:last-child{
-                font-family:"Calibri Light", Arial;
-                font-size:21px;
-                letter-spacing:.5pt;
-                color:#446EB6;
-            }
-            
-        .sectionCarta .scCajaBtn .scBtnSedes{
+    .sectionCarta .sectionCartaC{
+        border:solid 6px #fff;
+        border-top-left-radius:40px;
+        border-bottom-right-radius:40px;
+        background:#446EB6;
+    }
+        .sectionCarta .sectionCartaC .sectionCartaCHeader{
+            padding:15px 50px;
             width:100%;
-            height:auto;
             display:flex;
-            flex-flow:row wrap;
-            justify-content:space-around;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
         }
-            .sectionCarta .scCajaBtn .scBtnSedes button{
-                outline:none;
-                background:#446EB6;
-                font-size:22px;
-                border-radius:8px;
-                letter-spacing:1pt;
+            .sectionCarta .sectionCartaC .sectionCartaCHeader p{
                 color:#fff;
-                font-family:"Calibri Light", Arial;
-                padding:8px 16px;
-                margin:5px 15px;
+                font-size:40px;
+                letter-spacing:.5pt;
+            }
+        
+        .sectionCarta .sectionCartaC hr{
+            width:80%;
+            border-color:#fff;
+            border-width:2px;
+            opacity:1;
+        }
+
+        .sectionCarta .sectionCartaC .sectionCartaCBody{
+            padding: 10px;
+        }
+            .sectionCarta .sectionCartaC .sectionCartaCBody .sectionCartaCBodyInfo{
+                text-align:center;
+                margin-bottom:10px;
+            }
+                .sectionCarta .sectionCartaC .sectionCartaCBody .sectionCartaCBodyInfo p{
+                    color:#fff;
+                    font-size:18px;
+                    letter-spacing:.5pt;
+                }
+                
+            .sectionCarta .sectionCartaC .sectionCartaCBody .sectionCartaCBodyInfoSC{
+                text-align:center;
+                margin-top:10px;
+            }
+                .sectionCarta .sectionCartaC .sectionCartaCBody .sectionCartaCBodyInfoSC p{
+                    color:#fff;
+                    font-size:23px;
+                    letter-spacing:.5pt;
+                }
+                
+            .sectionCarta .sectionCartaC .sectionCartaCBody button.bc{
+                outline:none;
+                letter-spacing:1pt;
+                padding:10px 50px;
+                position:relative;
+                width:100%;
+                border-top-left-radius:6px;
+                border-top-right-radius:6px;
+                font-size:23px;
+                border:none;
+                color:#fff;
+                background:#365892;
                 -webkit-transition:all 200ms ease;
                 -o-transition:all 200ms ease;
                 transition:all 200ms ease;
             }
-                .sectionCarta .scCajaBtn .scBtnSedes button:hover{
-                    outline:none;
+                .sectionCarta .sectionCartaC .sectionCartaCBody button.bc:hover{
+                    color:#365892;
+                    border:none;
                     background:#fff;
-                    color:#446EB6;
                 }
-                .sectionCarta .scCajaBtn .scBtnSedes button:focus{
-                    outline:none;
-                    background:#fff;
-                    color:#446EB6;
+                    .sectionCarta .sectionCartaC .sectionCartaCBody button.bc .btn-collap{
+                        position:absolute;
+                        right:13px;
+                        height:90%;
+                        display:flex;
+                        align-items:center;
+                    }
+
+            .sectionCarta .sectionCartaC .sectionCartaCBody .panel-default,.panel-heading,.panel{
+                background:none !important;
+                border:none !important;
+            }
+            .sectionCarta .sectionCartaC .sectionCartaCBody .panel-group{
+                margin:0;
+            }
+            .sectionCarta .sectionCartaC .sectionCartaCBody .panel-body{
+                border:solid 2px #365892;
+                border-bottom-left-radius:6px;
+                border-bottom-right-radius:6px;
+                border-top:none;
+                padding:5px 10px;
+                display:flex;
+                flex-flow:column nowrap;
+                -webkit-transition:all 200ms ease;
+                -o-transition:all 200ms ease;
+                transition:all 200ms ease;
+            }
+                .sectionCarta .sectionCartaC .sectionCartaCBody .panel-body .panelBCartaCJProd{
+                    display:flex;
+                    flex-flow:row nowrap;
+                    justify-content:space-between;
+                    align-items:center;
+                }
+                    .sectionCarta .sectionCartaC .sectionCartaCBody .panel-body .panelBCartaCJProd{
+                        display:flex;
+                        flex-flow:row nowrap;
+                        justify-content:space-between;
+                        align-items:center;
+                    }
+                        .sectionCarta .sectionCartaC .sectionCartaCBody .panel-body .panelBCartaCJProd p{
+                            color:#fff;
+                            font-size:18.5px;
+                        }
+                        .sectionCarta .sectionCartaC .sectionCartaCBody .panel-body .panelBCartaCJProd .panelBCartaNomProd{
+                            padding:0 2px;
+                            margin-right:15px;
+                        }
+                        .sectionCarta .sectionCartaC .sectionCartaCBody .panel-body .panelBCartaCJProd .panelBCartaPreProd{
+                            padding:0 2px;
+                            margin-left:15px;
+                        }
+                        
+                    .sectionCarta .sectionCartaC .sectionCartaCBody .panel-body .panelBCartaCJDesc{
+                        padding:0 8px;
+                        margin-bottom:5px;
+                        display:flex;
+                        flex-flow:row nowrap;
+                        justify-content:space-between;
+                        align-items:center;
+                    }
+                        .sectionCarta .sectionCartaC .sectionCartaCBody .panel-body .panelBCartaCJDesc p{
+                            color:#ccc;
+                            font-size:17px;
+                        }
+                        .sectionCarta .sectionCartaC .sectionCartaCBody .panel-body .panelBCartaCJDesc .panelBCartaCanDesc{
+                            padding:2px;
+                            margin-right:10px;
+                        }
+                        .sectionCarta .sectionCartaC .sectionCartaCBody .panel-body .panelBCartaCJDesc .panelBCartaPreDesc{
+                            padding:2px;
+                            margin-left:10px;
+                        }
+                        
+                    .sectionCarta .sectionCartaC .sectionCartaCBody .panel-body .panelBCartaCJDescrip{
+                        margin:0 auto 8px auto;
+                        max-width:600px;
+                        padding:0 8px;
+                    } 
+                        .sectionCarta .sectionCartaC .sectionCartaCBody .panel-body .panelBCartaCJDescrip .panelBCartaDescrip{
+                            width:100%;
+                            text-align:justify;
+                        }
+                            .sectionCarta .sectionCartaC .sectionCartaCBody .panel-body .panelBCartaCJDescrip .panelBCartaDescrip p{
+                                color:#ccc;
+                                font-size:17px;
+                            }
+            
+        .sectionCarta .sectionCartaC .sectionCartaCFooter{
+            width:100%;
+            display:flex;
+            justify-content:center;
+            padding:10px 0;
+        }
+            .sectionCarta .sectionCartaC .sectionCartaCFooter .btnFooterCarta{
+                outline:none;
+                background:#fff;
+                letter-spacing:1pt;
+                color:#365892;
+                font-size:21px;
+                -webkit-transition:all 200ms ease;
+                -o-transition:all 200ms ease;
+                transition:all 200ms ease;
+            }
+                .sectionCarta .sectionCartaC .sectionCartaCFooter .btnFooterCarta:hover,.btnFooterCarta:focus{
+                    background:#365892;
+                    color:#fff;
                 }
 /* </editor-fold> */
 

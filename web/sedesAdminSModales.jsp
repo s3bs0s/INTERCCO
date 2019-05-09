@@ -152,6 +152,9 @@
                     <h4 class="modal-title"><span class="glyphicon glyphicon-globe"></span><label id="verTituloNombreSedes" class="me">Detalles de..</label></h4>
                 </div>
                 <div class="mb-textaling modal-body">
+                    <div class="cont-titulo-sect">
+                        <h1 class="titulo-sect">Información de la Sede</h1>
+                    </div>
                     <div class="verDetalles-caj">
                         <div>
                             <div>
@@ -185,11 +188,35 @@
                                 <p class="verDetalles-contenido" id="verHorariosSedes"></p>
                             </div>
                         </div>
-                        <hr>
-                        <div>
-                            <div>
-                                <p class="verDetalles-titulo">SRC de Maps Google:</p>
-                                <p class="verDetalles-contenido" id="verSrcSedes"></p>
+                    </div>
+                    <div class="cont-titulo-sect">
+                        <h1 class="titulo-sect">Mapa Google de la Sede</h1>
+                    </div>
+                    <div class="panel-group" id="accordionVerSede">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <button type="button" class="bc" data-toggle="collapse" data-parent="#accordionVerSede" data-target="#verSRC">Presióne para ver<span class="glyphicon glyphicon-plus btn-collap"></span></button>
+                            </div>
+                            <div id="verSRC" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="verDetalles-caj">
+                                        <div>
+                                            <div>
+                                                <p class="verDetalles-titulo">SRC:</p>
+                                                <p class="verDetalles-contenido" id="verSrcSedes"></p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div>
+                                            <div>
+                                                <p class="verDetalles-titulo">Mapa:</p>
+                                                <p class="verDetalles-contenido" id="verMapaSedes">
+                                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d16289433.169682765!2d-83.39715810640162!3d4.6097012817348455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e15a43aae1594a3%3A0x9a0d9a04eff2a340!2sColombia!5e0!3m2!1ses-419!2sco!4v1557393603755!5m2!1ses-419!2sco" width="100%" height="300" frameborder="0" allowfullscreen></iframe>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

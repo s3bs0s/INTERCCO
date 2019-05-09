@@ -34,6 +34,9 @@ public class Salir extends HttpServlet {
         session.setAttribute("rolSedeUsuario", null);
         session.setAttribute("idCiudadUsuario", null);
         session.setAttribute("nomCiudadUsuario", null);
+        session.setAttribute("elijaSede", null);
+        session.setAttribute("elijaNomSede", null);
+        session.setAttribute("elijaRolSede", null);
         if (mensaje == null){
             request.getRequestDispatcher("index").forward(request, response);
         } else {

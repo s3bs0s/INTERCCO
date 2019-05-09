@@ -1,3 +1,5 @@
+<%@page import="com.INTERCCO.modelo.Beans.Sedes"%>
+<%@page import="java.util.ArrayList"%>
 <section class="sectionElijaSede">
     <article>
         <div class="sesTitulo">
@@ -6,9 +8,11 @@
         </div>
         <div class="sesSelect">
             <div class="input-group">
-                <select required class="form-control" title="Seleccione una sede para ver su información." name="indexElijaSedeUsuario" id="indexElijaSedeUsuario">
-                    <option value="Medellín">Medellín</option>
-                    <option value="Bogotá">Bogotá</option>
+                <% ArrayList<Sedes> listaSedSIndexES = (ArrayList) request.getAttribute("listaSedSIndex"); %>
+                <select required onchange="window.location = 'index?elijaIdSede='+this.value" class="form-control" title="Seleccione una sede para ver su información." name="indexElijaSedeUsuario" id="indexElijaSedeUsuario">
+                    <% for (Sedes  sedeSIndexES: listaSedSIndexES) { %>
+                        <option value="<%= sedeSIndexES.getIdSedes()%>"><%= sedeSIndexES.getNombre()%></option>
+                    <% } %>
                 </select>
             </div>
         </div>
