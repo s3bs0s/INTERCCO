@@ -63,6 +63,47 @@
             </div>
         </div>
     </div>
+    
+    <!-- Modal de Ver -->
+    <div class="modal fade" id="promocionesVerModal" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-eye-open"></span><label class="me">Detalles de la Promoción</label></h4>
+                </div>
+                <div class="mb-textaling modal-body">
+                    <div class="verDetalles-caj">
+                        <div>
+                            <div>
+                                <p class="verDetalles-titulo">Producto de la Promoción:</p>
+                                <p class="verDetalles-contenido" id="verProductoPromocion"></p>
+                            </div>
+                            <div>
+                                <p class="verDetalles-titulo">Fecha de Caducidad:</p>
+                                <p class="verDetalles-contenido" id="verFchCaducidadPromocion"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div>
+                            <div>
+                                <p class="verDetalles-titulo">Porcentaje:</p>
+                                <p class="verDetalles-contenido" id="verPorcentajePromocion"></p>
+                            </div>
+                            <div>
+                                <p class="verDetalles-titulo">Precio con Descuento:</p>
+                                <p class="verDetalles-contenido" id="verPrecioPorcenPromocion"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal para Actualizar -->
     <div class="modal fade" id="promocionesAGerenteModal" role="dialog">

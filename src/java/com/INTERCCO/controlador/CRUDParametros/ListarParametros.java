@@ -167,11 +167,12 @@ public class ListarParametros extends HttpServlet {
                 pm.setIdSede(rs.getInt("idSede"));
                 
                 
-                ps2 = con.prepareStatement("SELECT nombre FROM productos WHERE idProductos=?;");
+                ps2 = con.prepareStatement("SELECT nombre,precio FROM productos WHERE idProductos=?;");
                 ps2.setInt(1, rs.getInt("idProducto"));
                 rs2 = ps2.executeQuery();
                 if (rs2.next()){
                     pm.setNombreProducto(rs2.getString("nombre"));
+                    pm.setPrecioProducto(rs2.getInt("precio"));
                 }
                 ps2.close();
                 rs2.close();

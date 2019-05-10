@@ -160,8 +160,8 @@
                 <%@include file="seccionElijaSedeIndex.jsp" %>
                 <%@include file="seccionCarruselIndex.jsp" %>
                 <%@include file="seccionCartaIndex.jsp" %>
+                <%@include file="seccionPqrsfIndex.jsp" %> <!-- Aca va domicilios, pero esta mientras que no esta. -->
                 <%@include file="seccionAcercadeIndex.jsp" %>
-                <%@include file="seccionPqrsfIndex.jsp" %>
                 
             </div>
         </body>
@@ -231,10 +231,8 @@
                     <% } %>
                 <% }%>
                 
-                <%@include file="seccionCarruselIndex.jsp" %>
-                <%@include file="seccionCartaIndex.jsp" %>
-                <%@include file="seccionAcercadeIndex.jsp" %>
                 <%@include file="seccionPqrsfIndex.jsp" %>
+                <%@include file="seccionCartaIndex.jsp" %>
                 <section class="section4-domi" style="position:relative;">
                     <div style="height:100%; width:100%; background:rgba(0,0,0,0.9); z-index:600; position:absolute; top:0; left:0; display:flex; align-items:center; justify-content:center; ">
                         <img style="width:70%; transform:rotate(-20deg);" src="Estilos/img/PubilicidadSucco/EnConstruccion (Transparente).png" alt="En Contrucción">
@@ -427,6 +425,8 @@
                         </table>
                     </article>
                 </section>
+                <%@include file="seccionCarruselIndex.jsp" %>
+                <%@include file="seccionAcercadeIndex.jsp" %>
             
             </div>
         </body>

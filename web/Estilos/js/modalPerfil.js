@@ -91,7 +91,7 @@ function verModalPerfil(idusu,
     document.getElementById("perfilEmailUsuario").value = DescifrarASCII(email);
     document.getElementById("perfilTelefonoUsuario").value = DescifrarASCII(tel);
     document.getElementById("perfilMovilUsuario").value = DescifrarASCII(movil);
-    document.getElementById("perfilContraActualOcultoUsuario").value = DescifrarASCII(pass);
+    document.getElementById("perfilContraActualOcultoUsuario").value = pass;
     document.getElementById("perfilDireccionUsuario").value = DescifrarASCII(dir);
    
     if (DescifrarASCII(rol) === "Cliente") {
@@ -141,7 +141,8 @@ function ContrasIgualesPerfil(){
 }
 
 function EnviarFormContras(){
-    if (document.getElementById('perfilContraActualOcultoUsuario').value !== document.getElementById('perfilContraActualUsuario').value){
+    var contraActualDescifrada = DescifrarASCII(document.getElementById('perfilContraActualOcultoUsuario').value);
+    if (contraActualDescifrada !== document.getElementById('perfilContraActualUsuario').value){
         document.getElementById('perfilContraActualUsuario').style.color = '#E06666';
         document.getElementById('perfilContraActualUsuario').value = "Contraseña Actual Incorrecta!";
     } else {
@@ -215,6 +216,27 @@ function validarFilePerfil(all){
     }
 }
 // </editor-fold>
+
+$(document).ready(function(){
+    document.getElementById("perfilContraActualUsuario").addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("perfilCambiarContras").click();
+        }
+    });
+    document.getElementById("perfilContraNuevaUsuario").addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("perfilCambiarContras").click();
+        }
+    });
+    document.getElementById("perfilRepitaContraNuevaUsuario").addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("perfilCambiarContras").click();
+        }
+    });
+});
 
 var modal = document.getElementById('ModalPerfil');
 var flex = document.getElementById('FlexPerfil');

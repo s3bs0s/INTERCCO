@@ -122,7 +122,7 @@
             <% } %>
         </div>
         <div class="sectionCartaCFooter">
-            <% if (session.getAttribute("rolUsuario").equals("Usuario")){ %>
+            <% if (session.getAttribute("rolUsuario") == null || session.getAttribute("rolUsuario").equals("Usuario")){ %>
                 <button type="button" id="elijaOtraSede" class="btnFooterCarta btn">Cambiar Sede</button>
             <% } %>
         </div>

@@ -129,10 +129,6 @@
                                 <p class="verDetalles-titulo">Email:</p>
                                 <p class="verDetalles-contenido" id="verEmailUsuario"></p>
                             </div>
-                            <div>
-                                <p class="verDetalles-titulo">Contraseña SUCCO:</p>
-                                <p class="verDetalles-contenido" id="verContraUsuario"></p>
-                            </div>
                         </div>
                         <hr>
                         <div>
@@ -259,10 +255,6 @@
                         <div class="input-group">
                             <span class="input-group-addon">Email:</span>
                             <input disabled type="email" class="form-control" id="actuaEmailUsuario">
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">Contraseña SUCCO:</span>
-                            <input required type="text" onkeypress="this.style.color = '#87A2D1';" minlength="3" maxlength="20" class="form-control" id="actuaContraUsuario" name="actuaContraUsuario">
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">Teléfono:</span>

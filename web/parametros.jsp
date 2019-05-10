@@ -370,7 +370,6 @@
                                                             <th>Hora</th>
                                                             <th>Producto</th>
                                                             <th>Porcentaje</th>
-                                                            <th>Caducidad</th>
                                                             <th>Estado</th>
                                                             <th>Acciones</th>
                                                         </tr>
@@ -381,7 +380,6 @@
                                                             <th>Hora</th>
                                                             <th>Producto</th>
                                                             <th>Porcentaje</th>
-                                                            <th>Caducidad</th>
                                                             <th>Estado</th>
                                                             <th>Acciones</th>
                                                         </tr>
@@ -406,7 +404,6 @@
                                                                     <td><%= eFYH.estHora(hora, "h")+":"+eFYH.estHora(hora, "m") %></td>
                                                                     <td><%= prom.getNombreProducto()%></td>
                                                                     <td><%= prom.getPorcentajePromo()%>%</td>
-                                                                    <td><%= eFYH.estFecha(fechaC, "dd")+"/"+eFYH.estFecha(fechaC, "mm")+"/"+eFYH.estFecha(fechaC, "aa") %></td>
                                                                     <% if (prom.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date)))){ %>
                                                                         <td class="danger">Caducada</td>
                                                                     <% } else { %>
@@ -414,6 +411,7 @@
                                                                     <% } %>
                                                                     <td>
                                                                         <div class="td-espaciado">
+                                                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#promocionesVerModal" onClick="promocionesVerModal('<%= cA.CifrarASCII(prom.getNombreProducto()) %>', '<%= prom.getFchCaducidad()%>', '<%= prom.getPorcentajePromo() %>', '<%= prom.getPrecioProducto()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
                                                                             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#promocionesAGerenteModal" onClick="promocionesActualizarModal('<%= prom.getIdPromociones()%>', '<%= prom.getPorcentajePromo()%>', '<%= prom.getFchCaducidad()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
                                                                             <button type="button" onClick="window.location = 'PromocionE?idProm='+<%= prom.getIdPromociones()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
                                                                         </div>
@@ -434,7 +432,6 @@
                                                             <th>Hora</th>
                                                             <th>Producto</th>
                                                             <th>Porcentaje</th>
-                                                            <th>Caducidad</th>
                                                             <th>Estado</th>
                                                             <th>Acciones</th>
                                                         </tr>
@@ -446,7 +443,6 @@
                                                             <th>Hora</th>
                                                             <th>Producto</th>
                                                             <th>Porcentaje</th>
-                                                            <th>Caducidad</th>
                                                             <th>Estado</th>
                                                             <th>Acciones</th>
                                                         </tr>
@@ -465,7 +461,6 @@
                                                                 <td><%= eFYH.estHora(hora, "h")+":"+eFYH.estHora(hora, "m") %></td>
                                                                 <td><%= prom.getNombreProducto()%></td>
                                                                 <td><%= prom.getPorcentajePromo()%>%</td>
-                                                                <td><%= eFYH.estFecha(fechaC, "dd")+"/"+eFYH.estFecha(fechaC, "mm")+"/"+eFYH.estFecha(fechaC, "aa") %></td>
                                                                 <% if (prom.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date)))){ %>
                                                                     <td class="danger">Caducada</td>
                                                                 <% } else { %>
@@ -473,6 +468,7 @@
                                                                 <% } %>
                                                                 <td>
                                                                     <div class="td-espaciado">
+                                                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#promocionesVerModal" onClick="promocionesVerModal('<%= cA.CifrarASCII(prom.getNombreProducto()) %>', '<%= prom.getFchCaducidad()%>', '<%= prom.getPorcentajePromo() %>', '<%= prom.getPrecioProducto()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
                                                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#promocionesAGerenteModal" onClick="promocionesActualizarModal('<%= prom.getIdPromociones()%>', '<%= prom.getPorcentajePromo()%>', '<%= prom.getFchCaducidad()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
                                                                         <button type="button" onClick="window.location = 'PromocionE?idProm='+<%= prom.getIdPromociones()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
                                                                     </div>

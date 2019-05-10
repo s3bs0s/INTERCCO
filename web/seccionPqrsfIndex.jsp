@@ -6,7 +6,6 @@
 <section class="sectionPqrsf">
 
 <% if (session.getAttribute("rolUsuario") == null || session.getAttribute("rolUsuario").equals("Usuario")){ %>
-        
     <article class="sectionPqrsfR">
         <div class="sectionPqrsfRContent">
             <div class="sectionPqrsfRContentH">
@@ -26,7 +25,6 @@
                     </div>
                       
 <% } else { %>
-
     <article id="PqrsfListar" class="sectionPqrsfL">
         <div class="sectionPqrsfLTitulo">
             <p>Mis Solicitudes PQRSF<span style="font-size:17px;" class="me">Solicitudes de petición, queja, reclamo, sugerencia o felicitaciones.</span></p>

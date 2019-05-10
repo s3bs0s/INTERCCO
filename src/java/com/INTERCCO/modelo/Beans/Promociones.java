@@ -14,6 +14,7 @@ public class Promociones {
     private int idSede;
     private String NombreSede;
     private String NombreProducto;
+    private int PrecioProducto;
 
     public Promociones() {
     }
@@ -105,6 +106,14 @@ public class Promociones {
 
     public void setNombreProducto(String NombreProducto) {
         this.NombreProducto = NombreProducto;
+    }
+    
+    public int getPrecioProducto() {
+        return PrecioProducto;
+    }
+
+    public void setPrecioProducto(int PrecioProducto) {
+        this.PrecioProducto = PrecioProducto;
     }
     
     public String getNombreSede() {

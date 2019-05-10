@@ -541,7 +541,33 @@ function carruselesCambioModal(idcarr) {
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="promocionesActualizarModal">
+// <editor-fold defaultstate="collapsed" desc="promocionesActualizarModal y promocionesVerModal">
+function formatNumberReturn(numero) {
+    // Variable que contendra el resultado final
+    var resultado = "";
+    var nuevoNumero;
+
+    // Cogemos el numero eliminando los posibles puntos que tenga
+    nuevoNumero = numero.toString().replace(/\./g, '');
+
+    // Ponemos un punto cada 3 caracteres
+    for (var j, i = nuevoNumero.length - 1, j = 0; i >= 0; i--, j++) {
+        resultado = nuevoNumero.charAt(i) + ((j > 0) && (j % 3 === 0) ? "." : "") + resultado;
+    }
+    
+    return resultado;
+}
+function promocionesVerModal(nompro,
+        fchcadu,
+        porc,
+        precio) {
+            
+    document.getElementById('verProductoPromocion').innerText = DescifrarASCII(nompro);
+    document.getElementById('verFchCaducidadPromocion').innerText = estructurarFecha("dd",fchcadu)+" del "+estructurarFecha("mm",fchcadu)+" de "+estructurarFecha("aa",fchcadu);
+    document.getElementById('verPorcentajePromocion').innerText = porc+" %";
+    var precioDesc = formatNumberReturn( precio - ( ( precio * porc ) / 100.0) );
+    document.getElementById('verPrecioPorcenPromocion').innerHTML = "Precio Oficial <b>-></b> "+formatNumberReturn(precio)+"<br>Precio con Descuento <b>-></b> "+precioDesc;
+}
 function promocionesActualizarModal(idprom,
         porc,
         fchc) {
@@ -842,7 +868,6 @@ function usuarioActualizarModal(idusu,
         nomusu,
         apellusu,
         emusu,
-        contra,
         tipoidenti,
         numidenti,
         telefono,
@@ -858,7 +883,6 @@ function usuarioActualizarModal(idusu,
     document.getElementById('actuaApellidosUsuario').value = DescifrarASCII(apellusu);
     document.getElementById('actuaRolUsuario').value = DescifrarASCII(roleusu);
     document.getElementById('actuaEmailUsuario').value = DescifrarASCII(emusu);
-    document.getElementById('actuaContraUsuario').value = DescifrarASCII(contra);
     document.getElementById('actuaTipoIdentiUsuario').value = tipoidenti;
     document.getElementById('actuaNumIdentiUsuario').value = DescifrarASCII(numidenti);
     document.getElementById('actuaTelefonoUsuario').value = DescifrarASCII(telefono);
@@ -871,7 +895,6 @@ function usuarioVerModal(roleusu,
         nomusu,
         apellusu,
         emusu,
-        contra,
         tipoidenti,
         numidenti,
         telefono,
@@ -890,11 +913,10 @@ function usuarioVerModal(roleusu,
     document.getElementById('verNombreUsuario').innerText = DescifrarASCII(nomusu)+" "+DescifrarASCII(apellusu);
     document.getElementById('verRolUsuario').innerText = DescifrarASCII(roleusu);
     if (verificado === "Y"){
-        document.getElementById('verEmailUsuario').innerText = DescifrarASCII(emusu)+"\nEsta Verificado";
+        document.getElementById('verEmailUsuario').innerHTML = DescifrarASCII(emusu)+"<br><b>Esta Verificado</b>";
     } else {
-        document.getElementById('verEmailUsuario').innerText = DescifrarASCII(emusu)+"\nNo esta Verificado";
+        document.getElementById('verEmailUsuario').innerHTML = DescifrarASCII(emusu)+"<br><b>No esta Verificado</b>";
     }
-    document.getElementById('verContraUsuario').innerText = DescifrarASCII(contra);
     if (tipoidenti === "TI"){
         document.getElementById('verTipoIdentiUsuario').innerText = "Tarjeta de Identidad:";
     } else if (tipoidenti === "CC"){

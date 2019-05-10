@@ -327,6 +327,7 @@ function formatNumberReturn(numero) {
     
     return resultado;
 }
+// <editor-fold defaultstate="collapsed" desc="Version Botones (Desactivado)">
 /*function verCartaSede(nombreSede,
         rangoSede,
         cadenaCate,
@@ -483,6 +484,7 @@ function formatNumberReturn(numero) {
     document.getElementById('ModalCarta').style.display = 'block';
 }*/
 // </editor-fold>
+// </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Sección Domicilios">
 $(document).ready(function () {
@@ -514,10 +516,6 @@ $(".mainiu .section4-domi .section4-domiListar .tabla-reg button").on("click", f
 
 // <editor-fold defaultstate="collapsed" desc="Sección Acerca de">
 $(document).ready(function () {
-    /* Inicio Botones y ContBotones ocultando uno*/
-    $('#BotonesSedesADInformacion').show();
-    $('#ADInformacion').hide();
-    
     /* Inicio de tabs(Articulos) ocultos */
     $('.sectionInformacion .siBody .siBodyNav li:first a').addClass('active');
     $('.sectionInformacion .siBody .siBArticulos article').hide();
@@ -535,55 +533,57 @@ $(document).ready(function () {
     });
 });
 
-function verInfoAD(nombreSede,
-        rangoSede,
-        horarios,
-        direccion,
-        SRC){
-    
-    var horariosDescifrado = DescifrarASCII(horarios);
-    var arrayHyD = horariosDescifrado.split("Æ");
-    var arrayDias = arrayHyD[0].split(";");
-    var arrayHoras = arrayHyD[1].split(";");
-    var templateTitulo = `
-        <div class="siBArticulosLIzq">
-            <div>
-                <p>Horarios</p>
-            </div>`;
-    var templateContenido = ``;
-    for (var i = 0; i < arrayDias.length; i++) {
-        templateContenido += `
-            <div>
-                <p>${arrayDias[i]}</p>
-                <p>${arrayHoras[i]}</p>
-            </div>`;
-    }
-    
-    var templateLDerecho = `
-        <div class="siBArticulosLDch">
-            <div>
-                <p>Dirección de la SEDE ${rangoSede==="Principal"?`Principal `+DescifrarASCII(nombreSede):DescifrarASCII(nombreSede)}</p>
-                <p>${DescifrarASCII(direccion)}</p>
-            </div>
-            <div>
-                <iframe src="${DescifrarASCII(SRC)}" width="75%" height="300" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <button type="button" id="ADRegreso" class="btn">Atrás</button>
-        </div>`;
-    
-    document.getElementById("ADInformacion").lastElementChild.remove();
-    document.getElementById("ADInformacion").firstElementChild.remove();
-    document.getElementById("ADInformacion").insertAdjacentHTML("beforeend",templateTitulo+templateContenido+`</div>`+templateLDerecho);
-    /* Redirección para mostrar o ocultar Botones o ContBotones */
-    $("#ADRegreso").on("click", function(){
-        $("#BotonesSedesADInformacion").show(200, function(){});
-        $("#ADInformacion").hide(200, function(){});
-    });
-
-    
-    $("#ADInformacion").show(100, function(){});
-    $("#BotonesSedesADInformacion").hide(100, function(){});
-}
+// <editor-fold defaultstate="collapsed" desc="Version Botones (Desactivado)">
+//function verInfoAD(nombreSede,
+//        rangoSede,
+//        horarios,
+//        direccion,
+//        SRC){
+//    
+//    var horariosDescifrado = DescifrarASCII(horarios);
+//    var arrayHyD = horariosDescifrado.split("Æ");
+//    var arrayDias = arrayHyD[0].split(";");
+//    var arrayHoras = arrayHyD[1].split(";");
+//    var templateTitulo = `
+//        <div class="siBArticulosLIzq">
+//            <div>
+//                <p>Horarios</p>
+//            </div>`;
+//    var templateContenido = ``;
+//    for (var i = 0; i < arrayDias.length; i++) {
+//        templateContenido += `
+//            <div>
+//                <p>${arrayDias[i]}</p>
+//                <p>${arrayHoras[i]}</p>
+//            </div>`;
+//    }
+//    
+//    var templateLDerecho = `
+//        <div class="siBArticulosLDch">
+//            <div>
+//                <p>Dirección de la SEDE ${rangoSede==="Principal"?`Principal `+DescifrarASCII(nombreSede):DescifrarASCII(nombreSede)}</p>
+//                <p>${DescifrarASCII(direccion)}</p>
+//            </div>
+//            <div>
+//                <iframe src="${DescifrarASCII(SRC)}" width="75%" height="300" frameborder="0" allowfullscreen></iframe>
+//            </div>
+//            <button type="button" id="ADRegreso" class="btn">Atrás</button>
+//        </div>`;
+//    
+//    document.getElementById("ADInformacion").lastElementChild.remove();
+//    document.getElementById("ADInformacion").firstElementChild.remove();
+//    document.getElementById("ADInformacion").insertAdjacentHTML("beforeend",templateTitulo+templateContenido+`</div>`+templateLDerecho);
+//    /* Redirección para mostrar o ocultar Botones o ContBotones */
+//    $("#ADRegreso").on("click", function(){
+//        $("#BotonesSedesADInformacion").show(200, function(){});
+//        $("#ADInformacion").hide(200, function(){});
+//    });
+//
+//    
+//    $("#ADInformacion").show(100, function(){});
+//    $("#BotonesSedesADInformacion").hide(100, function(){});
+//}
+// </editor-fold>
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Sección PQRSF">

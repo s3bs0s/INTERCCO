@@ -99,7 +99,7 @@
                         <hr>
                         <div>
                             <div>
-                                <p class="verDetalles-titulo">Descripción</p>
+                                <p class="verDetalles-titulo">Descripción:</p>
                                 <p class="verDetalles-contenido" id="verDescripcionProducto"></p>
                             </div>
                         </div>

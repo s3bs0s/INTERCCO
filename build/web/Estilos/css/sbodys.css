@@ -573,10 +573,14 @@
 .mainiu .sectionCarta{
     width:100%;
     padding:20px 0;
-    background:#698BC5;
     display:flex;
     justify-content:center;
     align-items:flex-start;
+    background:#446EB6 url("../img/Backgrounds/FondoIUCarta.jpg");
+    background-size:110%;
+    background-position-x:center;
+    background-position-y:center;
+    background-attachment:fixed;
 }
     .sectionCarta .sectionCartaC{
         border:solid 6px #fff;
@@ -1210,60 +1214,6 @@
                     background:#fff;
                 }
                     /* <editor-fold defaultstate="collapsed" desc="Información"> */
-                    .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosCJBtn{
-                        width:100%;
-                        height:auto;
-                        padding-bottom:10px;
-                        border-top-right-radius:26px;
-                        background:#fff;
-                        display:flex;
-                        
-                        flex-flow:column nowrap;
-                    }
-                        .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosCJBtn .siBArticulosBtnTitulo{
-                            width:100%;
-                            height:auto;
-                            padding:14px;
-                            background:#698BC5;
-                            border-top-right-radius:23px;
-                            word-wrap:break-word;
-                            text-align:center;
-                            margin-bottom:10px;
-                        }
-                            .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosCJBtn .siBArticulosBtnTitulo p{
-                                font-family:"Calibri Light";
-                                font-size:28px;
-                                letter-spacing:1pt;
-                                color:#fff;
-                            }
-                            
-                        .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosCJBtn .siBArticulosBtnSede{
-                            width:100%;
-                            height:auto;
-                            display:flex;
-                            flex-flow:row wrap;
-                            justify-content:space-around;
-                        }
-                            .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosCJBtn .siBArticulosBtnSede button{
-                                outline:none;
-                                background:#446EB6;
-                                font-size:22px;
-                                border-radius:8px;
-                                letter-spacing:1pt;
-                                color:#fff;
-                                font-family:"Calibri Light", Arial;
-                                padding: 8px 16px;
-                                margin:5px 15px;
-                                text-align:center;
-                                -webkit-transition:all 200ms ease;
-                                -o-transition:all 200ms ease;
-                                transition:all 200ms ease;
-                            }
-                                .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosCJBtn .siBArticulosBtnSede button:hover,button:focus{
-                                    outline:none;
-                                    background:#365892;
-                                }
-
                     .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC{
                         display:flex;
                         flex-flow:row wrap;
@@ -1306,31 +1256,8 @@
                             display:flex;
                             border-top-right-radius:20px;
                             background:#446EB6;
-                            position:relative;
                             flex-flow:column nowrap;
                         }
-                            .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLDch button{
-                                outline:none;
-                                background:#fff;
-                                font-size:18px;
-                                border-radius:8px;
-                                letter-spacing:1.5pt;
-                                color:#446EB6;
-                                position:absolute;
-                                top:18px;
-                                right:18px;
-                                padding: 8px 16px;
-                                border:solid 1px #446EB6;
-                                -webkit-transition:all 200ms ease;
-                                -o-transition:all 200ms ease;
-                                transition:all 200ms ease;
-                            }
-                                .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLDch button:hover,button:focus{
-                                    outline:none;
-                                    background:#365892;
-                                    color:#fff;
-                                }
-                            
                             .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLDch div:nth-child(1){
                                 width:100%;
                                 text-align:center;

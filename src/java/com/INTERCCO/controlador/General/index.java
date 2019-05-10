@@ -49,7 +49,9 @@ public class index extends HttpServlet {
             
             ArrayList<Sedes> listaSedSIndex = new ArrayList<>();
             
-            ps = con.prepareStatement("SELECT idSedes,nombre FROM sedes ORDER BY idSedes DESC;");
+            int contSedeExistentes = 0;
+            int contSedePExistentes = 0;
+            ps = con.prepareStatement("SELECT idSedes,nombre,rango FROM sedes ORDER BY idSedes DESC;");
             rs = ps.executeQuery();
             while (rs.next()){
                 Sedes sd = new Sedes();
@@ -57,10 +59,15 @@ public class index extends HttpServlet {
                 sd.setNombre(rs.getString("nombre"));
                 
                 listaSedSIndex.add(sd);
+                
+                if (rs.getString("rango").equals("Principal")){
+                    contSedePExistentes++;
+                }
+                contSedeExistentes++;
             }
             
             int elijaSede = 0;
-            if (session.getAttribute("rolUsuario").equals("Usuario")){
+            if (session.getAttribute("rolUsuario") == null || session.getAttribute("rolUsuario").equals("Usuario")){
                 if (request.getParameter("elijaIdSede") == null){
                     ps.close();
                     rs.close();
@@ -103,13 +110,13 @@ public class index extends HttpServlet {
             
             ArrayList<Sedes> listaSedeIndex = new ArrayList<>();
             
-            int contSedeExistentes = 0;
-            int contSedePExistentes = 0;
+            
             ps.close();
             rs.close();
-            ps = con.prepareStatement("SELECT * FROM sedes;");
+            ps = con.prepareStatement("SELECT * FROM sedes WHERE idSedes=?;");
+            ps.setInt(1, elijaSede);
             rs = ps.executeQuery();
-            while (rs.next()){
+            if (rs.next()){
                 Sedes sd = new Sedes();
                 sd.setIdSedes(rs.getInt("idSedes"));
                 sd.setNombre(rs.getString("nombre"));
@@ -129,12 +136,7 @@ public class index extends HttpServlet {
                 ps2.close();
                 rs2.close();
                 
-                
                 listaSedeIndex.add(sd);
-                if (rs.getString("rango").equals("Principal")){
-                    contSedePExistentes++;
-                }
-                contSedeExistentes++;
             }
             
             // --------------------- //

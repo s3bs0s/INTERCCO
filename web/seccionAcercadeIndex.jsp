@@ -18,26 +18,34 @@
                 <div class="siBArticulosT">
                     <p>I</p><p>N</p><p>F</p><p>O</p><p>R</p><p>M</p><p>A</p><p>C</p><p>I</p><p>Ó</p><p>N</p>
                 </div>
-                <div class="siBArticulosCJBtn" id="BotonesSedesADInformacion">
-                    <div class="siBArticulosBtnTitulo">
-                        <p>Sedes Disponibles</p>
-                    </div>
-                    <div class="siBArticulosBtnSede">
-                        <% ArrayList<Sedes> listaSedeIndexAD = (ArrayList) request.getAttribute("listaSedeIndex"); %>
-
-                        <% for (Sedes sedeIndexAD : listaSedeIndexAD) {
-                            CifradoASCII cAIndexAD = new CifradoASCII();
-                            if (sedeIndexAD.getRango().equals("Principal")){ %>
-                                <button type="button" onclick="verInfoAD('<%= cAIndexAD.CifrarASCII(sedeIndexAD.getNombre()) %>', '<%= sedeIndexAD.getRango()%>', '<%= cAIndexAD.CifrarASCII(sedeIndexAD.getHorariosSede()) %>', '<%= cAIndexAD.CifrarASCII(sedeIndexAD.getDireccion()) %>', '<%= sedeIndexAD.getSrcMapa() %>')" class="btn">SEDE Principal <%= sedeIndexAD.getNombre() %></button>
-                            <% } else { %>
-                                <button type="button" onclick="verInfoAD('<%= cAIndexAD.CifrarASCII(sedeIndexAD.getNombre()) %>', '<%= sedeIndexAD.getRango()%>', '<%= cAIndexAD.CifrarASCII(sedeIndexAD.getHorariosSede()) %>', '<%= cAIndexAD.CifrarASCII(sedeIndexAD.getDireccion()) %>', '<%= sedeIndexAD.getSrcMapa() %>')" class="btn">SEDE <%= sedeIndexAD.getNombre() %></button>
-                            <% } %>
-                        <% }%>
-                    </div>
-                </div>
+                <% ArrayList<Sedes> listaSedeIndexAD = (ArrayList) request.getAttribute("listaSedeIndex");
+                    CifradoASCII cAIndexAD = new CifradoASCII(); %>
                 <div class="siBArticulosC" id="ADInformacion">
-                    <div class="siBArticulosLIzq"></div>
-                    <div class="siBArticulosLDch"></div>
+                    <div class="siBArticulosLIzq">
+                        <div>
+                            <p>Horarios</p>
+                        </div>
+                    <% for (Sedes sedeIndexAD : listaSedeIndexAD) {
+                        String[] horarioDyH = sedeIndexAD.getHorariosSede().split("Æ");
+                        String[] arrayD = horarioDyH[0].split(";");
+                        String[] arrayH = horarioDyH[1].split(";"); 
+                        for (int i = 0; i < arrayD.length; i++) { %>
+                            <div>
+                                <p><%= arrayD[i] %></p>
+                                <p><%= arrayH[i] %></p>
+                            </div>
+                        <% } %>
+                        </div>
+                        <div class="siBArticulosLDch">
+                            <div>
+                                <p>Dirección de la SEDE <%= sedeIndexAD.getRango().equals("Principal")?"Principal "+sedeIndexAD.getNombre():""+sedeIndexAD.getNombre() %></p>
+                                <p><%= sedeIndexAD.getDireccion() %></p>
+                            </div>
+                            <div>
+                                <iframe src="<%= cAIndexAD.DescifrarASCII(sedeIndexAD.getSrcMapa()) %>" width="75%" height="300" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    <% } %>
                 </div>
             </article>
             <article id="siBArticulo2">
