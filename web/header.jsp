@@ -78,6 +78,7 @@
                 <div class="menupriniu">
                     <ul>
                         <li><a id="Acceder" href="#"><span class="me">Acceder</span></a></li>
+                        <li><a id="Sede" href="#"><span class="me">Elejir Sede</span></a></li>
                         <li><a id="Carta" href="#"><span class="me">Carta</span></a></li>
                         <li><a id="Domicilios" href="#"><span class="me">Domicilios</span></a></li>
                         <li><a id="Acercade" href="#"><span class="me">Acerca de</span></a></li>
@@ -85,6 +86,23 @@
                         <li><button type="button" data-toggle="modal" data-target="#registrarseModal"><span class="me">Registrarse</span></button></li>
                     </ul>
                 </div>
+                <section class="sectionElijaSedeSN">
+                    <article>
+                        <div class="sesTitulo">
+                            <p>Elija una Sede:</p>
+                        </div>
+                        <div class="sesSelect">
+                            <div class="input-group">
+                                <% ArrayList<Sedes> listaSedSIndexES = (ArrayList) request.getAttribute("listaSedSIndex"); %>
+                                <select required onchange="window.location = 'index?elijaIdSede='+this.value" class="form-control" title="Seleccione una sede para ver su información." id="indexElijaSedeUsuarioSN">
+                                    <% for (Sedes  sedeSIndexES: listaSedSIndexES) { %>
+                                        <option value="<%= sedeSIndexES.getIdSedes()%>"><%= sedeSIndexES.getNombre()%></option>
+                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+                    </article>
+                </section>
             </nav>
         </header>
         

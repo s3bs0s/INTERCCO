@@ -385,15 +385,63 @@ nav.navrlogo{
 }
 /* </editor-fold> */
 
-    /*Navegador propio de IndexUsuario y IndexCliente*/
+    /*Navegador propio de Usuario y Cliente*/
 /* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
+
+    /*Elija Sede Navegador Usuario*/
+/* <editor-fold defaultstate="collapsed" desc="Section Elija Sede"> */
+.sectionElijaSedeSN{
+    width:100%;
+    background:#365892;
+    display:none;
+}
+    .sectionElijaSedeSN article{
+        padding:10px 8px;
+        width:100%;
+        display:flex;
+        flex-flow:row wrap;
+        justify-content:center;
+        align-items:center;
+    }
+        .sectionElijaSedeSN article .sesTitulo{
+            text-align:center;
+            margin-right:15px;
+        }
+            .sectionElijaSedeSN article .sesTitulo p{
+                letter-spacing:1pt;
+                font-size:24px;
+                color:#fff;
+                font-family:"Calibri Light", Arial;
+                -webkit-transition:all 200ms ease;
+                -o-transition:all 200ms ease;
+                transition:all 200ms ease;
+            }
+            
+        .sectionElijaSedeSN .sesSelect{
+            text-align:center;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+            .sectionElijaSedeSN .sesSelect select{
+                outline:none;
+                width:250px;
+                height:40px;
+                font-size:17px;
+                border:1px solid #446EB6;
+            }
+                .sectionElijaSedeSN .sesSelect select:focus > option:checked{
+                    background:#446EB6 !important;
+                    color:#fff;
+                }
+/* </editor-fold> */
+
 .logonaviu{
     width:100%;
     background:#446EB6;
     height:60px;
-    display:flex;
-
-    justify-content:center;
+    text-align:center;
+    display:none;
 }
     .logonaviu img{
         height:100%;

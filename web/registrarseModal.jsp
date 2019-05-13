@@ -6,7 +6,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><span class="icon-user-plus"></span><label for="regNombresUsuario" class="me">Registrarse</label></h4>
+                <h4 class="modal-title"><span class="icon-user-plus"></span><label for="regNombresUsuario" class="me">Registrarme</label></h4>
             </div>
             <div class="mb-textaling modal-body">
                 <p class="mi-obli">Los campos que contengan el símbolo asterisco <span class="a-mi">*</span> son obligatorios, de no ser así, son totalmente opcional.</p>
@@ -84,7 +84,7 @@
 
                     <div class="input-group cont-btn">
                         <div class="cont-btn-principal">
-                            <button type="submit" class="btn-modal btn btn-principal">Registrarse</button>
+                            <button type="submit" class="btn-modal btn btn-principal">Registrarme</button>
                         </div>
                         <div class="cont-btns-secundario">
                             <button type="button" data-dismiss="modal" class="btn-modal btn btn-secundario">Acceder</button>

@@ -71,24 +71,26 @@ public class index extends HttpServlet {
                 if (request.getParameter("elijaIdSede") == null){
                     ps.close();
                     rs.close();
-                    ps = con.prepareStatement("SELECT idSedes,nombre,rango FROM sedes ORDER BY idSedes DESC LIMIT 1;");
+                    ps = con.prepareStatement("SELECT idSedes,nombre,rango,idCiudad FROM sedes ORDER BY idSedes DESC LIMIT 1;");
                     rs = ps.executeQuery();
                     if (rs.next()){
                         session.setAttribute("elijaIdSede", rs.getInt("idSedes"));
                         session.setAttribute("elijaNomSede", rs.getString("nombre"));
                         session.setAttribute("elijaRolSede", rs.getString("rango"));
+                        session.setAttribute("elijaCiuSede", rs.getInt("idCiudad"));
                         elijaSede = (int)session.getAttribute("elijaIdSede");
                     }
                 } else {
                     ps.close();
                     rs.close();
-                    ps = con.prepareStatement("SELECT idSedes,nombre,rango FROM sedes WHERE idSedes=?;");
+                    ps = con.prepareStatement("SELECT idSedes,nombre,rango,idCiudad FROM sedes WHERE idSedes=?;");
                     ps.setInt(1, Integer.parseInt(request.getParameter("elijaIdSede")));
                     rs = ps.executeQuery();
                     if (rs.next()){
                         session.setAttribute("elijaIdSede", rs.getInt("idSedes"));
                         session.setAttribute("elijaNomSede", rs.getString("nombre"));
                         session.setAttribute("elijaRolSede", rs.getString("rango"));
+                        session.setAttribute("elijaCiuSede", rs.getInt("idCiudad"));
                         elijaSede = (int)session.getAttribute("elijaIdSede");
                     }
                 }
@@ -99,9 +101,6 @@ public class index extends HttpServlet {
                 ps.setInt(1, (int)session.getAttribute("elijaIdSede"));
                 rs = ps.executeQuery();
                 if (rs.next()){
-                    session.setAttribute("elijaIdSede", rs.getInt("idSedes"));
-                    session.setAttribute("elijaNomSede", rs.getString("nombre"));
-                    session.setAttribute("elijaRolSede", rs.getString("rango"));
                     elijaSede = (int)session.getAttribute("elijaIdSede");
                 }
             }

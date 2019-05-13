@@ -26,6 +26,7 @@ public class ActualizarPerfilUsuario extends HttpServlet {
             String fchnaci = request.getParameter("perfilFechaNacimientoUsuario");
             String direccion = request.getParameter("perfilDireccionUsuario");
             String sede = request.getParameter("perfilSedeCliente");
+            System.out.println(sede);
             
             ConectaDB cdb = new ConectaDB();
             Connection con = cdb.conectar();
@@ -53,15 +54,10 @@ public class ActualizarPerfilUsuario extends HttpServlet {
                         ps = con.prepareStatement("UPDATE pqrsf SET idSedeCliente=? WHERE idCliente=?;");
                         ps.setInt(1, Integer.parseInt(sede));
                         ps.setInt(2, Integer.parseInt(id));
-                        int res3 = ps.executeUpdate();
-
-                        if (res3 > 0){
-                            request.getRequestDispatcher("Salir?mensaje=YActualizarPerfil").forward(request, response);
-                            System.out.println("ERROR de ACTUALIZAR PERFIL el dato de USUARIO.");
-                        } else {
-                            request.getRequestDispatcher("index?mensaje=NeAP").forward(request, response);
-                            System.out.println("ERROR de ACTUALIZAR PERFIL el dato de USUARIO.");
-                        }
+                        ps.executeUpdate();
+                        
+                        request.getRequestDispatcher("Salir?mensaje=YActualizarPerfil").forward(request, response);
+                        System.out.println("ERROR de ACTUALIZAR PERFIL el dato de USUARIO.");
                     } else {
                         request.getRequestDispatcher("index?mensaje=NeAP").forward(request, response);
                         System.out.println("ERROR de ACTUALIZAR PERFIL el dato de USUARIO.");

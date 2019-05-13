@@ -169,6 +169,7 @@
     }
     
 #btn-subir{
+    display:none;
     position:fixed;
     left:0;
     bottom:35px;
@@ -213,7 +214,7 @@
     }
     #share-social ul{
         list-style:none;
-        display:flex;
+        display:none;
         flex-flow:row nowrap;
     }
         #share-social ul li a{
@@ -250,6 +251,7 @@
     width:100%;
     position:relative;
     height:100vh;
+    min-height:540px;
     display:flex;
     align-items:center;
     background: rgba(255,255,255,1);

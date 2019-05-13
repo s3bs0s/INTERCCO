@@ -32,7 +32,7 @@
                         <button type="button" onclick="btnAcceder()" id="accBtnAcceder" class="saAContentBtns btn btn-principal">Acceder</button>
                     </div>
                     <div class="saAContentFormCJBtnsSecundarios">
-                        <button type="button" data-toggle="modal" data-target="#registrarseModal" class="saAContentBtns btn btn-secundario">Registrarse</button>
+                        <button type="button" data-toggle="modal" data-target="#registrarseModal" class="saAContentBtns btn btn-secundario">Registrarme</button>
                     </div>
                 </div>
             </form>

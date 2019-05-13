@@ -2,13 +2,14 @@
 /* Header */
 $(document).ready(function () {
     /* Inicio de hover de los elementos ocultos en el Nav */
-    $('.logonaviu').hide();
     $('#share-social ul').hide();
     $('.menuperfil .caj-menuperfil ul').hide();
     
     $("#accBtnAcceder").attr('disabled','');
     
     if (document.getElementById("accederEmail") !== null){
+        
+        /* Recordar Información */
         var lSt = localStorage;
         if (lSt.getItem("rEyP") !== null && lSt.getItem("rEyP") !== "null"){
             var arrRec = lSt.getItem("rEyP").split(";");
@@ -19,6 +20,7 @@ $(document).ready(function () {
             $('#accBtnAcceder').removeAttr('disabled');
         }
 
+        /* Tecla ENTER en campos de Acceder */
         var inpE = document.getElementById("accederEmail");
         var inpP = document.getElementById("InpMOPasswordAcceder");
         inpE.addEventListener("keyup", function (event) {
@@ -34,6 +36,21 @@ $(document).ready(function () {
             }
         });
     }
+    
+    /* elijaSede pegado en el Navegador */
+    var altura = $('.sectionCarrusel').offset().top - 20;
+    if ($(window).scrollTop() > altura) {
+        $('.sectionElijaSedeSN').css('display', 'block');
+    } else {
+        $('.sectionElijaSedeSN').css('display', 'none');
+    }
+    $(window).on('scroll', function () {
+        if ($(window).scrollTop() > altura) {
+            $('.sectionElijaSedeSN').css('display', 'block');
+        } else {
+            $('.sectionElijaSedeSN').css('display', 'none');
+        }
+    });
     
     /* Redirección de botones en el Nav */
     $('.menupriniu ul li #Acceder').click(function(){
@@ -51,34 +68,59 @@ $(document).ready(function () {
         }, 600);
     });
     
+    $('#Sede').click(function(){
+        var elejirSedeAltura = $('.sectionElijaSede').offset().top - 43;
+        $('body, html').animate({
+            scrollTop: elejirSedeAltura+'px'
+        }, 600);
+    });
+    
     $('.menupriniu ul li #Carta').click(function(){
-        var cartaAltura = $('.sectionCarta').offset().top - 42;
+        var cartaAltura = $('.sectionCarta').offset().top - 102;
         $('body, html').animate({
             scrollTop: cartaAltura+'px'
         }, 600);
     });
     
     $('.menupriniu ul li #Domicilios').click(function(){
-        var cartaAltura = $('.sectionDomicilios').offset().top - 42;
+        var cartaAltura = $('.sectionDomicilios').offset().top - 102;
         $('body, html').animate({
             scrollTop: cartaAltura+'px'
         }, 600);
     });
     
     $('.menupriniu ul li #Acercade').click(function(){
-        var acercadeAltura = $('.sectionInformacion').offset().top - 42;
+        var acercadeAltura = $('.sectionInformacion').offset().top - 102;
         $('body, html').animate({
             scrollTop: acercadeAltura+'px'
         }, 600);
     });
     
     $('.menupriniu ul li #PQRSF').click(function(){
-        var pqrsfAltura = $('.sectionPqrsf').offset().top - 42;
+        var pqrsfAltura = $('.sectionPqrsf').offset().top - 102;
         $('body, html').animate({
             scrollTop: pqrsfAltura+'px'
         }, 600);
     });
 });
+
+$('.naviu').hover(
+    function () {
+        $('.logonaviu').css('display', 'block');
+    },
+    function () {
+        $('.logonaviu').css('display', 'none');
+    }
+);
+
+$('.menuperfil .caj-menuperfil').hover(
+    function () {
+        $('.menuperfil .caj-menuperfil ul').show(10, function(){});
+    },
+    function () {
+        $('.menuperfil .caj-menuperfil ul').hide(10, function(){});
+    }
+);
 
 function btnAcceder(){
     var lSt = localStorage;
@@ -91,25 +133,6 @@ function btnAcceder(){
     }
     document.getElementById("accederForm").submit();
 }
-
-/* Hover de los elementos ocultos en el Nav */
-$('.naviu').hover(
-    function () {
-        $('.logonaviu').show();
-    },
-    function () {
-        $('.logonaviu').hide();
-    }
-);
-
-$('.menuperfil .caj-menuperfil').hover(
-    function () {
-        $('.menuperfil .caj-menuperfil ul').show(10, function(){});
-    },
-    function () {
-        $('.menuperfil .caj-menuperfil ul').hide(10, function(){});
-    }
-);
 
 function validacionAcceder(inpActual,idInpContrario){
     if (idInpContrario === "InpMOPasswordAcceder"){
@@ -209,10 +232,10 @@ $(document).ready(function () {
 /* Hover para mostrar redes sociales */
 $('#share-social').hover(
     function () {
-        $('#share-social ul').show();
+        $('#share-social ul').css('display', 'flex');
     },
     function () {
-        $('#share-social ul').hide();
+        $('#share-social ul').css('display', 'none');
     }
 );
 // </editor-fold>
@@ -222,17 +245,17 @@ $(document).ready(function () {
     /* Desaparición del botón subir cuando esta en el acceder */
     var alturaBS = 45;
     if ($(window).scrollTop() > alturaBS) {
-        $('#btn-subir').show();
+        $('#btn-subir').css('display', 'block');
     } else {
-        $('#btn-subir').hide();
+        $('#btn-subir').css('display', 'none');
     }
     $(window).on('scroll', function () {
         if ($(window).scrollTop() > alturaBS) {
             /* Se fue de la sección Acceder */
-            $('#btn-subir').show(100, function(){});
+            $('#btn-subir').css('display', 'block');
         } else {
             /* Esta en la sección Acceder */
-            $('#btn-subir').hide(100, function(){});
+            $('#btn-subir').css('display', 'none');
         }
     });
     
@@ -288,6 +311,7 @@ function MOPass (mod) {
 // <editor-fold defaultstate="collapsed" desc="Sección Elija Sede">
 function validacionSedeElejida(idSede) {
     document.getElementById("indexElijaSedeUsuario").value = idSede;
+    document.getElementById("indexElijaSedeUsuarioSN").value = idSede;
 }
 // </editor-fold>
 

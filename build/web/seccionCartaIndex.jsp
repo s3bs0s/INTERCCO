@@ -86,7 +86,7 @@
 
                                     <div class="panelBCartaCJProd">
                                         <div class="panelBCartaNomProd"><p><%= prodIndex.getNombre() %></p></div>
-                                        <div class="panelBCartaPreProd"><p>$ <%= dPIndex.formatNumber(prodIndex.getPrecio()) %></p></div>
+                                        <div class="panelBCartaPreProd"><p><del>$ <%= dPIndex.formatNumber(prodIndex.getPrecio()) %></del></p></div>
                                     </div>
                                     <div class="panelBCartaCJDesc">
                                         <div class="panelBCartaCanDesc"><p>Descuento de <%= porcentaje %>%</p></div>
@@ -98,7 +98,7 @@
 
                                     <div class="panelBCartaCJProd">
                                         <div class="panelBCartaNomProd"><p><%= prodIndex.getNombre() %></p></div>
-                                        <div class="panelBCartaPreProd"><p>$ <%= dPIndex.formatNumber(prodIndex.getPrecio()) %></p></div>
+                                        <div class="panelBCartaPreProd"><p><del>$ <%= dPIndex.formatNumber(prodIndex.getPrecio()) %></del></p></div>
                                     </div>
                                     <div style="margin-bottom:0;" class="panelBCartaCJDesc">
                                         <div class="panelBCartaCanDesc"><p>Descuento de <%= porcentaje %>%</p></div>
