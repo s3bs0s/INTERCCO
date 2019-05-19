@@ -65,6 +65,11 @@
                                             <% } %>
                                         </select>
                                     </div>
+                                    <div class="input-group cont-btn">
+                                        <div class="cont-btn-principal">
+                                            <button type="button" data-toggle="modal" data-target="#productoPAggVerModal" onclick="productoPAggVerModal()" class="btn-rp btn btn-ip btn-principal">Información del Producto</button>
+                                        </div>
+                                    </div>
                                     <div id="regCJSProductosPedidos" class="input-group">
                                         <span class="input-group-addon">Producto:</span>
                                         <% ArrayList<Productos> listaProductosSPed = (ArrayList) request.getAttribute("listaProSPed"); %>
@@ -153,13 +158,23 @@
                             </div>
                             <% } %>
                         <% } %>
-                        <h1><span class="icon-clipboard"></span> Pedidos</h1>
+                        <%  nomSedeUsuario = "";
+                            if (session.getAttribute("nomSedeUsuario") == null){
+                                nomSedeUsuario = "Vacio";
+                            } else {
+                                nomSedeUsuario = (String) session.getAttribute("nomSedeUsuario"); 
+                            } 
+                            if (nomSedeUsuario.equals("Vacio")){ %>
+                            <h1><span class="icon-clipboard"></span> Pedidos</h1>
+                        <% } else { %>
+                            <h1><span class="icon-clipboard"></span> Pedidos de <%= nomSedeUsuario%></h1>
+                        <% } %>
                         <div class="tabla-reg">
                             <button type="button" id="btnRegistrarPedidos" class="btn">Registrar <span class="tabla-reg-m"><span class="glyphicon glyphicon-plus"></span></span></button>
                         </div>
                         <% ArrayList<Pedidos> listaPedidos = (ArrayList) request.getAttribute("listaPed"); %>
                         <div class="table-responsive">
-                            <table class="tablaListarPedidos table-bordered table">
+                            <table class="tablaListarPedidosGerente table-bordered table">
                                 <thead>
                                     <tr>
                                         <th>Fecha</th>
@@ -189,40 +204,42 @@
                                         for (int j = 0, i = numero.length() - 1; i >= 0; i--) {
                                             resultado = numero.charAt(i) + ((j > 0) && (j % 3 == 0) ? "." : "") + resultado;
                                             j++;
-                                        } %>
-                                        <tr>
-                                            <%  EstructuraFYH eFYH = new EstructuraFYH();
-                                                String fecha = String.valueOf(pedi.getFchRegistro());
-                                                String hora = String.valueOf(pedi.getHoraRegistro()); %>
-                                            <td><%= eFYH.estFecha(fecha, "dd")+"/"+eFYH.estFecha(fecha, "mm")+"/"+eFYH.estFecha(fecha, "aa") %></td>
-                                            <td><%= eFYH.estHora(hora, "h")+":"+eFYH.estHora(hora, "m") %></td>
-                                            <td>mesero@succo.com</td>
-                                            <td><%= pedi.getNumMesa() %></td>
-                                            <td><%= resultado %></td>
-                                            <% if (pedi.getEstado().equals("En espera")){ %>
-                                                <td class="warning"><%= pedi.getEstado() %></td>
-                                            <% } else if (pedi.getEstado().equals("En produccion")){ %>
-                                                <td class="info">En producción</td>
-                                            <% } else if (pedi.getEstado().equals("Entregado")){ %>
-                                                <td class="success"><%= pedi.getEstado() %></td>
-                                            <% } else if (pedi.getEstado().equals("Devuelto")){ %>
-                                                <td class="purple"><%= pedi.getEstado() %></td>
-                                            <% } else if (pedi.getEstado().equals("Cancelado")){ %>
-                                                <td class="danger"><%= pedi.getEstado() %></td>
-                                            <% } %>
-                                            <td>
-                                                <div class="td-espaciado">
-                                                    <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                    <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                    <% if (pedi.getEstado().equals("En espera")){ %>
-                                                        <button type="button" class="btn btn-danger" onClick="window.location = 'PedidoC?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
-                                                    <% } %>
-                                                    <% if (pedi.getEstado().equals("Entregado")){ %>
-                                                        <button type="button" class="btn btn-active-os" onClick="window.location = 'PedidoD?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-transfer"></span> Devolución</button>
-                                                    <% } %>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        }
+                                        if (pedi.getNomSede().equals(nomSedeUsuario)){ %>
+                                            <tr>
+                                                <%  EstructuraFYH eFYH = new EstructuraFYH();
+                                                    String fecha = String.valueOf(pedi.getFchRegistro());
+                                                    String hora = String.valueOf(pedi.getHoraRegistro()); %>
+                                                <td><%= eFYH.estFecha(fecha, "dd")+"/"+eFYH.estFecha(fecha, "mm")+"/"+eFYH.estFecha(fecha, "aa") %></td>
+                                                <td><%= eFYH.estHora(hora, "h")+":"+eFYH.estHora(hora, "m") %></td>
+                                                <td><%= pedi.getNomMeseroODomiciliario()%></td>
+                                                <td><%= pedi.getNumMesa() %></td>
+                                                <td><%= resultado %></td>
+                                                <% if (pedi.getEstado().equals("En espera")){ %>
+                                                    <td class="warning"><%= pedi.getEstado() %></td>
+                                                <% } else if (pedi.getEstado().equals("En produccion")){ %>
+                                                    <td class="info">En producción</td>
+                                                <% } else if (pedi.getEstado().equals("Entregado")){ %>
+                                                    <td class="success"><%= pedi.getEstado() %></td>
+                                                <% } else if (pedi.getEstado().equals("Devuelto")){ %>
+                                                    <td class="purple"><%= pedi.getEstado() %></td>
+                                                <% } else if (pedi.getEstado().equals("Cancelado")){ %>
+                                                    <td class="danger"><%= pedi.getEstado() %></td>
+                                                <% } %>
+                                                <td>
+                                                    <div class="td-espaciado">
+                                                        <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>  
+                                                        <% if (pedi.getEstado().equals("En espera")){ %>
+                                                            <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                            <button type="button" class="btn btn-danger" onClick="window.location = 'PedidoC?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
+                                                        <% }
+                                                        if (pedi.getEstado().equals("Entregado")){ %>
+                                                            <button type="button" class="btn btn-active-os" onClick="window.location = 'PedidoD?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-transfer"></span> Devolución</button>
+                                                        <% } %>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <% } %>
                                     <% } %>
                                 </tbody>
                             </table>
@@ -387,6 +404,11 @@
                                             <% } %>
                                         </select>
                                     </div>
+                                    <div class="input-group cont-btn">
+                                        <div class="cont-btn-principal">
+                                            <button type="button" data-toggle="modal" data-target="#productoPAggVerModal" onclick="productoPAggVerModal()" class="btn-rp btn btn-ip btn-principal">Información del Producto</button>
+                                        </div>
+                                    </div>
                                     <div id="regCJSProductosPedidos" class="input-group">
                                         <span class="input-group-addon">Producto:</span>
                                         <% ArrayList<Productos> listaProductosSPed = (ArrayList) request.getAttribute("listaProSPed"); %>
@@ -475,16 +497,32 @@
                             </div>
                             <% } %>
                         <% } %>
-                        <h1><span class="icon-clipboard"></span> Pedidos</h1>
+                        <%  Date date = new Date();
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            String hoy = dateFormat.format(date);
+                            EstructuraFYH eFYH = new EstructuraFYH();
+                            nomUsuario = "";
+                            idUsuario = 0;
+                            if (session.getAttribute("nomUsuario") == null){
+                                nomUsuario = "Mesero";
+                                idUsuario = 0;
+                            } else {
+                                nomUsuario = (String) session.getAttribute("nomUsuario"); 
+                                idUsuario = (int) session.getAttribute("idUsuario"); 
+                            } 
+                            if (nomSedeUsuario.equals("Vacio")){ %>
+                            <h1><span class="icon-clipboard"></span> Pedidos</h1>
+                        <% } else { %>
+                        <h1><span class="icon-clipboard"></span> Pedidos hechos por <%= nomUsuario %>, de hoy <%= eFYH.estFechaMeses(hoy, "dd") %> de <%= eFYH.estFechaMeses(hoy, "mm") %></h1>
+                        <% } %>
                         <div class="tabla-reg">
                             <button type="button" id="btnRegistrarPedidos" class="btn">Registrar <span class="tabla-reg-m"><span class="glyphicon glyphicon-plus"></span></span></button>
                         </div>
                         <% ArrayList<Pedidos> listaPedidos = (ArrayList) request.getAttribute("listaPed"); %>
                         <div class="table-responsive">
-                            <table class="tablaListarPedidos table-bordered table">
+                            <table class="tablaListarPedidosMesero table-bordered table">
                                 <thead>
                                     <tr>
-                                        <th>Fecha</th>
                                         <th>Hora</th>
                                         <th>Mesa</th>
                                         <th>Subtotal</th>
@@ -494,7 +532,6 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Fecha</th>
                                         <th>Hora</th>
                                         <th>Mesa</th>
                                         <th>Subtotal</th>
@@ -510,40 +547,40 @@
                                             resultado = numero.charAt(i) + ((j > 0) && (j % 3 == 0) ? "." : "") + resultado;
                                             j++;
                                         }
-                                        if (pedi.getTipoPedido().equals("Restaurante")){ %>
-                                            <tr>
-                                                <%  EstructuraFYH eFYH = new EstructuraFYH();
-                                                    String fecha = String.valueOf(pedi.getFchRegistro());
-                                                    String hora = String.valueOf(pedi.getHoraRegistro()); %>
-                                                <td><%= eFYH.estFecha(fecha, "dd")+"/"+eFYH.estFecha(fecha, "mm")+"/"+eFYH.estFecha(fecha, "aa") %></td>
-                                                <td><%= eFYH.estHora(hora, "h")+":"+eFYH.estHora(hora, "m") %></td>
-                                                <td><%= pedi.getNumMesa() %></td>
-                                                <td><%= resultado %></td>
-                                                <% if (pedi.getEstado().equals("En espera")){ %>
-                                                    <td class="warning"><%= pedi.getEstado() %></td>
-                                                <% } else if (pedi.getEstado().equals("En produccion")){ %>
-                                                    <td class="info">En producción</td>
-                                                <% } else if (pedi.getEstado().equals("Entregado")){ %>
-                                                    <td class="success"><%= pedi.getEstado() %></td>
-                                                <% } else if (pedi.getEstado().equals("Devuelto")){ %>
-                                                    <td class="purple"><%= pedi.getEstado() %></td>
-                                                <% } else if (pedi.getEstado().equals("Cancelado")){ %>
-                                                    <td class="danger"><%= pedi.getEstado() %></td>
-                                                <% } %>
-                                                <td>
-                                                    <div class="td-espaciado">
-                                                        <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                        <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                        <% if (pedi.getEstado().equals("En espera")){ %>
-                                                            <button type="button" class="btn btn-danger" onClick="window.location = 'PedidoC?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
-                                                        <% } %>
-                                                        <% if (pedi.getEstado().equals("Entregado")){ %>
-                                                            <button type="button" class="btn btn-active-os" onClick="window.location = 'PedidoD?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-transfer"></span> Devolución</button>
-                                                        <% } %>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        <% } 
+                                        if (pedi.getTipoPedido().equals("Restaurante")){
+                                            if (pedi.getIdMeseroODomiciliario() == idUsuario && pedi.getFchRegistro().equals(dateFormat.parse(dateFormat.format(date)))){ %>
+                                                <tr>
+                                                    <%  String fecha = String.valueOf(pedi.getFchRegistro());
+                                                        String hora = String.valueOf(pedi.getHoraRegistro()); %>
+                                                    <td><%= eFYH.estHora(hora, "h")+":"+eFYH.estHora(hora, "m") %></td>
+                                                    <td><%= pedi.getNumMesa() %></td>
+                                                    <td><%= resultado %></td>
+                                                    <% if (pedi.getEstado().equals("En espera")){ %>
+                                                        <td class="warning"><%= pedi.getEstado() %></td>
+                                                    <% } else if (pedi.getEstado().equals("En produccion")){ %>
+                                                        <td class="info">En producción</td>
+                                                    <% } else if (pedi.getEstado().equals("Entregado")){ %>
+                                                        <td class="success"><%= pedi.getEstado() %></td>
+                                                    <% } else if (pedi.getEstado().equals("Devuelto")){ %>
+                                                        <td class="purple"><%= pedi.getEstado() %></td>
+                                                    <% } else if (pedi.getEstado().equals("Cancelado")){ %>
+                                                        <td class="danger"><%= pedi.getEstado() %></td>
+                                                    <% } %>
+                                                    <td>
+                                                        <div class="td-espaciado">
+                                                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>  
+                                                            <% if (pedi.getEstado().equals("En espera")){ %>
+                                                                <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                                                                <button type="button" class="btn btn-danger" onClick="window.location = 'PedidoC?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
+                                                            <% }
+                                                            if (pedi.getEstado().equals("Entregado")){ %>
+                                                                <button type="button" class="btn btn-active-os" onClick="window.location = 'PedidoD?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-transfer"></span> Devolución</button>
+                                                            <% } %>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <% }
+                                        } 
                                     } %>
                                 </tbody>
                             </table>

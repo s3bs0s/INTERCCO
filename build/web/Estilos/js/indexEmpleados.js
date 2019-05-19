@@ -180,9 +180,9 @@ function acceptNum(evt){
     return (key1 >= 48 && key1 <= 57);
 }
 var nav2 = window.Event ? true : false; 
-function refusePC(evt){
+function acceptNumCant(evt){
     var key2 = nav2 ? evt.which : evt.keyCode;
-    return (key2 <= 58 || key2 >= 60);
+    return key2 >= 48 && key2 <= 57;
 }
 var nav3 = window.Event ? true : false; 
 function acceptNP(evt){
@@ -193,11 +193,6 @@ var nav4 = window.Event ? true : false;
 function refuseCPyP(evt){
     var key4 = nav4 ? evt.which : evt.keyCode;
     return ((key4 <= 156 || key4 >= 158) && (key4 <= 145 || key4 >= 147));
-}
-var nav5 = window.Event ? true : false; 
-function acceptNumCant(evt){
-    var key5 = nav5 ? evt.which : evt.keyCode;
-    return key5 >= 48 && key5 <= 57;
 }
 function formatNumberReturn(numero) {
     // Variable que contendra el resultado final
@@ -233,6 +228,45 @@ function formatNumber(numero, idElem, tipoModal) {
         document.getElementById(idElem).value = resultado;
     }
 }
+function horaMilitarANormal(hora){
+    var horaLimpia = hora.replace(":", "");
+    var milTime = parseInt(horaLimpia);
+    var pm;
+
+    /* Se determina si es AM o PM y se convierte de hora militar a normal */
+    if (milTime > 1159) {
+        pm = true;
+        milTime = (milTime - 1200);
+    } else {
+        pm = false;
+    }
+
+    /* Estructuración de la hora normal */
+    var fourthDigit = parseInt(milTime % 10);
+    milTime = parseInt(milTime / 10);
+    var thirdDigit = parseInt(milTime % 10);
+    milTime = parseInt(milTime / 10);
+    var secondDigit = parseInt(milTime % 10);
+    milTime = parseInt(milTime / 10);
+    var firstDigit = parseInt(milTime % 10);
+
+    var minutesString = thirdDigit + "" + fourthDigit;
+    var hoursString = firstDigit + "" + secondDigit;
+
+    /* Se determina si es 00 para modificarlo por 12 en hor */
+    if (firstDigit === 0 && secondDigit === 0) {
+        hoursString = "12";
+    }
+
+    /* Fin */
+    if (pm === true) {
+        console.log(hoursString + ":" + minutesString + " p.m.");
+        return hoursString + ":" + minutesString + " p.m.";
+    } else {
+        console.log(hoursString + ":" + minutesString + " a.m.");
+        return hoursString + ":" + minutesString + " a.m.";
+    }
+}
 // </editor-fold>
 
 
@@ -253,12 +287,12 @@ $(document).ready(function () {
         });
         
         $('#btnListarPedidos').click(function(){
-            $('#pedidosRegistrar').hide();
+            $('#pedidosRegistrar').hide(100, function(){});
             $('#pedidosListar').show();
         });
         
         $('#btnListarRutaPedidos').click(function(){
-            $('#pedidosRegistrar').hide();
+            $('#pedidosRegistrar').hide(100, function(){});
             $('#pedidosListar').show();
         });
         
@@ -319,8 +353,8 @@ function agregarProductoPedido(btnAgregar){
             </div>`,
             `<span id="${numProductoAGGPedido}SubtotalRowPP">`+formatNumberReturn(subTotalProductos)+`</span>`,
             `<div class="td-espaciado">
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productoPedidoVerModal" onClick="productoPedidoVerModal('${CifrarASCII(nomCategoria)}', '${CifrarASCII(nomProducto)}', '${cantidad}', '${subTotalProductos}', '${CifrarASCII(observacion)}', '${infoProducto[2]}', '${infoProducto[1]}')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                <button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productoPedidoVerModal" onClick="productoPedidoVerModal('${CifrarASCII(nomCategoria)}', '${CifrarASCII(nomProducto)}', '${infoProducto[2]}', '${infoProducto[1]}', '${numProductoAGGPedido}')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#productoPedidoAModal" onClick="productoPedidoActualizarModal('${numProductoAGGPedido}', 'actuaV')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
                 <button type="button" onclick="sacarProductoPedido(this, '${numProductoAGGPedido}', '${idCategoria}C', '${CifrarASCII(nomProducto)}')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Sacar</button>
             </div>`
         ] ).draw();
@@ -408,21 +442,20 @@ function resetNumberReturn(numero) {
 }
 function productoPedidoVerModal(nomCate,
         nomProd,
-        cant,
-        subtotal,
-        observ,
         precio,
-        descri) {
+        descri,
+        numeroRow) {
     
     $(".collapse").collapse("hide");
+    var inpProductoArr = document.getElementById(numeroRow+"InputPP").value.split(";");
     document.getElementById("verCategoriaProductoPedido").innerText = DescifrarASCII(nomCate);
     document.getElementById("verProductoProductoPedido").innerText = DescifrarASCII(nomProd);
-    document.getElementById("verCantidadProductoPedido").innerText = cant;
-    document.getElementById("verSubtotalProductoPedido").innerText = formatNumberReturn(subtotal);
-    if (DescifrarASCII(observ) === "Vacio"){
+    document.getElementById("verCantidadProductoPedido").innerText = inpProductoArr[3];
+    document.getElementById("verSubtotalProductoPedido").innerText = formatNumberReturn(inpProductoArr[5]);
+    if (DescifrarASCII(inpProductoArr[4]) === "Vacio"){
         document.getElementById("verObservacionProductoPedido").innerText = "Sin observación.";
     } else {
-        document.getElementById("verObservacionProductoPedido").innerText = DescifrarASCII(observ);
+        document.getElementById("verObservacionProductoPedido").innerText = DescifrarASCII(inpProductoArr[4]);
     }
     document.getElementById("verCateProProductoPedido").innerText = DescifrarASCII(nomCate);
     document.getElementById("verNomProProductoPedido").innerText = DescifrarASCII(nomProd);
@@ -433,11 +466,47 @@ function productoPedidoVerModal(nomCate,
         document.getElementById("verDesProProductoPedido").innerText = DescifrarASCII(descri);
     }
 }
-function productoPedidoActualizarModal(idcarr,
-        tipo,
-        diriA) {
+function productoPAggVerModal() {
+    
+    var selectCategorias = document.getElementById("regCategoriaPedidos");
+    var idCategoria = selectCategorias.value;
+    var nomCategoria = selectCategorias.options[selectCategorias.selectedIndex].text;
+    var selectProductos = document.getElementById(idCategoria+"C");
+    var infoProducto = selectProductos.value.split(";");
+    var nomProducto = selectProductos.options[selectProductos.selectedIndex].text;
+    
+    document.getElementById("verCategoriaProductoPAgg").innerText = nomCategoria;
+    document.getElementById("verProductoProductoPAgg").innerText = nomProducto;
+    document.getElementById("verPrecioProductoPAgg").innerText = "$ "+formatNumberReturn(infoProducto[2]);
+    if (DescifrarASCII(infoProducto[1]) === "Vacio"){
+        document.getElementById("verDescripcionProductoPAgg").innerText = "Sin descripción.";
+    } else {
+        document.getElementById("verDescripcionProductoPAgg").innerText = DescifrarASCII(infoProducto[1]);
+    }
+}
+function productoPedidoActualizarModal(numeroRow,
+        tipoBtn) {
             
-    $("#carruselesAGerenteModal input,select,textarea").css('color', '#555555');
+    var inpProductoArr = document.getElementById(numeroRow+"InputPP").value.split(";");
+    
+    if (tipoBtn === "actuaV"){
+        $("#actuaBtnAProductoPedido").attr('onClick', 'productoPedidoActualizarModal("'+numeroRow+'", "actuaA")');
+        $("#productoPedidoAModal textarea").css('color', '#555555');
+        if (DescifrarASCII(inpProductoArr[4]) !== "Vacio"){
+            document.getElementById("actuaObservacionProductoPedido").value = DescifrarASCII(inpProductoArr[4]);
+        } else {
+            document.getElementById("actuaObservacionProductoPedido").value = "";
+        }
+    } else {
+        var descripNueva;
+        if (document.getElementById("actuaObservacionProductoPedido").value === ""){
+            descripNueva = CifrarASCII("Vacio");
+        } else {
+            descripNueva = CifrarASCII(document.getElementById("actuaObservacionProductoPedido").value);
+        }
+        var infoNuevaInp = inpProductoArr[0]+";"+inpProductoArr[1]+";"+inpProductoArr[2]+";"+inpProductoArr[3]+";"+descripNueva+";"+inpProductoArr[5];
+        document.getElementById(numeroRow+"InputPP").value = infoNuevaInp;
+    }
 }
 // </editor-fold>
 
@@ -637,62 +706,78 @@ function categoriasEliminarModal(idcate,
 
 // <editor-fold defaultstate="collapsed" desc="sedesVerModal y sedesRegistrar">
 $(document).ready(function () {
-    var rNIs = document.getElementById("regNumInpSedes");
-    var aNIs = document.getElementById("actuaNumInpSedes");
-    if (rNIs !== null){
-        rNIs.value = 1;
-        $('.regHorarioSedes').hide();
-        $('.regFormSedes #1').show();
-        aNIs.value = 1;
-        $('.actuaHorarioSedes').hide();
-        $('.actuaFormSedes #1A').show();
+    var validatorSedes = document.getElementById("regOpcion1Sedes");
+    if (validatorSedes !== null){
+        document.getElementById("regOpcion1Sedes").value = "";
+        $("#regHastaOpcion1Sedes").removeAttr('required');
+        $("#regDesdeOpcion1Sedes").removeAttr('required');
+        
+        document.getElementById("regOpcion2Sedes").value = "";
+        $("#regHastaOpcion2Sedes").removeAttr('required');
+        $("#regDesdeOpcion2Sedes").removeAttr('required');
+        
+        document.getElementById("regOpcion3Sedes").value = "";
+        $("#regHastaOpcion3Sedes").removeAttr('required');
+        $("#regDesdeOpcion3Sedes").removeAttr('required');
+
+        $("#regCJOpcion1Sedes").hide();
+        $("#regCJOpcion2Sedes").hide();
+        $("#regCJOpcion3Sedes").hide();
+        document.getElementById("regFormSedes").action = "#";
+        $("#regBtnSedes").attr('disabled','');
     }
 });
-function validacionSedes(input, metodo){
-    var textoInput = input.value;
-    var contienePyC = textoInput.indexOf(";");
-    if (contienePyC !== -1){
-        input.value = "Evite usar punto y coma!";
-        input.style.color = "#E06666";
-        $('.'+metodo+'FormSedes #'+metodo+'BtnSedes').attr('disabled','');
+function validacionHorario(selectOpcion, numeroOpcion, metodo){
+    if (selectOpcion.value === ""){
+        $("#"+metodo+"HastaOpcion"+numeroOpcion+"Sedes").removeAttr('required');
+        $("#"+metodo+"DesdeOpcion"+numeroOpcion+"Sedes").removeAttr('required');
+        $("#"+metodo+"CJOpcion"+numeroOpcion+"Sedes").hide();
     } else {
-        if (metodo === "actua"){
-            input.style.color = "#87A2D1";
-        } else {
-            input.style.color = "#555555";
-        }
-        $('.'+metodo+'FormSedes #'+metodo+'BtnSedes').removeAttr('disabled');
+        $("#"+metodo+"HastaOpcion"+numeroOpcion+"Sedes").attr('required', '');
+        $("#"+metodo+"DesdeOpcion"+numeroOpcion+"Sedes").attr('required', '');
+        $("#"+metodo+"CJOpcion"+numeroOpcion+"Sedes").show();
     }
-}
-function eliminarHSedes(metodo){
-    var valueInpNumero = Number(document.getElementById(metodo+"NumInpSedes").value);
-    if (valueInpNumero !== 1){
-        if (metodo === "actua"){
-            $('.actuaFormSedes #'+(valueInpNumero)+'A').hide();
-            document.getElementById("actuaNumInpSedes").value = valueInpNumero - 1;
-            $('.actuaFormSedes #'+valueInpNumero+'A #actuaDias'+valueInpNumero+'Sedes').removeAttr('required');
-            $('.actuaFormSedes #'+valueInpNumero+'A #actuaHoras'+valueInpNumero+'Sedes').removeAttr('required');
+    
+    if (numeroOpcion === "1"){
+        if (selectOpcion.value === "Viernes y Sábados"){
+            $("#"+metodo+"HastaOpcion2Sedes").removeAttr('required');
+            $("#"+metodo+"DesdeOpcion2Sedes").removeAttr('required');
+            $("#"+metodo+"CJOpcion2Sedes").hide();
+            $("#"+metodo+"CJMOpcion2Sedes").hide();
+            
+            var selectOpcion2 = document.getElementById(metodo+"Opcion2Sedes");
+            if (selectOpcion2.value === "Sábados y Domingos" || selectOpcion2.value === "Fines de Semana y Festivos"){
+                $("#"+metodo+"CJMOpcion3Sedes").show();
+            }
+            
+            document.getElementById(metodo+"Opcion2Sedes").value = "";
         } else {
-            $('.regFormSedes #'+(valueInpNumero)).hide();
-            document.getElementById("regNumInpSedes").value = valueInpNumero - 1;
-            $('.regFormSedes #'+valueInpNumero+' #regDias'+valueInpNumero+'Sedes').removeAttr('required');
-            $('.regFormSedes #'+valueInpNumero+' #regHoras'+valueInpNumero+'Sedes').removeAttr('required');
+            $("#"+metodo+"CJMOpcion2Sedes").show();
+        }
+    } else if (numeroOpcion === "2"){
+        if (selectOpcion.value === "Sábados y Domingos" || selectOpcion.value === "Fines de Semana y Festivos"){
+            $("#"+metodo+"HastaOpcion3Sedes").removeAttr('required');
+            $("#"+metodo+"DesdeOpcion3Sedes").removeAttr('required');
+            $("#"+metodo+"CJOpcion3Sedes").hide();
+            $("#"+metodo+"CJMOpcion3Sedes").hide();
+            document.getElementById(metodo+"Opcion3Sedes").value = "";
+        } else {
+            $("#"+metodo+"CJMOpcion3Sedes").show();
         }
     }
-}
-function agregarHSedes(metodo){
-    var valueInpNumero = Number(document.getElementById(metodo+"NumInpSedes").value);
-    if (valueInpNumero !== 5){
-        if (metodo === "actua"){
-            $('.actuaFormSedes #'+(valueInpNumero + 1)+'A').show();
-            document.getElementById("actuaNumInpSedes").value = valueInpNumero + 1;
-            $('.actuaFormSedes #'+(valueInpNumero + 1)+'A #actuaDias'+(valueInpNumero + 1)+'Sedes').attr('required','');
-            $('.actuaFormSedes #'+(valueInpNumero + 1)+'A #actuaHoras'+(valueInpNumero + 1)+'Sedes').attr('required','');
+
+    var opcionUno = document.getElementById(metodo+"Opcion1Sedes").value,
+            opcionDos = document.getElementById(metodo+"Opcion2Sedes").value,
+            opcionTres = document.getElementById(metodo+"Opcion3Sedes").value;
+    if (opcionUno === "" && opcionDos === "" && opcionTres === ""){
+        $("#"+metodo+"BtnSedes").attr('disabled', '');
+        document.getElementById(metodo+"FormSedes").action = "#";
+    } else {
+        $("#"+metodo+"BtnSedes").removeAttr('disabled');
+        if (metodo === "reg"){
+            document.getElementById("regFormSedes").action = "Sede";
         } else {
-            $('.regFormSedes #'+(valueInpNumero + 1)).show();
-            document.getElementById("regNumInpSedes").value = valueInpNumero + 1;
-            $('.regFormSedes #'+(valueInpNumero + 1)+' #regDias'+(valueInpNumero + 1)+'Sedes').attr('required','');
-            $('.regFormSedes #'+(valueInpNumero + 1)+' #regHoras'+(valueInpNumero + 1)+'Sedes').attr('required','');
+            document.getElementById("actuaFormSedes").action = "SedeA";
         }
     }
 }
@@ -718,13 +803,19 @@ function sedesVerModal(nombre,
     }
     document.getElementById('verSrcSedes').innerText = DescifrarASCII(src);
     $('#verMapaSedes iframe').attr("src", DescifrarASCII(src));
-    var horasDescifrado = DescifrarASCII(horas);
-    var diasDescifrado = DescifrarASCII(dias);
-    var arrayHH = horasDescifrado.split(";");
-    var arrayDH = diasDescifrado.split(";");
+    
+    var arrayDH = dias.split(";");
+    var arrayHH = horas.split(";");
     var cadeHS = "";
-    for (var i = 0; i < arrayHH.length; i++) {
-        cadeHS += "Los días <b>"+arrayDH[i]+"</b>, abren entre <b>"+arrayHH[i]+"</b><br>";
+    for (var i = 0; i < 3; i++) {
+        var diaDescifrado = DescifrarASCII(arrayDH[i]);
+        if (arrayHH[i] !== "86S97S99S105S111"){
+            var arrayDesdeYHasta = arrayHH[i].split("-");
+            var horaDesdeDescifrada = DescifrarASCII(arrayDesdeYHasta[0]);
+            var horaHastaDescifrada = DescifrarASCII(arrayDesdeYHasta[1]);
+            
+            cadeHS += "Los días <b>"+diaDescifrado+"</b>, desde las <b>"+horaMilitarANormal(horaDesdeDescifrada)+"</b> hasta las <b>"+horaMilitarANormal(horaHastaDescifrada)+"</b><br>";
+        }
     }
     cadeHS = cadeHS.substring(0,cadeHS.length-2);
     document.getElementById('verHorariosSedes').innerHTML = cadeHS;
@@ -748,28 +839,62 @@ function sedesActualizarModal(id,
     document.getElementById('actuaDireccionSedes').value = DescifrarASCII(direccion);
     document.getElementById('actuaMesasSedes').value = numMesas;
     document.getElementById('actuaSrcSedes').value = DescifrarASCII(src);
-    $('.actuaHorarioSedes').hide();
-    for (var e = 2; e <= 5; e++) {
-        $('.actuaFormSedes #'+e+'A #actuaDias'+e+'Sedes').removeAttr('required');
-        $('.actuaFormSedes #'+e+'A #actuaHoras'+e+'Sedes').removeAttr('required');
-    }
-    var horasDescifrado = DescifrarASCII(horas);
-    var diasDescifrado = DescifrarASCII(dias);
-    var arrayHH = horasDescifrado.split(";");
-    var arrayDH = diasDescifrado.split(";");
-    var cadeHS = "";
-    for (var i = 1; i <= arrayHH.length; i++) {
-        $('.actuaFormSedes #'+i+'A').show();
-        document.getElementById("actuaNumInpSedes").value = i;
-        if (i !== 1){
-            $('.actuaFormSedes #'+i+'A #actuaDias'+i+'Sedes').attr('required','');
-            $('.actuaFormSedes #'+i+'A #actuaHoras'+i+'Sedes').attr('required','');
+
+    document.getElementById("actuaOpcion1Sedes").value = "";
+    $("#actuaHastaOpcion1Sedes").removeAttr('required');
+    $("#actuaDesdeOpcion1Sedes").removeAttr('required');
+
+    document.getElementById("actuaOpcion2Sedes").value = "";
+    $("#actuaHastaOpcion2Sedes").removeAttr('required');
+    $("#actuaDesdeOpcion2Sedes").removeAttr('required');
+
+    document.getElementById("actuaOpcion3Sedes").value = "";
+    $("#actuaHastaOpcion3Sedes").removeAttr('required');
+    $("#actuaDesdeOpcion3Sedes").removeAttr('required');
+    
+    $("#actuaCJMOpcion2Sedes").show();
+    $("#actuaCJMOpcion3Sedes").show();
+    $("#actuaCJOpcion1Sedes").hide();
+    $("#actuaCJOpcion2Sedes").hide();
+    $("#actuaCJOpcion3Sedes").hide();
+    
+    var arrayDH = dias.split(";");
+    var arrayHH = horas.split(";");
+    for (var i = 0; i < 3; i++) {
+        var diaDescifrado = DescifrarASCII(arrayDH[i]);
+        var iSumado = i + 1;
+        if (arrayHH[i] !== "86S97S99S105S111"){
+            var arrayDesdeYHasta = arrayHH[i].split("-");
+            var horaDesdeDescifrada = DescifrarASCII(arrayDesdeYHasta[0]);
+            var horaHastaDescifrada = DescifrarASCII(arrayDesdeYHasta[1]);
+            
+            $("#actuaHastaOpcion"+iSumado+"Sedes").attr('required', '');
+            $("#actuaDesdeOpcion"+iSumado+"Sedes").attr('required', '');
+            document.getElementById("actuaHastaOpcion"+iSumado+"Sedes").value = horaHastaDescifrada;
+            document.getElementById("actuaDesdeOpcion"+iSumado+"Sedes").value = horaDesdeDescifrada;
+            $("#actuaCJOpcion"+iSumado+"Sedes").show();
+            document.getElementById("actuaOpcion"+iSumado+"Sedes").value = diaDescifrado;
+            
+            if (iSumado === 1){
+                if (diaDescifrado === "Viernes y Sábados"){
+                    $("#actuaHastaOpcion2Sedes").removeAttr('required');
+                    $("#actuaDesdeOpcion2Sedes").removeAttr('required');
+                    $("#actuaCJOpcion2Sedes").hide();
+                    $("#actuaCJMOpcion2Sedes").hide();
+
+                    document.getElementById("actuaOpcion2Sedes").value = "";
+                }
+            } else if (iSumado === 2){
+                if (diaDescifrado === "Sábados y Domingos" || diaDescifrado === "Fines de Semana y Festivos"){
+                    $("#actuaHastaOpcion3Sedes").removeAttr('required');
+                    $("#actuaDesdeOpcion3Sedes").removeAttr('required');
+                    $("#actuaCJOpcion3Sedes").hide();
+                    $("#actuaCJMOpcion3Sedes").hide();
+                    document.getElementById("actuaOpcion3Sedes").value = "";
+                }
+            }
         }
-        $('.actuaFormSedes #'+i+'A #actuaDias'+i+'Sedes').val(arrayDH[i-1]);
-        $('.actuaFormSedes #'+i+'A #actuaHoras'+i+'Sedes').val(arrayHH[i-1]);
     }
-//    cadeHS = cadeHS.substring(0,cadeHS.length-2);
-//    document.getElementById('verHorariosSedes').innerHTML = cadeHS;
 }
 // </editor-fold>
 

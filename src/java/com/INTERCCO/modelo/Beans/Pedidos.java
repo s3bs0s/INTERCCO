@@ -11,12 +11,15 @@ public class Pedidos {
     private Integer numMesa;
     private String direccionEnt;
     private String observaciones;
-    private int subTotal;
+    private Integer subTotal;
     private String estado;
+    private String existencia;
     private String idCliente;
-    private String idFactura;
-    private String idMeseroODomiciliario;
-    private String idSede;
+    private Integer idFactura;
+    private Integer idMeseroODomiciliario;
+    private String NomMeseroODomiciliario;
+    private Integer idSede;
+    private String NomSede;
 
     public Pedidos() {
     }
@@ -25,7 +28,7 @@ public class Pedidos {
         this.idPedidos = idPedidos;
     }
 
-    public Pedidos(Integer idPedidos, Date fchRegistro, Date horaRegistro, String tipoPedido, Integer numMesa, String direccionEnt, String observaciones, int subTotal, String estado) {
+    public Pedidos(Integer idPedidos, Date fchRegistro, Date horaRegistro, String tipoPedido, Integer numMesa, String direccionEnt, String observaciones, int subTotal, String estado, String existencia) {
         this.idPedidos = idPedidos;
         this.fchRegistro = fchRegistro;
         this.horaRegistro = horaRegistro;
@@ -35,6 +38,7 @@ public class Pedidos {
         this.observaciones = observaciones;
         this.subTotal = subTotal;
         this.estado = estado;
+        this.existencia = existencia;
     }
 
     /* Metodos de la Tabla en la Base de datos */
@@ -95,11 +99,11 @@ public class Pedidos {
         this.observaciones = observaciones;
     }
 
-    public int getSubTotal() {
+    public Integer getSubTotal() {
         return subTotal;
     }
 
-    public void setSubTotal(int subTotal) {
+    public void setSubTotal(Integer subTotal) {
         this.subTotal = subTotal;
     }
 
@@ -111,6 +115,14 @@ public class Pedidos {
         this.estado = estado;
     }
 
+    public String getExistencia() {
+        return existencia;
+    }
+
+    public void setExistencia(String existencia) {
+        this.existencia = existencia;
+    }
+
     public String getIdCliente() {
         return idCliente;
     }
@@ -119,32 +131,47 @@ public class Pedidos {
         this.idCliente = idCliente;
     }
 
-    public String getIdFactura() {
+    public Integer getIdFactura() {
         return idFactura;
     }
 
-    public void setIdFactura(String idFactura) {
+    public void setIdFactura(Integer idFactura) {
         this.idFactura = idFactura;
     }
 
-    public String getIdMeseroODomiciliario() {
+    public int getIdMeseroODomiciliario() {
         return idMeseroODomiciliario;
     }
 
-    public void setIdMeseroODomiciliario(String idMeseroODomiciliario) {
+    public void setIdMeseroODomiciliario(int idMeseroODomiciliario) {
         this.idMeseroODomiciliario = idMeseroODomiciliario;
     }
 
-    public String getIdSede() {
+    public Integer getIdSede() {
         return idSede;
     }
 
-    public void setIdSede(String idSede) {
+    public void setIdSede(Integer idSede) {
         this.idSede = idSede;
     }
     
     /* Metodos Adicionales para la Vista */
     
+    public String getNomMeseroODomiciliario() {
+        return NomMeseroODomiciliario;
+    }
+
+    public void setNomMeseroODomiciliario(String NomMeseroODomiciliario) {
+        this.NomMeseroODomiciliario = NomMeseroODomiciliario;
+    }
+    
+    public String getNomSede() {
+        return NomSede;
+    }
+
+    public void setNomSede(String NomSede) {
+        this.NomSede = NomSede;
+    }
     
     /* Metodos de Apoyo */
     

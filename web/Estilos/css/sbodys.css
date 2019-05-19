@@ -349,6 +349,7 @@
                     justify-content:center;
                     align-items:center;
                     margin:10px 0;
+                    cursor:default;
                     font-weight:normal;
                 }
                     .sectionAcceso .saContent .saAContent form .contentInputRecuerdame span{
@@ -376,12 +377,13 @@
                         display:inline-block;
                         position: relative;
                         border-radius: 15px;
+                        cursor:pointer;
                     }
                     .sectionAcceso .saContent .saAContent form .contentInputRecuerdame input + i{
                         background: #CDD9EC;
                         border:2px solid rgba(0,0,0,0.2);
                     }
-                        .sectionAcceso .saContent .saAContent form .contentInputRecuerdame:hover i{
+                        .sectionAcceso .saContent .saAContent form .contentInputRecuerdame i:hover{
                             background: #9FB5DA;
                         }
                         
@@ -1225,11 +1227,12 @@
                             min-width:200px;
                             display:flex;
                             flex-flow:column wrap;
-                            justify-content:space-around;
+                            justify-content:center;
                         }
                             .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLIzq div{
                                 width:100%;
                                 text-align:center;
+                                margin:10px 0;
                             }
                                 .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLIzq div p:nth-child(1){
                                     display:inline-block;
@@ -1247,7 +1250,7 @@
                                 .sectionInformacion .siBody .siBArticulos #siBArticulo1 .siBArticulosC .siBArticulosLIzq div:nth-child(1) p{
                                     font-size:43px;
                                     color:#365892;
-                                    font-weight:600;
+                                    font-weight:bold;
                                     letter-spacing:1.5pt;
                                     font-family:"Calibri Light", Arial;
                                 }
@@ -2056,9 +2059,10 @@
     /*Body RegistrarPedido*/
 /* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
 .section-rp{
+    padding:10px 20px;
     width:90%;
     height:auto;
-    margin:30px auto;
+    margin:20px auto 40px auto;
     background:#fff;
 }
     .section-rp article{
@@ -2107,6 +2111,9 @@
             background:#446EB6;
         }
         
+    .section-rp button.btn-ip{
+        font-size:19px !important;
+    }
     .section-rp .input-group{
         margin:15px;
     }

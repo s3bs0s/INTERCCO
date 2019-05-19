@@ -1,3 +1,4 @@
+<%@page import="com.INTERCCO.controlador.General.EstructuraFYH"%>
 <%@page import="com.INTERCCO.controlador.General.CifradoASCII"%>
 <%@page import="com.INTERCCO.modelo.Beans.Sedes"%>
 <%@page import="java.util.ArrayList"%>
@@ -19,22 +20,28 @@
                     <p>I</p><p>N</p><p>F</p><p>O</p><p>R</p><p>M</p><p>A</p><p>C</p><p>I</p><p>Ó</p><p>N</p>
                 </div>
                 <% ArrayList<Sedes> listaSedeIndexAD = (ArrayList) request.getAttribute("listaSedeIndex");
-                    CifradoASCII cAIndexAD = new CifradoASCII(); %>
+                    CifradoASCII cAIndexAD = new CifradoASCII();
+                    EstructuraFYH eFYHIndexAD = new EstructuraFYH(); %>
                 <div class="siBArticulosC" id="ADInformacion">
                     <div class="siBArticulosLIzq">
                         <div>
                             <p>Horarios</p>
                         </div>
                     <% for (Sedes sedeIndexAD : listaSedeIndexAD) {
-                        String[] horarioDyH = sedeIndexAD.getHorariosSede().split("Æ");
-                        String[] arrayD = horarioDyH[0].split(";");
-                        String[] arrayH = horarioDyH[1].split(";"); 
-                        for (int i = 0; i < arrayD.length; i++) { %>
-                            <div>
-                                <p><%= arrayD[i] %></p>
-                                <p><%= arrayH[i] %></p>
-                            </div>
-                        <% } %>
+                        String[] arrayD = sedeIndexAD.getDiasHorario().split(";");
+                        String[] arrayH = sedeIndexAD.getHorasHorario().split(";"); 
+                        for (int i = 0; i < 3; i++) { 
+                            String diaDescifrado = cAIndexAD.DescifrarASCII(arrayD[i]);
+                            if (!diaDescifrado.equals("Vacio")){
+                                String[] arrayDesdeYHasta = arrayH[i].split("-");
+                                String horaDesdeDescifrada = cAIndexAD.DescifrarASCII(arrayDesdeYHasta[0]);
+                                String horaHastaDescifrada = cAIndexAD.DescifrarASCII(arrayDesdeYHasta[1]); %>
+                                <div>
+                                    <p><%= diaDescifrado %></p>
+                                    <p><%= eFYHIndexAD.horaMilitarANormal(horaDesdeDescifrada) %> hasta las <%= eFYHIndexAD.horaMilitarANormal(horaHastaDescifrada) %></p>
+                                </div>
+                            <% }
+                        } %>
                         </div>
                         <div class="siBArticulosLDch">
                             <div>

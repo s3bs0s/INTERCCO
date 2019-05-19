@@ -11,18 +11,18 @@
 
 ::-webkit-scrollbar{
     width:15px;
-    background-color:#87A2D1;
+    background-color:#22385E;
 }
 ::-webkit-scrollbar-thumb{
     /*-webkit-border-radius:5px;*/
     /*border-radius:5px;*/
-    background-color:#87A2D1;
+    background-color:#22385E;
 }
 ::-webkit-scrollbar-track{
     -webkit-border-radius:0;
     border-radius:0;
-    border-left:solid 2px #87A2D1;
-    background-color:#fff;
+    /*border-left:solid 2px #87A2D1;*/
+    background-color:#DBDBDB;
 }
 
 .me{
@@ -450,7 +450,6 @@ nav.navrlogo{
 nav.naviu{
     width:100%;
     height:auto;
-    border-radius:0;
     display:flex;
     position:fixed;
     z-index:1000;

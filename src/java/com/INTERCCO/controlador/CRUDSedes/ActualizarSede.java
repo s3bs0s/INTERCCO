@@ -23,58 +23,50 @@ public class ActualizarSede extends HttpServlet {
             String direccion = request.getParameter("actuaDireccionSedes");
             int numMesas = Integer.parseInt(request.getParameter("actuaMesasSedes"));
             String mapaSrc = request.getParameter("actuaSrcSedes");
-            int numeroHorarios = Integer.parseInt(request.getParameter("actuaNumInpSedes"));
             String diasHorario = "";
             String horasHorario = "";
-            
-            for (int i = 1; i <= numeroHorarios; i++) {
-                String dH = request.getParameter("actuaDias"+i+"Sedes");
-                dH = dH.replace("Æ", "");
-                dH = dH.replace("Ø", "");
-                dH = dH.replace(";", "");
-                diasHorario += dH + ";";
-                String hH = request.getParameter("actuaHoras"+i+"Sedes");
-                hH = hH.replace("Æ", "");
-                hH = hH.replace("Ø", "");
-                hH = hH.replace(";", "");
-                horasHorario += hH + ";";
-            }
-            diasHorario = diasHorario.substring(0, diasHorario.length() - 1);
-            horasHorario = horasHorario.substring(0, horasHorario.length() - 1);
             
             ConectaDB cdb = new ConectaDB();
             Connection con = cdb.conectar();
             CifradoASCII cA = new CifradoASCII();
             PreparedStatement ps;
             
-            if (numeroHorarios < 1){
-                request.getRequestDispatcher("Sedes?mensaje=Ne").forward(request, response);
-                System.out.println("ERROR de REGISTRAR el dato de SEDE.");
+            for (int i = 1; i <= 3; i++) {
+                String dH = request.getParameter("actuaOpcion"+i+"Sedes");
+                if (dH.length() > 0){
+                    String hDesdeH = request.getParameter("actuaDesdeOpcion"+i+"Sedes");
+                    String hHastaH = request.getParameter("actuaHastaOpcion"+i+"Sedes");
+                    diasHorario += cA.CifrarASCII(dH) + ";";
+                    horasHorario += cA.CifrarASCII(hDesdeH) + "-" + cA.CifrarASCII(hHastaH) + ";";
+                } else {
+                    diasHorario += cA.CifrarASCII("Vacio") + ";";
+                    horasHorario += cA.CifrarASCII("Vacio") + ";";
+                }
+            }
+            diasHorario = diasHorario.substring(0, diasHorario.length() - 1);
+            horasHorario = horasHorario.substring(0, horasHorario.length() - 1);
+            
+            ps = con.prepareStatement("UPDATE sedes SET nombre=?,direccion=?,num_mesas=?,src_mapa=?,dias_horario=?,horas_horario=?,idCiudad=? WHERE idSedes=?;");
+            ps.setString(1, nomSede);
+            ps.setString(2, direccion);
+            if (numMesas < 1){
+                ps.setInt(3, 1);
             } else {
-                ps = con.prepareStatement("UPDATE sedes SET nombre=?,direccion=?,num_mesas=?,src_mapa=?,dias_horario=?,horas_horario=?,idCiudad=? WHERE idSedes=?;");
-                ps.setString(1, nomSede);
-                ps.setString(2, direccion);
-                if (numMesas < 1){
-                    ps.setInt(3, 1);
-                } else {
-                    ps.setInt(3, numMesas);
-                }
-                String mapaSCifrada = cA.CifrarASCII(mapaSrc);
-                ps.setString(4, mapaSCifrada);
-                String diasHCifrada = cA.CifrarASCII(diasHorario);
-                ps.setString(5, diasHCifrada);
-                String horasHCifrada = cA.CifrarASCII(horasHorario);
-                ps.setString(6, horasHCifrada);
-                ps.setInt(7, Integer.parseInt(ciudad));
-                ps.setInt(8, Integer.parseInt(id));
-                int res = ps.executeUpdate();
+                ps.setInt(3, numMesas);
+            }
+            String mapaSCifrada = cA.CifrarASCII(mapaSrc);
+            ps.setString(4, mapaSCifrada);
+            ps.setString(5, diasHorario);
+            ps.setString(6, horasHorario);
+            ps.setInt(7, Integer.parseInt(ciudad));
+            ps.setInt(8, Integer.parseInt(id));
+            int res = ps.executeUpdate();
 
-                if (res > 0){
-                    request.getRequestDispatcher("Sedes?mensaje=YActualizar&nomSed="+nomSede).forward(request, response);
-                } else {
-                    request.getRequestDispatcher("Sedes?mensaje=Ne").forward(request, response);
-                    System.out.println("ERROR de ACTUALIZAR el dato de SEDE.");
-                }
+            if (res > 0){
+                request.getRequestDispatcher("Sedes?mensaje=YActualizar&nomSed="+nomSede).forward(request, response);
+            } else {
+                request.getRequestDispatcher("Sedes?mensaje=Ne").forward(request, response);
+                System.out.println("ERROR de ACTUALIZAR el dato de SEDE.");
             }
             cdb.cierraConexion();
             

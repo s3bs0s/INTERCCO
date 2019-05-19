@@ -12,7 +12,7 @@
                 </div>
                 <div class="mb-textaling modal-body">
                     <p class="mi-obli">Los campos que contengan el símbolo asterisco <span class="a-mi">*</span> son obligatorios, de no ser así, son totalmente opcional.</p>
-                    <form action="Sede" method="POST" class="regFormSedes">
+                    <form action="#" method="POST" id="regFormSedes">
                         <div class="cont-titulo-sect">
                             <h1 class="titulo-sect">Información de la Sede</h1>
                         </div>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">Número de mesas:</span>
-                            <input required type="tel" onkeypress="return acceptNum(event)" minlength="1" maxlength="3" class="form-control" name="regMesasSedes" placeholder="Número de Mesas en la Sede.">
+                            <input required type="tel" onkeypress="return acceptNum(event)" minlength="1" maxlength="2" class="form-control" name="regMesasSedes" placeholder="Número de Mesas en la Sede.">
                             <span class="input-group-addon i-obli">*</span>
                         </div>
                         <div class="input-group">
@@ -54,76 +54,78 @@
                             <input required type="text" class="form-control" minlength="20" name="regSrcSedes" title="La dirección URL que esta en el SRC de la etiqueta HTML del Mapa de Google." placeholder="La dirección URL que esta en el SRC de la etiqueta HTML del Mapa de Google.">
                             <span class="input-group-addon i-obli">*</span>
                         </div>
+                            
+                            
+                            
                         <div class="cont-titulo-sect">
                             <h1 class="titulo-sect">Horario</h1>
                         </div>
-                        <p class="mi-obli">Tiene máximo 5 opciones de horario y intenté no usar punto y coma ; en los campos de texto.</p>
-                        <div class="input-group inpDesa">
-                            <span class="input-group-addon">Numero de Inp:</span>
-                            <input type="text" class="form-control" name="regNumInpSedes" id="regNumInpSedes">
+                        <p class="mi-obli">Para registrar su horario, debe escoger mínimo una de las tres opciones de días que se le ofrecen a continuación.</p>
+                        <div class="input-group">
+                            <span class="input-group-addon">Opción #1</span>
+                            <select class="form-control" onchange="validacionHorario(this, '1', 'reg')" title="Seleccione una de las Opciones de Días." id="regOpcion1Sedes" name="regOpcion1Sedes">
+                                <option value="">Entre Semana...</option>
+                                <option value="Lunes a Viernes">Lunes a Viernes</option>
+                                <option value="Martes a Viernes">Martes a Viernes</option>
+                                <option value="Lunes a Jueves">Lunes a Jueves</option>
+                                <option value="Viernes">Viernes</option>
+                                <option value="Viernes y Sábados">Viernes y Sábados</option>
+                            </select>
                         </div>
-                        <div class="input-group" style="display:flex; justify-content:center; align-items:center;">
-                            <button type="button" onClick="agregarHSedes('reg')" class="btn btn-success btnMyM">Agregar Horario</button>
-                            <button type="button" onClick="eliminarHSedes('reg')" class="btn btn-danger btnMyM">Eliminar Horario</button>
-                        </div>
-                        <div class="regHorarioSedes" id="1" style="border:solid 1px #365892; margin:4px 0;">
+                        <div id="regCJOpcion1Sedes">
                             <div class="input-group">
-                                <span class="input-group-addon">Días:</span>
-                                <input required type="text" onkeypress="return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'reg');" class="form-control" name="regDias1Sedes">
-                                <span class="input-group-addon i-obli">*</span>
+                                <span class="input-group-addon">Desde las (Hora):</span>
+                                <input type="time" class="form-control" id="regDesdeOpcion1Sedes" name="regDesdeOpcion1Sedes">
                             </div>
                             <div class="input-group">
-                                <span class="input-group-addon">Horas:</span>
-                                <input required type="text" onkeypress="return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'reg');" class="form-control" name="regHoras1Sedes">
-                                <span class="input-group-addon i-obli">*</span>
-                            </div>
-                        </div>
-                        <div class="regHorarioSedes" id="2" style="border:solid 1px #365892; margin:4px 0;">
-                            <div class="input-group">
-                                <span class="input-group-addon">Días:</span>
-                                <input type="text" onkeypress="return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'reg');" class="form-control" id="regDias2Sedes" name="regDias2Sedes">
-                                <span class="input-group-addon i-obli">*</span>
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-addon">Horas:</span>
-                                <input type="text" onkeypress="return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'reg');" class="form-control" id="regHoras2Sedes" name="regHoras2Sedes">
-                                <span class="input-group-addon i-obli">*</span>
+                                <span class="input-group-addon">Hasta las (Hora):</span>
+                                <input type="time" class="form-control" id="regHastaOpcion1Sedes" name="regHastaOpcion1Sedes">
                             </div>
                         </div>
-                        <div class="regHorarioSedes" id="3" style="border:solid 1px #365892; margin:4px 0;">
+                        
+                        <div id="regCJMOpcion2Sedes">
+                            <hr>
                             <div class="input-group">
-                                <span class="input-group-addon">Días:</span>
-                                <input type="text" onkeypress="return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'reg');" class="form-control" id="regDias3Sedes" name="regDias3Sedes">
-                                <span class="input-group-addon i-obli">*</span>
+                                <span class="input-group-addon">Opción #2</span>
+                                <select class="form-control" onchange="validacionHorario(this, '2', 'reg')" title="Seleccione una de las Opciones de Días." id="regOpcion2Sedes" name="regOpcion2Sedes">
+                                    <option value="">Fines de Semana...</option>
+                                    <option value="Sábados">Sábados</option>
+                                    <option value="Sábados y Domingos">Sábados y Domingos</option>
+                                    <option value="Fines de Semana y Festivos">Fines de Semana y Festivos</option>
+                                </select>
                             </div>
-                            <div class="input-group">
-                                <span class="input-group-addon">Horas:</span>
-                                <input type="text" onkeypress="return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'reg');" class="form-control" id="regHoras3Sedes" name="regHoras3Sedes">
-                                <span class="input-group-addon i-obli">*</span>
+                            <div id="regCJOpcion2Sedes">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Desde las (Hora):</span>
+                                    <input type="time" class="form-control" id="regDesdeOpcion2Sedes" name="regDesdeOpcion2Sedes">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Hasta las (Hora):</span>
+                                    <input type="time" class="form-control" id="regHastaOpcion2Sedes" name="regHastaOpcion2Sedes">
+                                </div>
                             </div>
                         </div>
-                        <div class="regHorarioSedes" id="4" style="border:solid 1px #365892; margin:4px 0;">
+                        
+                        <div id="regCJMOpcion3Sedes">
+                            <hr>
                             <div class="input-group">
-                                <span class="input-group-addon">Días:</span>
-                                <input type="text" onkeypress="return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'reg');" class="form-control" id="regDias4Sedes" name="regDias4Sedes">
-                                <span class="input-group-addon i-obli">*</span>
+                                <span class="input-group-addon">Opción #3</span>
+                                <select class="form-control" onchange="validacionHorario(this, '3', 'reg')" title="Seleccione una de las Opciones de Días." id="regOpcion3Sedes" name="regOpcion3Sedes">
+                                    <option value="">Fines de Semana...</option>
+                                    <option value="Domingos">Domingos</option>
+                                    <option value="Festivos">Festivos</option>
+                                    <option value="Domingos y Festivos">Domingos y Festivos</option>
+                                </select>
                             </div>
-                            <div class="input-group">
-                                <span class="input-group-addon">Horas:</span>
-                                <input type="text" onkeypress="return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'reg');" class="form-control" id="regHoras4Sedes" name="regHoras4Sedes">
-                                <span class="input-group-addon i-obli">*</span>
-                            </div>
-                        </div>
-                        <div class="regHorarioSedes" id="5" style="border:solid 1px #365892; margin:4px 0;">
-                            <div class="input-group">
-                                <span class="input-group-addon">Días:</span>
-                                <input type="text" onkeypress="return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'reg');" class="form-control" id="regDias5Sedes" name="regDias5Sedes">
-                                <span class="input-group-addon i-obli">*</span>
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-addon">Horas:</span>
-                                <input type="text" onkeypress="return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'reg');" class="form-control" id="regHoras5Sedes" name="regHoras5Sedes">
-                                <span class="input-group-addon i-obli">*</span>
+                            <div id="regCJOpcion3Sedes">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Desde las (Hora):</span>
+                                    <input type="time" class="form-control" id="regDesdeOpcion3Sedes" name="regDesdeOpcion3Sedes">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Hasta las (Hora):</span>
+                                    <input type="time" class="form-control" id="regHastaOpcion3Sedes" name="regHastaOpcion3Sedes">
+                                </div>
                             </div>
                         </div>
 
@@ -132,7 +134,7 @@
                                 <button type="submit" id="regBtnSedes" class="btn-modal btn btn-principal">Registrar</button>
                             </div>
                             <div class="cont-btns-secundario">
-                                <button data-dismiss="modal" type="button" data-toggle="modal" class="btn-modal btn btn-secundario">Cancelar</button>
+                                <button data-dismiss="modal" type="button" class="btn-modal btn btn-secundario">Cancelar</button>
                             </div>
                         </div>
                     </form>
@@ -238,7 +240,7 @@
                     <h4 class="modal-title"><span class="glyphicon glyphicon-edit"></span><label id="actuaTituloNombreSedes" for="actuaNombreSedes" class="me">Actualizar Información de la Sede</label></h4>
                 </div>
                 <div class="mb-textaling modal-body">
-                    <form action="SedeA" method="POST" class="actuaFormSedes">
+                    <form action="#" method="POST" id="actuaFormSedes">
                         <div class="cont-titulo-sect">
                             <h1 class="titulo-sect">Información de la Sede</h1>
                         </div>
@@ -271,72 +273,83 @@
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">Número de mesas:</span>
-                            <input required type="tel" onkeypress="this.style.color = '#87A2D1'; return acceptNum(event)" minlength="1" maxlength="3" class="form-control" name="actuaMesasSedes" id="actuaMesasSedes">
+                            <input required type="tel" onkeypress="this.style.color = '#87A2D1'; return acceptNum(event)" minlength="1" maxlength="2" class="form-control" name="actuaMesasSedes" id="actuaMesasSedes">
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">Mapa SRC:</span>
                             <input required type="text" onkeypress="this.style.color = '#87A2D1';" class="form-control" minlength="20" id="actuaSrcSedes" name="actuaSrcSedes" title="La dirección URL que esta en el SRC de la etiqueta HTML del Mapa de Google.">
                         </div>
+                            
+                            
                         <div class="cont-titulo-sect">
                             <h1 class="titulo-sect">Horario</h1>
                         </div>
-                        <p class="mi-obli">Tiene máximo 5 opciones de horario y intenté no usar punto y coma ; en los campos de texto.</p>
-                        <div class="input-group inpDesa">
-                            <span class="input-group-addon">Numero de Inp:</span>
-                            <input type="text" class="form-control" name="actuaNumInpSedes" id="actuaNumInpSedes">
+                        <p class="mi-obli">Para actualizar su horario, debe tener seleccionada mínimo una de las tres opciones de días que se le ofrecen a continuación.</p>
+                        <div class="input-group">
+                            <span class="input-group-addon">Opción #1</span>
+                            <select class="form-control" onchange="this.style.color = '#87A2D1'; validacionHorario(this, '1', 'actua')" title="Seleccione una de las Opciones de Días." id="actuaOpcion1Sedes" name="actuaOpcion1Sedes">
+                                <option value="">Entre Semana...</option>
+                                <option value="Lunes a Viernes">Lunes a Viernes</option>
+                                <option value="Martes a Viernes">Martes a Viernes</option>
+                                <option value="Lunes a Jueves">Lunes a Jueves</option>
+                                <option value="Viernes">Viernes</option>
+                                <option value="Viernes y Sábados">Viernes y Sábados</option>
+                            </select>
                         </div>
-                        <div class="input-group" style="display:flex; justify-content:center; align-items:center;">
-                            <button type="button" onClick="agregarHSedes('actua')" class="btn btn-success btnMyM">Agregar Horario</button>
-                            <button type="button" onClick="eliminarHSedes('actua')" class="btn btn-danger btnMyM">Eliminar Horario</button>
-                        </div>
-                        <div class="actuaHorarioSedes" id="1A" style="border:solid 1px #365892; margin:4px 0;">
+                        <div id="actuaCJOpcion1Sedes">
                             <div class="input-group">
-                                <span class="input-group-addon">Días:</span>
-                                <input required type="text" onkeypress="this.style.color = '#87A2D1'; return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'actua');" class="form-control" id="actuaDias1Sedes" name="actuaDias1Sedes">
+                                <span class="input-group-addon">Desde las (Hora):</span>
+                                <input type="time" onkeypress="this.style.color = '#87A2D1'" class="form-control" id="actuaDesdeOpcion1Sedes" name="actuaDesdeOpcion1Sedes">
                             </div>
                             <div class="input-group">
-                                <span class="input-group-addon">Horas:</span>
-                                <input required type="text" onkeypress="this.style.color = '#87A2D1'; return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'actua');" class="form-control" id="actuaHoras1Sedes" name="actuaHoras1Sedes">
-                            </div>
-                        </div>
-                        <div class="actuaHorarioSedes" id="2A" style="border:solid 1px #365892; margin:4px 0;">
-                            <div class="input-group">
-                                <span class="input-group-addon">Días:</span>
-                                <input type="text" onkeypress="this.style.color = '#87A2D1'; return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'actua');" class="form-control" id="actuaDias2Sedes" name="actuaDias2Sedes">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-addon">Horas:</span>
-                                <input type="text" onkeypress="this.style.color = '#87A2D1'; return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'actua');" class="form-control" id="actuaHoras2Sedes" name="actuaHoras2Sedes">
+                                <span class="input-group-addon">Hasta las (Hora):</span>
+                                <input type="time" onkeypress="this.style.color = '#87A2D1'" class="form-control" id="actuaHastaOpcion1Sedes" name="actuaHastaOpcion1Sedes">
                             </div>
                         </div>
-                        <div class="actuaHorarioSedes" id="3A" style="border:solid 1px #365892; margin:4px 0;">
+
+                        <div id="actuaCJMOpcion2Sedes">
+                            <hr>
                             <div class="input-group">
-                                <span class="input-group-addon">Días:</span>
-                                <input type="text" onkeypress="this.style.color = '#87A2D1'; return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'actua');" class="form-control" id="actuaDias3Sedes" name="actuaDias3Sedes">
+                                <span class="input-group-addon">Opción #2</span>
+                                <select class="form-control" onchange="this.style.color = '#87A2D1'; validacionHorario(this, '2', 'actua')" title="Seleccione una de las Opciones de Días." id="actuaOpcion2Sedes" name="actuaOpcion2Sedes">
+                                    <option value="">Fines de Semana...</option>
+                                    <option value="Sábados">Sábados</option>
+                                    <option value="Sábados y Domingos">Sábados y Domingos</option>
+                                    <option value="Fines de Semana y Festivos">Fines de Semana y Festivos</option>
+                                </select>
                             </div>
-                            <div class="input-group">
-                                <span class="input-group-addon">Horas:</span>
-                                <input type="text" onkeypress="this.style.color = '#87A2D1'; return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'actua');" class="form-control" id="actuaHoras3Sedes" name="actuaHoras3Sedes">
+                            <div id="actuaCJOpcion2Sedes">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Desde las (Hora):</span>
+                                    <input type="time" onkeypress="this.style.color = '#87A2D1'" class="form-control" id="actuaDesdeOpcion2Sedes" name="actuaDesdeOpcion2Sedes">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Hasta las (Hora):</span>
+                                    <input type="time" onkeypress="this.style.color = '#87A2D1'" class="form-control" id="actuaHastaOpcion2Sedes" name="actuaHastaOpcion2Sedes">
+                                </div>
                             </div>
                         </div>
-                        <div class="actuaHorarioSedes" id="4A" style="border:solid 1px #365892; margin:4px 0;">
+
+                        <div id="actuaCJMOpcion3Sedes">
+                            <hr>
                             <div class="input-group">
-                                <span class="input-group-addon">Días:</span>
-                                <input type="text" onkeypress="this.style.color = '#87A2D1'; return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'actua');" class="form-control" id="actuaDias4Sedes" name="actuaDias4Sedes">
+                                <span class="input-group-addon">Opción #3</span>
+                                <select class="form-control" onchange="this.style.color = '#87A2D1'; validacionHorario(this, '3', 'actua')" title="Seleccione una de las Opciones de Días." id="actuaOpcion3Sedes" name="actuaOpcion3Sedes">
+                                    <option value="">Fines de Semana...</option>
+                                    <option value="Domingos">Domingos</option>
+                                    <option value="Festivos">Festivos</option>
+                                    <option value="Domingos y Festivos">Domingos y Festivos</option>
+                                </select>
                             </div>
-                            <div class="input-group">
-                                <span class="input-group-addon">Horas:</span>
-                                <input type="text" onkeypress="this.style.color = '#87A2D1'; return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'actua');" class="form-control" id="actuaHoras4Sedes" name="actuaHoras4Sedes">
-                            </div>
-                        </div>
-                        <div class="actuaHorarioSedes" id="5A" style="border:solid 1px #365892; margin:4px 0;">
-                            <div class="input-group">
-                                <span class="input-group-addon">Días:</span>
-                                <input type="text" onkeypress="this.style.color = '#87A2D1'; return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'actua');" class="form-control" id="actuaDias5Sedes" name="actuaDias5Sedes">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-addon">Horas:</span>
-                                <input type="text" onkeypress="this.style.color = '#87A2D1'; return refusePC(event)" onfocus="if (this.value === 'Evite usar punto y coma!'){this.value = '';}" onblur="validacionSedes(this, 'actua');" class="form-control" id="actuaHoras5Sedes" name="actuaHoras5Sedes">
+                            <div id="actuaCJOpcion3Sedes">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Desde las (Hora):</span>
+                                    <input type="time" onkeypress="this.style.color = '#87A2D1'" class="form-control" id="actuaDesdeOpcion3Sedes" name="actuaDesdeOpcion3Sedes">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">Hasta las (Hora):</span>
+                                    <input type="time" onkeypress="this.style.color = '#87A2D1'" class="form-control" id="actuaHastaOpcion3Sedes" name="actuaHastaOpcion3Sedes">
+                                </div>
                             </div>
                         </div>
 
@@ -345,7 +358,7 @@
                                 <button type="submit" id="actuaBtnSedes" class="btn-modal btn btn-principal">Actualizar</button>
                             </div>
                             <div class="cont-btns-secundario">
-                                <button data-dismiss="modal" type="button" data-toggle="modal" class="btn-modal btn btn-secundario">Cancelar</button>
+                                <button data-dismiss="modal" type="button" class="btn-modal btn btn-secundario">Cancelar</button>
                             </div>
                         </div>
                     </form>

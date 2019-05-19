@@ -122,7 +122,8 @@ public class index extends HttpServlet {
                 sd.setRango(rs.getString("rango"));
                 sd.setDireccion(rs.getString("direccion"));
                 sd.setSrcMapa(rs.getString("src_mapa"));
-                sd.setHorariosSede(cA.DescifrarASCII(rs.getString("dias_horario"))+"Æ"+cA.DescifrarASCII(rs.getString("horas_horario")));
+                sd.setDiasHorario(rs.getString("dias_horario"));
+                sd.setHorasHorario(rs.getString("horas_horario"));
                 sd.setIdCiudad(rs.getInt("idCiudad"));
                 
                 

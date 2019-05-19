@@ -124,8 +124,8 @@
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <% for (InfoUsuarios  usua: listaInfoUsuarios) { %>
-                                    <% if(usua.getSede().equals(nomSedeUsuario)){ %>
+                                <% for (InfoUsuarios  usua: listaInfoUsuarios) {
+                                    if(usua.getSede().equals(nomSedeUsuario)){ %>
                                         <tr>
                                             <%  EstructuraFYH eFYH = new EstructuraFYH();
                                                 String fecha = String.valueOf(usua.getFchRegistro());

@@ -72,19 +72,21 @@
     <% } %>
         <header>
             <nav class="naviu">
-                <div class="logonaviu">
-                    <img src="Estilos/img/PapeleriaCorporativaSucco/Nombre/Marca SUCCO COREL (Nombre-Blanco-Transparente).png" alt="Logo">
-                </div>
-                <div class="menupriniu">
-                    <ul>
-                        <li><a id="Acceder" href="#"><span class="me">Acceder</span></a></li>
-                        <li><a id="Sede" href="#"><span class="me">Elejir Sede</span></a></li>
-                        <li><a id="Carta" href="#"><span class="me">Carta</span></a></li>
-                        <li><a id="Domicilios" href="#"><span class="me">Domicilios</span></a></li>
-                        <li><a id="Acercade" href="#"><span class="me">Acerca de</span></a></li>
-                        <li><a id="PQRSF" href="#"><span class="me">PQRSF</span></a></li>
-                        <li><button type="button" data-toggle="modal" data-target="#registrarseModal"><span class="me">Registrarse</span></button></li>
-                    </ul>
+                <div class="naviuHover">
+                    <div class="logonaviu">
+                        <img src="Estilos/img/PapeleriaCorporativaSucco/Nombre/Marca SUCCO COREL (Nombre-Blanco-Transparente).png" alt="Logo">
+                    </div>
+                    <div class="menupriniu">
+                        <ul>
+                            <li><a id="Acceder" href="#"><span class="me">Acceder</span></a></li>
+                            <li><a id="Sede" href="#"><span class="me">Elejir Sede</span></a></li>
+                            <li><a id="Carta" href="#"><span class="me">Carta</span></a></li>
+                            <li><a id="Domicilios" href="#"><span class="me">Domicilios</span></a></li>
+                            <li><a id="Acercade" href="#"><span class="me">Acerca de</span></a></li>
+                            <li><a id="PQRSF" href="#"><span class="me">PQRSF</span></a></li>
+                            <li><button type="button" data-toggle="modal" data-target="#registrarseModal"><span class="me">Registrarse</span></button></li>
+                        </ul>
+                    </div>
                 </div>
                 <section class="sectionElijaSedeSN">
                     <article>
@@ -110,26 +112,28 @@
     <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
         <header>
             <nav class="naviu">
-                <div class="logonaviu">
-                    <img src="Estilos/img/PapeleriaCorporativaSucco/Nombre/Marca SUCCO COREL (Nombre-Blanco-Transparente).png" alt="Logo">
-                </div>
-                <div class="menupriniu">
-                    <ul>
-                        <li><a id="InicioCliente" href="#"><span class="me">Inicio</span></a></li>
-                        <li><a id="Domicilios" href="#"><span class="me">Domicilios</span></a></li>
-                        <li><a id="Carta" href="#"><span class="me">Carta</span></a></li>
-                        <li><a id="Acercade" href="#"><span class="me">Acerca de</span></a></li>
-                        <li><a id="PQRSF" href="#"><span class="me">PQRSF</span></a></li>
-                    </ul>
-                </div>
-                <div class="menuperfil">
-                    <div class="caj-menuperfil">
+                <div class="naviuHover">
+                    <div class="logonaviu">
+                        <img src="Estilos/img/PapeleriaCorporativaSucco/Nombre/Marca SUCCO COREL (Nombre-Blanco-Transparente).png" alt="Logo">
+                    </div>
+                    <div class="menupriniu">
                         <ul>
-                            <li><a href="Salir"><span class="me">Salir</span></a></li>
-                            <li><a style="cursor:pointer;" id="AbrirPerfil" onclick="verModalPerfil('<%= cA.CifrarASCII(String.valueOf(idUsuario)) %>', '<%= cA.CifrarASCII(nomUsuario) %>', '<%= cA.CifrarASCII(apeUsuario) %>', '<%= fotUsuario %>', '<%= cA.CifrarASCII(rolUsuario) %>', '<%= cA.CifrarASCII(tipoUsuario) %>', '<%= cA.CifrarASCII(numUsuario) %>', '<%= cA.CifrarASCII(genUsuario) %>', '<%= cA.CifrarASCII(fnaUsuario) %>', '<%= cA.CifrarASCII(emailUsuario) %>', '<%= cA.CifrarASCII(telUsuario) %>', '<%= cA.CifrarASCII(movUsuario) %>', '<%= cA.CifrarASCII(passwordUsuario) %>', '<%= cA.CifrarASCII(dirUsuario) %>', '<%= cA.CifrarASCII(String.valueOf(idSedeUsuario)) %>', '<%= cA.CifrarASCII(nomSedeUsuario) %>')"><span class="me">Perfil</span></a></li>
+                            <li><a id="InicioCliente" href="#"><span class="me">Inicio</span></a></li>
+                            <li><a id="Domicilios" href="#"><span class="me">Domicilios</span></a></li>
+                            <li><a id="Carta" href="#"><span class="me">Carta</span></a></li>
+                            <li><a id="Acercade" href="#"><span class="me">Acerca de</span></a></li>
+                            <li><a id="PQRSF" href="#"><span class="me">PQRSF</span></a></li>
                         </ul>
-                        <div class="menuperfil-nom">
-                            <p><%= nomUsuario%></p>
+                    </div>
+                    <div class="menuperfil">
+                        <div class="caj-menuperfil">
+                            <ul>
+                                <li><a href="Salir"><span class="me">Salir</span></a></li>
+                                <li><a style="cursor:pointer;" id="AbrirPerfil" onclick="verModalPerfil('<%= cA.CifrarASCII(String.valueOf(idUsuario)) %>', '<%= cA.CifrarASCII(nomUsuario) %>', '<%= cA.CifrarASCII(apeUsuario) %>', '<%= fotUsuario %>', '<%= cA.CifrarASCII(rolUsuario) %>', '<%= cA.CifrarASCII(tipoUsuario) %>', '<%= cA.CifrarASCII(numUsuario) %>', '<%= cA.CifrarASCII(genUsuario) %>', '<%= cA.CifrarASCII(fnaUsuario) %>', '<%= cA.CifrarASCII(emailUsuario) %>', '<%= cA.CifrarASCII(telUsuario) %>', '<%= cA.CifrarASCII(movUsuario) %>', '<%= cA.CifrarASCII(passwordUsuario) %>', '<%= cA.CifrarASCII(dirUsuario) %>', '<%= cA.CifrarASCII(String.valueOf(idSedeUsuario)) %>', '<%= cA.CifrarASCII(nomSedeUsuario) %>')"><span class="me">Perfil</span></a></li>
+                            </ul>
+                            <div class="menuperfil-nom">
+                                <p><%= nomUsuario%></p>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,35 @@
 $(document).ready(function () {
-    $('.tablaListarPedidos').DataTable({
-        "order": [[0, "desc"],[1, "desc"]],
+    $('.tablaListarPedidosMesero').DataTable({
+        "order": [[3, "desc"],[0, "desc"]],
+        "pageLength": 5,
+        language: {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Límite de pedidos por página: _MENU_",
+            "sZeroRecords": "No se encontraron resultados.",
+            "sEmptyTable": "Ningún pedido disponible en esta tabla.",
+            "sInfo": "Mostrando pedidos del _START_ al _END_ de un total de _TOTAL_ pedidos",
+            "sInfoEmpty": "Mostrando pedidos del 0 al 0 de un total de 0 pedidos",
+            "sInfoFiltered": "(Filtrado de un total de _MAX_ pedidos).",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente.",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente."
+            }
+        }
+    });
+    
+    $('.tablaListarPedidosGerente').DataTable({
+        "order": [[5, "desc"],[0, "desc"],[1, "desc"]],
         "pageLength": 5,
         language: {
             "sProcessing": "Procesando...",

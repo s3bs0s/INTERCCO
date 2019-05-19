@@ -9,7 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +32,8 @@ public class ListarPedidos extends HttpServlet {
             ResultSet rs;
             PreparedStatement ps2;
             ResultSet rs2;
+            Date date = new Date();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             
             HttpSession session = request.getSession();
             int idSedeUsuario = (int) session.getAttribute("idSedeUsuario"); 
@@ -45,32 +50,43 @@ public class ListarPedidos extends HttpServlet {
                 Pedidos pd = new Pedidos();
                 pd.setIdPedidos(rs.getInt("idPedidos"));
                 pd.setFchRegistro(rs.getDate("fch_registro"));
-                pd.setTipoPedido(rs.getString("tipo_pedido"));
                 pd.setHoraRegistro(rs.getTime("hora_registro"));
+                pd.setTipoPedido(rs.getString("tipo_pedido"));
                 pd.setNumMesa(rs.getInt("num_mesa"));
                 pd.setSubTotal(rs.getInt("sub_total"));
                 pd.setEstado(rs.getString("estado"));
+                pd.setExistencia(rs.getString("existencia"));
+                pd.setIdSede(rs.getInt("idSede"));
+                pd.setIdMeseroODomiciliario(rs.getInt("idMeseroODomiciliario"));
                 
                 
-//                ps2 = con.prepareStatement("SELECT email FROM usuarios WHERE idUsuarios=? AND rol!=?;");
-//                ps2.setInt(1, rs.getInt("idUsuario"));
-//                ps2.setString(2, "Cliente");
-//                rs2 = ps2.executeQuery();
-//                if (rs2.next()) {
-//                    sp.setEmailUsuario(rs2.getString("email"));
-//                }
-//                ps2.close();
-//                rs2.close();
-//
-//                
-//                ps2 = con.prepareStatement("SELECT nombre FROM sedes WHERE idSedes=?;");
-//                ps2.setInt(1, rs.getInt("idSede"));
-//                rs2 = ps2.executeQuery();
-//                if (rs2.next()) {
-//                    sp.setIdSede(rs2.getString("nombre"));
-//                }
-//                ps2.close();
-//                rs2.close();
+                ps2 = con.prepareStatement("SELECT nombres FROM usuarios WHERE idUsuarios=?;");
+                ps2.setInt(1, rs.getInt("idMeseroODomiciliario"));
+                rs2 = ps2.executeQuery();
+                if (rs2.next()) {
+                    String nombresUMoD = rs2.getString("nombres");
+                    
+                    ps2.close();
+                    rs2.close();
+                    ps2 = con.prepareStatement("SELECT apellidos FROM info_usuarios WHERE idUsuario=?;");
+                    ps2.setInt(1, rs.getInt("idMeseroODomiciliario"));
+                    rs2 = ps2.executeQuery();
+                    if (rs2.next()) {
+                        pd.setNomMeseroODomiciliario(nombresUMoD+" "+rs2.getString("apellidos"));
+                    }
+                }
+                ps2.close();
+                rs2.close();
+
+                
+                ps2 = con.prepareStatement("SELECT nombre FROM sedes WHERE idSedes=?;");
+                ps2.setInt(1, rs.getInt("idSede"));
+                rs2 = ps2.executeQuery();
+                if (rs2.next()) {
+                    pd.setNomSede(rs2.getString("nombre"));
+                }
+                ps2.close();
+                rs2.close();
 
                     
                 listaPed.add(pd);
@@ -150,11 +166,12 @@ public class ListarPedidos extends HttpServlet {
                 
                 
                 for (int i = 1; i <= mesasSede; i++) {
-                    ps2 = con.prepareStatement("SELECT * FROM pedidos WHERE idSede=? AND existencia=? AND tipo_pedido=? AND num_mesa=?;");
+                    ps2 = con.prepareStatement("SELECT * FROM pedidos WHERE idSede=? AND existencia=? AND tipo_pedido=? AND num_mesa=? AND fch_registro=?;");
                     ps2.setInt(1, idSedeUsuario);
                     ps2.setString(2, "Y");
                     ps2.setString(3, "Restaurante");
                     ps2.setInt(4, i);
+                    ps2.setString(5, dateFormat.format(date));
                     rs2 = ps2.executeQuery();
                     if (!rs2.next()) {
                         mesasDisponibles += i+";";

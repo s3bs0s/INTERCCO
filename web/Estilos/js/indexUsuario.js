@@ -102,9 +102,23 @@ $(document).ready(function () {
             scrollTop: pqrsfAltura+'px'
         }, 600);
     });
+    
+    document.getElementById("accederTitulo").innerText = "";
+    typeWriter();
 });
 
-$('.naviu').hover(
+/* Typing Effect */
+var iEffect = 0;
+var txtEffect = 'Acceder a SUCCO';
+function typeWriter() {
+    if (iEffect < txtEffect.length) {
+        document.getElementById("accederTitulo").innerHTML += txtEffect.charAt(iEffect);
+        iEffect++;
+        setTimeout(typeWriter, 130);
+    }
+}
+
+$('.naviuHover').hover(
     function () {
         $('.logonaviu').css('display', 'block');
     },
