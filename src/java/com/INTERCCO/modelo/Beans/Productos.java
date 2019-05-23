@@ -11,6 +11,7 @@ public class Productos {
     private int idSede;
     private String NombreSede;
     private String NombreCategoria;
+    private String InsumosGasta;
 
     public Productos() {
     }
@@ -99,6 +100,14 @@ public class Productos {
 
     public void setNombreSede(String NombreSede) {
         this.NombreSede = NombreSede;
+    }
+    
+    public String getInsumosGasta() {
+        return InsumosGasta;
+    }
+
+    public void setInsumosGasta(String InsumosGasta) {
+        this.InsumosGasta = InsumosGasta;
     }
     
     /* Metodos de Apoyo */

@@ -17,7 +17,7 @@ public class EliminarInsumo extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         try {
-            String idInsumo = request.getParameter("idIns");
+            String idInsumo = request.getParameter("elimIDInsumo");
             
             ConectaDB cdb = new ConectaDB();
             Connection con = cdb.conectar();
@@ -38,6 +38,12 @@ public class EliminarInsumo extends HttpServlet {
                 int res = ps.executeUpdate();
 
                 if (res > 0){
+                    ps.close();
+                    ps = con.prepareStatement("UPDATE detalles_productos SET existencia=? WHERE idInsumoNecesario=?;");
+                    ps.setString(1, "N");
+                    ps.setInt(2, Integer.parseInt(idInsumo));
+                    ps.executeUpdate();
+                    
                     request.getRequestDispatcher("Insumos?mensaje=YEliminar&nomIns="+nombreIns).forward(request, response);
                 } else {
                     request.getRequestDispatcher("Insumos?mensaje=Ne").forward(request, response);

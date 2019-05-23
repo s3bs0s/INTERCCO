@@ -69,7 +69,7 @@
     </div>
     
     <!-- Modal para Eliminar -->
-    <div class="modal fade" id="categoriasEGerenteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal" id="categoriasEGerenteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             
             <div class="modal-content">
@@ -83,7 +83,7 @@
                             <span class="input-group-addon">ID:</span>
                             <input type="text" class="form-control" id="elimIDCategoria" name="elimIDCategoria">
                         </div>
-                        <p class="mi-obli">Recuerde que cuando eliminé la categoría <span class="a-mi-elim-sp" id="elimNombreCategoria"></span>, también se eliminarán todos los productos de ella más sus promociones.</p>
+                        <p class="mi-obli">Recuerde que cuando eliminé la categoría <span class="a-mi-elim-sp" id="elimNombreCategoria"></span>, también se eliminarán todos los productos de está más sus promociones.</p>
                         <div class="input-group cont-btn">
                             <div class="cont-btn-principal">
                                 <button type="submit" class="btn-modal-elim btn btn-principal">Estoy Segur<%= session.getAttribute("genUsuario").equals("Masculino")?"o":"a" %>, ¡Eliminar!</button>

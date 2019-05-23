@@ -1,8 +1,10 @@
 package com.INTERCCO.controlador.CRUDParametros;
 
+import com.INTERCCO.controlador.General.CifradoASCII;
 import com.INTERCCO.modelo.Beans.Carruseles;
 import com.INTERCCO.modelo.Beans.Soportes;
 import com.INTERCCO.modelo.Beans.Categorias;
+import com.INTERCCO.modelo.Beans.Insumos;
 import com.INTERCCO.modelo.Beans.Productos;
 import com.INTERCCO.modelo.Beans.Promociones;
 import com.INTERCCO.modelo.Conexion.ConectaDB;
@@ -30,6 +32,9 @@ public class ListarParametros extends HttpServlet {
             ResultSet rs;
             PreparedStatement ps2;
             ResultSet rs2;
+            PreparedStatement ps3;
+            ResultSet rs3;
+            CifradoASCII cA = new CifradoASCII();
             
             
             // Listar de TABLAS //
@@ -139,6 +144,30 @@ public class ListarParametros extends HttpServlet {
                 if (rs2.next()){
                     pd.setNombreSede(rs2.getString("nombre"));
                 }
+                ps2.close();
+                rs2.close();
+                
+                ps2 = con.prepareStatement("SELECT * FROM detalles_productos WHERE idProducto=? AND existencia=?;");
+                ps2.setInt(1, rs.getInt("idProductos"));
+                ps2.setString(2, "Y");
+                rs2 = ps2.executeQuery();
+                String cadenaInsumos = "";
+                while (rs2.next()){
+                    ps3 = con.prepareStatement("SELECT nombre,unidad_medida FROM insumos WHERE idInsumos=?;");
+                    ps3.setInt(1, rs2.getInt("idInsumoNecesario"));
+                    rs3 = ps3.executeQuery();
+                    String nombreInsumo = "Insumo";
+                    String unidadMedida = "";
+                    if (rs3.next()){
+                        nombreInsumo = rs3.getString("nombre");
+                        unidadMedida = rs3.getString("unidad_medida");
+                    }
+                    ps3.close();
+                    rs3.close();
+                    
+                    cadenaInsumos += rs2.getInt("idDetalles_Productos")+"-"+rs2.getInt("idInsumoNecesario")+"-"+cA.CifrarASCII(nombreInsumo)+"-"+unidadMedida+"-"+rs2.getInt("cantidad_insumo")+"-Y-Viejo;";
+                }
+                pd.setInsumosGasta(cadenaInsumos.substring(0, cadenaInsumos.length() - 1));
                 ps2.close();
                 rs2.close();
 
@@ -271,6 +300,25 @@ public class ListarParametros extends HttpServlet {
                 listaProSPar.add(pd);
             }
             
+            // --------------------- //
+            
+            ArrayList<Insumos> listaInsSPar = new ArrayList<>();
+            
+            ps.close();
+            rs.close();
+            ps = con.prepareStatement("SELECT idInsumos,nombre,unidad_medida,idSede FROM insumos WHERE existencia=? ORDER BY idInsumos DESC;");
+            ps.setString(1, "Y");
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Insumos in = new Insumos();
+                in.setIdInsumos(rs.getInt("idInsumos"));
+                in.setNombre(rs.getString("nombre"));
+                in.setUnidadMedida(rs.getString("unidad_medida"));
+                in.setIdSede(rs.getInt("idSede"));
+                
+                listaInsSPar.add(in);
+            }
+            
             
             request.setAttribute("listaSop", listaSop);
             request.setAttribute("listaCat", listaCat);
@@ -279,6 +327,7 @@ public class ListarParametros extends HttpServlet {
             request.setAttribute("listaCarr", listaCarr);
             request.setAttribute("listaCatSPar", listaCatSPar);
             request.setAttribute("listaProSPar", listaProSPar);
+            request.setAttribute("listaInsSPar", listaInsSPar);
             request.setAttribute("IVA", IVA);
             request.getRequestDispatcher("parametros.jsp").forward(request, response);
             cdb.cierraConexion();

@@ -15,7 +15,8 @@ public class Insumos {
     private String existencia;
     private Integer idProveedor;
     private String NombreProveedor;
-    private String idSede;
+    private Integer idSede;
+    private String NomSede;
     private String tipoIf;
     private String numIt;
     private String nombrePc;
@@ -129,15 +130,23 @@ public class Insumos {
         this.idProveedor = idProveedor;
     }
 
-    public String getIdSede() {
+    public Integer getIdSede() {
         return idSede;
     }
 
-    public void setIdSede(String idSede) {
+    public void setIdSede(Integer idSede) {
         this.idSede = idSede;
     }
 
     /* Metodos Adicionales para la Vista */
+    
+    public String getNomSede() {
+        return NomSede;
+    }
+
+    public void setNomSede(String NomSede) {
+        this.NomSede = NomSede;
+    }
     
     public String getNombreProveedor() {
         return NombreProveedor;

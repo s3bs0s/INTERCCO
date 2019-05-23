@@ -202,6 +202,64 @@ $(document).ready(function () {
         }
     });
     
+    $('.tablaListarInsumosProductosReg').DataTable({
+        "order": [[0, "asc"]],
+        "pageLength": 5,
+        language: {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Límite de insumos por página: _MENU_",
+            "sZeroRecords": "No se encontraron resultados.",
+            "sEmptyTable": "Ningún insumo disponible en esta tabla.",
+            "sInfo": "Mostrando insumos del _START_ al _END_ de un total de _TOTAL_ insumos",
+            "sInfoEmpty": "Mostrando insumos del 0 al 0 de un total de 0 insumos",
+            "sInfoFiltered": "(Filtrado de un total de _MAX_ insumos).",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente.",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente."
+            }
+        }
+    });
+    
+    $('.tablaListarInsumosProductosActua').DataTable({
+        "order": [[0, "asc"]],
+        "pageLength": 5,
+        language: {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Límite de insumos por página: _MENU_",
+            "sZeroRecords": "No se encontraron resultados.",
+            "sEmptyTable": "Ningún insumo disponible en esta tabla.",
+            "sInfo": "Mostrando insumos del _START_ al _END_ de un total de _TOTAL_ insumos",
+            "sInfoEmpty": "Mostrando insumos del 0 al 0 de un total de 0 insumos",
+            "sInfoFiltered": "(Filtrado de un total de _MAX_ insumos).",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente.",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente."
+            }
+        }
+    });
+    
     $('.tablaListarProveedores').DataTable({
         "order": [[1, "asc"]],
         "pageLength": 5,

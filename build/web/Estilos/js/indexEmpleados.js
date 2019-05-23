@@ -177,22 +177,17 @@ function estructurarHora(whatNeed, hora){
 var nav1 = window.Event ? true : false; 
 function acceptNum(evt){
     var key1 = nav1 ? evt.which : evt.keyCode;
-    return (key1 >= 48 && key1 <= 57);
+    return key1 >= 48 && key1 <= 57;
 }
 var nav2 = window.Event ? true : false; 
-function acceptNumCant(evt){
+function acceptNP(evt){
     var key2 = nav2 ? evt.which : evt.keyCode;
-    return key2 >= 48 && key2 <= 57;
+    return key2 === 46 || (key2 >= 48 && key2 <= 57);
 }
 var nav3 = window.Event ? true : false; 
-function acceptNP(evt){
-    var key3 = nav3 ? evt.which : evt.keyCode;
-    return key3 === 46 || (key3 >= 48 && key3 <= 57);
-}
-var nav4 = window.Event ? true : false; 
 function refuseCPyP(evt){
-    var key4 = nav4 ? evt.which : evt.keyCode;
-    return ((key4 <= 156 || key4 >= 158) && (key4 <= 145 || key4 >= 147));
+    var key3 = nav3 ? evt.which : evt.keyCode;
+    return ((key3 <= 156 || key3 >= 158) && (key3 <= 145 || key3 >= 147));
 }
 function formatNumberReturn(numero) {
     // Variable que contendra el resultado final
@@ -260,10 +255,8 @@ function horaMilitarANormal(hora){
 
     /* Fin */
     if (pm === true) {
-        console.log(hoursString + ":" + minutesString + " p.m.");
         return hoursString + ":" + minutesString + " p.m.";
     } else {
-        console.log(hoursString + ":" + minutesString + " a.m.");
         return hoursString + ":" + minutesString + " a.m.";
     }
 }
@@ -649,10 +642,270 @@ function promocionesActualizarModal(idprom,
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="productosVerModal, productosActualizarModal, productosEliminarModal">
+$(document).ready(function(){
+    var validacionProducto = document.getElementById("regInsumosPProducto");
+    if (validacionProducto !== null){
+        validacionExistenciaInsumosP("reg");
+        autocompleteInsumosProducto("reg");
+    }
+});
+function validacionExistenciaInsumosP(metodo){
+    var inputInsumos = document.getElementById(metodo+"InsumosPProducto");
+    if (inputInsumos.value.length > 0){
+        var valueInput = inputInsumos.value.substring(0,inputInsumos.value.length-1);
+        var arrayInsumos = valueInput.split(";");
+        var contadorInsumos = 0;
+        for (var i = 0; i < arrayInsumos.length; i++) {
+            if (metodo === "actua"){
+                var arrayInfoInsumo = arrayInsumos[i].split("-");
+                if (arrayInfoInsumo[5] !== "N"){
+                    contadorInsumos++;
+                }
+            } else {
+                if (arrayInsumos[i] !== "86S97S99S105S111"){
+                    contadorInsumos++;
+                }
+            }
+        }
+        if (contadorInsumos > 0){
+            $("#"+metodo+"BtnProducto").removeAttr('disabled');
+        } else {
+            $("#"+metodo+"BtnProducto").attr('disabled','');
+        }
+    } else {
+        $("#"+metodo+"BtnProducto").attr('disabled','');
+    }
+}
+function autocompleteInsumosProducto(metodo){
+    var select = document.getElementById(metodo+"InsumosProducto");
+    if (select.value.length > 0){
+        var arrayInfoInsumo = select.value.split(";");
+        document.getElementById(metodo+"UnidadMInsumoProducto").value = arrayInfoInsumo[1];
+    } else {
+        document.getElementById(metodo+"UnidadMInsumoProducto").value = "Seleccioné un Insumo...";
+    }
+}
+function agregarInsumoProducto(metodo){
+    var inputInsumos = document.getElementById(metodo+"InsumosPProducto");
+    var selectInsumos = document.getElementById(metodo+"InsumosProducto");
+    var cantidad = document.getElementById(metodo+"CantidadInsumosProducto");
+    
+    if (cantidad.value.length > 0 && selectInsumos.value.length > 0){
+        selectInsumos.style.background = "#fff";
+        cantidad.style.background = "#fff";
+        var arrayInfoInsumo = selectInsumos.value.split(";");
+        var nomInsumo = selectInsumos.options[selectInsumos.selectedIndex].text;
+        var optionInsumo = selectInsumos.options[selectInsumos.selectedIndex];
+        
+        var posicionInsumosAgg = 0;
+        var valueInputInsumos;
+        var arrayInputInsumos;
+        var arrayInputInfoInsumo;
+        if (metodo === "reg"){
+            if (inputInsumos.value.length > 0){
+                valueInputInsumos = inputInsumos.value.substring(0,inputInsumos.value.length-1);
+                arrayInputInsumos = valueInputInsumos.split(";");
+                posicionInsumosAgg = arrayInputInsumos.length;
+            }
+            inputInsumos.value += arrayInfoInsumo[0]+"-"+CifrarASCII(nomInsumo)+"-"+arrayInfoInsumo[1]+"-"+cantidad.value+";";
+        } else {
+            if (inputInsumos.value.length > 0){
+                valueInputInsumos = inputInsumos.value.substring(0,inputInsumos.value.length-1);
+                arrayInputInsumos = valueInputInsumos.split(";");
+                var verificacionInsumo = "No";
+                posicionInsumosAgg = arrayInputInsumos.length;
+                
+                for (var i = 0; i < arrayInputInsumos.length; i++) {
+                    arrayInputInfoInsumo = arrayInputInsumos[i].split("-");
+                    if (arrayInputInfoInsumo[1] === arrayInfoInsumo[0]){
+                       verificacionInsumo = "Si";
+                       posicionInsumosAgg = i;
+                    }
+                }
+                
+                if (verificacionInsumo === "No"){
+                    inputInsumos.value += "X-"+arrayInfoInsumo[0]+"-"+CifrarASCII(nomInsumo)+"-"+arrayInfoInsumo[1]+"-"+cantidad.value+"-Y-Nuevo;";
+                } else {
+                    inputInsumos.value = "";
+                    for (var i = 0; i < arrayInputInsumos.length; i++) {
+                        if (posicionInsumosAgg === i){
+                            arrayInputInfoInsumo = arrayInputInsumos[i].split("-");
+                            inputInsumos.value += arrayInputInfoInsumo[0]+"-"+arrayInputInfoInsumo[1]+"-"+arrayInputInfoInsumo[2]+"-"+arrayInputInfoInsumo[3]+"-"+cantidad.value+"-Y-"+arrayInputInfoInsumo[6]+";";
+                        } else {
+                            inputInsumos.value += arrayInputInsumos[i]+";";
+                        }
+                    }
+                }
+            } else {
+                inputInsumos.value += "0-"+arrayInfoInsumo[0]+"-"+CifrarASCII(nomInsumo)+"-"+arrayInfoInsumo[1]+"-"+cantidad.value+"-Y-Nuevo;";
+            }
+        }
+        
+        
+        var metodoDT;
+        metodo === "reg"? metodoDT = "Reg" : metodoDT = "Actua";
+        $('.tablaListarInsumosProductos'+metodoDT).DataTable().row.add( [
+            nomInsumo,
+            `<div class="td-espaciado">
+                <button type="button" id="${posicionInsumosAgg}BtnMenosRowIP${metodo}" onclick="cantInsumoProducto('resta', '${posicionInsumosAgg}', '${metodo}')" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>
+                    <span>
+                        <span id="${posicionInsumosAgg}CantRowIP${metodo}">${cantidad.value}</span>
+                        <span>${" "+arrayInfoInsumo[1]}</span>
+                    </span>
+                <button type="button" id="${posicionInsumosAgg}BtnMasRowIP${metodo}" onclick="cantInsumoProducto('suma', '${posicionInsumosAgg}', '${metodo}')" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>`,
+            `<div class="td-espaciado">
+                <button type="button" id="${posicionInsumosAgg}BtnRemoveRowIP${metodo}" onclick="removerInsumoProducto('${posicionInsumosAgg}', '${metodo}')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Remover</button>
+            </div>`
+        ] ).draw();
+        
+        cantidad.value = "";
+        optionInsumo.remove();
+        autocompleteInsumosProducto(metodo);
+        validacionExistenciaInsumosP(metodo);
+        cantidad.focus();
+    } else {
+        selectInsumos.style.background = "#E06666";
+        cantidad.style.background = "#E06666";
+    }
+}
+function limpiarInsumosProducto(metodo){
+    var inputInsumos = document.getElementById(metodo+"InsumosPProducto");
+    if (inputInsumos.value.length > 0){
+        var valueInput = inputInsumos.value.substring(0,inputInsumos.value.length-1);
+        var arrayInsumos = valueInput.split(";");
+        var arrayInfoInsumo;
+        var contadorInsumos = 0;
+        for (var i = 0; i < arrayInsumos.length; i++) {
+            if (metodo === "actua"){
+                arrayInfoInsumo = arrayInsumos[i].split("-");
+                if (arrayInfoInsumo[5] !== "N"){
+                    contadorInsumos++;
+                }
+            } else {
+                if (arrayInsumos[i] !== "86S97S99S105S111"){
+                    contadorInsumos++;
+                }
+            }
+        }
+        if (contadorInsumos > 0){
+            for (var i = 0; i < arrayInsumos.length; i++) {
+                if (metodo === "actua"){
+                    arrayInfoInsumo = arrayInsumos[i].split("-");
+                    if (arrayInfoInsumo[5] !== "N"){
+                        removerInsumoProducto(i, metodo);
+                    }
+                } else {
+                    if (arrayInsumos[i] !== "86S97S99S105S111"){
+                        removerInsumoProducto(i, metodo);
+                    }
+                }
+            }
+            if (metodo === "reg"){
+                inputInsumos.value = "";
+            }
+        } else {
+            document.getElementById(metodo+"InsumosProducto").style.background = "#E06666";
+            document.getElementById(metodo+"CantidadInsumosProducto").style.background = "#E06666";
+        }
+    } else {
+        document.getElementById(metodo+"InsumosProducto").style.background = "#E06666";
+        document.getElementById(metodo+"CantidadInsumosProducto").style.background = "#E06666";
+    }
+}
+function removerInsumoProducto(posicionInputI, metodo){
+    var inputInsumos = document.getElementById(metodo+"InsumosPProducto");
+    var valueInputInsumos = inputInsumos.value.substring(0,inputInsumos.value.length-1);
+    var arrayInputInsumos = valueInputInsumos.split(";");
+    var arrayPosicionInsumo = arrayInputInsumos[parseInt(posicionInputI)].split("-");
+    
+    var templateOption;
+    if (metodo === "reg"){
+        templateOption = '<option value="'+arrayPosicionInsumo[0]+';'+arrayPosicionInsumo[2]+'">'+DescifrarASCII(arrayPosicionInsumo[1])+'</option>';
+    } else {
+        templateOption = '<option value="'+arrayPosicionInsumo[1]+';'+arrayPosicionInsumo[3]+'">'+DescifrarASCII(arrayPosicionInsumo[2])+'</option>';
+    }
+    document.getElementById(metodo+"InsumosProducto").insertAdjacentHTML("beforeend",templateOption);
+    
+    inputInsumos.value = "";
+    for (var i = 0; i < arrayInputInsumos.length; i++) {
+        if (i === parseInt(posicionInputI)){
+            if (metodo === "actua"){
+                inputInsumos.value += arrayPosicionInsumo[0]+"-"+arrayPosicionInsumo[1]+"-"+arrayPosicionInsumo[2]+"-"+arrayPosicionInsumo[3]+"-"+arrayPosicionInsumo[4]+"-N-"+arrayPosicionInsumo[6]+";";
+            } else {
+                inputInsumos.value += "86S97S99S105S111;";
+            }
+        } else {
+            inputInsumos.value += arrayInputInsumos[i]+";";
+        }
+    }
+    validacionExistenciaInsumosP(metodo);
+    autocompleteInsumosProducto(metodo);
+    var metodoDT;
+    metodo === "reg"? metodoDT = "Reg" : metodoDT = "Actua";
+    $('.tablaListarInsumosProductos'+metodoDT).DataTable().row($("#"+posicionInputI+"BtnRemoveRowIP"+metodo).parents('tr')).remove().draw(false);
+}
+function cantInsumoProducto(tipoOpe, posicionInputI, metodo){
+    var inputInsumos = document.getElementById(metodo+"InsumosPProducto");
+    var valueInputInsumos = inputInsumos.value.substring(0,inputInsumos.value.length-1);
+    var arrayInputInsumos = valueInputInsumos.split(";");
+    var arrayPosicionInsumo = arrayInputInsumos[parseInt(posicionInputI)].split("-");
+    var posicionCantidadValue;
+    if (tipoOpe === "resta"){
+        if (metodo === "reg"){
+            posicionCantidadValue = arrayPosicionInsumo[3];
+        } else {
+            posicionCantidadValue = arrayPosicionInsumo[4];
+        }
+        if (parseInt(posicionCantidadValue) > 1){
+            inputInsumos.value = "";
+            for (var i = 0; i < arrayInputInsumos.length; i++) {
+                if (i === parseInt(posicionInputI)){
+                    if (metodo === "actua"){
+                        inputInsumos.value += arrayPosicionInsumo[0]+"-"+arrayPosicionInsumo[1]+"-"+arrayPosicionInsumo[2]+"-"+arrayPosicionInsumo[3]+"-"+(parseInt(arrayPosicionInsumo[4])-1)+"-"+arrayPosicionInsumo[5]+"-"+arrayPosicionInsumo[6]+";";
+                    } else {
+                        inputInsumos.value += arrayPosicionInsumo[0]+"-"+arrayPosicionInsumo[1]+"-"+arrayPosicionInsumo[2]+"-"+(parseInt(arrayPosicionInsumo[3])-1)+";";
+                    }
+                } else {
+                    inputInsumos.value += arrayInputInsumos[i]+";";
+                }
+            }
+            document.getElementById(posicionInputI+"CantRowIP"+metodo).innerText = parseInt(posicionCantidadValue)-1;
+            $("#"+posicionInputI+"BtnMasRowIP"+metodo).removeAttr('disabled');
+        } else {
+            $("#"+posicionInputI+"BtnMenosRowIP"+metodo).attr('disabled','');
+        }
+    } else {
+        if (metodo === "reg"){
+            posicionCantidadValue = arrayPosicionInsumo[3];
+        } else {
+            posicionCantidadValue = arrayPosicionInsumo[4];
+        }
+        if (parseInt(posicionCantidadValue) < 99999){
+            inputInsumos.value = "";
+            for (var i = 0; i < arrayInputInsumos.length; i++) {
+                if (i === parseInt(posicionInputI)){
+                    if (metodo === "actua"){
+                        inputInsumos.value += arrayPosicionInsumo[0]+"-"+arrayPosicionInsumo[1]+"-"+arrayPosicionInsumo[2]+"-"+arrayPosicionInsumo[3]+"-"+(parseInt(arrayPosicionInsumo[4])+1)+"-"+arrayPosicionInsumo[5]+"-"+arrayPosicionInsumo[6]+";";
+                    } else {
+                        inputInsumos.value += arrayPosicionInsumo[0]+"-"+arrayPosicionInsumo[1]+"-"+arrayPosicionInsumo[2]+"-"+(parseInt(arrayPosicionInsumo[3])+1)+";";
+                    }
+                } else {
+                    inputInsumos.value += arrayInputInsumos[i]+";";
+                }
+            }
+            document.getElementById(posicionInputI+"CantRowIP"+metodo).innerText = parseInt(posicionCantidadValue)+1;
+            $("#"+posicionInputI+"BtnMenosRowIP"+metodo).removeAttr('disabled');
+        } else {
+            $("#"+posicionInputI+"BtnMasRowIP"+metodo).attr('disabled','');
+        }
+    }
+}
 function productosVerModal(cate,
         nombre,
         descrip,
-        precio) {
+        precio,
+        insumosGasta) {
             
     document.getElementById('verNombreProducto').innerText = DescifrarASCII(nombre);
     document.getElementById('verCategoriaProducto').innerText = DescifrarASCII(cate);
@@ -662,12 +915,21 @@ function productosVerModal(cate,
     } else {
         document.getElementById('verDescripcionProducto').innerText = DescifrarASCII(descrip);
     }
+    var arrayInsumos = insumosGasta.split(";");
+    var templateInsumos = "";
+    for (var i = 0; i < arrayInsumos.length; i++) {
+        var arrayInfoInsumo = arrayInsumos[i].split("-");
+        templateInsumos += (i+1)+". <b>"+DescifrarASCII(arrayInfoInsumo[2])+"</b> con una cantidad de <b>"+arrayInfoInsumo[4]+" "+(parseInt(arrayInfoInsumo[4])>1?'Unidades':'Unidad')+"</b><br>";
+    }
+    templateInsumos = templateInsumos.substring(0, templateInsumos.length - 4);
+    document.getElementById('verInsumosGastaProducto').innerHTML = templateInsumos;
 }
 function productosActualizarModal(idprod,
         cate,
         nombre,
         descri,
-        precio) {
+        precio,
+        insumosGasta) {
             
     $("#productosAGerenteModal input,select,textarea").css('color', '#555555');
     document.getElementById('actuaIDProducto').value = idprod;
@@ -679,6 +941,57 @@ function productosActualizarModal(idprod,
     } else {
         document.getElementById('actuaDescripcionProducto').value = DescifrarASCII(descri);
     }
+    
+    var valueInputInsumos = document.getElementById("actuaInsumosPProducto").value;
+    var valueInputInsumosA;
+    var arrayInsumos;
+    var arrayInfoInsumo;
+    if (valueInputInsumos.length > 0){ 
+        valueInputInsumosA = valueInputInsumos.substring(0, valueInputInsumos.length - 1);
+        arrayInsumos = valueInputInsumosA.split(";");
+        var templateOption = "";
+        for (var i = 0; i < arrayInsumos.length; i++) {
+            arrayInfoInsumo = arrayInsumos[i].split("-");
+            templateOption += '<option value="'+arrayInfoInsumo[1]+';'+arrayInfoInsumo[3]+'">'+DescifrarASCII(arrayInfoInsumo[2])+'</option>';
+        }
+        document.getElementById("actuaInsumosProducto").insertAdjacentHTML("beforeend",templateOption);
+        $('.tablaListarInsumosProductosActua').DataTable().clear().draw();
+    }
+    document.getElementById("actuaCantidadInsumosProducto").value = "";
+    document.getElementById("actuaCantidadInsumosProducto").style.background = "#fff";
+    document.getElementById("actuaInsumosPProducto").value = "";
+    document.getElementById("actuaInsumosProducto").style.background = "#fff";
+    
+    valueInputInsumos = insumosGasta.substring(0,insumosGasta.length-1);
+    arrayInsumos = valueInputInsumos.split(";");
+
+    for (var i = 0; i < arrayInsumos.length; i++) {
+        arrayInfoInsumo = arrayInsumos[i].split("-");
+        
+        $('.tablaListarInsumosProductosActua').DataTable().row.add( [
+            DescifrarASCII(arrayInfoInsumo[2]),
+            `<div class="td-espaciado">
+                <button type="button" id="${i}BtnMenosRowIPactua" onclick="cantInsumoProducto('resta', '${i}', 'actua')" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>
+                    <span>
+                        <span id="${i}CantRowIPactua">${arrayInfoInsumo[4]}</span>
+                        <span>${" "+arrayInfoInsumo[3]}</span>
+                    </span>
+                <button type="button" id="${i}BtnMasRowIPactua" onclick="cantInsumoProducto('suma', '${i}', 'actua')" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>`,
+            `<div class="td-espaciado">
+                <button type="button" id="${i}BtnRemoveRowIPactua" onclick="removerInsumoProducto('${i}', 'actua')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Remover</button>
+            </div>`
+        ] ).draw();
+        
+        var selectInsumos = document.getElementById("actuaInsumosProducto");
+        var indexOption = $("#actuaInsumosProducto").children('option[value="'+arrayInfoInsumo[1]+';'+arrayInfoInsumo[3]+'"]').index();
+        var optionInsumo = selectInsumos.options[indexOption];
+        optionInsumo.remove();
+    }
+    
+    document.getElementById("actuaInsumosPProducto").value = insumosGasta+";";
+    validacionExistenciaInsumosP("actua");
+    autocompleteInsumosProducto("actua");
 }
 function productosEliminarModal(idprod,
         nombre) {
@@ -1238,7 +1551,7 @@ function proveedorEliminarModal(idProveedor,
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="insumoVerModal, insumoActualizarModal y insumoDevolverModal"> 
+// <editor-fold defaultstate="collapsed" desc="insumoVerModal, insumoActualizarModal, insumoDevolverModal y insumoEliminarModal"> 
 function insumoDevolverModal(idInsumo,
         emailpro,
         nominsu,
@@ -1356,6 +1669,12 @@ function insumoVerModal(referencia,
     } else {
         document.getElementById('verMovilPCProInsumo').innerText = DescifrarASCII(movilPC);
     }
+}
+function insumoEliminarModal(idinsumo,
+        nombre) {
+            
+    document.getElementById('elimIDInsumo').value = idinsumo;
+    document.getElementById('elimNombreInsumo').innerText = DescifrarASCII(nombre);
 }
 // </editor-fold>
 // </editor-fold>

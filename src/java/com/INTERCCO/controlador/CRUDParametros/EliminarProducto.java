@@ -44,6 +44,13 @@ public class EliminarProducto extends HttpServlet {
                     ps.setInt(2, Integer.parseInt(idProducto));
                     ps.setString(3, "Y");
                     ps.executeUpdate();
+                    
+                    ps.close();
+                    ps = con.prepareStatement("UPDATE detalles_productos SET existencia=? WHERE idProducto=? AND existencia=?;");
+                    ps.setString(1, "N");
+                    ps.setInt(2, Integer.parseInt(idProducto));
+                    ps.setString(3, "Y");
+                    ps.executeUpdate();
 
                     request.getRequestDispatcher("Parametros?mensaje=YEliminarProducto&nomProd="+nombreProd).forward(request, response);
                 } else {

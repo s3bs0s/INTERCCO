@@ -111,7 +111,7 @@
                             </tfoot>
                             <tbody>
                                 <% for (Insumos  insu: listaInsumos) { %>
-                                    <% if(insu.getIdSede().equals(nomSedeUsuario)){ %>
+                                    <% if(insu.getNomSede().equals(nomSedeUsuario)){ %>
                                         <% Date date = new Date();
                                             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -151,9 +151,9 @@
                                                     <button type="button" class="btn btn-active-os" data-toggle="modal" data-target="#insumoDGerenteModal" onClick="insumoDevolverModal('<%= insu.getIdInsumos()%>', '<%= cA.CifrarASCII(insu.getEmail())%>', '<%= cA.CifrarASCII(insu.getNombre())%>', '<%= cA.CifrarASCII(insu.getNombrePc())%>')"><span class="glyphicon glyphicon-transfer"></span> Devolver</button>
                                                     <% } %>
                                                     <% if ((insu.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date))) || insu.getFchCaducidad().equals(dateFormat.parse(dateFormat.format(date)))) && !insu.getExistencia().equals("D")) { %>
-                                                        <button type="button" onClick="window.location = 'InsumoE?idIns='+<%= insu.getIdInsumos()%>;" class="btn btn-purple"><span class="icon-hour-glass"></span> Venció</button>
+                                                        <button type="button" onClick="window.location = 'InsumoE?elimIDInsumo='+<%= insu.getIdInsumos()%>;" class="btn btn-purple"><span class="icon-hour-glass"></span> Venció</button>
                                                     <% } else { %>
-                                                        <button type="button" onClick="window.location = 'InsumoE?idIns='+<%= insu.getIdInsumos()%>;" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#insumoEGerenteModal" onClick="insumoEliminarModal('<%= insu.getIdInsumos()%>', '<%= cA.CifrarASCII(insu.getNombre())%>')"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
                                                     <% } %>
                                                 </div>
                                             </td>

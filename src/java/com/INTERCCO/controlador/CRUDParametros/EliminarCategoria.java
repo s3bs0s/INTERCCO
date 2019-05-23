@@ -56,6 +56,13 @@ public class EliminarCategoria extends HttpServlet {
                         ps2.executeUpdate();
                         ps2.close();
                         
+                        ps2 = con.prepareStatement("UPDATE detalles_productos SET existencia=? WHERE idProducto=? AND existencia=?;");
+                        ps2.setString(1, "N");
+                        ps2.setInt(2, rs.getInt("idProductos"));
+                        ps2.setString(3, "Y");
+                        ps2.executeUpdate();
+                        ps2.close();
+                        
                     }
                     
                     ps.close();

@@ -1,3 +1,4 @@
+<%@page import="com.INTERCCO.modelo.Beans.Insumos"%>
 <%@page import="com.INTERCCO.modelo.Beans.Categorias"%>
 <%@page import="java.util.ArrayList"%>
 <body>
@@ -13,6 +14,9 @@
                 <div class="mb-textaling modal-body">
                     <p class="mi-obli">Los campos que contengan el símbolo asterisco <span class="a-mi">*</span> son obligatorios, de no ser así, son totalmente opcional.</p>
                     <form action="Producto" method="POST" autocomplete="off">
+                        <div class="cont-titulo-sect">
+                            <h1 class="titulo-sect">Información del Producto</h1>
+                        </div>
                         <div class="input-group">
                             <span class="input-group-addon">Nombre:</span>
                             <input required type="text" onkeypress="return refuseCPyP(event)" maxlength="50" minlength="2" class="form-control" name="regNombreProducto" placeholder="Producto.">
@@ -51,13 +55,75 @@
                             <span class="input-group-addon">Descripción:</span>
                             <textarea class="form-control" placeholder="Descripción del producto." name="regDescripcionProducto"></textarea>
                         </div>
+                        <div class="cont-titulo-sect">
+                            <h1 class="titulo-sect">Insumos que Gasta</h1>
+                        </div>
+                        <p class="mi-obli">Para registrar el producto, debe agregar como mínimo un insumo que gasté.</p>
+                        <div class="input-group">
+                            <span class="input-group-addon">Insumos:</span>
+                            <input type="text" class="form-control" id="regInsumosPProducto" name="regInsumosPProducto">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Insumo:</span>
+                            <% ArrayList<Insumos> listaInsumosSPar = (ArrayList) request.getAttribute("listaInsSPar"); %>
+                            <select class="form-control" onchange="autocompleteInsumosProducto('reg', this)" onfocus="this.style.background = '#fff'" id="regInsumosProducto">
+                                <%  idSedeUsuarioCate = 0;
+                                    rolUsuarioCate = "";
+                                    if (session.getAttribute("rolUsuario") == null || session.getAttribute("rolUsuario").equals("")){
+                                        idSedeUsuarioCate = 0;
+                                    } else {
+                                        idSedeUsuarioCate = (int) session.getAttribute("idSedeUsuario"); 
+                                        rolUsuarioCate = (String) session.getAttribute("rolUsuario");
+                                    }
+                                    for (Insumos  insuSP: listaInsumosSPar) { 
+                                    if (rolUsuarioCate.equals("AdminS")){ %>
+                                        <option value="<%= insuSP.getIdInsumos()+";"+insuSP.getUnidadMedida()%>"><%= insuSP.getNombre()%></option>
+                                    <% } else {
+                                        if (insuSP.getIdSede() == idSedeUsuarioCate){ %>
+                                            <option value="<%= insuSP.getIdInsumos()+";"+insuSP.getUnidadMedida()%>"><%= insuSP.getNombre()%></option>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Unidad de medida:</span>
+                            <input disabled type="text" class="form-control" id="regUnidadMInsumoProducto">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Cantidad:</span>
+                            <input type="tel" pattern="[0-9]+" onfocus="this.style.background = '#fff'" onkeyup="if(this.value==='0'){this.value='1';}" onkeypress="return acceptNum(event)" minlength="1" maxlength="5" class="form-control" id="regCantidadInsumosProducto" placeholder="Cantidad que Gasta.">
+                        </div>
+                        <div class="input-group btnCJMSecundario">
+                            <button type="button" onclick="agregarInsumoProducto('reg')" class="btn btn-success btnMSecundario">Agregar Insumo</button>
+                            <button type="button" onclick="limpiarInsumosProducto('reg')" class="btn btn-info btnMSecundario">Limpiar Insumos</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="tablaListarInsumosProductosReg table-bordered table">
+                                <thead>
+                                    <tr>
+                                        <th>Insumo</th>
+                                        <th>Cantidad</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Insumo</th>
+                                        <th>Cantidad</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody id="regBodyTableProducto">
+                                </tbody>
+                            </table>
+                        </div>
 
                         <div class="input-group cont-btn">
                             <div class="cont-btn-principal">
-                                <button type="submit" class="btn-modal btn btn-principal">Registrar</button>
+                                <button type="submit" id="regBtnProducto" class="btn-modal btn btn-principal">Registrar</button>
                             </div>
                             <div class="cont-btns-secundario">
-                                <button type="reset" class="btn-modal btn btn-secundario">Limpiar</button>
                                 <button data-dismiss="modal" type="button" class="btn-modal btn btn-secundario">Cancelar</button>
                             </div>
                         </div>
@@ -103,6 +169,13 @@
                                 <p class="verDetalles-contenido" id="verDescripcionProducto"></p>
                             </div>
                         </div>
+                        <hr>
+                        <div>
+                            <div>
+                                <p class="verDetalles-titulo">Insumos que Gasta:</p>
+                                <p class="verDetalles-contenido" id="verInsumosGastaProducto"></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -123,6 +196,9 @@
                 </div>
                 <div class="mb-textaling modal-body">
                     <form action="ProductoA" method="POST">
+                        <div class="cont-titulo-sect">
+                            <h1 class="titulo-sect">Información del Producto</h1>
+                        </div>
                         <div class="input-group inpDesa">
                             <span class="input-group-addon">ID:</span>
                             <input type="text" class="form-control" id="actuaIDProducto" name="actuaIDProducto">
@@ -161,10 +237,72 @@
                             <span class="input-group-addon">Descripción:</span>
                             <textarea onkeypress="this.style.color = '#87A2D1';" class="form-control" id="actuaDescripcionProducto" name="actuaDescripcionProducto"></textarea>
                         </div>
+                        <div class="cont-titulo-sect">
+                            <h1 class="titulo-sect">Insumos que Gasta</h1>
+                        </div>
+                        <p class="mi-obli">Para registrar el producto, debe agregar como mínimo un insumo que gasté.</p>
+                        <div class="input-group">
+                            <span class="input-group-addon">Insumos:</span>
+                            <input type="text" class="form-control" id="actuaInsumosPProducto" name="actuaInsumosPProducto">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Insumo:</span>
+                            <select class="form-control" onchange="autocompleteInsumosProducto('actua', this)" onfocus="this.style.background = '#fff'" id="actuaInsumosProducto">
+                                <%  idSedeUsuarioCate = 0;
+                                    rolUsuarioCate = "";
+                                    if (session.getAttribute("rolUsuario") == null || session.getAttribute("rolUsuario").equals("")){
+                                        idSedeUsuarioCate = 0;
+                                    } else {
+                                        idSedeUsuarioCate = (int) session.getAttribute("idSedeUsuario"); 
+                                        rolUsuarioCate = (String) session.getAttribute("rolUsuario");
+                                    }
+                                    for (Insumos  insuSP: listaInsumosSPar) { 
+                                    if (rolUsuarioCate.equals("AdminS")){ %>
+                                        <option value="<%= insuSP.getIdInsumos()+";"+insuSP.getUnidadMedida()%>"><%= insuSP.getNombre()%></option>
+                                    <% } else {
+                                        if (insuSP.getIdSede() == idSedeUsuarioCate){ %>
+                                            <option value="<%= insuSP.getIdInsumos()+";"+insuSP.getUnidadMedida()%>"><%= insuSP.getNombre()%></option>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Unidad de medida:</span>
+                            <input disabled type="text" class="form-control" id="actuaUnidadMInsumoProducto">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Cantidad:</span>
+                            <input type="tel" pattern="[0-9]+" onfocus="this.style.background = '#fff'" onkeyup="if(this.value==='0'){this.value='1';}" onkeypress="return acceptNum(event)" minlength="1" maxlength="5" class="form-control" id="actuaCantidadInsumosProducto" placeholder="Cantidad que Gasta.">
+                        </div>
+                        <div class="input-group btnCJMSecundario">
+                            <button type="button" onclick="agregarInsumoProducto('actua')" class="btn btn-success btnMSecundario">Agregar Insumo</button>
+                            <button type="button" onclick="limpiarInsumosProducto('actua')" class="btn btn-info btnMSecundario">Limpiar Insumos</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="tablaListarInsumosProductosActua table-bordered table">
+                                <thead>
+                                    <tr>
+                                        <th>Insumo</th>
+                                        <th>Cantidad</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Insumo</th>
+                                        <th>Cantidad</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody id="actuaBodyTableProducto">
+                                </tbody>
+                            </table>
+                        </div>
 
                         <div class="input-group cont-btn">
                             <div class="cont-btn-principal">
-                                <button type="submit" class="btn-modal btn btn-principal">Actualizar</button>
+                                <button type="submit" id="actuaBtnProducto" class="btn-modal btn btn-principal">Actualizar</button>
                             </div>
                             <div class="cont-btns-secundario">
                                 <button data-dismiss="modal" type="button" class="btn-modal btn btn-secundario">Cancelar</button>
@@ -178,7 +316,7 @@
     </div>
     
     <!-- Modal para Eliminar -->
-    <div class="modal fade" id="productosEGerenteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal" id="productosEGerenteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             
             <div class="modal-content">
@@ -192,7 +330,7 @@
                             <span class="input-group-addon">ID:</span>
                             <input type="text" class="form-control" id="elimIDProducto" name="elimIDProducto">
                         </div>
-                        <p class="mi-obli">Recuerde que cuando eliminé el producto <span class="a-mi-elim-sp" id="elimNombreProducto"></span>, también se eliminarán todas las promociones existentes de el.</p>
+                        <p class="mi-obli">Recuerde que cuando eliminé el producto <span class="a-mi-elim-sp" id="elimNombreProducto"></span>, también se eliminarán todas las promociones existentes de él.</p>
                         <div class="input-group cont-btn">
                             <div class="cont-btn-principal">
                                 <button type="submit" class="btn-modal-elim btn btn-principal">Estoy Segur<%= session.getAttribute("genUsuario").equals("Masculino")?"o":"a" %>, ¡Eliminar!</button>

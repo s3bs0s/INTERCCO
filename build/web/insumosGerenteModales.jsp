@@ -47,21 +47,15 @@
                             <span class="input-group-addon">Unidad de medida:</span>
                             <select required class="form-control" title="Seleccione la unidad de medida." name="regUnidadMedidaInsumo">
                                 <option value="Unidades">Unidades</option>
-                                <option value="Docenas">Docenas</option>
                                 <option value="Kilogramo">Kilogramo</option>
-                                <option value="Gramo">Gramo</option>
-                                <option value="Miligramo">Miligramo</option>
                                 <option value="Libra">Libra</option>
-                                <option value="Onza">Onza</option>
                                 <option value="Litro">Litro</option>
-                                <option value="Mililitro">Mililitro</option>
-                                <option value="Galón">Galón</option>
                             </select>
                             <span class="input-group-addon i-obli">*</span>
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">Cantidad:</span>
-                            <input required type="tel" pattern="[0-9]+" minlength="1" maxlength="9" class="form-control" name="regCantidadInsumo" placeholder="Cantidad.">
+                            <input required type="tel" onkeypress="return acceptNum(event)" pattern="[0-9]+" minlength="1" maxlength="9" class="form-control" name="regCantidadInsumo" placeholder="Cantidad.">
                             <span class="input-group-addon i-obli">*</span>
                         </div>
 
@@ -241,20 +235,14 @@
                             <span class="input-group-addon">Unidad de medida:</span>
                             <select required onchange="this.style.color = '#87A2D1';" class="form-control" title="Seleccione la unidad de medida." id="actuaUnidadMedidaInsumo" name="actuaUnidadMedidaInsumo">
                                 <option value="Unidades">Unidades</option>
-                                <option value="Docenas">Docenas</option>
                                 <option value="Kilogramo">Kilogramo</option>
-                                <option value="Gramo">Gramo</option>
-                                <option value="Miligramo">Miligramo</option>
                                 <option value="Libra">Libra</option>
-                                <option value="Onza">Onza</option>
                                 <option value="Litro">Litro</option>
-                                <option value="Mililitro">Mililitro</option>
-                                <option value="Galón">Galón</option>
                             </select>
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">Cantidad:</span>
-                            <input required type="tel" onkeypress="this.style.color = '#87A2D1';" pattern="[0-9]+" minlength="1" maxlength="9" class="form-control" id="actuaCantidadInsumo" name="actuaCantidadInsumo">
+                            <input required type="tel" onkeypress="return acceptNum(event); this.style.color = '#87A2D1';" pattern="[0-9]+" minlength="1" maxlength="9" class="form-control" id="actuaCantidadInsumo" name="actuaCantidadInsumo">
                         </div>
 
                         <div class="input-group cont-btn">
@@ -321,6 +309,37 @@
                     </form>
                 </div>
                 <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para Eliminar -->
+    <div class="modal" id="insumoEGerenteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            
+            <div class="modal-content">
+                <div class="modal-header modal-header-elim">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-remove"></span><label class="me">¿Desea eliminar el Insumo?</label></h4>
+                </div>
+                <div class="modal-body modal-body-elim">
+                    <form action="InsumoE" method="POST">
+                        <div class="input-group inpDesa">
+                            <span class="input-group-addon">ID:</span>
+                            <input type="text" class="form-control" id="elimIDInsumo" name="elimIDInsumo">
+                        </div>
+                        <p class="mi-obli">Recuerde que cuando eliminé el insumo <span class="a-mi-elim-sp" id="elimNombreInsumo"></span>, también se elimina en todos los insumos que gasta cada producto.</p>
+                        <div class="input-group cont-btn">
+                            <div class="cont-btn-principal">
+                                <button type="submit" class="btn-modal-elim btn btn-principal">Estoy Segur<%= session.getAttribute("genUsuario").equals("Masculino")?"o":"a" %>, ¡Eliminar!</button>
+                            </div>
+                            <div class="cont-btns-secundario">
+                                <button data-dismiss="modal" type="button" class="btn-modal-elim btn btn-secundario">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer modal-footer-elim"></div>
             </div>
         </div>
     </div>

@@ -46,6 +46,7 @@ public class ListarInsumos extends HttpServlet {
                 ins.setPrecioUnitario(rs.getInt("precio_unitario"));
                 ins.setExistencia(rs.getString("existencia"));
                 ins.setIdProveedor(rs.getInt("idProveedor"));
+                ins.setIdSede(rs.getInt("idSede"));
                 
                 
                 ps2 = con.prepareStatement("SELECT * FROM proveedores WHERE idProveedores=? AND existencia=?;");
@@ -74,7 +75,7 @@ public class ListarInsumos extends HttpServlet {
                 ps2.setInt(1, rs.getInt("idSede"));
                 rs2 = ps2.executeQuery();
                 if (rs2.next()){
-                    ins.setIdSede(rs2.getString("nombre"));
+                    ins.setNomSede(rs2.getString("nombre"));
                 }
                 ps2.close();
                 rs2.close();

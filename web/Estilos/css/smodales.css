@@ -170,6 +170,12 @@ form .cont-btn{
 .modal .modal-content{
     border-radius:20px;
 }
+    .modal .modal-content .dataTables_wrapper .dataTables_filter input{
+        width:auto !important;
+    }
+    .modal .modal-content .dataTables_wrapper{
+        margin-top:25px;
+    }
     .modal-content .mb-textaling{
         text-align:center;
     }
@@ -201,11 +207,15 @@ form .cont-btn{
     .modal-content .modal-body .input-group{
         margin:15px;
     }
-        .modal-content .modal-body .input-group .btnMyM{
+    .modal-content .modal-body .btnCJMSecundario{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+        .modal-content .modal-body .input-group .btnMSecundario{
             margin:0 10px;
             font-size:20px;
         }
-        
         .modal-content .modal-body .input-group .btn-modal-form{
             outline:none;
             background:#446EB6;
