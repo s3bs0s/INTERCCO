@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="Estilos/css/smodales.css">
     <link rel="stylesheet" type="text/css" href="Estilos/css/stablasListar.css">
     <link rel="stylesheet" type="text/css" href="Estilos/fonts/fonts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     
     <link rel="icon" href="Estilos/img/PapeleriaCorporativaSucco/Favicon/Marca SUCCO COREL (Favicon-ICO).ico">
 <head>
@@ -43,9 +44,7 @@
         String rolSedeUsuario = "";
         int idCiudadUsuario = 0;
         String nomCiudadUsuario = "";
-    if (session.getAttribute("idUsuario") == null){
-        rolUsuario = "Usuario";
-    } else {
+    if (session.getAttribute("idUsuario") != null){
         idUsuario = (int) session.getAttribute("idUsuario");
         emailUsuario = (String) session.getAttribute("emailUsuario");
         passwordUsuario = (String) session.getAttribute("passwordUsuario");
@@ -81,7 +80,6 @@
                             <li><a id="Acceder" href="#"><span class="me">Acceder</span></a></li>
                             <li><a id="Sede" href="#"><span class="me">Elejir Sede</span></a></li>
                             <li><a id="Carta" href="#"><span class="me">Carta</span></a></li>
-                            <li><a id="Domicilios" href="#"><span class="me">Domicilios</span></a></li>
                             <li><a id="Acercade" href="#"><span class="me">Acerca de</span></a></li>
                             <li><a id="PQRSF" href="#"><span class="me">PQRSF</span></a></li>
                             <li><button type="button" data-toggle="modal" data-target="#registrarseModal"><span class="me">Registrarse</span></button></li>
@@ -95,12 +93,7 @@
                         </div>
                         <div class="sesSelect">
                             <div class="input-group">
-                                <% ArrayList<Sedes> listaSedSIndexES = (ArrayList) request.getAttribute("listaSedSIndex"); %>
-                                <select required onchange="window.location = 'index?elijaIdSede='+this.value" class="form-control" title="Seleccione una sede para ver su información." id="indexElijaSedeUsuarioSN">
-                                    <% for (Sedes  sedeSIndexES: listaSedSIndexES) { %>
-                                        <option value="<%= sedeSIndexES.getIdSedes()%>"><%= sedeSIndexES.getNombre()%></option>
-                                    <% } %>
-                                </select>
+                                <select required onchange="window.location = 'index?elijaIdSede='+this.value" class="form-control" title="Seleccione una sede para ver su información." id="indexElijaSedeUsuarioSN"></select>
                             </div>
                         </div>
                     </article>
@@ -119,60 +112,25 @@
                     <div class="menupriniu">
                         <ul>
                             <li><a id="InicioCliente" href="#"><span class="me">Inicio</span></a></li>
-                            <li><a id="Domicilios" href="#"><span class="me">Domicilios</span></a></li>
                             <li><a id="Carta" href="#"><span class="me">Carta</span></a></li>
                             <li><a id="Acercade" href="#"><span class="me">Acerca de</span></a></li>
                             <li><a id="PQRSF" href="#"><span class="me">PQRSF</span></a></li>
                         </ul>
                     </div>
-                    <div class="menuperfil">
-                        <div class="caj-menuperfil">
-                            <ul>
-                                <li><a href="Salir"><span class="me">Salir</span></a></li>
-                                <li><a style="cursor:pointer;" id="AbrirPerfil" onclick="verModalPerfil('<%= cA.CifrarASCII(String.valueOf(idUsuario)) %>', '<%= cA.CifrarASCII(nomUsuario) %>', '<%= cA.CifrarASCII(apeUsuario) %>', '<%= fotUsuario %>', '<%= cA.CifrarASCII(rolUsuario) %>', '<%= cA.CifrarASCII(tipoUsuario) %>', '<%= cA.CifrarASCII(numUsuario) %>', '<%= cA.CifrarASCII(genUsuario) %>', '<%= cA.CifrarASCII(fnaUsuario) %>', '<%= cA.CifrarASCII(emailUsuario) %>', '<%= cA.CifrarASCII(telUsuario) %>', '<%= cA.CifrarASCII(movUsuario) %>', '<%= cA.CifrarASCII(passwordUsuario) %>', '<%= cA.CifrarASCII(dirUsuario) %>', '<%= cA.CifrarASCII(String.valueOf(idSedeUsuario)) %>', '<%= cA.CifrarASCII(nomSedeUsuario) %>')"><span class="me">Perfil</span></a></li>
-                            </ul>
-                            <div class="menuperfil-nom">
-                                <p><%= nomUsuario%></p>
-                            </div>
+                </div>
+                <div class="menuperfil">
+                    <div class="caj-menuperfil">
+                        <ul>
+                            <li><a style="cursor:pointer;" id="AbrirPerfil" onclick="verModalPerfil('<%= cA.CifrarASCII(String.valueOf(idUsuario)) %>', '<%= cA.CifrarASCII(nomUsuario) %>', '<%= cA.CifrarASCII(apeUsuario) %>', '<%= fotUsuario %>', '<%= cA.CifrarASCII(rolUsuario) %>', '<%= cA.CifrarASCII(tipoUsuario) %>', '<%= cA.CifrarASCII(numUsuario) %>', '<%= cA.CifrarASCII(genUsuario) %>', '<%= cA.CifrarASCII(fnaUsuario) %>', '<%= cA.CifrarASCII(emailUsuario) %>', '<%= cA.CifrarASCII(telUsuario) %>', '<%= cA.CifrarASCII(movUsuario) %>', '<%= cA.CifrarASCII(passwordUsuario) %>', '<%= cA.CifrarASCII(dirUsuario) %>', '<%= cA.CifrarASCII(String.valueOf(idSedeUsuario)) %>', '<%= cA.CifrarASCII(nomSedeUsuario) %>')">Perfil</a></li>
+                            <li><a href="Salir">Salir</a></li>
+                        </ul>
+                        <div class="menuperfil-nom">
+                            <p><%= nomUsuario%></p>
                         </div>
                     </div>
                 </div>
             </nav>
             <nav class="naviu-Rem">
-
-            </nav>
-        </header>
-    <%@include file="perfilModal.jsp" %>
-    <% } else if (rolUsuario.equals("Domiciliario")) { %>
-    <body onload="mayorEdad('<%= idUsuario %>', '<%= fnaUsuario %>', '<%= tipoUsuario %>')">
-        <header>
-            <div class="logoheader">
-                <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Cartel/Marca SUCCO COREL (Cartel-Transparente).png" width="20%" alt="Logo"></a>
-            </div>
-            
-            <p class="p-rango"><span>Domiciliari<%= genUsuario.equals("Masculino")?"o":"a" %></span><span class="me">de <%= nomSedeUsuario%></span></p>
-            <!--<p class="p-reloj"><span id="RhActual">00:00:00</span><span id="RfActual" class="me">0 de 0 del 0</span></p>-->
-            
-            <nav class="navslogo">
-                <div class="logonav-slogo">
-                    <a href="index"><img src="Estilos/img/PapeleriaCorporativaSucco/Nombre/Marca SUCCO COREL (Nombre-Blanco-Transparente).png" alt="Logo"></a>
-                </div>
-                <div class="menuprin-slogo">
-                    <ul>
-                        <li><a href="index"><span class="icon-office"></span><span class="me">Inicio</span></a></li>
-                        <li><a href="Pedidos"><span class="icon-truck"></span><span class="me">Domicilios</span></a></li>
-                        <li><a href="Parametros"><span class="icon-phone"></span><span class="me">Soporte</span></a></li>
-                    </ul>
-                </div>
-                <div class="singup">
-                    <ul>
-                        <li><a title="Mi Perfil" style="cursor:pointer;" id="AbrirPerfil" onclick="verModalPerfil('<%= cA.CifrarASCII(String.valueOf(idUsuario)) %>', '<%= cA.CifrarASCII(nomUsuario) %>', '<%= cA.CifrarASCII(apeUsuario) %>', '<%= fotUsuario %>', '<%= cA.CifrarASCII(rolUsuario) %>', '<%= cA.CifrarASCII(tipoUsuario) %>', '<%= cA.CifrarASCII(numUsuario) %>', '<%= cA.CifrarASCII(genUsuario) %>', '<%= cA.CifrarASCII(fnaUsuario) %>', '<%= cA.CifrarASCII(emailUsuario) %>', '<%= cA.CifrarASCII(telUsuario) %>', '<%= cA.CifrarASCII(movUsuario) %>', '<%= cA.CifrarASCII(passwordUsuario) %>', '<%= cA.CifrarASCII(dirUsuario) %>', '<%= cA.CifrarASCII(String.valueOf(idSedeUsuario)) %>', '<%= cA.CifrarASCII(nomSedeUsuario) %>')"><span class="icon-user"></span><span class="me"><%= nomUsuario%></span></a></li>
-                        <li><a href="Salir"><span class="icon-exit"></span><span class="me">Salir</span></a></li>
-                    </ul>
-                </div>
-            </nav>
-
-            <nav class="navrnlogo">
 
             </nav>
         </header>
@@ -263,7 +221,6 @@
                     <ul>
                         <li><a href="index"><span class="icon-office"></span><span class="me">Inicio</span></a></li>
                         <li><a href="recibosListar.jsp"><span class="icon-coin-dollar"></span><span class="me">Facturas</span></a></li>
-                        <li><a href="Pedidos"><span class="icon-truck"></span><span class="me">Domicilios</span></a></li>
                         <li><a href="Parametros"><span class="icon-phone"></span><span class="me">Soporte</span></a></li>
                     </ul>
                 </div>

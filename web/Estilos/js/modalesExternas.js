@@ -38,9 +38,11 @@ function MOPassME (mod, id) {
     var typeInp = document.getElementById(id).type;
     if (typeInp === "password"){
         document.getElementById(id).type = 'text';
+        document.getElementById(id).focus();
         document.getElementById('BtnMOPassword'+mod).innerText = "Ocultar";
     } else {
         document.getElementById(id).type = 'password';
+        document.getElementById(id).focus();
         document.getElementById('BtnMOPassword'+mod).innerText = "Mostrar";
     }
 }

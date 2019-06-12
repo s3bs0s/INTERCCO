@@ -7,19 +7,19 @@ public class Pedidos {
     private Integer idPedidos;
     private Date fchRegistro;
     private Date horaRegistro;
-    private String tipoPedido;
     private Integer numMesa;
-    private String direccionEnt;
     private String observaciones;
     private Integer subTotal;
     private String estado;
     private String existencia;
-    private String idCliente;
+    private Integer idCliente;
     private Integer idFactura;
-    private Integer idMeseroODomiciliario;
-    private String NomMeseroODomiciliario;
+    private Integer idMesero;
+    private String NomMesero;
+    private String NomCliente;
     private Integer idSede;
     private String NomSede;
+    private String DetallesPedidos;
 
     public Pedidos() {
     }
@@ -28,13 +28,11 @@ public class Pedidos {
         this.idPedidos = idPedidos;
     }
 
-    public Pedidos(Integer idPedidos, Date fchRegistro, Date horaRegistro, String tipoPedido, Integer numMesa, String direccionEnt, String observaciones, int subTotal, String estado, String existencia) {
+    public Pedidos(Integer idPedidos, Date fchRegistro, Date horaRegistro, Integer numMesa, String observaciones, int subTotal, String estado, String existencia) {
         this.idPedidos = idPedidos;
         this.fchRegistro = fchRegistro;
         this.horaRegistro = horaRegistro;
-        this.tipoPedido = tipoPedido;
         this.numMesa = numMesa;
-        this.direccionEnt = direccionEnt;
         this.observaciones = observaciones;
         this.subTotal = subTotal;
         this.estado = estado;
@@ -67,28 +65,12 @@ public class Pedidos {
         this.horaRegistro = horaRegistro;
     }
 
-    public String getTipoPedido() {
-        return tipoPedido;
-    }
-
-    public void setTipoPedido(String tipoPedido) {
-        this.tipoPedido = tipoPedido;
-    }
-
     public Integer getNumMesa() {
         return numMesa;
     }
 
     public void setNumMesa(Integer numMesa) {
         this.numMesa = numMesa;
-    }
-
-    public String getDireccionEnt() {
-        return direccionEnt;
-    }
-
-    public void setDireccionEnt(String direccionEnt) {
-        this.direccionEnt = direccionEnt;
     }
 
     public String getObservaciones() {
@@ -123,11 +105,11 @@ public class Pedidos {
         this.existencia = existencia;
     }
 
-    public String getIdCliente() {
+    public int getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(String idCliente) {
+    public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
 
@@ -139,12 +121,12 @@ public class Pedidos {
         this.idFactura = idFactura;
     }
 
-    public int getIdMeseroODomiciliario() {
-        return idMeseroODomiciliario;
+    public int getIdMesero() {
+        return idMesero;
     }
 
-    public void setIdMeseroODomiciliario(int idMeseroODomiciliario) {
-        this.idMeseroODomiciliario = idMeseroODomiciliario;
+    public void setIdMesero(int idMesero) {
+        this.idMesero = idMesero;
     }
 
     public Integer getIdSede() {
@@ -157,12 +139,20 @@ public class Pedidos {
     
     /* Metodos Adicionales para la Vista */
     
-    public String getNomMeseroODomiciliario() {
-        return NomMeseroODomiciliario;
+    public String getNomMesero() {
+        return NomMesero;
     }
 
-    public void setNomMeseroODomiciliario(String NomMeseroODomiciliario) {
-        this.NomMeseroODomiciliario = NomMeseroODomiciliario;
+    public void setNomMesero(String NomMesero) {
+        this.NomMesero = NomMesero;
+    }
+    
+    public String getNomCliente() {
+        return NomCliente;
+    }
+
+    public void setNomCliente(String NomCliente) {
+        this.NomCliente = NomCliente;
     }
     
     public String getNomSede() {
@@ -171,6 +161,15 @@ public class Pedidos {
 
     public void setNomSede(String NomSede) {
         this.NomSede = NomSede;
+    }
+    
+    
+    public String getDetallesPedidos() {
+        return DetallesPedidos;
+    }
+
+    public void setDetallesPedidos(String DetallesPedidos) {
+        this.DetallesPedidos = DetallesPedidos;
     }
     
     /* Metodos de Apoyo */

@@ -21,7 +21,6 @@ public class ActualizarUsuario extends HttpServlet {
             String nombres = request.getParameter("actuaNombresUsuario");
             String apellidos = request.getParameter("actuaApellidosUsuario");
             String rol = request.getParameter("actuaRolUsuario");
-            String password = request.getParameter("actuaContraUsuario");
             String telef_fijo = request.getParameter("actuaTelefonoUsuario");
             String telef_movil = request.getParameter("actuaMovilUsuario");
             String genero = request.getParameter("actuaGeneroUsuario");
@@ -30,14 +29,12 @@ public class ActualizarUsuario extends HttpServlet {
             
             ConectaDB cdb = new ConectaDB();
             Connection con = cdb.conectar();
-            CifradoASCII cA = new CifradoASCII();
             PreparedStatement ps;
             
-            ps = con.prepareStatement("UPDATE usuarios SET password=?,rol=?,nombres=? WHERE idUsuarios=?;");
-            ps.setString(1, cA.CifrarASCII(password));
-            ps.setString(2, rol);
-            ps.setString(3, nombres);
-            ps.setInt(4, Integer.parseInt(id));
+            ps = con.prepareStatement("UPDATE usuarios SET rol=?,nombres=? WHERE idUsuarios=?;");
+            ps.setString(1, rol);
+            ps.setString(2, nombres);
+            ps.setInt(3, Integer.parseInt(id));
             int res = ps.executeUpdate();
 
             if (res > 0){

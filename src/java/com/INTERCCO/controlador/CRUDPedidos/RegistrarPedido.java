@@ -1,6 +1,5 @@
 package com.INTERCCO.controlador.CRUDPedidos;
 
-import com.INTERCCO.controlador.General.CifradoASCII;
 import com.INTERCCO.modelo.Conexion.ConectaDB;
 import java.io.IOException;
 import java.sql.Connection;
@@ -24,11 +23,11 @@ public class RegistrarPedido extends HttpServlet {
         try {
             int mesa = Integer.parseInt(request.getParameter("regMesaPedidos"));
             int subTotalGlobal = Integer.parseInt(request.getParameter("regSubtotalPedidos").replace(".", ""));
-            int numsInputPP = Integer.parseInt(request.getParameter("NumsInputPP"));
+            int numsInputPP = Integer.parseInt(request.getParameter("regNumsInputPP"));
             
             int contProductosPedido = 0;
             for (int i = 1; i <= numsInputPP; i++) {
-                if (request.getParameter(i+"InputPP") != null){
+                if (request.getParameter("reg"+i+"InputPP") != null){
                     contProductosPedido++;
                 }
             }
@@ -37,8 +36,8 @@ public class RegistrarPedido extends HttpServlet {
             
             contProductosPedido = 0;
             for (int i = 0; i < numsInputPP; i++) {
-                if (request.getParameter((i+1)+"InputPP") != null){
-                    String[] arrInputH = request.getParameter((i+1)+"InputPP").split(";");
+                if (request.getParameter("reg"+(i+1)+"InputPP") != null){
+                    String[] arrInputH = request.getParameter("reg"+(i+1)+"InputPP").split(";");
                     for (int j = 0; j < arrInputH.length; j++) {
                         productosPedido[contProductosPedido][j] = arrInputH[j];
                     }
@@ -48,7 +47,6 @@ public class RegistrarPedido extends HttpServlet {
             
             ConectaDB cdb = new ConectaDB();
             Connection con = cdb.conectar();
-            CifradoASCII cA = new CifradoASCII();
             PreparedStatement ps;
             ResultSet rs;
             Date date = new Date();
@@ -63,17 +61,16 @@ public class RegistrarPedido extends HttpServlet {
             int idUsuario = (int) session.getAttribute("idUsuario");
             int idSedeUsuario = (int) session.getAttribute("idSedeUsuario");
             
-            ps = con.prepareStatement("INSERT INTO pedidos (codigo,fch_registro,hora_registro,tipo_pedido,num_mesa,sub_total,idMeseroODomiciliario,idSede,estado,existencia) VALUES (?,?,?,?,?,?,?,?,?,?);");
+            ps = con.prepareStatement("INSERT INTO pedidos (codigo,fch_registro,hora_registro,num_mesa,sub_total,idMesero,idSede,estado,existencia) VALUES (?,?,?,?,?,?,?,?,?);");
             ps.setString(1, code);
             ps.setString(2, dateFormat.format(date));
             ps.setString(3, hourFormat.format(date));
-            ps.setString(4, "Restaurante");
-            ps.setInt(5, mesa);
-            ps.setInt(6, subTotalGlobal);
-            ps.setInt(7, idUsuario);
-            ps.setInt(8, idSedeUsuario);
-            ps.setString(9, "En espera");
-            ps.setString(10, "Y");
+            ps.setInt(4, mesa);
+            ps.setInt(5, subTotalGlobal);
+            ps.setInt(6, idUsuario);
+            ps.setInt(7, idSedeUsuario);
+            ps.setString(8, "En espera");
+            ps.setString(9, "Y");
             int res = ps.executeUpdate();
 
             if (res > 0){
@@ -86,12 +83,13 @@ public class RegistrarPedido extends HttpServlet {
                     int idPedidos = rs.getInt("idPedidos");
                     
                     for (int i = 0; i < productosPedido.length; i++) {
-                        ps = con.prepareStatement("INSERT INTO detalles_pedidos (idPedido,idProducto,cantidad,observacion,sub_total) VALUES (?,?,?,?,?);");
+                        ps = con.prepareStatement("INSERT INTO detalles_pedidos (idPedido,idProducto,cantidad,observacion,sub_total,existencia) VALUES (?,?,?,?,?,?);");
                         ps.setInt(1, idPedidos);
                         ps.setInt(2, Integer.parseInt(productosPedido[i][0]));
                         ps.setInt(3, Integer.parseInt(productosPedido[i][3]));
                         ps.setString(4, productosPedido[i][4]);
                         ps.setInt(5, Integer.parseInt(productosPedido[i][5]));
+                        ps.setString(6, "Y");
                         int res2 = ps.executeUpdate();
 
                         if (res2 < 1){

@@ -27,7 +27,6 @@
                                 <option value="Cajero">Cajero</option>
                                 <option value="Cocinero">Cocinero</option>
                                 <option value="Mesero">Mesero</option>
-                                <option value="Domiciliario">Domiciliario</option>
                                 <option value="Cliente">Cliente</option>
                             </select>
                             <span class="input-group-addon i-obli">*</span>
@@ -231,7 +230,6 @@
                         <div class="input-group">
                             <span class="input-group-addon">Rol:</span>
                             <select required onchange="this.style.color = '#87A2D1';" class="form-control" title="Seleccione un rol para el usuario." id="actuaRolUsuario" name="actuaRolUsuario">
-                                <option value="Gerente">Gerente</option>
                                 <option value="Cajero">Cajero</option>
                                 <option value="Cocinero">Cocinero</option>
                                 <option value="Mesero">Mesero</option>

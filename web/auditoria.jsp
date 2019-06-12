@@ -11,10 +11,12 @@
     </head>
     <%@include file="header.jsp" %>
     <%  rolUsuario = "Usuario";
-        if (!session.getAttribute("rolUsuario").equals("AdminS") && !session.getAttribute("rolUsuario").equals("Gerente")){
-            request.getRequestDispatcher("index").forward(request, response);
-        } else { 
+        if (session.getAttribute("rolUsuario") != null){
             rolUsuario = (String) session.getAttribute("rolUsuario");
+        }
+        if (!rolUsuario.equals("AdminS") && !rolUsuario.equals("Gerente")){
+            request.getRequestDispatcher("index").forward(request, response);
+        } else {
             if (rolUsuario.equals("AdminS")){ %>
                 <div style="position:relative; margin-bottom:-50px;">
                     <div style="height:100%; width:100%; background:rgba(0,0,0,0.9); z-index:600; position:absolute; top:0; left:0; display:flex; align-items:center; justify-content:center; ">

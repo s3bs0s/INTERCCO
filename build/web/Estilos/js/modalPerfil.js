@@ -108,6 +108,13 @@ function verModalPerfil(idusu,
         if (DescifrarASCII(rol) === "AdminS"){
             $("#perfilPanelFotoUsuario").hide();
         } else {
+            var img = document.getElementById("perfilNombreImagenUsuario");
+            img.value = fot;
+            if (img.value === "86S97S99S105S111"){
+                $("#perfilEliminarFoto").hide();
+            } else {
+                $("#perfilEliminarFoto").show();
+            }
             $("#perfilPanelFotoUsuario").show();
             if (fot === "86S97S99S105S111"){
                 if (DescifrarASCII(gen) === "Masculino"){
@@ -161,7 +168,7 @@ function EnviarFormContras(){
     }
 }
 
-function EnviarFormFoto(mod){
+function EnviarFormFoto(mod, nomSede){
     if (mod === "AI"){
         if (document.getElementById('perfilRolOcultoUsuario').value !== "AdminS" && document.getElementById('perfilRolOcultoUsuario').value !== "Cliente"){
             document.getElementById('FormPerfil').action = 'Usuario'+mod;
@@ -169,11 +176,14 @@ function EnviarFormFoto(mod){
             document.getElementById('FormPerfil').submit();
         }
     } else {
-        var img = $("#perfilCajFotoUsuario img").attr('src');
-        if (img.includes("FotoPerfilEmpleados")){
-            $("#perfilEliminarFoto").attr('disabled', '');
+        var img = document.getElementById("perfilNombreImagenUsuario").value;
+        if (img === "86S97S99S105S111"){
+            $("#perfilEliminarFoto").hide();
         } else {
-            if (document.getElementById('perfilRolOcultoUsuario').value !== "AdminS" && document.getElementById('perfilRolOcultoUsuario').value !== "Cliente"){
+            var rolOculto = document.getElementById('perfilRolOcultoUsuario').value;
+            if ( rolOculto !== "AdminS" && rolOculto !== "Cliente"){
+                $("#perfilCajFotoUsuario img").attr('src', 'ArchivosSistema/Usuarios/'+DescifrarASCII(nomSede)+'/'+DescifrarASCII(img));
+                $("#perfilCajFotoUsuario img").attr('alt', DescifrarASCII(img));
                 document.getElementById('FormPerfil').action = 'Usuario'+mod;
                 document.getElementById('FormPerfil').submit();
             }
@@ -194,27 +204,57 @@ function validarFilePerfil(all){
     var rutayarchivo = all.value;
     var ultimo_punto = all.value.lastIndexOf(".");
     var extension = rutayarchivo.slice(ultimo_punto, rutayarchivo.length);
-    if((all.files[0].size / 1048576) > tamano){
-        document.getElementById("perfilHayImagenUsuario").value = "N";
-        document.getElementById(all.id).value = "";
-        document.getElementById(all.id).style.background = "#E06666";
-        document.getElementById(all.id).style.color = "#fff";
-        $("#perfilCambiarFoto").attr('disabled','');
-    } else {
-        if(extensiones_permitidas.indexOf(extension) === -1){
+    if (all.files.length > 0){
+        if((all.files[0].size / 1048576) > tamano){
             document.getElementById("perfilHayImagenUsuario").value = "N";
             document.getElementById(all.id).value = "";
             document.getElementById(all.id).style.background = "#E06666";
             document.getElementById(all.id).style.color = "#fff";
             $("#perfilCambiarFoto").attr('disabled','');
         } else {
-            $("#perfilCambiarFoto").removeAttr('disabled');
-            document.getElementById(all.id).style.background = "#fff";
-            document.getElementById(all.id).style.color = "#555";
-            document.getElementById("perfilHayImagenUsuario").value = "Y";
+            if(extensiones_permitidas.indexOf(extension) === -1){
+                document.getElementById("perfilHayImagenUsuario").value = "N";
+                document.getElementById(all.id).value = "";
+                document.getElementById(all.id).style.background = "#E06666";
+                document.getElementById(all.id).style.color = "#fff";
+                $("#perfilCambiarFoto").attr('disabled','');
+            } else {
+                $("#perfilCambiarFoto").removeAttr('disabled');
+                document.getElementById(all.id).style.background = "#fff";
+                document.getElementById(all.id).style.color = "#555";
+                document.getElementById("perfilHayImagenUsuario").value = "Y";
+
+                var preview = document.querySelector('#perfilCajFotoUsuario img');
+                var file = document.querySelector('#perfilArchivoUsuario').files[0];
+
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                    preview.src = reader.result;
+                };
+
+                reader.readAsDataURL(file);
+            }
         }
+    } else {
+        document.getElementById("perfilHayImagenUsuario").value = "N";
+        document.getElementById(all.id).value = "";
+        document.getElementById(all.id).style.background = "#E06666";
+        document.getElementById(all.id).style.color = "#fff";
+        $("#perfilCambiarFoto").attr('disabled','');
     }
 }
+
+$('#accordionPerfil .collapse').on('shown.bs.collapse', function(){
+    var seccion = $(this);
+    if (seccion.hasClass('seccionFotoPerfil') || seccion.hasClass('seccionPasswordPerfil')){
+        $("#BtnActuaPerfil").hide();
+    }
+}).on('hidden.bs.collapse', function(){ 
+    var seccion = $(this);
+    if (seccion.hasClass('seccionFotoPerfil') || seccion.hasClass('seccionPasswordPerfil')){
+        $("#BtnActuaPerfil").show();
+    }
+});
 // </editor-fold>
 
 $(document).ready(function(){

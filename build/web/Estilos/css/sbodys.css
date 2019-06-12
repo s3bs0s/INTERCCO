@@ -766,329 +766,6 @@
                 }
 /* </editor-fold> */
 
-/* <editor-fold defaultstate="collapsed" desc="Section 4 - Domicilios"> */
-.mainiu .section4-domi{
-    width:100%;
-    background:#365892;
-    padding:50px 0;
-}
-
-    /* Registrar */
-    .mainiu .section4-domi .section4-domiRegistrar{
-        width:80%;
-        margin: auto;
-    }
-        .mainiu .section4-domi .section4-domiRegistrar .div-content{
-            background: #fff;
-            width:auto;
-            display:flex;
-            position:relative;
-            flex-flow:column nowrap;
-            -webkit-background-clip: padding-box;
-            background-clip: padding-box;
-            border: 1px solid #999;
-            border: 1px solid rgba(0, 0, 0, .2);
-            border-radius: 20px;
-            outline: 0;
-        }
-            .mainiu .section4-domi .section4-domiRegistrar .div-content .section4-domiR-Desactivado{
-                background:rgba(105,139,197,0.8);
-                position:absolute;
-                top:0;
-                left:0;
-                width:100%;
-                height:100%;
-                border-radius:18px;
-                z-index:998;
-                display:grid;
-            }
-                .mainiu .section4-domi .section4-domiRegistrar .div-content .section4-domiR-Desactivado button.btn-div{
-                    outline:none;
-                    background:#fff;
-                    letter-spacing:1pt;
-                    color:#446EB6;
-                    font-size:28px;
-                    -webkit-transition:all 200ms ease;
-                    -o-transition:all 200ms ease;
-                    transition:all 200ms ease;
-                }
-                    .mainiu .section4-domi .section4-domiRegistrar .div-content .section4-domiR-Desactivado button.btn-div:hover,button.btn-div:focus{
-                        background:#446EB6;
-                        color:#fff;
-                        letter-spacing:2pt;
-                    }
-            
-            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-header{
-                background:#446EB6;
-                border-top-left-radius:15px;
-                border-top-right-radius:15px;
-                border-bottom:1px solid #698BC5;
-                padding:15px;
-                text-align:center;
-                color:#fff;
-            }
-                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-header .div-title{
-                    display:flex;
-                    justify-content:center;
-                    flex-flow:column nowrap;
-                    font-size:30px;
-                    padding-top:12px;
-                    font-family:"Calibri Light", Arial;
-                    letter-spacing:2pt;
-                }
-
-        .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body{
-            width:100%;
-            height:93%;
-            display:flex;
-            text-align:center;
-        }
-            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body form{
-                padding:15px;
-                width:100%;
-            }
-                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body form .cont-btn{
-                    width:97%;
-                    margin:15px auto 0 auto;
-                    display:flex;
-                    flex-flow:column nowrap;
-                }
-                    .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body form .cont-btn .cont-btn-principal{
-                        display:flex;
-                        width:100%;
-                        justify-content:center;
-                    }
-                        .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body form .cont-btn .cont-btn-principal .btn-principal{
-                            font-size:24px;
-                        }
-                        
-                    .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body form .cont-btn .cont-btns-secundario{
-                        display:flex;
-                        margin:15px auto 0 auto;
-                        width:100%;
-                        justify-content:center;
-                    }
-                        .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body form .cont-btn .cont-btns-secundario .btn-secundario{
-                            font-size:21px;
-                            margin:0 10px;
-                        }
-
-            .mainiu .section4-domi .section4-domiRegistrar .div-body button.btn-div{
-                outline:none;
-                background:#446EB6;
-                letter-spacing:1pt;
-                color:#fff;
-                border:solid 1px #fff;
-                -webkit-transition:all 200ms ease;
-                -o-transition:all 200ms ease;
-                transition:all 200ms ease;
-            }
-                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body button.btn-div:hover,button.btn-div:focus{
-                    border:solid 1px #446EB6;
-                    background:#fff;
-                    color:#446EB6;
-                }
-
-            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .filas-i .estado-domi{
-                margin:10px auto;
-                width:35%;
-            }
-                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .filas-i .estado-domi input{
-                    background:#fff;
-                    text-align:center;
-                }
-                
-            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .recuadroDomi{
-                border:solid 1px #446EB6;
-                display:flex;
-                flex-flow:column nowrap;
-                border-radius:16px;
-            }
-            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .recuadroDomiObser{
-                border:none;
-            }
-                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .recuadroDomi .titulo-recuadroDomi{
-                    width:100%;
-                    padding:8px;
-                    text-align:center;
-                    border-top-left-radius:12px;
-                    border-top-right-radius:12px;
-                    background:#446EB6;
-                    font-size:19px;
-                    color:#fff;
-                    letter-spacing:1.5pt;
-                }
-                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .recuadroDomi textarea.contenido-recuadroDomi{
-                    outline:none;
-                    width:100%;
-                    padding:10px;
-                    font-size:17px;
-                    resize:vertical;
-                    min-height:120px;
-                    border-top-left-radius:0;
-                    border-top-right-radius:0;
-                    border-bottom-left-radius:16px;
-                    border-bottom-right-radius:16px;
-                }
-                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .recuadroDomi .contenido-recuadroDomi{
-                    width:100%;
-                    padding:10px;
-                }
-                    .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .recuadroDomi .contenido-recuadroDomi table{
-                        border-bottom:none;
-                        margin-bottom:0;
-                    }
-                
-            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .input-group{
-                margin:10px;
-                width:97%;
-            }
-                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .input-group button.btn-div{
-                    font-size:20px;
-                    letter-spacing:2pt;
-                }
-                
-            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body .input-group-addon{
-                background:#446EB6;
-                color:#fff;
-                border:1px solid #446EB6;
-            }
-            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body input{
-                outline:none;
-                height:40px;
-                font-size:17px;
-                border:1px solid #446EB6;
-            }
-            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body textarea{
-                outline:none;
-                font-size:17px;
-                resize:vertical;
-                min-height:120px;
-                max-height:220px;
-                border:1px solid #446EB6;
-            }
-            .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body select{
-                outline:none;
-                height:40px;
-                font-size:17px;
-                border:1px solid #446EB6;
-            }
-                .mainiu .section4-domi .section4-domiRegistrar .div-content .div-body select:focus > option:checked{
-                    background:#446EB6 !important;
-                    color:#fff;
-                }
-
-        .mainiu .section4-domi .section4-domiRegistrar .div-content .div-footer{
-            background:#446EB6;
-            padding:15px;
-            border-bottom-left-radius:15px;
-            border-bottom-right-radius:15px;
-            border-top:1px solid #698BC5;
-            width:100%;
-        }
-
-    /* Listar */
-    .mainiu .section4-domi .section4-domiListar{
-        width:85%;
-        margin:auto;
-    }
-        .mainiu .section4-domi .section4-domiListar .dataTables_length{
-            font-size:17px;
-            letter-spacing:.5pt;
-        }
-        .mainiu .section4-domi .section4-domiListar .dataTables_filter{
-            font-size:17px;
-            letter-spacing:.5pt;
-        }
-        .mainiu .section4-domi .section4-domiListar .dataTables_info{
-            font-size:17px;
-            letter-spacing:.5pt;
-        }
-        .mainiu .section4-domi .section4-domiListar .DataTables_Table_0_filter{
-            font-size:17px;
-            letter-spacing:.5pt;
-        }
-        .mainiu .section4-domi .section4-domiListar .titulo-domiListar{
-            width:100%;
-            padding:14px 0;
-            margin-bottom:15px;
-            text-align:center;
-            background:#446EB6;
-            border-top-right-radius:10px;
-            border-bottom-left-radius:10px;
-        }
-            .mainiu .section4-domi .section4-domiListar .titulo-domiListar p{
-                font-size:30px;
-                color:#fff;
-                letter-spacing:2.5pt;
-            }
-            
-    .mainiu .section4-domi .section4-domiListar .tabla-reg{
-        width:100%;
-        display:flex;
-        justify-content:center;
-        flex-flow:row nowrap;
-        margin:20px 0;
-        font-family:"Calibri Light", Arial;
-        font-size:40px;
-    }
-        .mainiu .section4-domi .section4-domiListar .tabla-reg button{
-            outline:none;
-            background:#446EB6;
-            font-size:32px;
-            border-radius:8px;
-            letter-spacing:2pt;
-            color:#fff;
-            margin:10px;
-            padding: 8px 16px;
-            border:none;
-            -webkit-transition:all 200ms ease;
-            -o-transition:all 200ms ease;
-            transition:all 200ms ease;
-        }
-            .mainiu .section4-domi .section4-domiListar .tabla-reg button:hover{
-                outline:none;
-                border:none;
-                background:#fff;
-                color:#446EB6;
-            }
-            .mainiu .section4-domi .section4-domiListar .tabla-reg button:focus{
-                outline:none;
-                border:none;
-                background:#fff;
-                color:#446EB6;
-            }
-
-        .mainiu .section4-domi .section4-domiListar .tabla-reg button .tabla-reg-m{
-            background:#fff;
-            display:inline-block;
-            font-size:21px;
-            color:#446EB6;
-            border-radius:5px;
-            padding: 8px 12px 6px 14px;
-            border:solid 1px #fff;
-            -webkit-transition:all 200ms ease;
-            -o-transition:all 200ms ease;
-            transition:all 200ms ease;
-        }
-            .mainiu .section4-domi .section4-domiListar .tabla-reg button:hover .tabla-reg-m{
-                border:solid 1px #fff;
-                background:#446EB6;
-                color:#fff;
-            }
-            .mainiu .section4-domi .section4-domiListar .tabla-reg button:focus .tabla-reg-m{
-                border:solid 1px #fff;
-                background:#446EB6;
-                color:#fff;
-            }
-            
-    .mainiu .section4-domi .section4-domiListar table{
-        background:#fff;
-        border-bottom:none;
-    }
-
-/* </editor-fold> */
-
 /* <editor-fold defaultstate="collapsed" desc="Section Información de SUCCO"> */
 .mainiu .sectionInformacion{
     width:100%;
@@ -1111,9 +788,7 @@
             padding:14px 0;
             margin-bottom:15px;
             text-align:center;
-            background:#446EB6;
-            border-top-right-radius:10px;
-            border-bottom-left-radius:10px;
+            background:#365892;
         }
             .sectionInformacion .siBody .siBodyTitulo p{
                 font-size:34px;
@@ -1126,24 +801,30 @@
             width:100%;
             list-style:none;
             display:flex;
-            flex-flow:row wrap;
-            padding:12px 0;
+            flex-flow:row nowrap;
             justify-content:space-around;
             background:#fff;
+            min-width:500px;
             border-top-left-radius:10px;
             border-bottom-right-radius:10px;
             margin-bottom:18px;
         }
+        .sectionInformacion .siBody .siBodyNav li{
+            display:block;
+            width:100%;
+            height:100%;
+        }
             .sectionInformacion .siBody .siBodyNav li .siBNavBtns:link,.siBNavBtns:visited{
                 color:#fff;
-                font-size:16px;
+                font-size:17px;
                 background:#446EB6;
-                display:block;
+                display:flex;
+                flex-flow:column nowrap;
+                justify-content:center;
                 letter-spacing:1pt;
-                padding: 12px 20px;
-                border-radius:15px;
+                padding:10px 6px;
+                height:100%;
                 text-align:center;
-                margin:2px 4px;
                 text-decoration:none;
                 -webkit-transition:all 200ms ease;
                 -o-transition:all 200ms ease;
@@ -1154,13 +835,9 @@
                     color:#fff;
                 }
 
-            .sectionInformacion .siBody .siBodyNav li .active{
-                background:#698BC5 !important;
-                letter-spacing:2.5pt !important;
-                border-radius:8px !important;
-                -webkit-transition:all 200ms ease;
-                -o-transition:all 200ms ease;
-                transition:all 200ms ease;
+            .sectionInformacion .siBody .siBodyNav li .siBNavBtns.active{
+                background:#365892;
+                cursor:default;
             }
                     
         /* Secciones */
@@ -1646,20 +1323,20 @@
 /* </editor-fold> */
 /* </editor-fold> */
 
-    /*Body codigo-recuperarContra*/
+    /*Body Modales Externas*/
 /* <editor-fold defaultstate="collapsed" desc="Código Acumulado"> */
 .body-codigoRC{
     width:100%;
     height:100vh;
     background:#698BC5;
-    border-radius:40px;
-    border:solid 18px #fff;
     display:flex;
     justify-content:center;
     align-items:center;
 }
     .body-codigoRC .codigoRC-modal{
-        width:45%;
+        max-width:600px;
+        min-width:500px;
+        margin:0 8px;
     }
         .body-codigoRC .codigoRC-modal .div-content{
             background: #fff;
@@ -1742,7 +1419,7 @@
                     }
 
                 .body-codigoRC .codigoRC-modal .div-content .div-body .input-group{
-                    margin:20px;
+                    margin:20px auto;
                     width:97%;
                 }
                 .body-codigoRC .codigoRC-modal .div-content .div-body .input-group-addon{
@@ -1811,12 +1488,20 @@
             justify-content:space-around;
             align-items:center;
         }
-            .section-indexs .CJAccRap .CJAccRapBtns button{
+/*            .section-indexs .CJAccRap .CJAccRapBtns button{
                 outline:none;
-                background:#446EB6;
                 font-size:28px;
                 border-radius:8px;
                 letter-spacing:1.5pt;
+                padding:8px 16px;
+                margin:8px 10px;
+            }*/
+            .section-indexs .CJAccRap .CJAccRapBtns button{
+                outline:none;
+                font-size:28px;
+                border-radius:8px;
+                letter-spacing:1.5pt;
+                background:#446EB6;
                 color:#fff;
                 padding:8px 16px;
                 margin:8px 10px;
@@ -1824,11 +1509,31 @@
                 -o-transition:all 200ms ease;
                 transition:all 200ms ease;
             }
-            .section-indexs .CJAccRap .CJAccRapBtns button:hover,button:focus{
-                outline:none;
-                background:#365892;
-                color:#fff;
+                .section-indexs .CJAccRap .CJAccRapBtns button:hover,button:focus{
+                    outline:none;
+                    background:#365892;
+                    color:#fff;
+                }
+                
+            .section-indexs .CJAccRap .CJAccRapBtns .btnAR-danger{
+                background:#d9534f;
+                -webkit-transition:all 200ms ease;
+                -o-transition:all 200ms ease;
+                transition:all 200ms ease;
             }
+                .section-indexs .CJAccRap .CJAccRapBtns .btnAR-danger:hover,.btnAR-danger:focus{
+                    background:#c9302c;
+                }
+                
+            .section-indexs .CJAccRap .CJAccRapBtns .btnAR-warning{
+                background:#f0ad4e;
+                -webkit-transition:all 200ms ease;
+                -o-transition:all 200ms ease;
+                transition:all 200ms ease;
+            }
+                .section-indexs .CJAccRap .CJAccRapBtns .btnAR-warning:hover,.btnAR-warning:focus{
+                    background:#ec971f;
+                }
 
     .section-indexs article.art-carrusel{
         width:95%;
@@ -1871,6 +1576,7 @@
     background-size: cover;
     width: 300px;
     height: 380px;
+    background:#fff;
 }
     .swiper-slide .imgBx{
         width:100%;
@@ -1879,6 +1585,7 @@
         display:flex;
         align-items:center;
         justify-content:center;
+        background:#E1E1E1;
     }
         .swiper-slide .imgBx img{
             width:100%;
@@ -1908,7 +1615,7 @@
     border-bottom:none;
 }
 .swiper-slide .imgBx-Cocinero{
-    border:solid 2px #78C13A;
+    border:solid 2px #E59030;
     border-bottom:none;
 }
 .swiper-slide .imgBx-Cajero{
@@ -1919,10 +1626,6 @@
     border:solid 2px #DAE34E;
     border-bottom:none;
 }
-.swiper-slide .imgBx-Domiciliario{
-    border:solid 2px #E59030;
-    border-bottom:none;
-}
 
 /* Caja de Detalles */
 .swiper-slide .details-Gerente{
@@ -1930,7 +1633,7 @@
     border-top:none;
 }
 .swiper-slide .details-Cocinero{
-    border:solid 2px #78C13A;
+    border:solid 2px #E59030;
     border-top:none;
 }
 .swiper-slide .details-Cajero{
@@ -1941,10 +1644,6 @@
     border:solid 2px #DAE34E;
     border-top:none;
 }
-.swiper-slide .details-Domiciliaro{
-    border:solid 2px #E59030;
-    border-top:none;
-}
 
 /* Caja de Rol */
 .swiper-slide .details h3 span.span-Gerente{
@@ -1952,7 +1651,7 @@
     border-top-left-radius:6px;
 }
 .swiper-slide .details h3 span.span-Cocinero{
-    background:#78C13A;
+    background:#E59030;
     border-top-left-radius:6px;
 }
 .swiper-slide .details h3 span.span-Cajero{
@@ -1963,10 +1662,6 @@
     background:#DAE34E;
     border-top-left-radius:6px;
 }
-.swiper-slide .details h3 span.span-Domiciliario{
-    background:#E59030;
-    border-top-left-radius:6px;
-}
 
 /* Caja de Email */
 .swiper-slide .details h3 span.span-GerenteEmail{
@@ -1975,7 +1670,7 @@
     margin-top:0;
 }
 .swiper-slide .details h3 span.span-CocineroEmail{
-    background:#609A2E;
+    background:#B77326;
     border-bottom-right-radius:6px;
     margin-top:0;
 }
@@ -1986,11 +1681,6 @@
 }
 .swiper-slide .details h3 span.span-MeseroEmail{
     background:#AEB63E;
-    border-bottom-right-radius:6px;
-    margin-top:0;
-}
-.swiper-slide .details h3 span.span-DomiciliarioEmail{
-    background:#B77326;
     border-bottom-right-radius:6px;
     margin-top:0;
 }

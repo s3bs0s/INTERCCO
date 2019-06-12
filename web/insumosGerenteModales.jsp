@@ -15,7 +15,7 @@
                     <form action="Insumo" method="POST">
                         <div class="input-group">
                             <span class="input-group-addon">Nombre del insumo:</span>
-                            <input required type="text" minlength="4" maxlength="120" class="form-control" name="regNombreInsumo" placeholder="Nombre del Insumo.">
+                            <input required type="text" minlength="1" maxlength="120" class="form-control" name="regNombreInsumo" placeholder="Nombre del Insumo.">
                             <span class="input-group-addon i-obli">*</span>
                         </div>
                         <div class="input-group">
@@ -209,7 +209,7 @@
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">Nombre del insumo:</span>
-                            <input required type="text" onkeypress="this.style.color = '#87A2D1';" minlength="4" maxlength="120" class="form-control" id="actuaNombreInsumo" name="actuaNombreInsumo">
+                            <input required type="text" onkeypress="this.style.color = '#87A2D1';" minlength="1" maxlength="120" class="form-control" id="actuaNombreInsumo" name="actuaNombreInsumo">
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">Referencia:</span>

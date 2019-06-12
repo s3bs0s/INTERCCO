@@ -110,9 +110,9 @@ public class ListarUsuarios extends HttpServlet {
         } catch (SQLException sql) {
             System.out.println("ERROR en MySQL LISTANDO los datos de USUARIOS.");
             sql.printStackTrace();
-        } catch (Exception alle){
+        } /*catch (Exception alle){
             request.getRequestDispatcher("Error404.jsp?mensaje="+alle.toString()).forward(request, response);
-        }
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

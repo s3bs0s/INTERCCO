@@ -46,7 +46,6 @@ public class ActualizarProducto extends HttpServlet {
             Connection con = cdb.conectar();
             CifradoASCII cA = new CifradoASCII();
             PreparedStatement ps;
-            ResultSet rs;
             
             ps = con.prepareStatement("UPDATE productos SET idCategoria=?,nombre=?,descripcion=?,precio=? WHERE idProductos=?;");
             ps.setInt(1, Integer.parseInt(categoria));

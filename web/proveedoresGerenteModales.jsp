@@ -84,7 +84,7 @@
                             <p class="mi-obli">Por favor escoja entre el <span onClick="document.getElementById('regEmailPCProveedor').focus()" class="a-mi">email</span>, <span onClick="document.getElementById('regFaxPCProveedor').focus()" class="a-mi">fax</span>, <span onClick="document.getElementById('regTelefonoPCProveedor').focus()" class="a-mi">télefono</span> o <span onClick="document.getElementById('regMovilPCProveedor').focus()" class="a-mi">móvil</span>, pero debe ingresar uno los mencionados anteriormente.</p>
                             <div class="input-group">
                                 <span class="input-group-addon">Nombre completo:</span>
-                                <input required type="text" pattern="[a-zA-z ]+" maxlength="110" minlength="5" class="form-control" name="regNombrePCProveedor" placeholder="Nombre completo.">
+                                <input required type="text" maxlength="110" minlength="5" class="form-control" name="regNombrePCProveedor" placeholder="Nombre completo.">
                                 <span class="input-group-addon i-obli">*</span>
                             </div>
                             <div class="input-group">
@@ -338,7 +338,7 @@
                         <p class="mi-obli">Por favor escoja entre el <span onClick="document.getElementById('actuaEmailPCProveedor').focus()" class="a-mi">email</span>, <span onClick="document.getElementById('actuaFaxPCProveedor').focus()" class="a-mi">fax</span>, <span onClick="document.getElementById('actuaTelefonoPCProveedor').focus()" class="a-mi">télefono</span> o <span onClick="document.getElementById('actuaMovilPCProveedor').focus()" class="a-mi">móvil</span>, pero debe ingresar uno los mencionados anteriormente.</p>
                         <div class="input-group">
                             <span class="input-group-addon">Nombre completo:</span>
-                            <input required type="text" onkeypress="this.style.color = '#87A2D1';" pattern="[a-zA-z ]+" maxlength="110" minlength="5" class="form-control" id="actuaNombrePCProveedor" name="actuaNombrePCProveedor">
+                            <input required type="text" onkeypress="this.style.color = '#87A2D1';" maxlength="110" minlength="5" class="form-control" id="actuaNombrePCProveedor" name="actuaNombrePCProveedor">
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">Cargo:</span>

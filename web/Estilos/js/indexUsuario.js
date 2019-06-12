@@ -3,7 +3,6 @@
 $(document).ready(function () {
     /* Inicio de hover de los elementos ocultos en el Nav */
     $('#share-social ul').hide();
-    $('.menuperfil .caj-menuperfil ul').hide();
     
     $("#accBtnAcceder").attr('disabled','');
     
@@ -82,13 +81,6 @@ $(document).ready(function () {
         }, 600);
     });
     
-    $('.menupriniu ul li #Domicilios').click(function(){
-        var cartaAltura = $('.sectionDomicilios').offset().top - 102;
-        $('body, html').animate({
-            scrollTop: cartaAltura+'px'
-        }, 600);
-    });
-    
     $('.menupriniu ul li #Acercade').click(function(){
         var acercadeAltura = $('.sectionInformacion').offset().top - 102;
         $('body, html').animate({
@@ -103,8 +95,11 @@ $(document).ready(function () {
         }, 600);
     });
     
-    document.getElementById("accederTitulo").innerText = "";
-    typeWriter();
+    var validacionTitulo = document.getElementById("accederTitulo");
+    if (validacionTitulo !== null){
+        validacionTitulo.innerText = "";
+        typeWriter();
+    }
 });
 
 /* Typing Effect */
@@ -124,15 +119,6 @@ $('.naviuHover').hover(
     },
     function () {
         $('.logonaviu').css('display', 'none');
-    }
-);
-
-$('.menuperfil .caj-menuperfil').hover(
-    function () {
-        $('.menuperfil .caj-menuperfil ul').show(10, function(){});
-    },
-    function () {
-        $('.menuperfil .caj-menuperfil ul').hide(10, function(){});
     }
 );
 
@@ -314,15 +300,29 @@ function MOPass (mod) {
     var typeInp = document.getElementById('InpMOPassword'+mod).type;
     if (typeInp === "password"){
         document.getElementById('InpMOPassword'+mod).type = 'text';
+        document.getElementById('InpMOPassword'+mod).focus();
         document.getElementById('BtnMOPassword'+mod).innerText = "Ocultar";
     } else {
         document.getElementById('InpMOPassword'+mod).type = 'password';
+        document.getElementById('InpMOPassword'+mod).focus();
         document.getElementById('BtnMOPassword'+mod).innerText = "Mostrar";
     }
 }
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Sección Elija Sede">
+$(document).ready(function(){
+    var cadenaArraySedes = document.getElementById("cadenaArraySedesES");
+    if (cadenaArraySedes !== null){
+        var arraySedes = cadenaArraySedes.value.split(";");
+        var templateOptions = ``;
+        for (var i = 0; i < arraySedes.length; i++) {
+            var arrayInfoSede = arraySedes[i].split("-");
+            templateOptions += `<option value="${arrayInfoSede[0]}">${DescifrarASCII(arrayInfoSede[1])}</option>`;
+        }
+        document.getElementById("indexElijaSedeUsuarioSN").innerHTML = templateOptions;
+    }
+});
 function validacionSedeElejida(idSede) {
     document.getElementById("indexElijaSedeUsuario").value = idSede;
     document.getElementById("indexElijaSedeUsuarioSN").value = idSede;
@@ -524,34 +524,6 @@ function formatNumberReturn(numero) {
 // </editor-fold>
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="Sección Domicilios">
-$(document).ready(function () {
-    /* Inicio Listar y Registrar ocultando uno*/
-    $('#DomiListar').hide();
-    $('#DomiRegistrar').show();
-    
-    /* Redirección de boton Acceder para indexUsuario */
-    $('.mainiu .section4-domi .section4-domiRegistrar .div-content .section4-domiR-Desactivado #Acceder').click(function(){
-        var accederAltura = $('.mainiu .section1-acc').offset().top;
-        $('body, html').animate({
-            scrollTop: accederAltura+'px'
-        }, 600);
-        document.getElementById("accederEmail").focus();
-    });
-});
-
-/* Redirección para mostrar o ocultar Listar o Registrar */
-$("#MisPedidos").on("click", function(){
-    $("#DomiListar").show(200, function(){});
-    $("#DomiRegistrar").hide(200, function(){});
-});
-
-$(".mainiu .section4-domi .section4-domiListar .tabla-reg button").on("click", function(){
-    $("#DomiRegistrar").show(200, function(){});
-    $("#DomiListar").hide(200, function(){});
-});
-// </editor-fold>
-
 // <editor-fold defaultstate="collapsed" desc="Sección Acerca de">
 $(document).ready(function () {
     /* Inicio de tabs(Articulos) ocultos */
@@ -627,8 +599,16 @@ $(document).ready(function () {
 // <editor-fold defaultstate="collapsed" desc="Sección PQRSF">
 $(document).ready(function () {
     /* Inicio Listar y Registrar ocultando uno*/
-    $('#PqrsfListar').show();
-    $('#PqrsfRegistrar').hide();
+    var vSolicitudes = document.getElementById("regSedePqrsf");
+    if (vSolicitudes !== null){
+        if (parseInt(vSolicitudes.dataset.cantsolicitudes) > 0){
+            $('#PqrsfListar').show();
+            $('#PqrsfRegistrar').hide();
+        } else {
+            $('#PqrsfListar').hide();
+            $('#PqrsfRegistrar').show();
+        }
+    }
     
     if (document.getElementById("regBtnPqrsf") !== null){
         var validacion = document.getElementById("perfilIDUsuario");

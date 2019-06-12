@@ -1,3 +1,4 @@
+<%@page import="com.INTERCCO.controlador.General.CifradoASCII"%>
 <%@page import="com.INTERCCO.modelo.Beans.Sedes"%>
 <%@page import="java.util.ArrayList"%>
 <body>
@@ -89,7 +90,7 @@
                                 <div class="panel-heading">
                                     <button type="button" class="bc" data-toggle="collapse" data-parent="#accordionPerfil" data-target="#Perfil3"><span class="icon-key"></span> Contraseña SUCCO<span class="glyphicon glyphicon-plus btn-collap"></span></button>
                                 </div>
-                                <div id="Perfil3" class="panel-collapse collapse">
+                                <div id="Perfil3" class="panel-collapse collapse seccionPasswordPerfil">
                                     <div class="panel-body">
                                         <div class="input-group">
                                             <span class="input-group-addon">Contraseña actual:</span>
@@ -150,15 +151,19 @@
                                 <div class="panel-heading">
                                     <button type="button" class="bc" data-toggle="collapse" data-parent="#accordionPerfil" data-target="#Perfil5"><span class="icon-file-picture"></span> Foto<span class="glyphicon glyphicon-plus btn-collap"></span></button>
                                 </div>
-                                <div id="Perfil5" class="panel-collapse collapse">
+                                <div id="Perfil5" class="panel-collapse collapse seccionFotoPerfil">
                                     <div class="panel-body">
                                         <div class="input-group inpDesa">
-                                            <span class="input-group-addon">Hay Imagen:</span>
+                                            <span class="input-group-addon">Nombre Imagen:</span>
                                             <input type="text" class="form-control" id="perfilHayImagenUsuario">
                                         </div>
+                                        <div class="input-group inpDesa">
+                                            <span class="input-group-addon">Hay Imagen:</span>
+                                            <input type="text" class="form-control" id="perfilNombreImagenUsuario">
+                                        </div>
                                         <p class="mi-obli"><span class="a-mi-sp">Recuerde seguir las siguientes reglas:</span> el tamaño máximo es de 6MB y los formatos permitidos son .png, .bmp, .jpg, .svg y .jpeg</p>
-                                        <div class="input-group" id="perfilCajFotoUsuario" style="width:100%; text-align:center;">
-                                            <img style="width:40%; border:solid 1px #446EB6;">
+                                        <div class="input-group" id="perfilCajFotoUsuario">
+                                            <img>
                                         </div>
                                         <div class="input-group">
                                             <span class="input-group-addon">Imagen:</span>
@@ -167,8 +172,9 @@
                                         
                                         <div class="input-group cont-btn">
                                             <div class="cont-btn-principal">
-                                                <button type="button" id="perfilCambiarFoto" onclick="EnviarFormFoto('AI')" class="btn-modal btn btn-principal">Cambiar Foto</button>
-                                                <button type="button" id="perfilEliminarFoto" onclick="EnviarFormFoto('EI')" class="btn-modal btn btn-principal">Eliminar Foto</button>
+                                                <% CifradoASCII cAPerfilM = new CifradoASCII(); %>
+                                                <button type="button" id="perfilCambiarFoto" onclick="EnviarFormFoto('AI', '<%= cAPerfilM.CifrarASCII((String)session.getAttribute("nomSedeUsuario")) %>')" class="btn-modal btn btn-principal">Cambiar Foto</button>
+                                                <button type="button" id="perfilEliminarFoto" onclick="EnviarFormFoto('EI', '<%= cAPerfilM.CifrarASCII((String)session.getAttribute("nomSedeUsuario")) %>')" class="btn-modal btn btn-principal">Eliminar Foto</button>
                                             </div>
                                         </div>
                                     </div>
@@ -178,7 +184,7 @@
 
                         <div class="input-group cont-btn">
                             <div class="cont-btn-principal">
-                                <button type="submit" class="btn-modal btn btn-principal">Actualizar</button>
+                                <button type="submit" id="BtnActuaPerfil" class="btn-modal btn btn-principal">Actualizar</button>
                                 <button type="button" id="CerrarBodyPerfil" class="btn-modal btn btn-principal">Cerrar</button>
                             </div>
                         </div>

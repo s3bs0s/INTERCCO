@@ -14,7 +14,10 @@
     </head>
     <%@include file="header.jsp" %>
     <%  rolUsuario = "Usuario";
-        if (!session.getAttribute("rolUsuario").equals("Gerente")){
+        if (session.getAttribute("rolUsuario") != null){
+            rolUsuario = (String) session.getAttribute("rolUsuario");
+        }
+        if (!rolUsuario.equals("Gerente")){
             request.getRequestDispatcher("index").forward(request, response);
         } else { %>
             <body>
@@ -96,6 +99,7 @@
                                     <th>Nombre</th>
                                     <th>Cantidad</th>
                                     <th>Unidad de Medida</th>
+                                    <th>Uso</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -105,6 +109,7 @@
                                     <th>Nombre</th>
                                     <th>Cantidad</th>
                                     <th>Unidad de Medida</th>
+                                    <th>Uso</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -128,7 +133,12 @@
                                             <td><%= insu.getNombre()%></td>
                                             <td><%= insu.getCantidad()%></td>
                                             <td><%= insu.getUnidadMedida()%></td>
-                                            <% if (insu.getExistencia().equals("D")) { %>
+                                            <% if (insu.getUso().equals("N")) { %>
+                                                <td class="danger">Sin uso</td>
+                                            <% } else { %>
+                                                <td class="success">En uso</td>
+                                            <% }
+                                            if (insu.getExistencia().equals("D")) { %>
                                                 <td class="info">Devuelto</td>
                                             <% } else { %>
                                                 <% if (insu.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date))) || insu.getFchCaducidad().equals(dateFormat.parse(dateFormat.format(date)))){%>

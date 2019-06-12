@@ -59,7 +59,7 @@
                             <h1 class="titulo-sect">Insumos que Gasta</h1>
                         </div>
                         <p class="mi-obli">Para registrar el producto, debe agregar como mínimo un insumo que gasté.</p>
-                        <div class="input-group">
+                        <div class="input-group inpDesa">
                             <span class="input-group-addon">Insumos:</span>
                             <input type="text" class="form-control" id="regInsumosPProducto" name="regInsumosPProducto">
                         </div>
@@ -95,7 +95,7 @@
                             <input type="tel" pattern="[0-9]+" onfocus="this.style.background = '#fff'" onkeyup="if(this.value==='0'){this.value='1';}" onkeypress="return acceptNum(event)" minlength="1" maxlength="5" class="form-control" id="regCantidadInsumosProducto" placeholder="Cantidad que Gasta.">
                         </div>
                         <div class="input-group btnCJMSecundario">
-                            <button type="button" onclick="agregarInsumoProducto('reg')" class="btn btn-success btnMSecundario">Agregar Insumo</button>
+                            <button type="button" id="regBtnAggProducto" onclick="agregarInsumoProducto('reg')" class="btn btn-success btnMSecundario">Agregar Insumo</button>
                             <button type="button" onclick="limpiarInsumosProducto('reg')" class="btn btn-info btnMSecundario">Limpiar Insumos</button>
                         </div>
                         <div class="table-responsive">
@@ -241,7 +241,7 @@
                             <h1 class="titulo-sect">Insumos que Gasta</h1>
                         </div>
                         <p class="mi-obli">Para registrar el producto, debe agregar como mínimo un insumo que gasté.</p>
-                        <div class="input-group">
+                        <div class="input-group inpDesa">
                             <span class="input-group-addon">Insumos:</span>
                             <input type="text" class="form-control" id="actuaInsumosPProducto" name="actuaInsumosPProducto">
                         </div>
@@ -276,7 +276,7 @@
                             <input type="tel" pattern="[0-9]+" onfocus="this.style.background = '#fff'" onkeyup="if(this.value==='0'){this.value='1';}" onkeypress="return acceptNum(event)" minlength="1" maxlength="5" class="form-control" id="actuaCantidadInsumosProducto" placeholder="Cantidad que Gasta.">
                         </div>
                         <div class="input-group btnCJMSecundario">
-                            <button type="button" onclick="agregarInsumoProducto('actua')" class="btn btn-success btnMSecundario">Agregar Insumo</button>
+                            <button type="button" id="actuaBtnAggProducto" onclick="agregarInsumoProducto('actua')" class="btn btn-success btnMSecundario">Agregar Insumo</button>
                             <button type="button" onclick="limpiarInsumosProducto('actua')" class="btn btn-info btnMSecundario">Limpiar Insumos</button>
                         </div>
                         <div class="table-responsive">

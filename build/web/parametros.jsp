@@ -18,10 +18,12 @@
     </head>
     <%@include file="header.jsp" %>
     <%  rolUsuario = "Usuario";
-        if (session.getAttribute("rolUsuario").equals("Usuario") || session.getAttribute("rolUsuario") == null || session.getAttribute("rolUsuario").equals("Cliente")){
-            request.getRequestDispatcher("index").forward(request, response);
-        } else { 
+        if (session.getAttribute("rolUsuario") != null){
             rolUsuario = (String) session.getAttribute("rolUsuario");
+        }
+        if (rolUsuario.equals("Usuario") || rolUsuario.equals("Cliente")){
+            request.getRequestDispatcher("index").forward(request, response);
+        } else {
             if (rolUsuario.equals("AdminS") || rolUsuario.equals("Gerente")){ %>
             
                 <body>

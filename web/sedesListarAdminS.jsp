@@ -9,7 +9,10 @@
     </head>
     <%@include file="header.jsp" %>
     <%  rolUsuario = "Usuario";
-        if (!session.getAttribute("rolUsuario").equals("AdminS")){
+        if (session.getAttribute("rolUsuario") != null){
+            rolUsuario = (String) session.getAttribute("rolUsuario");
+        }
+        if (!rolUsuario.equals("AdminS")){
             request.getRequestDispatcher("index").forward(request, response);
         } else { %>
             <body>

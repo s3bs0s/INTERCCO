@@ -28,6 +28,7 @@ public class Insumos {
     private String extensionFaxPc;
     private String telefonoPc;
     private String movilPc;
+    private String Uso;
 
     public Insumos() {
     }
@@ -139,6 +140,14 @@ public class Insumos {
     }
 
     /* Metodos Adicionales para la Vista */
+    
+    public String getUso() {
+        return Uso;
+    }
+
+    public void setUso(String Uso) {
+        this.Uso = Uso;
+    }
     
     public String getNomSede() {
         return NomSede;

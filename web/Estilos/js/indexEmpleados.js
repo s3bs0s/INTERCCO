@@ -70,8 +70,8 @@ function mayorEdad(idUsuario,
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="Metodos de las Modales">
-// <editor-fold defaultstate="collapsed" desc="Metodos de Utilidad">
+// <editor-fold defaultstate="collapsed" desc="Modulos">
+// <editor-fold defaultstate="collapsed" desc="Herramientas">
 function calcularEdad(fecha) {
     var hoy = new Date();
     var cumpleanos = new Date(fecha);
@@ -174,6 +174,26 @@ function estructurarHora(whatNeed, hora){
         return shdr;
     }
 }
+function MOPass (mod) {
+    var typeInp = document.getElementById('InpMOPassword'+mod).type;
+    if (typeInp === "password"){
+        document.getElementById('InpMOPassword'+mod).type = 'text';
+        document.getElementById('InpMOPassword'+mod).focus();
+        document.getElementById('BtnMOPassword'+mod).innerText = "Ocultar";
+    } else {
+        document.getElementById('InpMOPassword'+mod).type = 'password';
+        document.getElementById('InpMOPassword'+mod).focus();
+        document.getElementById('BtnMOPassword'+mod).innerText = "Mostrar";
+    }
+}
+$('.collapse').on('shown.bs.collapse', function(){ 
+    $(this).parent().find(".bc .glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus"); 
+}).on('hidden.bs.collapse', function(){ 
+    $(this).parent().find(".bc .glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus"); 
+});
+$(".alert").delay(10000).slideUp(200, function() {
+    $(this).alert('close');
+});
 var nav1 = window.Event ? true : false; 
 function acceptNum(evt){
     var key1 = nav1 ? evt.which : evt.keyCode;
@@ -263,39 +283,189 @@ function horaMilitarANormal(hora){
 // </editor-fold>
 
 
-// <editor-fold defaultstate="collapsed" desc="pedidosRModal">
+// <editor-fold defaultstate="collapsed" desc="Pedidos">
 $(document).ready(function () {
     var bdListarP = document.getElementById("pedidosListar");
     if (bdListarP !== null){
+        $.ajax({
+            url: 'PEDRellenoCartaAJAX',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response){
+                let objetoCategorias = response[0].categorias;
+                let objetoProductos = response[0].productos;
+                let templateOptionsCategoria = ``;
+                let templateSelectsProductos = `<span class="input-group-addon">Producto:</span>`;
+
+                for (var i = 0; i < objetoCategorias.length; i++) {
+                    templateOptionsCategoria += `<option value="${objetoCategorias[i].idCategorias}">${objetoCategorias[i].nombre}</option>`;
+                }
+                for (var i = 0; i < objetoCategorias.length; i++) {
+                    templateSelectsProductos += `<select required onchange="validacionProducto(this, 'reg'); $('#regBtnAgregarPedidos').removeAttr('disabled')" class="form-control" id="reg${objetoCategorias[i].idCategorias}C">`;
+                    for (var e = 0; e < objetoProductos.length; e++) {
+                        if (objetoProductos[e].idCategoria === objetoCategorias[i].idCategorias){
+                            templateSelectsProductos += `<option value="${objetoProductos[e].idProductos+";"+objetoProductos[e].descripcion+";"+objetoProductos[e].precio}">${objetoProductos[e].nombre}</option>`;
+                        }
+                    }
+                    templateSelectsProductos += `</select>`;
+                }
+                $('#regCategoriaPedidos').html(templateOptionsCategoria);
+                $('#regCJSProductosPedidos').html(templateSelectsProductos);
+                $("#regCJSProductosPedidos select").hide();
+                $("#regCJSProductosPedidos #reg"+document.getElementById("regCategoriaPedidos").value+"C").show();
+            }
+        });
+        $.ajax({
+            url: 'PEDRellenoCartaAJAX',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response){
+                let objetoCategorias = response[0].categorias;
+                let objetoProductos = response[0].productos;
+                let templateOptionsCategoria = ``;
+                let templateSelectsProductos = `<span class="input-group-addon">Producto:</span>`;
+
+                for (var i = 0; i < objetoCategorias.length; i++) {
+                    templateOptionsCategoria += `<option value="${objetoCategorias[i].idCategorias}">${objetoCategorias[i].nombre}</option>`;
+                }
+                for (var i = 0; i < objetoCategorias.length; i++) {
+                    templateSelectsProductos += `<select required onchange="validacionProducto(this, 'actua'); $('#actuaBtnAgregarPedidos').removeAttr('disabled')" class="form-control" id="actua${objetoCategorias[i].idCategorias}C">`;
+                    for (var e = 0; e < objetoProductos.length; e++) {
+                        if (objetoProductos[e].idCategoria === objetoCategorias[i].idCategorias){
+                            templateSelectsProductos += `<option value="${objetoProductos[e].idProductos+";"+objetoProductos[e].descripcion+";"+objetoProductos[e].precio}">${objetoProductos[e].nombre}</option>`;
+                        }
+                    }
+                    templateSelectsProductos += `</select>`;
+                }
+                $('#actuaCategoriaPedidos').html(templateOptionsCategoria);
+                $('#actuaCJSProductosPedidos').html(templateSelectsProductos);
+                $("#actuaCJSProductosPedidos select").hide();
+                $("#actuaCJSProductosPedidos #actua"+document.getElementById("actuaCategoriaPedidos").value+"C").show();
+            }
+        });
+        rellenoMesasDisponibles('reg', 'N');
+        $("#pedidosActualizar").hide();
         $("#pedidosRegistrar").hide();
         $("#regSpanWarningPedidos").hide();
         document.getElementById("regSubtotalPedidos").value = 0;
         document.getElementById("regCantidadPedidos").value = 1;
-        var lSt = localStorage;
-        lSt.setItem("cantProductosP", "0");
+        localStorage.setItem("regCantProductosP", "0");
         
         $('#btnRegistrarPedidos').click(function(){
+            $("#pedidosListar").hide();
             $('#pedidosRegistrar').show();
-            $('#pedidosListar').hide();
         });
         
-        $('#btnListarPedidos').click(function(){
-            $('#pedidosRegistrar').hide(100, function(){});
+        $('.btnListarPedidos').click(function(){
+            $("#pedidosActualizar").hide();
+            $("#pedidosRegistrar").hide();
             $('#pedidosListar').show();
         });
         
-        $('#btnListarRutaPedidos').click(function(){
-            $('#pedidosRegistrar').hide(100, function(){});
+        $('.btnListarRutaPedidos').click(function(){
+            $("#pedidosActualizar").hide();
+            $("#pedidosRegistrar").hide();
             $('#pedidosListar').show();
         });
-        
-        $("#regCJSProductosPedidos select").hide();
-        $("#regCJSProductosPedidos #"+document.getElementById("regCategoriaPedidos").value+"C").show();
     }
 });
-function cambioCategoria(idcate){
-    $("#regCJSProductosPedidos select").hide();
-    $("#regCJSProductosPedidos #"+idcate+"C").show();
+function rellenoMesasDisponibles(method, mesaActua){
+    $.post('PEDRellenoMesasAJAX', { mesaActua }, function(response){
+        let arrayMesas = response.split(";");
+        let templateOptionsMesas = ``;
+
+        for (var i = 0; i < arrayMesas.length; i++) {
+            templateOptionsMesas += `<option value="${arrayMesas[i]}">Mesa ${arrayMesas[i]}</option>`;
+        }
+        $('#'+method+'MesaPedidos').html(templateOptionsMesas);
+        if (method === "actua"){
+            document.getElementById("actuaMesaPedidos").value = mesaActua;
+        }
+    });
+}
+function cambioCategoria(idcate, method){
+    $("#"+method+"CJSProductosPedidos select").hide();
+    var selectProductos = $("#"+method+"CJSProductosPedidos #"+method+idcate+"C");
+    var selectProductosOption = document.getElementById(method+idcate+"C");
+    selectProductos.show();
+    validacionProducto(selectProductosOption, method);
+}
+function validacionProducto(producto, method){
+    var selectProductosOption = producto;
+    var arrayInfoProducto = selectProductosOption.value.split(';');
+    
+    $.ajax({
+        url: 'PEDProductoDisponibleAJAX',
+        type: 'POST',
+        data: {idProducto : arrayInfoProducto[0]},
+        dataType: 'json',
+        success: function(response){
+            let objetoInsumos = response[0].insumos;
+            let objetoDetallesProductos = response[0].detallesProductos;
+            
+            let productoValido = true;
+            for (var i = 0; i < objetoDetallesProductos.length; i++) {
+                for (var e = 0; e < objetoInsumos.length; e++) {
+                    if (objetoInsumos[e].idInsumos === objetoDetallesProductos[i].idInsumoNecesario){
+                        if (objetoInsumos[e].cantidad < (objetoDetallesProductos[i].cantidadInsumo*parseInt(document.getElementById(method+"CantidadPedidos").value))){
+                            productoValido = false;
+                            break;
+                        }
+                    }
+                }
+                if (!productoValido){
+                    break;
+                }
+            }
+
+            if (!productoValido){
+                if (document.getElementById(method+"CantidadPedidos").value === "1"){
+                    $.confirm({
+                        animation: 'rotateX',
+                        closeAnimation: 'zoom',
+                        title: 'Producto Agotado!',
+                        content: 'El producto <b>'+selectProductosOption.options[selectProductosOption.selectedIndex].text+'</b> no tiene suficientes insumos para su producción.',
+                        type: 'red',
+//                        columnClass: 'col-md-6 col-md-offset-3',
+                        icon: 'fa fa-warning',
+                        typeAnimated: true,
+                        closeIconClass: 'fa fa-close',
+                        buttons: {
+                            tryAgain: {
+                                text: 'Entiendo',
+                                btnClass: 'btn-red',
+                                action: function(){
+                                    selectProductosOption.options[selectProductosOption.selectedIndex].remove();
+                                    document.getElementById(method+"CantidadPedidos").value = 1;
+                                    document.getElementById(method+"ObservacionPedidos").value = "";
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    $.confirm({
+                        animation: 'rotateX',
+                        closeAnimation: 'zoom',
+                        title: 'Insumos Insuficientes!',
+                        content: 'Debe ingresar una cantidad menor para el producto <b>'+selectProductosOption.options[selectProductosOption.selectedIndex].text+'</b>, porque no hay suficientes insumos para la producción.',
+                        type: 'red',
+                        icon: 'fa fa-warning',
+                        typeAnimated: true,
+                        closeIconClass: 'fa fa-close',
+                        buttons: {
+                            tryAgain: {
+                                text: 'Entiendo',
+                                btnClass: 'btn-red',
+                                action: function(){
+                                    document.getElementById(method+"CantidadPedidos").value = 1;
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    });
 }
 function validacionCantidad(input,content){
     if (content === "0" || content === 0){
@@ -306,125 +476,291 @@ function validacionCantidad(input,content){
         }
     }
 }
-function agregarProductoPedido(btnAgregar){
+function agregarProductoPedido(method){
     var lSt = localStorage;
     
-    var numProductoAGGPedido = parseInt(lSt.getItem("cantProductosP"))+1;
-    var selectCategorias = document.getElementById("regCategoriaPedidos");
+    var selectCategorias = document.getElementById(method+"CategoriaPedidos");
     var idCategoria = selectCategorias.value;
     var nomCategoria = selectCategorias.options[selectCategorias.selectedIndex].text;
-    var selectProductos = document.getElementById(idCategoria+"C");
-    var infoProducto = selectProductos.value.split(";");
+    var selectProductos = document.getElementById(method+idCategoria+"C");
+    var infoProducto = selectProductos.value.split(";"); // ID, Descripcion, Precio
     
     if (selectProductos.value.length > 0){
         var nomProducto = selectProductos.options[selectProductos.selectedIndex].text;
         var optionProducto = selectProductos.options[selectProductos.selectedIndex];
-        var cantidad = document.getElementById("regCantidadPedidos").value;
+        var cantidad = document.getElementById(method+"CantidadPedidos").value;
         var subTotalProductos = parseInt(infoProducto[2])*cantidad;
-        var observacion = document.getElementById("regObservacionPedidos").value;
+        var observacion = document.getElementById(method+"ObservacionPedidos").value;
         if (observacion.length === 0){
             observacion = "Vacio";
         }
         
-        lSt.setItem("cantProductosP", numProductoAGGPedido);
-        var campoSubtotal = document.getElementById("regSubtotalPedidos");
-        campoSubtotal.value = formatNumberReturn(parseInt(resetNumberReturn(campoSubtotal.value))+parseInt(subTotalProductos));
+        $.post('PEDGastoInsumosAJAX', {idProducto : infoProducto[0],cantidadProductos : cantidad,operacion : '-'}, function(response){
+            if (response === "success"){
+                
+                if (method === "actua"){
+                    
+                    var numProductoAGGPedido = parseInt(lSt.getItem("actuaCantProductosP"));
+                    var validateActua = false;
+                    for (var i = 1; i <= numProductoAGGPedido; i++) {
+                        var infoProductoPPArray = document.getElementById("actua"+i+"InputPP").value.split(";");
+                        if (infoProductoPPArray[0] === infoProducto[0]){
+                            numProductoAGGPedido = i;
+                            validateActua = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!validateActua){
+                        numProductoAGGPedido += 1;
+                        lSt.setItem("actuaCantProductosP", numProductoAGGPedido);
+                        var templateInptHide = `
+                            <div class="input-group inpDesa">
+                                <input type="text" class="form-control" name="actua${numProductoAGGPedido}InputPP" id="actua${numProductoAGGPedido}InputPP">
+                            </div>`;
+                        document.getElementById("actuaCAJProductosPedidos").insertAdjacentHTML("beforeend",templateInptHide);
+                    }
 
-        var templateInptHide = `
-            <div class="input-group inpDesa">
-                <input type="text" class="form-control" name="${numProductoAGGPedido}InputPP" id="${numProductoAGGPedido}InputPP">
-            </div>`;
+                    var campoSubtotal = document.getElementById("actuaSubtotalPedidos");
+                    campoSubtotal.value = formatNumberReturn(parseInt(resetNumberReturn(campoSubtotal.value))+parseInt(subTotalProductos));
 
-        document.getElementById("regCAJProductosPedidos").insertAdjacentHTML("beforeend",templateInptHide);
-        $('.tablaListarProductosPedido').DataTable().row.add( [
-            nomCategoria,
-            nomProducto,
-            `<div class="td-espaciado">
-                <button type="button" id="${numProductoAGGPedido}BtnMenosRowPP" onclick="cantProductoPedido('resta', '${numProductoAGGPedido}')" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>
-                    <span id="${numProductoAGGPedido}CantRowPP">${cantidad}</span>
-                <button type="button" id="${numProductoAGGPedido}BtnMasRowPP" onclick="cantProductoPedido('suma', '${numProductoAGGPedido}')" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></button>
-            </div>`,
-            `<span id="${numProductoAGGPedido}SubtotalRowPP">`+formatNumberReturn(subTotalProductos)+`</span>`,
-            `<div class="td-espaciado">
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productoPedidoVerModal" onClick="productoPedidoVerModal('${CifrarASCII(nomCategoria)}', '${CifrarASCII(nomProducto)}', '${infoProducto[2]}', '${infoProducto[1]}', '${numProductoAGGPedido}')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#productoPedidoAModal" onClick="productoPedidoActualizarModal('${numProductoAGGPedido}', 'actuaV')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                <button type="button" onclick="sacarProductoPedido(this, '${numProductoAGGPedido}', '${idCategoria}C', '${CifrarASCII(nomProducto)}')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Sacar</button>
-            </div>`
-        ] ).draw();
-        document.getElementById("regCantidadPedidos").value = 1;
-        document.getElementById("regObservacionPedidos").value = "";
-        optionProducto.remove();
-        document.getElementById(numProductoAGGPedido+"InputPP").value = infoProducto[0]+";"+infoProducto[1]+";"+infoProducto[2]+";"+cantidad+";"+CifrarASCII(observacion)+";"+subTotalProductos;
+                    $('.actuaTablaListarProductosPedido').DataTable().row.add( [
+                        nomCategoria,
+                        nomProducto,
+                        `<div class="td-espaciado">
+                            <button type="button" id="${method+numProductoAGGPedido}BtnMenosRowPP" onclick="cantProductoPedido('resta', '${numProductoAGGPedido}', '${method}')" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>
+                                <span id="${method+numProductoAGGPedido}CantRowPP">${cantidad}</span>
+                            <button type="button" id="${method+numProductoAGGPedido}BtnMasRowPP" onclick="cantProductoPedido('suma', '${numProductoAGGPedido}', '${method}')" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>`,
+                        `<span id="${method+numProductoAGGPedido}SubtotalRowPP">`+formatNumberReturn(subTotalProductos)+`</span>`,
+                        `<div class="td-espaciado">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productoPedidoVerModal" onClick="productoPedidoVerModal('${CifrarASCII(nomCategoria)}', '${CifrarASCII(nomProducto)}', '${infoProducto[2]}', '${infoProducto[1]}', '${numProductoAGGPedido}', '${method}')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#productoPedidoAModal" onClick="productoPedidoActualizarModal('${numProductoAGGPedido}', 'actuaV', '${method}')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                            <button type="button" onclick="sacarProductoPedido(this, '${numProductoAGGPedido}', '${method+idCategoria}C', '${CifrarASCII(nomProducto)}', '${method}')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Sacar</button>
+                        </div>`
+                    ] ).draw();
+                    
+                    document.getElementById("actua"+numProductoAGGPedido+"InputPP").value = infoProducto[0]+";"+infoProducto[1]+";"+infoProducto[2]+";"+cantidad+";"+CifrarASCII(observacion)+";"+subTotalProductos+";X;Nuevo;Y";
+                    
+                } else {
+                    
+                    numProductoAGGPedido = parseInt(lSt.getItem(method+"CantProductosP"))+1;
+                    
+                    lSt.setItem("regCantProductosP", numProductoAGGPedido);
+
+                    var templateInptHide = `
+                        <div class="input-group inpDesa">
+                            <input type="text" class="form-control" name="${method+numProductoAGGPedido}InputPP" id="${method+numProductoAGGPedido}InputPP">
+                        </div>`;
+
+                    var campoSubtotal = document.getElementById(method+"SubtotalPedidos");
+                    campoSubtotal.value = formatNumberReturn(parseInt(resetNumberReturn(campoSubtotal.value))+parseInt(subTotalProductos));
+
+                    document.getElementById(method+"CAJProductosPedidos").insertAdjacentHTML("beforeend",templateInptHide);
+                    $('.'+method+'TablaListarProductosPedido').DataTable().row.add( [
+                        nomCategoria,
+                        nomProducto,
+                        `<div class="td-espaciado">
+                            <button type="button" id="${method+numProductoAGGPedido}BtnMenosRowPP" onclick="cantProductoPedido('resta', '${numProductoAGGPedido}', '${method}')" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>
+                                <span id="${method+numProductoAGGPedido}CantRowPP">${cantidad}</span>
+                            <button type="button" id="${method+numProductoAGGPedido}BtnMasRowPP" onclick="cantProductoPedido('suma', '${numProductoAGGPedido}', '${method}')" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>`,
+                        `<span id="${method+numProductoAGGPedido}SubtotalRowPP">`+formatNumberReturn(subTotalProductos)+`</span>`,
+                        `<div class="td-espaciado">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productoPedidoVerModal" onClick="productoPedidoVerModal('${CifrarASCII(nomCategoria)}', '${CifrarASCII(nomProducto)}', '${infoProducto[2]}', '${infoProducto[1]}', '${numProductoAGGPedido}', '${method}')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#productoPedidoAModal" onClick="productoPedidoActualizarModal('${numProductoAGGPedido}', 'actuaV', '${method}')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                            <button type="button" onclick="sacarProductoPedido(this, '${numProductoAGGPedido}', '${method+idCategoria}C', '${CifrarASCII(nomProducto)}', '${method}')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Sacar</button>
+                        </div>`
+                    ] ).draw();
+                    
+                    document.getElementById("reg"+numProductoAGGPedido+"InputPP").value = infoProducto[0]+";"+infoProducto[1]+";"+infoProducto[2]+";"+cantidad+";"+CifrarASCII(observacion)+";"+subTotalProductos;
+                    
+                }
+
+                document.getElementById(method+"CantidadPedidos").value = 1;
+                document.getElementById(method+"ObservacionPedidos").value = "";
+                optionProducto.remove();
+            } else {
+                if (document.getElementById(method+"CantidadPedidos").value === "1"){
+                    $.confirm({
+                        animation: 'rotateX',
+                        closeAnimation: 'zoom',
+                        title: 'Producto Agotado!',
+                        content: 'El producto <b>'+nomProducto+'</b> no tiene suficientes insumos para su producción.',
+                        type: 'red',
+                        icon: 'fa fa-warning',
+                        typeAnimated: true,
+                        closeIconClass: 'fa fa-close',
+                        buttons: {
+                            tryAgain: {
+                                text: 'Entiendo',
+                                btnClass: 'btn-red',
+                                action: function(){
+                                    optionProducto.remove();
+                                    document.getElementById(method+"CantidadPedidos").value = 1;
+                                    document.getElementById(method+"ObservacionPedidos").value = "";
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    $.confirm({
+                        animation: 'rotateX',
+                        closeAnimation: 'zoom',
+                        title: 'Insumos Insuficientes!',
+                        content: 'Debe ingresar una cantidad menor para el producto <b>'+nomProducto+'</b>, porque no hay suficientes insumos para la producción.',
+                        type: 'red',
+                        icon: 'fa fa-warning',
+                        typeAnimated: true,
+                        closeIconClass: 'fa fa-close',
+                        buttons: {
+                            tryAgain: {
+                                text: 'Entiendo',
+                                btnClass: 'btn-red',
+                                action: function(){
+                                    document.getElementById(method+"CantidadPedidos").value = 1;
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        
     } else {
-        $("#regBtnAgregarPedidos").attr('disabled', '');
+        $("#"+method+"BtnAgregarPedidos").attr('disabled', '');
     }
 }
-function sacarProductoPedido(numPP, numRow, idSelectProd, nomProducto){
-    var infoProductoPPArr = document.getElementById(numRow+"InputPP").value.split(";");
+function sacarProductoPedido(button, numRow, idSelectProd, nomProducto, method){
+    var infoProductoPPArr = document.getElementById(method+numRow+"InputPP").value.split(";");
     var templateOption = '<option value="'+infoProductoPPArr[0]+';'+infoProductoPPArr[1]+';'+infoProductoPPArr[2]+'">'+DescifrarASCII(nomProducto)+'</option>';
+    $.post('PEDGastoInsumosAJAX', {idProducto : infoProductoPPArr[0],cantidadProductos : infoProductoPPArr[3],operacion : '+'});
     document.getElementById(idSelectProd).insertAdjacentHTML("beforeend",templateOption);
-    var campSubtotal = document.getElementById("regSubtotalPedidos");
+    var campSubtotal = document.getElementById(method+"SubtotalPedidos");
     campSubtotal.value = formatNumberReturn(parseInt(resetNumberReturn(campSubtotal.value))-parseInt(infoProductoPPArr[5]));
-    $("#"+numRow+"InputPP").parent('div').remove();
-    $('.tablaListarProductosPedido').DataTable().row($(numPP).parents('tr')).remove().draw(false);
+    
+    if (method === "reg"){
+        $("#reg"+numRow+"InputPP").parent('div').remove();
+        $('.regTablaListarProductosPedido').DataTable().row($(button).parents('tr')).remove().draw(false);
+    } else {
+        document.getElementById("actua"+numRow+"InputPP").value = infoProductoPPArr[0]+";"+infoProductoPPArr[1]+";"+infoProductoPPArr[2]+";"+infoProductoPPArr[3]+";"+infoProductoPPArr[4]+";"+infoProductoPPArr[5]+";"+infoProductoPPArr[6]+";"+infoProductoPPArr[7]+";N";
+        $('.actuaTablaListarProductosPedido').DataTable().row($(button).parents('tr')).remove().draw(false);
+    }
 }
-function cantProductoPedido(tipoOpe, numRow){
-    var inpProductoArr = document.getElementById(numRow+"InputPP").value.split(";");
+function cantProductoPedido(tipoOpe, numRow, method){
+    var inpProductoArr = document.getElementById(method+numRow+"InputPP").value.split(";");
     if (tipoOpe === "resta"){
         if (parseInt(inpProductoArr[3]) > 1){
-            var infoNuevaInp = inpProductoArr[0]+";"+inpProductoArr[1]+";"+inpProductoArr[2]+";"+(parseInt(inpProductoArr[3])-1)+";"+inpProductoArr[4]+";"+(parseInt(inpProductoArr[5])-parseInt(inpProductoArr[2]));
-            var campSubtotal = document.getElementById("regSubtotalPedidos");
+            var infoNuevaInp;
+            if (method === "actua"){
+                infoNuevaInp = inpProductoArr[0]+";"+inpProductoArr[1]+";"+inpProductoArr[2]+";"+(parseInt(inpProductoArr[3])-1)+";"+inpProductoArr[4]+";"+(parseInt(inpProductoArr[5])-parseInt(inpProductoArr[2]))+";"+inpProductoArr[6]+";"+inpProductoArr[7]+";"+inpProductoArr[8];
+            } else {
+                infoNuevaInp = inpProductoArr[0]+";"+inpProductoArr[1]+";"+inpProductoArr[2]+";"+(parseInt(inpProductoArr[3])-1)+";"+inpProductoArr[4]+";"+(parseInt(inpProductoArr[5])-parseInt(inpProductoArr[2]));
+            }
+            $.post('PEDGastoInsumosAJAX', {idProducto : inpProductoArr[0],cantidadProductos : '1',operacion : '+'});
+            var campSubtotal = document.getElementById(method+"SubtotalPedidos");
             campSubtotal.value = formatNumberReturn(parseInt(resetNumberReturn(campSubtotal.value))-parseInt(inpProductoArr[2]));
-            document.getElementById(numRow+"CantRowPP").innerText = parseInt(inpProductoArr[3])-1;
-            document.getElementById(numRow+"InputPP").value = infoNuevaInp;
-            document.getElementById(numRow+"SubtotalRowPP").innerText = formatNumberReturn(parseInt(inpProductoArr[5])-parseInt(inpProductoArr[2]));
-            $("#"+numRow+"BtnMasRowPP").removeAttr('disabled');
+            document.getElementById(method+numRow+"CantRowPP").innerText = parseInt(inpProductoArr[3])-1;
+            document.getElementById(method+numRow+"InputPP").value = infoNuevaInp;
+            document.getElementById(method+numRow+"SubtotalRowPP").innerText = formatNumberReturn(parseInt(inpProductoArr[5])-parseInt(inpProductoArr[2]));
+            $("#"+method+numRow+"BtnMasRowPP").removeAttr('disabled');
         } else {
-            $("#"+numRow+"BtnMenosRowPP").attr('disabled','');
+            $("#"+method+numRow+"BtnMenosRowPP").attr('disabled','');
         }
     } else {
         if (parseInt(inpProductoArr[3]) < 99){
-            var infoNuevaInp = inpProductoArr[0]+";"+inpProductoArr[1]+";"+inpProductoArr[2]+";"+(parseInt(inpProductoArr[3])+1)+";"+inpProductoArr[4]+";"+(parseInt(inpProductoArr[5])+parseInt(inpProductoArr[2]));
-            var campSubtotal = document.getElementById("regSubtotalPedidos");
-            campSubtotal.value = formatNumberReturn(parseInt(resetNumberReturn(campSubtotal.value))+parseInt(inpProductoArr[2]));
-            document.getElementById(numRow+"CantRowPP").innerText = parseInt(inpProductoArr[3])+1;
-            document.getElementById(numRow+"InputPP").value = infoNuevaInp;
-            document.getElementById(numRow+"SubtotalRowPP").innerText = formatNumberReturn(parseInt(inpProductoArr[5])+parseInt(inpProductoArr[2]));
-            $("#"+numRow+"BtnMenosRowPP").removeAttr('disabled');
+            $.post('PEDGastoInsumosAJAX', {idProducto : inpProductoArr[0],cantidadProductos : '1',operacion : '-'}, function(response){
+                if (response === "success"){
+                    var infoNuevaInp;
+                    if (method === "actua"){
+                        infoNuevaInp = inpProductoArr[0]+";"+inpProductoArr[1]+";"+inpProductoArr[2]+";"+(parseInt(inpProductoArr[3])+1)+";"+inpProductoArr[4]+";"+(parseInt(inpProductoArr[5])+parseInt(inpProductoArr[2]))+";"+inpProductoArr[6]+";"+inpProductoArr[7]+";"+inpProductoArr[8];
+                    } else {
+                        infoNuevaInp = inpProductoArr[0]+";"+inpProductoArr[1]+";"+inpProductoArr[2]+";"+(parseInt(inpProductoArr[3])+1)+";"+inpProductoArr[4]+";"+(parseInt(inpProductoArr[5])+parseInt(inpProductoArr[2]));
+                    }
+                    var campSubtotal = document.getElementById(method+"SubtotalPedidos");
+                    campSubtotal.value = formatNumberReturn(parseInt(resetNumberReturn(campSubtotal.value))+parseInt(inpProductoArr[2]));
+                    document.getElementById(method+numRow+"CantRowPP").innerText = parseInt(inpProductoArr[3])+1;
+                    document.getElementById(method+numRow+"InputPP").value = infoNuevaInp;
+                    document.getElementById(method+numRow+"SubtotalRowPP").innerText = formatNumberReturn(parseInt(inpProductoArr[5])+parseInt(inpProductoArr[2]));
+                    $("#"+method+numRow+"BtnMenosRowPP").removeAttr('disabled');
+                } else {
+                    $.confirm({
+                        animation: 'rotateX',
+                        closeAnimation: 'zoom',
+                        title: 'Insumos Insuficientes!',
+                        content: 'El producto ya no tiene más insumos para su producción.',
+                        type: 'red',
+                        icon: 'fa fa-warning',
+                        typeAnimated: true,
+                        closeIconClass: 'fa fa-close',
+                        buttons: {
+                            tryAgain: {
+                                text: 'Entiendo',
+                                btnClass: 'btn-red',
+                                action: function(){
+                                    $("#"+method+numRow+"BtnMasRowPP").attr('disabled','');
+                                }
+                            }
+                        }
+                    });
+                }
+            });
         } else {
-            $("#"+numRow+"BtnMasRowPP").attr('disabled','');
+            $("#"+method+numRow+"BtnMasRowPP").attr('disabled','');
         }
     }
 }
-function validacionCantidad(input,content){
-    if (content === "0" || content === 0){
-        input.value = 1;
-    } else {
-        if (content.length > 2){
-            input.value = content.substring(0,content.length-1);
+function registrarPedido(method){
+    if (method === "actua"){
+        var numProductoAGGPedido = parseInt(localStorage.getItem("actuaCantProductosP"));
+        var validateActua = false;
+        for (var i = 1; i <= numProductoAGGPedido; i++) {
+            var infoProductoPPArray = document.getElementById("actua"+i+"InputPP").value.split(";");
+            if (infoProductoPPArray[8] === "Y"){
+                validateActua = true;
+                break;
+            }
         }
-    }
-}
-function registrarPedido(){
-    var validarProductos = document.getElementById("regCAJProductosPedidos").innerHTML;
-    if (validarProductos.includes("input-group")){
-        var lSt = localStorage;
-        $("#regSubtotalPedidos").removeAttr("disabled");
-        var templateInptHide = `
-            <div class="input-group inpDesa">
-                <input type="text" class="form-control" name="NumsInputPP" id="NumsInputPP">
-            </div>`;
-        document.getElementById("regCAJProductosPedidos").insertAdjacentHTML("beforeend",templateInptHide);
-        document.getElementById("NumsInputPP").value = lSt.getItem("cantProductosP");
-        document.getElementById("regFormPedidos").action = "Pedido";
-        document.getElementById("regFormPedidos").submit();
+        
+        if (validateActua){
+            $("#actuaSubtotalPedidos").removeAttr("disabled");
+            var templateInptHide = `
+                <div class="input-group inpDesa">
+                    <input type="text" class="form-control" name="actuaNumsInputPP" id="actuaNumsInputPP">
+                </div>`;
+            document.getElementById("actuaCAJProductosPedidos").insertAdjacentHTML("beforeend",templateInptHide);
+            document.getElementById("actuaNumsInputPP").value = localStorage.getItem("actuaCantProductosP");
+            document.getElementById("actuaFormPedidos").action = "PedidoA";
+            document.getElementById("actuaFormPedidos").submit();
+        } else {
+            console.log("Holi");
+            $("#actuaSpanWarningPedidos").show();
+            $("#actuaSpanWarningPedidos").css('margin-top','-2px');
+            $("#actuaSpanWarningPedidos").css('display','block');
+            $("#actuaSpanWarningPedidos").css('font-size','16px');
+            $("#actuaSpanWarningPedidos").css('letter-spacing','.1.5pt');
+            $("#actuaSpanWarningPedidos").parent("button").css('background','#E06666');
+        }
     } else {
-        $("#regSpanWarningPedidos").show();
-        $("#regSpanWarningPedidos").css('margin-top','-2px');
-        $("#regSpanWarningPedidos").css('display','block');
-        $("#regSpanWarningPedidos").css('font-size','16px');
-        $("#regSpanWarningPedidos").css('letter-spacing','.1.5pt');
-        $("#regSpanWarningPedidos").parent("button").css('background','#E06666');
+        var validarProductos = document.getElementById(method+"CAJProductosPedidos").innerHTML;
+        if (validarProductos.includes("input-group")){
+            $("#regSubtotalPedidos").removeAttr("disabled");
+            var templateInptHide = `
+                <div class="input-group inpDesa">
+                    <input type="text" class="form-control" name="regNumsInputPP" id="regNumsInputPP">
+                </div>`;
+            document.getElementById("regCAJProductosPedidos").insertAdjacentHTML("beforeend",templateInptHide);
+            document.getElementById("regNumsInputPP").value = localStorage.getItem("cantProductosP");
+            document.getElementById("regFormPedidos").action = "Pedido";
+            document.getElementById("regFormPedidos").submit();
+        } else {
+            $("#regSpanWarningPedidos").show();
+            $("#regSpanWarningPedidos").css('margin-top','-2px');
+            $("#regSpanWarningPedidos").css('display','block');
+            $("#regSpanWarningPedidos").css('font-size','16px');
+            $("#regSpanWarningPedidos").css('letter-spacing','.1.5pt');
+            $("#regSpanWarningPedidos").parent("button").css('background','#E06666');
+        }
     }
 }
 function resetNumberReturn(numero) {
@@ -437,10 +773,11 @@ function productoPedidoVerModal(nomCate,
         nomProd,
         precio,
         descri,
-        numeroRow) {
+        numeroRow,
+        method) {
     
     $(".collapse").collapse("hide");
-    var inpProductoArr = document.getElementById(numeroRow+"InputPP").value.split(";");
+    var inpProductoArr = document.getElementById(method+numeroRow+"InputPP").value.split(";");
     document.getElementById("verCategoriaProductoPedido").innerText = DescifrarASCII(nomCate);
     document.getElementById("verProductoProductoPedido").innerText = DescifrarASCII(nomProd);
     document.getElementById("verCantidadProductoPedido").innerText = inpProductoArr[3];
@@ -459,12 +796,12 @@ function productoPedidoVerModal(nomCate,
         document.getElementById("verDesProProductoPedido").innerText = DescifrarASCII(descri);
     }
 }
-function productoPAggVerModal() {
+function productoPAggVerModal(method) {
     
-    var selectCategorias = document.getElementById("regCategoriaPedidos");
+    var selectCategorias = document.getElementById(method+"CategoriaPedidos");
     var idCategoria = selectCategorias.value;
     var nomCategoria = selectCategorias.options[selectCategorias.selectedIndex].text;
-    var selectProductos = document.getElementById(idCategoria+"C");
+    var selectProductos = document.getElementById(method+idCategoria+"C");
     var infoProducto = selectProductos.value.split(";");
     var nomProducto = selectProductos.options[selectProductos.selectedIndex].text;
     
@@ -478,12 +815,13 @@ function productoPAggVerModal() {
     }
 }
 function productoPedidoActualizarModal(numeroRow,
-        tipoBtn) {
+        tipoBtn,
+        method) {
             
-    var inpProductoArr = document.getElementById(numeroRow+"InputPP").value.split(";");
+    var inpProductoArr = document.getElementById(method+numeroRow+"InputPP").value.split(";");
     
     if (tipoBtn === "actuaV"){
-        $("#actuaBtnAProductoPedido").attr('onClick', 'productoPedidoActualizarModal("'+numeroRow+'", "actuaA")');
+        $("#"+method+"BtnAProductoPedido").attr('onClick', 'productoPedidoActualizarModal("'+numeroRow+'", "actuaA", "'+method+'")');
         $("#productoPedidoAModal textarea").css('color', '#555555');
         if (DescifrarASCII(inpProductoArr[4]) !== "Vacio"){
             document.getElementById("actuaObservacionProductoPedido").value = DescifrarASCII(inpProductoArr[4]);
@@ -497,13 +835,156 @@ function productoPedidoActualizarModal(numeroRow,
         } else {
             descripNueva = CifrarASCII(document.getElementById("actuaObservacionProductoPedido").value);
         }
-        var infoNuevaInp = inpProductoArr[0]+";"+inpProductoArr[1]+";"+inpProductoArr[2]+";"+inpProductoArr[3]+";"+descripNueva+";"+inpProductoArr[5];
-        document.getElementById(numeroRow+"InputPP").value = infoNuevaInp;
+        var infoNuevaInp;
+        if (method === "actua"){
+            infoNuevaInp = inpProductoArr[0]+";"+inpProductoArr[1]+";"+inpProductoArr[2]+";"+inpProductoArr[3]+";"+descripNueva+";"+inpProductoArr[5]+";"+inpProductoArr[6]+";"+inpProductoArr[7]+";"+inpProductoArr[8];
+        } else {
+            infoNuevaInp = inpProductoArr[0]+";"+inpProductoArr[1]+";"+inpProductoArr[2]+";"+inpProductoArr[3]+";"+descripNueva+";"+inpProductoArr[5];
+        }
+        document.getElementById(method+numeroRow+"InputPP").value = infoNuevaInp;
     }
+}
+function pedidosVer(rolU,
+        nomMesero,
+        nomCliente,
+        mesa,
+        subtotal,
+        detallesPedido){
+    
+    if (rolU === "Gerente"){
+        $('#cajGerentePedidos').show();
+        $('#hrGerentePedidos').show();
+        $('#cajClienteMeseroPedidos').hide();
+        document.getElementById('verMeseroPedidos').innerText = DescifrarASCII(nomMesero);
+        if (nomCliente.length > 0){
+            document.getElementById('verClienteGerentePedidos').innerText = DescifrarASCII(nomCliente);
+        } else {
+            document.getElementById('verClienteGerentePedidos').innerText = "No tiene";
+        }
+    } else {
+        $('#cajGerentePedidos').hide();
+        $('#hrGerentePedidos').hide();
+        $('#cajClienteMeseroPedidos').show();
+        if (nomCliente.length > 0){
+            document.getElementById('verClienteMeseroPedidos').innerText = DescifrarASCII(nomCliente);
+        } else {
+            document.getElementById('verClienteMeseroPedidos').innerText = "No tiene";
+        }
+    }
+    document.getElementById('verMesaPedidos').innerText = "Mesa "+mesa;
+    document.getElementById('verSubtotalPedidos').innerText = formatNumberReturn(subtotal);
+    
+    detallesPedido = DescifrarASCII(detallesPedido);
+    var arregloDetallesPedido = detallesPedido.split(":");
+    $('.tablaListarProductos').DataTable().clear().draw();
+    
+    for (var i = 0; i < arregloDetallesPedido.length; i++) {
+        var arregloClasificacion = arregloDetallesPedido[i].split("-");
+        var arregloCategoria = arregloClasificacion[0].split(";");
+        var arregloProducto = arregloClasificacion[1].split(";");
+        var arregloDetallePedido = arregloClasificacion[2].split(";");
+        
+        $('.tablaListarProductos').DataTable().row.add( [
+            DescifrarASCII(arregloCategoria[1]),
+            DescifrarASCII(arregloProducto[1]),
+            arregloDetallePedido[1],
+            DescifrarASCII(arregloDetallePedido[2])==="Vacio"?"No tiene":DescifrarASCII(arregloDetallePedido[2]),
+            formatNumberReturn(arregloDetallePedido[3])
+        ] ).draw();
+    }
+}
+function pedidosActualizar(idPedido,
+        numMesa,
+        subtotal,
+        detallesPedido){
+            
+    $.ajax({
+        url: 'PEDRellenoCartaAJAX',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response){
+            let objetoCategorias = response[0].categorias;
+            let objetoProductos = response[0].productos;
+            let templateOptionsCategoria = ``;
+            let templateSelectsProductos = `<span class="input-group-addon">Producto:</span>`;
+            
+            for (var i = 0; i < objetoCategorias.length; i++) {
+                templateOptionsCategoria += `<option value="${objetoCategorias[i].idCategorias}">${objetoCategorias[i].nombre}</option>`;
+            }
+            for (var i = 0; i < objetoCategorias.length; i++) {
+                templateSelectsProductos += `<select required onchange="validacionProducto(this, 'actua'); $('#actuaBtnAgregarPedidos').removeAttr('disabled')" class="form-control" id="actua${objetoCategorias[i].idCategorias}C">`;
+                for (var e = 0; e < objetoProductos.length; e++) {
+                    if (objetoProductos[e].idCategoria === objetoCategorias[i].idCategorias){
+                        templateSelectsProductos += `<option value="${objetoProductos[e].idProductos+";"+objetoProductos[e].descripcion+";"+objetoProductos[e].precio}">${objetoProductos[e].nombre}</option>`;
+                    }
+                }
+                templateSelectsProductos += `</select>`;
+            }
+            $('#actuaCategoriaPedidos').html(templateOptionsCategoria);
+            $('#actuaCJSProductosPedidos').html(templateSelectsProductos);
+            $("#actuaCJSProductosPedidos select").hide();
+            $("#actuaCJSProductosPedidos #actua"+document.getElementById("actuaCategoriaPedidos").value+"C").show();
+        }
+    });
+    rellenoMesasDisponibles('actua', numMesa);
+    $("#actuaSpanWarningPedidos").hide();
+    document.getElementById("actuaIDPedido").value = idPedido;
+    document.getElementById("actuaSubtotalPedidos").value = formatNumberReturn(subtotal);
+    document.getElementById("actuaCantidadPedidos").value = 1;
+    localStorage.setItem("actuaCantProductosP", "0");
+    
+    var lSt = localStorage;
+    detallesPedido = DescifrarASCII(detallesPedido);
+    var arregloDetallesPedido = detallesPedido.split(":");
+    document.getElementById("actuaCAJProductosPedidos").innerHTML = "";
+    $('.actuaTablaListarProductosPedido').DataTable().clear().draw();
+    
+    for (var i = 0; i < arregloDetallesPedido.length; i++) {
+        var arregloClasificacion = arregloDetallesPedido[i].split("-");
+        var arregloCategoria = arregloClasificacion[0].split(";");
+        var arregloProducto = arregloClasificacion[1].split(";");
+        var arregloDetallePedido = arregloClasificacion[2].split(";");
+        var numProductoAGGPedido = parseInt(lSt.getItem("actuaCantProductosP"))+1;
+
+        lSt.setItem("actuaCantProductosP", numProductoAGGPedido);
+        var templateInptHide = `
+            <div class="input-group inpDesa">
+                <input type="text" class="form-control" name="actua${numProductoAGGPedido}InputPP" id="actua${numProductoAGGPedido}InputPP">
+            </div>`;
+        document.getElementById("actuaCAJProductosPedidos").insertAdjacentHTML("beforeend",templateInptHide);
+
+        $('.actuaTablaListarProductosPedido').DataTable().row.add( [
+            DescifrarASCII(arregloCategoria[1]),
+            DescifrarASCII(arregloProducto[1]),
+            `<div class="td-espaciado">
+                <button type="button" id="actua${numProductoAGGPedido}BtnMenosRowPP" onclick="cantProductoPedido('resta', '${numProductoAGGPedido}', 'actua')" class="btn btn-warning"><span class="glyphicon glyphicon-minus"></span></button>
+                    <span id="actua${numProductoAGGPedido}CantRowPP">${arregloDetallePedido[1]}</span>
+                <button type="button" id="actua${numProductoAGGPedido}BtnMasRowPP" onclick="cantProductoPedido('suma', '${numProductoAGGPedido}', 'actua')" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>`,
+            `<span id="actua${numProductoAGGPedido}SubtotalRowPP">`+formatNumberReturn(arregloDetallePedido[3])+`</span>`,
+            `<div class="td-espaciado">
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productoPedidoVerModal" onClick="productoPedidoVerModal('${arregloCategoria[1]}', '${arregloProducto[1]}', '${arregloProducto[3]}', '${arregloProducto[2]}', '${numProductoAGGPedido}', 'actua')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#productoPedidoAModal" onClick="productoPedidoActualizarModal('${numProductoAGGPedido}', 'actuaV', 'actua')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                <button type="button" onclick="sacarProductoPedido(this, '${numProductoAGGPedido}', 'actua${arregloCategoria[0]}C', '${arregloProducto[1]}', 'actua')" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Sacar</button>
+            </div>`
+        ] ).draw();
+
+        document.getElementById("actua"+numProductoAGGPedido+"InputPP").value = arregloProducto[0]+";"+arregloProducto[2]+";"+arregloProducto[3]+";"+arregloDetallePedido[1]+";"+arregloDetallePedido[2]+";"+arregloDetallePedido[3]+";"+arregloDetallePedido[0]+";Viejo;Y";
+        
+        
+        var selectProductos = document.getElementById("actua"+arregloCategoria[0]+"C");
+        var indexOption = $("#actua"+arregloCategoria[0]+"C").children('option[value="'+arregloProducto[0]+';'+arregloProducto[2]+';'+arregloProducto[3]+'"]').index();
+        var optionProducto = selectProductos.options[indexOption];
+        optionProducto.remove();
+    }
+    
+    $("#pedidosListar").hide();
+    $('#pedidosActualizar').show();
+    
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="carruselesRGerenteModal, carruselesVerModal y carruselesActualizarModal">
+// <editor-fold defaultstate="collapsed" desc="Carruseles">
 $(document).ready(function () {
     var rHIc = document.getElementById("regHayImagenCarrusel");
     if (rHIc !== null){
@@ -603,22 +1084,7 @@ function carruselesCambioModal(idcarr) {
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="promocionesActualizarModal y promocionesVerModal">
-function formatNumberReturn(numero) {
-    // Variable que contendra el resultado final
-    var resultado = "";
-    var nuevoNumero;
-
-    // Cogemos el numero eliminando los posibles puntos que tenga
-    nuevoNumero = numero.toString().replace(/\./g, '');
-
-    // Ponemos un punto cada 3 caracteres
-    for (var j, i = nuevoNumero.length - 1, j = 0; i >= 0; i--, j++) {
-        resultado = nuevoNumero.charAt(i) + ((j > 0) && (j % 3 === 0) ? "." : "") + resultado;
-    }
-    
-    return resultado;
-}
+// <editor-fold defaultstate="collapsed" desc="Promociones">
 function promocionesVerModal(nompro,
         fchcadu,
         porc,
@@ -641,12 +1107,27 @@ function promocionesActualizarModal(idprom,
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="productosVerModal, productosActualizarModal, productosEliminarModal">
+// <editor-fold defaultstate="collapsed" desc="Productos">
 $(document).ready(function(){
     var validacionProducto = document.getElementById("regInsumosPProducto");
     if (validacionProducto !== null){
         validacionExistenciaInsumosP("reg");
         autocompleteInsumosProducto("reg");
+        
+        var inputCantidadReg = document.getElementById("regCantidadInsumosProducto");
+        var inputCantidadActua = document.getElementById("actuaCantidadInsumosProducto");
+        inputCantidadReg.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("regBtnAggProducto").click();
+            }
+        });
+        inputCantidadActua.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("actuaBtnAggProducto").click();
+            }
+        });
     }
 });
 function validacionExistenciaInsumosP(metodo){
@@ -763,7 +1244,7 @@ function agregarInsumoProducto(metodo){
         optionInsumo.remove();
         autocompleteInsumosProducto(metodo);
         validacionExistenciaInsumosP(metodo);
-        cantidad.focus();
+        selectInsumos.focus();
     } else {
         selectInsumos.style.background = "#E06666";
         cantidad.style.background = "#E06666";
@@ -1001,7 +1482,7 @@ function productosEliminarModal(idprod,
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="categoriasActualizarModal y categoriasEliminarModal">
+// <editor-fold defaultstate="collapsed" desc="Categorias">
 function categoriasActualizarModal(idcate,
         nombre) {
             
@@ -1017,7 +1498,7 @@ function categoriasEliminarModal(idcate,
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="sedesVerModal y sedesRegistrar">
+// <editor-fold defaultstate="collapsed" desc="Sedes">
 $(document).ready(function () {
     var validatorSedes = document.getElementById("regOpcion1Sedes");
     if (validatorSedes !== null){
@@ -1211,7 +1692,7 @@ function sedesActualizarModal(id,
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="soportesVerModal y soportesActualizarModal"> 
+// <editor-fold defaultstate="collapsed" desc="Soportes"> 
 function soportesActualizarModal(idsopo,
         ruta,
         descripcion) {
@@ -1249,7 +1730,7 @@ function soportesVerModal(rolusu,
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="resPqrsfVerModal y resPqrsfResponderModal"> 
+// <editor-fold defaultstate="collapsed" desc="Responder PQRSF"> 
 function resPqrsfResponderModal(idPqrsf,
         emailCli) {
     document.getElementById('respIDResPQRSF').value = idPqrsf;
@@ -1292,7 +1773,7 @@ function resPqrsfVerModal(emailcli,
 }
 // </editor-fold> 
 
-// <editor-fold defaultstate="collapsed" desc="usuarioVerModal, usuarioActualizarModal y usuariosSGerenteModal"> 
+// <editor-fold defaultstate="collapsed" desc="Usuarios"> 
 function usuarioSancionarModal(idusu,
         emusu) {
             
@@ -1405,7 +1886,7 @@ function usuarioEliminarModal(idusu,
 }
 // </editor-fold> 
 
-// <editor-fold defaultstate="collapsed" desc="proveedorVerModal, proveedorActualizarModal y proveedorEliminarModal"> 
+// <editor-fold defaultstate="collapsed" desc="Proveedores"> 
 function proveedorActualizarModal(idprov,
         nombreCOE,
         tipoidentifiscal,
@@ -1551,7 +2032,7 @@ function proveedorEliminarModal(idProveedor,
 }
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="insumoVerModal, insumoActualizarModal, insumoDevolverModal y insumoEliminarModal"> 
+// <editor-fold defaultstate="collapsed" desc="Insumos"> 
 function insumoDevolverModal(idInsumo,
         emailpro,
         nominsu,
@@ -1679,27 +2160,6 @@ function insumoEliminarModal(idinsumo,
 // </editor-fold>
 // </editor-fold>
 
-// <editor-fold defaultstate="collapsed" desc="MOPass">
-function MOPass (mod) {
-    var typeInp = document.getElementById('InpMOPassword'+mod).type;
-    if (typeInp === "password"){
-        document.getElementById('InpMOPassword'+mod).type = 'text';
-        document.getElementById('BtnMOPassword'+mod).innerText = "Ocultar";
-    } else {
-        document.getElementById('InpMOPassword'+mod).type = 'password';
-        document.getElementById('BtnMOPassword'+mod).innerText = "Mostrar";
-    }
-}
-// </editor-fold>
-
-// <editor-fold defaultstate="collapsed" desc="Estado de Acordeones">
-$('.collapse').on('shown.bs.collapse', function(){ 
-    $(this).parent().find(".bc .glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus"); 
-}).on('hidden.bs.collapse', function(){ 
-    $(this).parent().find(".bc .glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus"); 
-});
-// </editor-fold>
-
 // <editor-fold defaultstate="collapsed" desc="Reloj (Sin uso)">
 //function mueveReloj() {
 //    var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
@@ -1735,11 +2195,5 @@ var swiper = new Swiper('.swiper-container', {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
     },
-});
-// </editor-fold>
-
-// <editor-fold defaultstate="collapsed" desc="AutoClose de Alertas">
-$(".alert").delay(10000).slideUp(200, function() {
-    $(this).alert('close');
 });
 // </editor-fold>

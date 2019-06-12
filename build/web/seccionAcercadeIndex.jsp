@@ -89,12 +89,12 @@
             </article>
             <article id="siBArticulo5">
                 <div class="siBArticulosTPC">
-                    <di class="siBArticulosTPCColum">
+                    <div class="siBArticulosTPCColum">
                         <p>P</p><p>O</p><p>L</p><p>Í</p><p>T</p><p>I</p><p>C</p><p>A</p>
-                    </di>
-                    <di class="siBArticulosTPCColum">
+                    </div>
+                    <div class="siBArticulosTPCColum">
                         <p>D</p><p>E</p><p>C</p><p>A</p><p>L</p><p>I</p><p>D</p><p>A</p><p>D</p>
-                    </di>
+                    </div>
                 </div>
                 <div class="siBArticulosC">
                     <div class="siBArticulosCTexto">

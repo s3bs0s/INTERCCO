@@ -12,9 +12,7 @@
         nomUsuario = "";
         idSedeUsuario = 0;
         nomSedeUsuario = "";
-    if (session.getAttribute("idUsuario") == null){
-        rolUsuario = "Usuario";
-    } else {
+    if (session.getAttribute("idUsuario") != null){
         rolUsuario = (String) session.getAttribute("rolUsuario");
         idUsuario = (int) session.getAttribute("idUsuario");
         nomUsuario = (String) session.getAttribute("nomUsuario");
@@ -160,7 +158,7 @@
                 <%@include file="seccionElijaSedeIndex.jsp" %>
                 <%@include file="seccionCarruselIndex.jsp" %>
                 <%@include file="seccionCartaIndex.jsp" %>
-                <%@include file="seccionPqrsfIndex.jsp" %> <!-- Aca va domicilios, pero esta mientras que no esta. -->
+                <%@include file="seccionPqrsfIndex.jsp" %>
                 <%@include file="seccionAcercadeIndex.jsp" %>
                 
             </div>
@@ -233,198 +231,6 @@
                 
                 <%@include file="seccionPqrsfIndex.jsp" %>
                 <%@include file="seccionCartaIndex.jsp" %>
-                <section class="section4-domi" style="position:relative;">
-                    <div style="height:100%; width:100%; background:rgba(0,0,0,0.9); z-index:600; position:absolute; top:0; left:0; display:flex; align-items:center; justify-content:center; ">
-                        <img style="width:70%; transform:rotate(-20deg);" src="Estilos/img/PubilicidadSucco/EnConstruccion (Transparente).png" alt="En Contrucción">
-                    </div>
-                    <article id="DomiRegistrar" class="section4-domiRegistrar">
-                        <div class="div-content">
-                            <div class="div-header">
-                                <h4 class="div-title"><label for="sede-domi">¡Domicilios!</label></h4>
-                            </div>
-                            <div class="div-body">
-                                <form action="#" method="POST">
-                                    <div class="filas-i">
-                                        <div class="input-group" style="width:40%;">
-                                            <span class="input-group-addon">Sede:</span>
-                                            <select class="form-control" id="sede-domi" name="sede-domi">
-                                                <option value="Itagüí">Itagüí</option>
-                                            </select>
-                                        </div>
-                                        <div class="input-group estado-domi">
-                                            <span class="input-group-addon">Estado:</span>
-                                            <input readonly id="estado-domi" type="text" class="form-control" name="estado-domi" value="Sin Domicilio">
-                                        </div>
-                                        <div class="input-group" style="width:25%;">
-                                            <button id="MisPedidos" type="button" class="btn-div btn">Mis Pedidos</button>
-                                        </div>
-                                    </div>
-                                    <div class="filas-i">
-                                        <div class="input-group recuadroDomi" style="width:45%;">
-                                            <div class="titulo-recuadroDomi">
-                                                <p>Categorias</p>
-                                            </div>
-                                            <div class="contenido-recuadroDomi">
-
-                                            </div>
-                                        </div>
-                                        <div class="input-group recuadroDomi" style="width:55%;">
-                                            <div class="titulo-recuadroDomi">
-                                                <p>Productos</p>
-                                            </div>
-                                            <div class="contenido-recuadroDomi">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="filas-i">
-                                        <div class="input-group recuadroDomiObser recuadroDomi" style="width:35%;">
-                                            <div class="titulo-recuadroDomi">
-                                                <p>Observaciones</p>
-                                            </div>
-                                            <textarea class="form-control contenido-recuadroDomi" id="observa-domi" placeholder="Alguna Sugerencia o Petición para tener en Cuenta al momento de Producir su Pedido." name="observa-domi"></textarea>
-                                        </div>
-                                        <div class="input-group recuadroDomi" style="width:65%;">
-                                            <div class="titulo-recuadroDomi">
-                                                <p>Carrito</p>
-                                            </div>
-                                            <div class="contenido-recuadroDomi">
-                                                <table class="table-bordered table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Categoría</th>
-                                                            <th>Producto</th>
-                                                            <th>Precio</th>
-                                                            <th>Acciones</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <th>Categoría</th>
-                                                            <th>Producto</th>
-                                                            <th>Precio</th>
-                                                            <th>Acciones</th>
-                                                        </tr>
-                                                    </tfoot>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Perros</td>
-                                                            <td>Perra</td>
-                                                            <td>8.000</td>
-                                                            <td class="td-espaciado">
-                                                                <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-ban-circle"></span> Sacar</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Combos</td>
-                                                            <td>Happy Birthday</td>
-                                                            <td>21.000</td>
-                                                            <td class="td-espaciado">
-                                                                <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-ban-circle"></span> Sacar</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr  class="danger">
-                                                            <td colspan="4">No hay Seleccionados.</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="filas-i">
-                                        <div class="input-group" style="width:45%;">
-                                            <span class="input-group-addon">Dirección:</span>
-                                            <input required id="direc-domi" type="text" minlength="8" maxlength="150" class="form-control" name="direc-domi" placeholder="Dirección de Entrega.">
-                                            <span class="input-group-addon i-obli">*</span>
-                                        </div>
-                                        <div class="input-group" style="width:35%;">
-                                            <span class="input-group-addon">¿Cambio?</span>
-                                            <input required id="cambio-domi" type="text" pattern="[0-9]+" minlength="1" maxlength="9" class="form-control" name="cambio-domi" placeholder="Cantidad de Efectivo.">
-                                            <span class="input-group-addon i-obli">*</span>
-                                        </div>
-                                        <div class="input-group" style="width:20%;">
-                                            <span class="input-group-addon">Total:</span>
-                                            <input readonly id="total-domi" type="text" class="form-control" name="total-domi" placeholder="0$">
-                                        </div>
-                                    </div>
-
-                                    <div class="input-group cont-btn">
-                                        <div class="cont-btn-principal">
-                                            <button type="submit" onClick="window.open('indexUsuario.jsp', '_self')" class="btn-div btn btn-principal">Pedir</button>
-                                        </div>
-                                        <div class="cont-btns-secundario">
-                                            <button type="button" class="btn-div btn btn-secundario">Cancelar</button>
-                                            <button type="button" class="btn-div btn btn-secundario">Editar</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="div-footer"></div>
-                        </div>
-                    </article>
-                    <article id="DomiListar" class="section4-domiListar">
-                        <div class="titulo-domiListar">
-                            <p>Mis Pedidos</p>
-                        </div>
-                        <div class="tabla-reg">
-                            <button type="button" class="btn">Pedir Domicilio <span class="tabla-reg-m"><span class="glyphicon glyphicon-plus"></span></span></button>
-                        </div>
-                        <table class="tablaListarPedidos table-bordered table">
-                            <thead>
-                                <tr>
-                                    <th>Fecha</th>
-                                    <th>Hora</th>
-                                    <th>Tipo de Pedido</th>
-                                    <th>Sede</th>
-                                    <th>Total</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Fecha</th>
-                                    <th>Hora</th>
-                                    <th>Tipo de Pedido</th>
-                                    <th>Sede</th>
-                                    <th>Total</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <tr>
-                                    <td>10 / 12 / 2018</td>
-                                    <td>20 : 35</td>
-                                    <td>Itagüí</td>
-                                    <td>Domicilio</td>
-                                    <td>9.000</td>
-                                    <td class="td-espaciado">
-                                        <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>10 / 12 / 2018</td>
-                                    <td>20 : 40</td>
-                                    <td>Itagüí</td>
-                                    <td>Restaurante</td>
-                                    <td>34.000</td>
-                                    <td class="td-espaciado">
-                                        <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>10 / 12 / 2018</td>
-                                    <td>22 : 05</td>
-                                    <td>Itagüí</td>
-                                    <td>Domicilio</td>
-                                    <td>23.500</td>
-                                    <td class="td-espaciado">
-                                        <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </article>
-                </section>
                 <%@include file="seccionCarruselIndex.jsp" %>
                 <%@include file="seccionAcercadeIndex.jsp" %>
             
@@ -456,19 +262,7 @@
                     <% } %>
                 <% } %>
                 
-                <% if (rolUsuario.equals("Domiciliario")){ %>
-
-                    <article class="CJAccRap">
-                        <div class="CJAccRapTitulo">
-                            <p>Accesos Rápidos</p>
-                        </div>
-                        <div class="CJAccRapBtns">
-                            <button type="button" class="btn"><span class="icon-truck"></span> Domicilios<span class="me-bi">- Domicilios por Entregar</span></button>
-                            <button type="button" class="btn"><span class="icon-phone"></span> Soporte<span class="me-bi"><%= request.getAttribute("estadoSopoPendientes") %> Peticiones Pendientes</span></button>
-                        </div>
-                    </article>
-
-                <% } else if (rolUsuario.equals("Mesero")) { %>
+                <% if (rolUsuario.equals("Mesero")){ %>
 
                     <%@include file="llamadaMesaMeseroModal.jsp" %>
                     <article class="CJAccRap">
@@ -476,8 +270,8 @@
                             <p>Accesos Rápidos</p>
                         </div>
                         <div class="CJAccRapBtns">
-                            <button type="button" class="btn"><span class="icon-clipboard"></span> Pedidos<span class="me-bi">- Pedidos de Hoy</span></button>
-                            <button type="button" class="btn"><span class="icon-phone"></span> Soporte<span class="me-bi"><%= request.getAttribute("estadoSopoPendientes") %> Peticiones Pendientes</span></button>
+                            <button onClick="window.open('Pedidos', '_self')" type="button" class="btn"><span class="icon-clipboard"></span> Pedidos<span class="me-bi"><%= request.getAttribute("estadoPedidosHoy") %> Pedidos de Hoy</span></button>
+                            <button onClick="window.open('Parametros', '_self')" type="button" class="btn"><span class="icon-phone"></span> Soporte<span class="me-bi"><%= request.getAttribute("estadoSopoPendientes") %> Peticiones Pendientes</span></button>
                         </div>
                     </article>
 
@@ -488,8 +282,8 @@
                             <p>Accesos Rápidos</p>
                         </div>
                         <div class="CJAccRapBtns">
-                            <button type="button" class="btn"><span class="icon-truck"></span> Pedidos<span class="me-bi">- Pedidos por Producir</span></button>
-                            <button type="button" class="btn"><span class="icon-phone"></span> Soporte<span class="me-bi"><%= request.getAttribute("estadoSopoPendientes") %> Peticiones Pendientes</span></button>
+                            <button onClick="window.open('Pedidos', '_self')" type="button" class="btn"><span class="icon-clipboard"></span> Pedidos<span class="me-bi"><%= request.getAttribute("estadoPedidosHoy") %> Pedidos por Producir</span></button>
+                            <button onClick="window.open('Parametros', '_self')" type="button" class="btn"><span class="icon-phone"></span> Soporte<span class="me-bi"><%= request.getAttribute("estadoSopoPendientes") %> Peticiones Pendientes</span></button>
                         </div>
                     </article>
 
@@ -501,8 +295,7 @@
                         </div>
                         <div class="CJAccRapBtns">
                             <button type="button" class="btn"><span class="icon-coin-dollar"></span> Facturas<span class="me-bi">- Facturas de Hoy</span></button>
-                            <button type="button" class="btn"><span class="icon-truck"></span> Domicilios<span class="me-bi">- Domicilios de Hoy</span></button>
-                            <button type="button" class="btn"><span class="icon-phone"></span> Soporte<span class="me-bi"><%= request.getAttribute("estadoSopoPendientes") %> Peticiones Pendientes</span></button>
+                            <button onClick="window.open('Parametros', '_self')" type="button" class="btn"><span class="icon-phone"></span> Soporte<span class="me-bi"><%= request.getAttribute("estadoSopoPendientes") %> Peticiones Pendientes</span></button>
                         </div>
                     </article>
 
@@ -513,12 +306,12 @@
                             <p>Accesos Rápidos</p>
                         </div>
                         <div class="CJAccRapBtns">
-                            <button type="button" class="btn"><span class="icon-clipboard"></span> Pedidos<span class="me-bi">- Pedidos de Hoy</span></button>
+                            <button onClick="window.open('Pedidos', '_self')" type="button" class="btn<%= Integer.parseInt(String.valueOf(request.getAttribute("estadoPedidosNFinali")))>0?" btnAR-danger":"" %>"><span class="icon-clipboard"></span> Pedidos<span class="me-bi"><%= request.getAttribute("estadoPedidosHoy") %> Pedidos de Hoy</span><span class="me-bi"><%= request.getAttribute("estadoPedidosNFinali") %> Pedidos no Finalizados</span></button>
                             <button type="button" class="btn"><span class="icon-folder-open"></span> Recibos <span class="me-bi">- Recibos de Hoy</span></button>
-                            <button onClick="window.open('Insumos', '_self')" type="button" class="btn"><span class="icon-books"></span> Insumos<span class="me-bi"><%= request.getAttribute("estadoInsuAgotados") %> Insumos Agotados</span><span class="me-bi"><%= request.getAttribute("estadoInsuCaducados") %> Insumos Vencidos</span></button>
+                            <button onClick="window.open('Insumos', '_self')" type="button" class="btn<%= Integer.parseInt(String.valueOf(request.getAttribute("estadoInsuAgotados")))>0||Integer.parseInt(String.valueOf(request.getAttribute("estadoInsuCaducados")))>0?" btnAR-danger":"" %>"><span class="icon-books"></span> Insumos<span class="me-bi"><%= request.getAttribute("estadoInsuAgotados") %> Insumos Agotados</span><span class="me-bi"><%= request.getAttribute("estadoInsuCaducados") %> Insumos Vencidos</span></button>
                             <button onClick="window.open('Proveedores', '_self')" type="button" class="btn"><span class="icon-address-book"></span> Proveedores</button>
+                            <button onClick="window.open('Pqrsf', '_self')" type="button" class="btn<%= Integer.parseInt(String.valueOf(request.getAttribute("estadoPqrsfSResponder")))>0?" btnAR-warning":"" %>"><span class="glyphicon glyphicon-share-alt"></span> PQRSF<span class="me-bi"><%= request.getAttribute("estadoPqrsfSResponder") %> Solicitudes sin Responder</span></button>
                             <button onClick="window.open('Usuarios', '_self')" type="button" class="btn"><span class="icon-users"></span> Usuarios<span class="me-bi"><%= request.getAttribute("estadoUsuaEmpleados") %> Empleados en esta Sede</span><span class="me-bi"><%= request.getAttribute("estadoUsuaSancionados") %> Usuarios Sancionados</span></button>
-                            <button onClick="window.open('Pqrsf', '_self')" type="button" class="btn"><span class="glyphicon glyphicon-share-alt"></span> PQRSF<span class="me-bi"><%= request.getAttribute("estadoPqrsfSResponder") %> Solicitudes sin Responder</span></button>
                             <button onClick="window.open('Auditoria', '_self')" type="button" class="btn"><span class="icon-stats-dots"></span> Logs</button>
                             <button onClick="window.open('Parametros', '_self')" type="button" class="btn"><span class="icon-cog"></span> Parámetros<span class="me-bi"><%= request.getAttribute("estadoSopoPendientes") %> Peticiones Pendientes en Soporte</span></button>
                         </div>
@@ -761,29 +554,6 @@
                                                 </div>
                                                 <div class="details details-Mesero">
                                                     <h3><%= usuaIndex.getNombres()+" "+usuaIndex.getApellidos() %><br><span class="span-Mesero me">Meser<%= usuaIndex.getGenero().equals("Masculino")?"o":"a" %></span><span class="span-MeseroEmail me"><%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getEmail()) %></span></h3>
-                                                </div>
-                                            </div>
-                                        <% }
-                                    }
-                                }
-
-                                for (InfoUsuarios usuaIndex : listaUsuariosIndex) {
-                                    if (usuaIndex.getRol().equals("Domiciliario")){
-                                        if (nomSedeUsuario.equals(usuaIndex.getSede())){ %>
-                                            <div class="swiper-slide">
-                                                <div class="imgBx imgBx-Domiciliario">
-                                            <% if (usuaIndex.getNombreImg().equals("86S97S99S105S111")){ 
-                                                if (usuaIndex.getGenero().equals("Masculino")){ %>
-                                                    <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoH.jpg" alt="U<%= contUsu %>"> 
-                                                <% } else { %>
-                                                    <img src="Estilos/img/FotoPerfilEmpleados/PerfilAnonimoM.jpg" alt="U<%= contUsu %>">
-                                                <% }
-                                            } else { %>
-                                            <img src="ArchivosSistema/Usuarios/<%= usuaIndex.getSede() %>/<%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getNombreImg())%>" alt="U<%= contUsu %>">
-                                            <% } %>
-                                                </div>
-                                                <div class="details details-Domiciliario">
-                                                    <h3><%= usuaIndex.getNombres()+" "+usuaIndex.getApellidos() %><br><span class="span-Domiciliario me">Domiciliari<%= usuaIndex.getGenero().equals("Masculino")?"o":"a" %></span><span class="span-DomiciliarioEmail me"><%= cAIndexEmpleado.DescifrarASCII(usuaIndex.getEmail()) %></span></h3>
                                                 </div>
                                             </div>
                                         <% }

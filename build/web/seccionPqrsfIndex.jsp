@@ -5,7 +5,11 @@
 <%@page import="java.util.ArrayList"%>
 <section class="sectionPqrsf">
 
-<% if (session.getAttribute("rolUsuario") == null || session.getAttribute("rolUsuario").equals("Usuario")){ %>
+<%  String rolUsuarioSPqrsf = "Usuario";
+    if (session.getAttribute("rolUsuario") != null){
+        rolUsuarioSPqrsf = (String) session.getAttribute("rolUsuario");
+    }
+    if (rolUsuarioSPqrsf.equals("Usuario")){ %>
     <article class="sectionPqrsfR">
         <div class="sectionPqrsfRContent">
             <div class="sectionPqrsfRContentH">
@@ -108,14 +112,14 @@
     <article id="PqrsfRegistrar" class="sectionPqrsfR">
         <div class="sectionPqrsfRContent">
             <div class="sectionPqrsfRContentH">
-                <h4 class="sectionPqrsfRContentHTitulo"><label for="sede-pqrsf">¡Crear Solicitud PQRSF!</label><span style="font-size:17px;" class="me">Solicitudes de petición, queja, reclamo, sugerencia o felicitaciones.</span></h4>
+                <h4 class="sectionPqrsfRContentHTitulo"><label for="regSedePqrsf">¡Crear Solicitud PQRSF!<span style="font-size:17px; font-weight:normal;" class="me">Solicitudes de petición, queja, reclamo, sugerencia o felicitaciones.</span></label></h4>
             </div>
             <div class="sectionPqrsfRContentB">
                 <form action="Pqrsf" method="POST">
                     <div class="input-group">
                         <span class="input-group-addon">Sede:</span>
                         <% ArrayList<Sedes> listaSedSIndexP = (ArrayList) request.getAttribute("listaSedSIndex"); %>
-                        <select class="form-control" name="regSedePqrsf">
+                        <select class="form-control" data-cantsolicitudes="<%= listaPqrsfIndex.size() %>" name="regSedePqrsf" id="regSedePqrsf">
                             <option value="<%= session.getAttribute("idSedeUsuario") %>">Enviar a mi Sede</option>
                             <% for (Sedes  sedeSIndexP: listaSedSIndexP) { %>
                                 <option value="<%= sedeSIndexP.getIdSedes()%>"><%= sedeSIndexP.getNombre()%></option>

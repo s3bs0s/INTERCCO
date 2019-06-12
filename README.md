@@ -14,7 +14,7 @@
     <p>Ahora debes realizar algo llamado <b>Clean and Build/Limpiar y Reconstruir</b> para así evitar algún error por rutas; si no sabes realizar esta acción, utilicé la herramienta Google.</p><br>
     <h1>¡Ya puede ejecutarlo!</h1>
     <h3>Usuarios de prueba para acceder</h3>
-    <p>cliente@succo.com<br>clienteME@succo.com<br>domiciliario@succo.com<br>mesero@succo.com<br>cocinero@succo.com<br>cajero@succo.com<br>gerente@succo.com<br>gerenteSS@succo.com</p>
+    <p>cliente@succo.com<br>clienteME@succo.com<br>domiciliario@succo.com<br>mesero@succo.com<br>cocinero@succo.com<br>cajero@succo.com<br>gerente@succo.com<br>gerenteSC@succo.com</p>
     <p>La contraseña de todos, es sencillamente <b>123</b>.</p><br>
     <blockquote>Atentamente, Sebastian Sossa desarrollador de INTERCCO.</blockquote>
 </body>

@@ -30,6 +30,8 @@ public class ListarInsumos extends HttpServlet {
             ResultSet rs;
             PreparedStatement ps2;
             ResultSet rs2;
+            PreparedStatement ps3;
+            ResultSet rs3;
             
             ps = con.prepareStatement("SELECT * FROM insumos WHERE existencia!=?;");
             ps.setString(1, "N");
@@ -77,6 +79,30 @@ public class ListarInsumos extends HttpServlet {
                 if (rs2.next()){
                     ins.setNomSede(rs2.getString("nombre"));
                 }
+                ps2.close();
+                rs2.close();
+
+                
+                String usoInsumo = "N";
+                ps2 = con.prepareStatement("SELECT idProductos FROM productos WHERE idSede=? AND existencia=?;");
+                ps2.setInt(1, rs.getInt("idSede"));
+                ps2.setString(2, "Y");
+                rs2 = ps2.executeQuery();
+                while (rs2.next()){
+                    int idProductoUso = rs2.getInt("idProductos");
+                    
+                    ps3 = con.prepareStatement("SELECT idProducto FROM detalles_productos WHERE idProducto=? AND existencia=? AND idInsumoNecesario=?;");
+                    ps3.setInt(1, idProductoUso);
+                    ps3.setString(2, "Y");
+                    ps3.setInt(3, rs.getInt("idInsumos"));
+                    rs3 = ps3.executeQuery();
+                    while (rs3.next()){
+                        usoInsumo = "Y";
+                    }
+                    ps3.close();
+                    rs3.close();
+                }
+                ins.setUso(usoInsumo);
                 ps2.close();
                 rs2.close();
 

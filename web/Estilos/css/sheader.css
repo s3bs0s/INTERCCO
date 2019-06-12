@@ -564,6 +564,8 @@ nav.naviu{
                 margin:0;
                 padding:0;
                 width:100%;
+                display:flex;
+                flex-flow:row nowrap;
             }
                 .menuperfil .caj-menuperfil ul li{
                     width:100%;
@@ -579,67 +581,32 @@ nav.naviu{
                         box-shadow:none;
                         letter-spacing:1pt;
                         padding:10px 15px;
-                        -webkit-transition:color 500ms;
-                        -o-transition:color 500ms;
-                        transition:color 500ms;
+                        -webkit-transition:all 500ms;
+                        -o-transition:all 500ms;
+                        transition:all 500ms;
                     }
                         .menuperfil .caj-menuperfil ul li a:hover{
                             color:#446EB6;
-                            background:#fff;
-                            -webkit-transition:all 500ms;
-                            -o-transition:all 500ms;
-                            transition:all 500ms;
-                        }
-                        .menuperfil .caj-menuperfil ul li:last-child a:hover{
-                            color:#446EB6;
+                            border-top-left-radius:6px;
+                            border-top-right-radius:6px;
                             background:#fff;
                             -webkit-box-shadow: inset 0px -28px 23px -16px rgba(68,110,182,1);
                             -moz-box-shadow: inset 0px -28px 23px -16px rgba(68,110,182,1);
                             box-shadow: inset 0px -28px 23px -16px rgba(68,110,182,1);
-                            -webkit-transition:all 500ms;
-                            -o-transition:all 500ms;
-                            transition:all 500ms;
-                        }
-
-                    .menuperfil .caj-menuperfil ul li button{
-                        display:flex;
-                        flex-flow:column;
-                        justify-content:center;
-                        align-items:center;
-                        color:#fff;
-                        width:100%;
-                        box-shadow:none;
-                        letter-spacing:1pt;
-                        padding:10px 15px;
-                        background:none;
-                        border:none;
-                        -webkit-transition:color 500ms;
-                        -o-transition:color 500ms;
-                        transition:color 500ms;
-                    }
-                        .menuperfil .caj-menuperfil ul li button:hover{
-                            color:#446EB6;
-                            background:#fff;
-                            -webkit-box-shadow: inset 0px -28px 23px -16px rgba(68,110,182,1);
-                            -moz-box-shadow: inset 0px -28px 23px -16px rgba(68,110,182,1);
-                            box-shadow: inset 0px -28px 23px -16px rgba(68,110,182,1);
-                            -webkit-transition:all 500ms;
-                            -o-transition:all 500ms;
-                            transition:all 500ms;
-                        }
-                        .menuperfil .caj-menuperfil ul li button:focus{
-                            outline:none;
                         }
             
             .menuperfil .caj-menuperfil .menuperfil-nom{
                 width:100%;
-                padding:15px;
+                padding:10px;
                 background:#fff;
                 color:#446EB6;
                 letter-spacing:1pt;
                 text-align:center;
-                border-bottom-right-radius:18px;
-                border-bottom-left-radius:18px;
+                border:solid .4px #446EB6;
+                font-size:19px;
+                border-top:none;
+                border-bottom-right-radius:15px;
+                border-bottom-left-radius:15px;
                 -webkit-box-shadow: inset 0px 30px 23px -16px rgba(68,110,182,1);
                 -moz-box-shadow: inset 0px 30px 23px -16px rgba(68,110,182,1);
                 box-shadow: inset 0px 30px 23px -16px rgba(68,110,182,1);

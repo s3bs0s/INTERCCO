@@ -94,6 +94,26 @@
         <servlet-name>DevolverPedido</servlet-name>
         <servlet-class>com.INTERCCO.controlador.CRUDPedidos.DevolverPedido</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PEDProductoDisponibleAJAX</servlet-name>
+        <servlet-class>com.INTERCCO.controlador.CRUDPedidos.PEDProductoDisponibleAJAX</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PEDGastoInsumosAJAX</servlet-name>
+        <servlet-class>com.INTERCCO.controlador.CRUDPedidos.PEDGastoInsumosAJAX</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PEDRellenoCartaAJAX</servlet-name>
+        <servlet-class>com.INTERCCO.controlador.CRUDPedidos.PEDRellenoCartaAJAX</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PEDRellenoMesasAJAX</servlet-name>
+        <servlet-class>com.INTERCCO.controlador.CRUDPedidos.PEDRellenoMesasAJAX</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActualizarPedido</servlet-name>
+        <servlet-class>com.INTERCCO.controlador.CRUDPedidos.ActualizarPedido</servlet-class>
+    </servlet>
     <servlet-mapping>
         <!-- Nombre que se puso arriba para identificar el JSP de nuevo -->
         <servlet-name>DesignEmail</servlet-name>
@@ -471,6 +491,26 @@
     <servlet-mapping>
         <servlet-name>DevolverPedido</servlet-name>
         <url-pattern>/PedidoD</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PEDProductoDisponibleAJAX</servlet-name>
+        <url-pattern>/PEDProductoDisponibleAJAX</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PEDGastoInsumosAJAX</servlet-name>
+        <url-pattern>/PEDGastoInsumosAJAX</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PEDRellenoCartaAJAX</servlet-name>
+        <url-pattern>/PEDRellenoCartaAJAX</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PEDRellenoMesasAJAX</servlet-name>
+        <url-pattern>/PEDRellenoMesasAJAX</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActualizarPedido</servlet-name>
+        <url-pattern>/PedidoA</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

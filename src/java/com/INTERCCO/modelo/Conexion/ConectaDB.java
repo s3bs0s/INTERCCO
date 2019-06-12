@@ -32,6 +32,9 @@ public class ConectaDB {
         this.host = "jdbc:mysql://localhost:3306/";
         this.usuario = "1599195";
         this.clave = "";
+//        this.host = "jdbc:mysql://node32478-succo.jelastic.saveincloud.net:3306/";
+//        this.usuario = "root";
+//        this.clave = "7JJASDbpyq";
         this.url = host + db + "?user=" + usuario + "&password=" + clave;
         this.driverClassName = "com.mysql.jdbc.Driver";
     }

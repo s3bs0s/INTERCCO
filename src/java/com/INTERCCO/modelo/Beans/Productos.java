@@ -1,5 +1,7 @@
 package com.INTERCCO.modelo.Beans;
 
+import java.util.ArrayList;
+
 public class Productos {
 
     private Integer idProductos;

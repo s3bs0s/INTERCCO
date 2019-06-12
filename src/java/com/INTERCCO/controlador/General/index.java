@@ -35,7 +35,6 @@ public class index extends HttpServlet {
             
             ConectaDB cdb = new ConectaDB();
             Connection con = cdb.conectar();
-            CifradoASCII cA = new CifradoASCII();
             PreparedStatement ps;
             ResultSet rs;
             PreparedStatement ps2;
@@ -67,7 +66,11 @@ public class index extends HttpServlet {
             }
             
             int elijaSede = 0;
-            if (session.getAttribute("rolUsuario") == null || session.getAttribute("rolUsuario").equals("Usuario")){
+            String rolUsuario = "Usuario";
+            if (session.getAttribute("rolUsuario") != null){
+                rolUsuario = (String) session.getAttribute("rolUsuario");
+            } 
+            if (rolUsuario.equals("Usuario")){
                 if (request.getParameter("elijaIdSede") == null){
                     ps.close();
                     rs.close();
@@ -418,6 +421,53 @@ public class index extends HttpServlet {
             
             // --------------------- //
             
+            int contPedidosHoy = 0;
+            int contPedidosNFinali = 0;
+            if (session.getAttribute("idSedeUsuario") != null){
+                int idSedeUsuario = (int) session.getAttribute("idSedeUsuario");
+                int idUsuario = (int) session.getAttribute("idUsuario");
+                if (rolUsuario.equals("Gerente")){
+                    ps.close();
+                    rs.close();
+                    ps = con.prepareStatement("SELECT * FROM pedidos WHERE idSede=?;");
+                    ps.setInt(1, idSedeUsuario);
+                    rs = ps.executeQuery();
+                    while (rs.next()){
+                        if (rs.getDate("fch_registro").equals(dateFormat.parse(dateFormat.format(date)))){
+                            contPedidosHoy++;
+                        } else if (rs.getString("existencia").equals("Y")) {
+                            contPedidosNFinali++;
+                        }
+                    }
+                } else if (rolUsuario.equals("Mesero")){
+                    ps.close();
+                    rs.close();
+                    ps = con.prepareStatement("SELECT * FROM pedidos WHERE idSede=? AND idMesero=?;");
+                    ps.setInt(1, idSedeUsuario);
+                    ps.setInt(2, idUsuario);
+                    rs = ps.executeQuery();
+                    while (rs.next()){
+                        if (rs.getDate("fch_registro").equals(dateFormat.parse(dateFormat.format(date)))){
+                            contPedidosHoy++;
+                        }
+                    }
+                } else if (rolUsuario.equals("Cocinero")){
+                    ps.close();
+                    rs.close();
+                    ps = con.prepareStatement("SELECT * FROM pedidos WHERE idSede=? AND estado=?;");
+                    ps.setInt(1, idSedeUsuario);
+                    ps.setString(2, "En espera");
+                    rs = ps.executeQuery();
+                    while (rs.next()){
+                        if (rs.getDate("fch_registro").equals(dateFormat.parse(dateFormat.format(date)))){
+                            contPedidosHoy++;
+                        }
+                    }
+                }
+            }
+            
+            // --------------------- //
+            
             int contUsuaEmpleados = 0;
             if (session.getAttribute("idSedeUsuario") != null){
                 int idSedeUsuario = (int) session.getAttribute("idSedeUsuario");
@@ -521,6 +571,8 @@ public class index extends HttpServlet {
 
             request.setAttribute("estadoInsuAgotados", contInsuAgotados);
             request.setAttribute("estadoInsuCaducados", contInsuCaducados);
+            request.setAttribute("estadoPedidosHoy", contPedidosHoy);
+            request.setAttribute("estadoPedidosNFinali", contPedidosNFinali);
             request.setAttribute("estadoUsuaEmpleados", contUsuaEmpleados);
             request.setAttribute("estadoUsuaSancionados", contUsuaSancionados);
             request.setAttribute("estadoPqrsfSResponder", contPqrsfSResponder);

@@ -4,6 +4,7 @@ import com.INTERCCO.modelo.Conexion.ConectaDB;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +22,13 @@ public class CancelarPedido extends HttpServlet {
             ConectaDB cdb = new ConectaDB();
             Connection con = cdb.conectar();
             PreparedStatement ps;
+            ResultSet rs;
+            PreparedStatement ps2;
+            ResultSet rs2;
+            PreparedStatement ps3;
+            ResultSet rs3;
+            PreparedStatement ps4;
+            ResultSet rs4;
             
             ps = con.prepareStatement("UPDATE pedidos SET estado=?,existencia=? WHERE idPedidos=?;");
             ps.setString(1, "Cancelado");
@@ -29,6 +37,29 @@ public class CancelarPedido extends HttpServlet {
             int res = ps.executeUpdate();
 
             if (res > 0){
+                ps = con.prepareStatement("SELECT * FROM pedidos WHERE idPedidos=?;");
+                ps.setInt(1, Integer.parseInt(idPedido));
+                rs = ps.executeQuery();
+                if (rs.next()){
+                    ps2 = con.prepareStatement("SELECT * FROM detalles_pedidos WHERE idPedido=?;");
+                    ps2.setInt(1, Integer.parseInt(idPedido));
+                    rs2 = ps2.executeQuery();
+                    while (rs2.next()){
+                        ps3 = con.prepareStatement("SELECT cantidad_insumo,idInsumoNecesario FROM detalles_productos WHERE existencia=? AND idProducto=?;");
+                        ps3.setString(1, "Y");
+                        ps3.setInt(2, rs2.getInt("idProducto"));
+                        rs3 = ps3.executeQuery();
+                        while (rs3.next()){
+
+                            ps4 = con.prepareStatement("UPDATE insumos SET cantidad=(cantidad+?) WHERE idInsumos=?;");
+                            ps4.setInt(1, rs3.getInt("cantidad_insumo")*rs2.getInt("cantidad"));
+                            ps4.setInt(2, rs3.getInt("idInsumoNecesario"));
+                            ps4.executeUpdate();
+
+                        }
+                    }
+                }
+                
                 request.getRequestDispatcher("Pedidos?mensaje=YCancelar").forward(request, response);
             } else {
                 request.getRequestDispatcher("Pedidos?mensaje=Ne").forward(request, response);
