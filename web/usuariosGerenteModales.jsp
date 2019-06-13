@@ -48,12 +48,12 @@
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">Email:</span>
-                            <input required type="email" minlength="10" maxlength="150" class="form-control" name="actuaEmailUsuario" placeholder="user@succo.com">
+                            <input required type="email" minlength="10" maxlength="150" class="form-control" name="regEmailUsuario" placeholder="user@succo.com">
                             <span class="input-group-addon i-obli">*</span>
                         </div>
                         <div class="input-group">
                             <span class="input-group-addon">Contraseña SUCCO:</span>
-                            <input required type="password"  id="InpMOPasswordRegGer" minlength="3" maxlength="20" class="form-control" name="actuaContraUsuario" placeholder="Máximo 20 caracteres.">
+                            <input required type="password"  id="InpMOPasswordRegGer" minlength="3" maxlength="20" class="form-control" name="regContraUsuario" placeholder="Máximo 20 caracteres.">
                             <span class="input-group-addon i-pass" id="BtnMOPasswordRegGer" onClick="MOPass('RegGer')">Mostrar</span>
                         </div>
                         <div class="input-group">
@@ -230,10 +230,10 @@
                         <div class="input-group">
                             <span class="input-group-addon">Rol:</span>
                             <select required onchange="this.style.color = '#87A2D1';" class="form-control" title="Seleccione un rol para el usuario." id="actuaRolUsuario" name="actuaRolUsuario">
+                                <option value="Gerente">Gerente</option>
                                 <option value="Cajero">Cajero</option>
                                 <option value="Cocinero">Cocinero</option>
                                 <option value="Mesero">Mesero</option>
-                                <option value="Domiciliario">Domiciliario</option>
                                 <option value="Cliente">Cliente</option>
                             </select>
                         </div>

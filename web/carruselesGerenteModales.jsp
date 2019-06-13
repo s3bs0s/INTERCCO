@@ -6,7 +6,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="icon-map"></span><label for="regNombreCategoria" class="me">Registrar Carrusel</label></h4>
+                    <h4 class="modal-title"><span class="icon-map"></span><label for="regNombreCategoria" class="me">Registrar Publicidad</label></h4>
                 </div>
                 <div class="mb-textaling modal-body">
                     <p class="mi-obli">Los campos que contengan el símbolo asterisco <span class="a-mi">*</span> son obligatorios, de no ser así, son totalmente opcional.</p>
@@ -64,7 +64,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="glyphicon glyphicon-eye-open"></span><label class="me">Detalles del Carrusel</label></h4>
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-eye-open"></span><label class="me">Detalles de la Publicidad</label></h4>
                 </div>
                 <div class="mb-textaling modal-body">
                     <div class="verDetalles-caj">
@@ -85,7 +85,7 @@
                                 <p class="verDetalles-contenido" id="verNombreImgCarrusel"></p>
                             </div>
                             <div>
-                                <p class="verDetalles-titulo">Sede del Carrusel:</p>
+                                <p class="verDetalles-titulo">Sede de la Publicidad:</p>
                                 <p class="verDetalles-contenido" id="verSedeCarrusel"></p>
                             </div>
                         </div>
@@ -112,7 +112,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="glyphicon glyphicon-edit"></span><label for="actuaTipoCarrusel" class="me">Actualizar Información del Carrusel</label></h4>
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-edit"></span><label for="actuaTipoCarrusel" class="me">Actualizar Información de la Publicidad</label></h4>
                 </div>
                 <div class="mb-textaling modal-body">
                     <form action="CarruselA" method="POST">
@@ -162,7 +162,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="glyphicon glyphicon-edit"></span><label class="me">Actualizar Imagen del Carrusel</label></h4>
+                    <h4 class="modal-title"><span class="glyphicon glyphicon-edit"></span><label class="me">Actualizar Imagen de la Publicidad</label></h4>
                 </div>
                 <div class="mb-textaling modal-body">
                     <form action="CarruselC" method="POST" enctype="multipart/form-data">

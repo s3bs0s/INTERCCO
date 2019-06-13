@@ -114,6 +114,22 @@
         <servlet-name>ActualizarPedido</servlet-name>
         <servlet-class>com.INTERCCO.controlador.CRUDPedidos.ActualizarPedido</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListarFacturas</servlet-name>
+        <servlet-class>com.INTERCCO.controlador.CRUDFacturas.ListarFacturas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GenerarFactura</servlet-name>
+        <servlet-class>com.INTERCCO.controlador.CRUDFacturas.GenerarFactura</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EstadosCocineroPedido</servlet-name>
+        <servlet-class>com.INTERCCO.controlador.CRUDPedidos.EstadosCocineroPedido</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PEDBusquedaClienteAJAX</servlet-name>
+        <servlet-class>com.INTERCCO.controlador.CRUDPedidos.PEDBusquedaClienteAJAX</servlet-class>
+    </servlet>
     <servlet-mapping>
         <!-- Nombre que se puso arriba para identificar el JSP de nuevo -->
         <servlet-name>DesignEmail</servlet-name>
@@ -511,6 +527,22 @@
     <servlet-mapping>
         <servlet-name>ActualizarPedido</servlet-name>
         <url-pattern>/PedidoA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListarFacturas</servlet-name>
+        <url-pattern>/Facturas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GenerarFactura</servlet-name>
+        <url-pattern>/FacturaG</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EstadosCocineroPedido</servlet-name>
+        <url-pattern>/PedidoEC</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PEDBusquedaClienteAJAX</servlet-name>
+        <url-pattern>/PEDBusquedaClienteAJAX</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -486,9 +486,9 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <button type="button" class="bc" data-toggle="collapse" data-parent="#accordion" data-target="#coll-e-carrusel"><span class="icon-map"></span> Carrusel<span class="glyphicon glyphicon-plus btn-collap"></span></button>
+                                    <button type="button" class="bc" data-toggle="collapse" data-parent="#accordion" data-target="#coll-e-publicidad"><span class="icon-map"></span> Publicidad<span class="glyphicon glyphicon-plus btn-collap"></span></button>
                                 </div>
-                                <div id="coll-e-carrusel" class="panel-collapse collapse">
+                                <div id="coll-e-publicidad" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <div class="tabla-reg">
                                             <button data-toggle="modal" data-target="#carruselesRGerenteModal" type="button" class="btn">Registrar <span class="tabla-reg-m"><span class="glyphicon glyphicon-plus"></span></span></button>
@@ -496,7 +496,7 @@
                                         <% ArrayList<Carruseles> listaCarruseles = (ArrayList) request.getAttribute("listaCarr"); %>
                                         <% if (rolUsuario.equals("Gerente")){ %>
                                             <div class="table-responsive">
-                                                <table class="tablaListarCarruseles table-bordered table">
+                                                <table class="tablaListarPublicidad table-bordered table">
                                                     <thead>
                                                         <tr>
                                                             <th>Tipo de Imagen</th>
@@ -543,7 +543,7 @@
                                             </div>
                                         <% } else {%>
                                             <div class="table-responsive">
-                                                <table class="tablaListarCarruseles table-bordered table">
+                                                <table class="tablaListarPublicidad table-bordered table">
                                                     <thead>
                                                         <tr>
                                                             <th>Sede</th>

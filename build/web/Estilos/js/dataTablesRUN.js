@@ -115,17 +115,17 @@ $(document).ready(function () {
         }
     });
     
-    $('.tablaListarDomicilios').DataTable({
+    $('.tablaListarFacturas').DataTable({
         "order": [[0, "desc"],[1, "desc"]],
         "pageLength": 5,
         language: {
             "sProcessing": "Procesando...",
-            "sLengthMenu": "Límite de domicilios por página: _MENU_",
+            "sLengthMenu": "Límite de facturas por página: _MENU_",
             "sZeroRecords": "No se encontraron resultados.",
-            "sEmptyTable": "Ningún domicilio disponible en esta tabla.",
-            "sInfo": "Mostrando domicilios del _START_ al _END_ de un total de _TOTAL_ domicilios",
-            "sInfoEmpty": "Mostrando domicilios del 0 al 0 de un total de 0 domicilios",
-            "sInfoFiltered": "(Filtrado de un total de _MAX_ domicilios).",
+            "sEmptyTable": "Ninguna factura disponible en esta tabla.",
+            "sInfo": "Mostrando facturas del _START_ al _END_ de un total de _TOTAL_ facturas",
+            "sInfoEmpty": "Mostrando facturas del 0 al 0 de un total de 0 facturas",
+            "sInfoFiltered": "(Filtrado de un total de _MAX_ facturas).",
             "sInfoPostFix": "",
             "sSearch": "Buscar:",
             "sUrl": "",
@@ -144,14 +144,14 @@ $(document).ready(function () {
         }
     });
     
-    $('.tablaListarFacturas').DataTable({
-        "order": [[1, "desc"]],
+    $('.tablaListarPedidosFacturar').DataTable({
+        "order": [[4, "desc"],[0, "desc"]],
         "pageLength": 5,
         language: {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Límite de pedidos por página: _MENU_",
             "sZeroRecords": "No se encontraron resultados.",
-            "sEmptyTable": "Ninguna pedido disponible en esta tabla.",
+            "sEmptyTable": "Ningún pedido disponible en esta tabla.",
             "sInfo": "Mostrando pedidos del _START_ al _END_ de un total de _TOTAL_ pedidos",
             "sInfoEmpty": "Mostrando pedidos del 0 al 0 de un total de 0 pedidos",
             "sInfoFiltered": "(Filtrado de un total de _MAX_ pedidos).",
@@ -435,17 +435,17 @@ $(document).ready(function () {
         }
     });
     
-    $('.tablaListarCarruseles').DataTable({
+    $('.tablaListarPublicidad').DataTable({
         "order": [[0, "asc"]],
         "pageLength": 5,
         language: {
             "sProcessing": "Procesando...",
-            "sLengthMenu": "Límite de carruseles por página: _MENU_",
+            "sLengthMenu": "Límite de publicidades por página: _MENU_",
             "sZeroRecords": "No se encontraron resultados.",
-            "sEmptyTable": "Ningún carrusel disponible en esta tabla.",
-            "sInfo": "Mostrando carruseles del _START_ al _END_ de un total de _TOTAL_ carruseles",
-            "sInfoEmpty": "Mostrando carruseles del 0 al 0 de un total de 0 carruseles",
-            "sInfoFiltered": "(Filtrado de un total de _MAX_ carruseles).",
+            "sEmptyTable": "Ninguna publicidad disponible en esta tabla.",
+            "sInfo": "Mostrando publicidades del _START_ al _END_ de un total de _TOTAL_ publicidades",
+            "sInfoEmpty": "Mostrando publicidades del 0 al 0 de un total de 0 publicidades",
+            "sInfoFiltered": "(Filtrado de un total de _MAX_ publicidades).",
             "sInfoPostFix": "",
             "sSearch": "Buscar:",
             "sUrl": "",

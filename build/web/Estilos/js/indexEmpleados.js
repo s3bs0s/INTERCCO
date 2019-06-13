@@ -750,7 +750,7 @@ function registrarPedido(method){
                     <input type="text" class="form-control" name="regNumsInputPP" id="regNumsInputPP">
                 </div>`;
             document.getElementById("regCAJProductosPedidos").insertAdjacentHTML("beforeend",templateInptHide);
-            document.getElementById("regNumsInputPP").value = localStorage.getItem("cantProductosP");
+            document.getElementById("regNumsInputPP").value = localStorage.getItem("regCantProductosP");
             document.getElementById("regFormPedidos").action = "Pedido";
             document.getElementById("regFormPedidos").submit();
         } else {
@@ -851,7 +851,7 @@ function pedidosVer(rolU,
         subtotal,
         detallesPedido){
     
-    if (rolU === "Gerente"){
+    if (rolU === "Gerente" || rolU === "Cajero"){
         $('#cajGerentePedidos').show();
         $('#hrGerentePedidos').show();
         $('#cajClienteMeseroPedidos').hide();
@@ -981,6 +981,175 @@ function pedidosActualizar(idPedido,
     $("#pedidosListar").hide();
     $('#pedidosActualizar').show();
     
+}
+
+$(document).ready(function(){
+    var validate = document.getElementById("pedidosProductosCocinero");
+    if (validate !== null){
+        var lS = localStorage;
+        lS.setItem("ProductosCocinero", "");
+        
+        $('#pedidosBtnListoCocinero').attr('disabled', '');
+        var template = ``;
+        var arregloDetallesPedidos = validate.value.split(":");
+        
+        for (var i = 0; i < arregloDetallesPedidos.length; i++) {
+            var clasificacionDP = arregloDetallesPedidos[i].split("-");
+            var arregloProducto = clasificacionDP[0].split(";");
+            var arregloDetallesProductos = clasificacionDP[1].split("!");
+            
+            lS.setItem("ProductosCocinero", lS.getItem("ProductosCocinero") + arregloProducto[0] + ";" + "N" + "-");
+            
+            template += `
+                <div class="item">
+                    <div class="item-contenido">
+                        <h4 id="${arregloProducto[0]}ProductoT" class="danger">${DescifrarASCII(arregloProducto[1])}</h4>
+                        <div class="item-c-CJBtn">
+                            <button onclick="estadoProductoCocinero(this, '${arregloProducto[0]}', 'L')" class="btn btn-danger">¡Listo!</button>
+                        </div>
+                        <div class="item-c-body">
+                            <p><b>Cantidad de Productos:</b> ${arregloProducto[2]}</p>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Insumo</th>
+                                    <th>Cantidad</th>
+                                </tr>`;
+            
+            for (var e = 0; e < arregloDetallesProductos.length; e++) {
+                var arregloDetalleP = arregloDetallesProductos[e].split(";");
+                template += `   <tr>
+                                    <td>${DescifrarASCII(arregloDetalleP[0])}</td>
+                                    <td>${arregloDetalleP[1]+" "+arregloDetalleP[2]}</td>
+                                </tr>`;
+            }
+            
+            template += `   </table>
+                        </div>
+                    </div>
+                </div>`;
+        }
+        
+        $('.owl-carousel').html(template);
+        $('.owl-carousel').owlCarousel({
+            margin:10,
+            nav:true,
+            dots:true,
+            autoWidth:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:5
+                }
+            }
+        });
+    }
+});
+function estadoProductoCocinero(button, id, estado){
+    if (estado === "L"){
+        var lS = localStorage;
+        var arregloProductosL = lS.getItem("ProductosCocinero");
+        arregloProductosL = arregloProductosL.substring(0,arregloProductosL.length-1);
+        arregloProductosL = arregloProductosL.split("-");
+        var finalizado = true;
+        lS.setItem("ProductosCocinero", "");
+        for (var i = 0; i < arregloProductosL.length; i++) {
+            var arregloProducto = arregloProductosL[i].split(";");
+            if (arregloProducto[0] === id){
+                lS.setItem("ProductosCocinero", lS.getItem("ProductosCocinero") + arregloProducto[0] + ";" + "Y" + "-");
+            } else {
+                if (arregloProducto[1] === "N"){
+                    finalizado = false;
+                }
+                lS.setItem("ProductosCocinero", lS.getItem("ProductosCocinero") + arregloProducto[0] + ";" + arregloProducto[1] + "-");
+            }
+        }
+        
+        if (finalizado){
+            $('#pedidosBtnListoCocinero').removeAttr('disabled');
+        } else {
+            $('#pedidosBtnListoCocinero').attr('disabled', '');
+        }
+        
+        $(button).removeClass('btn-danger');
+        $(button).addClass('btn-success');
+        $(button).text('Descartar..');
+        $(button).attr('onclick', "estadoProductoCocinero(this, '"+id+"', 'D')");
+        $('#'+id+'ProductoT').removeClass('danger');
+        $('#'+id+'ProductoT').addClass('success');
+    } else {
+        var lS = localStorage;
+        var arregloProductosL = lS.getItem("ProductosCocinero");
+        arregloProductosL = arregloProductosL.substring(0,arregloProductosL.length-1);
+        arregloProductosL = arregloProductosL.split("-");
+        lS.setItem("ProductosCocinero", "");
+        for (var i = 0; i < arregloProductosL.length; i++) {
+            var arregloProducto = arregloProductosL[i].split(";");
+            if (arregloProducto[0] === id){
+                lS.setItem("ProductosCocinero", lS.getItem("ProductosCocinero") + arregloProducto[0] + ";" + "N" + "-");
+            } else {
+                lS.setItem("ProductosCocinero", lS.getItem("ProductosCocinero") + arregloProducto[0] + ";" + arregloProducto[1] + "-");
+            }
+        }
+        $('#pedidosBtnListoCocinero').attr('disabled', '');
+        
+        $(button).removeClass('btn-success');
+        $(button).addClass('btn-danger');
+        $(button).text('¡Listo!');
+        $(button).attr('onclick', "estadoProductoCocinero(this, '"+id+"', 'L')");
+        $('#'+id+'ProductoT').removeClass('success');
+        $('#'+id+'ProductoT').addClass('danger');
+    }
+}
+
+function buscarCliente(cedula){
+    if (cedula.length > 0){
+        $.post('PEDBusquedaClienteAJAX', { cedula }, function(response){
+            if (response === "no"){
+                $('#gfactIDClientePedido').val(0);
+                $('#gfactBusquedaClientePedido').val("Cliente no Encontrado");
+            } else {
+                var arregloUsuario = response.split(";");
+                $('#gfactIDClientePedido').val(arregloUsuario[1]);
+                $('#gfactBusquedaClientePedido').val(arregloUsuario[0]);
+            }
+        });
+        if ($('#gfactImporteClientePedido').val().length > 0){
+            $('#gfactBtnGenerarPedido').removeAttr('disabled');
+        } else {
+            $('#gfactBtnGenerarPedido').attr('disabled', '');
+        }
+    } else {
+        $('#gfactIDClientePedido').val(0);
+        $('#gfactBusquedaClientePedido').val("Cliente no Encontrado");
+        $('#gfactBtnGenerarPedido').attr('disabled', '');
+    }
+}
+function facturarPedido(numMesa,
+        idPedido,
+        nomMesero,
+        uso){
+    
+    if (uso === "ver"){
+        $('#gfactBtnGenerarPedido').attr('onclick', "facturarPedido('"+numMesa+"', '"+idPedido+"', '"+nomMesero+"', 'generar')");
+    } else {
+        $('#pedidoFacturaGModal').modal('toggle');
+        $('html,body').css('overflow', 'hidden');
+        $('.pedidosGenerandoFactura').css('display', 'flex');
+        $.post('FacturaG', { numMesa , idPedido , nomMesero , idCliente : $('#gfactIDClientePedido').val() , nomCliente : $('#gfactBusquedaClientePedido').val() , cedulaCliente : $('#gfactNumClientePedido').val() , importe : resetNumberReturn($('#gfactImporteClientePedido').val()) }, function(response){
+            if (response.length > 0){
+                window.open("http://localhost:8086/INTERCCO/ArchivosSistema/Facturas/"+response, "Factura", "width=500, height=500");
+            } else {
+                console.log("Fallo la generación de la Factura.");
+            }
+            $('html,body').css('overflow', 'auto');
+            $('.pedidosGenerandoFactura').css('display', 'none');
+        });
+    }
 }
 // </editor-fold>
 

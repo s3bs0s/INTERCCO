@@ -288,4 +288,48 @@
             </div>
         </div>
     </div>
+    
+    <!-- Modal de Cliente para Generar Factura -->
+    <div class="modal fade" id="pedidoFacturaGModal" role="dialog">
+        <div class="modal-dialog modal">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span class="icon-search"></span><label for="gfactNumClientePedido" class="me">Buscar Cliente</label></h4>
+                </div>
+                <div class="mb-textaling modal-body">
+                    <form>
+                        <div class="input-group inpDesa">
+                            <span class="input-group-addon">IDCliente:</span>
+                            <input type="text" value="0" id="gfactIDClientePedido" class="form-control">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Efectivo:</span>
+                            <input required type="tel" onkeypress="return acceptNum(event)" onkeyup="formatNumber(this.value,'gfactImporteClientePedido', 'reg'); if(this.value.length>0&&$('#gfactNumClientePedido').val().length>0){$('#gfactBtnGenerarPedido').removeAttr('disabled');}else{$('#gfactBtnGenerarPedido').attr('disabled', '');}" minlength="1" maxlength="11" class="form-control" id="gfactImporteClientePedido" placeholder="Importe de Efectivo del Cliente.">
+                            <span class="input-group-addon i-obli">*</span>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Identificación del Cliente:</span>
+                            <input type="text" onkeyup="buscarCliente(this.value)" placeholder="Número de Identificación del Cliente." id="gfactNumClientePedido" maxlength="20" class="form-control">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">Buscando Cliente...</span>
+                            <input disabled type="text" value="Cliente no Encontrado" id="gfactBusquedaClientePedido" class="form-control">
+                        </div>
+
+                        <div class="input-group cont-btn">
+                            <div class="cont-btn-principal">
+                                <button disabled data-dismiss="modal" type="button" id="gfactBtnGenerarPedido" class="btn-modal btn btn-principal">Generar Factura</button>
+                            </div>
+                            <div class="cont-btns-secundario">
+                                <button data-dismiss="modal" type="button" class="btn-modal btn btn-secundario">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
 </body>

@@ -32,6 +32,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
 <script src="Estilos/js/swiper.js"></script>
+<script src="Estilos/js/owl.carousel.min.js"></script>
 <script src="Estilos/js/indexEmpleados.js"></script>
 <script src="Estilos/js/modalPerfil.js"></script>
 

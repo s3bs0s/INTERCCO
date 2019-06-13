@@ -1,8 +1,6 @@
 package com.INTERCCO.controlador.CRUDPedidos;
 
 import com.INTERCCO.modelo.Beans.Categorias;
-import com.INTERCCO.modelo.Beans.DetallesProductos;
-import com.INTERCCO.modelo.Beans.Insumos;
 import com.INTERCCO.modelo.Beans.Productos;
 import com.INTERCCO.modelo.Conexion.ConectaDB;
 import java.io.IOException;

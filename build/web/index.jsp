@@ -294,7 +294,7 @@
                             <p>Accesos Rápidos</p>
                         </div>
                         <div class="CJAccRapBtns">
-                            <button type="button" class="btn"><span class="icon-coin-dollar"></span> Facturas<span class="me-bi">- Facturas de Hoy</span></button>
+                            <button onClick="window.open('Pedidos', '_self')" type="button" class="btn"><span class="icon-coin-dollar"></span> Facturas<span class="me-bi"><%= request.getAttribute("estadoPedidosHoy") %> Pedidos por Facturar</span></button>
                             <button onClick="window.open('Parametros', '_self')" type="button" class="btn"><span class="icon-phone"></span> Soporte<span class="me-bi"><%= request.getAttribute("estadoSopoPendientes") %> Peticiones Pendientes</span></button>
                         </div>
                     </article>
@@ -307,7 +307,7 @@
                         </div>
                         <div class="CJAccRapBtns">
                             <button onClick="window.open('Pedidos', '_self')" type="button" class="btn<%= Integer.parseInt(String.valueOf(request.getAttribute("estadoPedidosNFinali")))>0?" btnAR-danger":"" %>"><span class="icon-clipboard"></span> Pedidos<span class="me-bi"><%= request.getAttribute("estadoPedidosHoy") %> Pedidos de Hoy</span><span class="me-bi"><%= request.getAttribute("estadoPedidosNFinali") %> Pedidos no Finalizados</span></button>
-                            <button type="button" class="btn"><span class="icon-folder-open"></span> Recibos <span class="me-bi">- Recibos de Hoy</span></button>
+                            <button onClick="window.open('Facturas', '_self')" type="button" class="btn"><span class="icon-coin-dollar"></span> Facturas<span class="me-bi"><%= request.getAttribute("estadoFacturasHoy") %> Facturas de Hoy</span></button>
                             <button onClick="window.open('Insumos', '_self')" type="button" class="btn<%= Integer.parseInt(String.valueOf(request.getAttribute("estadoInsuAgotados")))>0||Integer.parseInt(String.valueOf(request.getAttribute("estadoInsuCaducados")))>0?" btnAR-danger":"" %>"><span class="icon-books"></span> Insumos<span class="me-bi"><%= request.getAttribute("estadoInsuAgotados") %> Insumos Agotados</span><span class="me-bi"><%= request.getAttribute("estadoInsuCaducados") %> Insumos Vencidos</span></button>
                             <button onClick="window.open('Proveedores', '_self')" type="button" class="btn"><span class="icon-address-book"></span> Proveedores</button>
                             <button onClick="window.open('Pqrsf', '_self')" type="button" class="btn<%= Integer.parseInt(String.valueOf(request.getAttribute("estadoPqrsfSResponder")))>0?" btnAR-warning":"" %>"><span class="glyphicon glyphicon-share-alt"></span> PQRSF<span class="me-bi"><%= request.getAttribute("estadoPqrsfSResponder") %> Solicitudes sin Responder</span></button>

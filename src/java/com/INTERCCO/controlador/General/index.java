@@ -404,17 +404,19 @@ public class index extends HttpServlet {
             int contInsuCaducados = 0;
             if (session.getAttribute("idSedeUsuario") != null){
                 int idSedeUsuario = (int) session.getAttribute("idSedeUsuario");
-                ps.close();
-                rs.close();
-                ps = con.prepareStatement("SELECT * FROM insumos WHERE idSede=? AND existencia=?;");
-                ps.setInt(1, idSedeUsuario);
-                ps.setString(2, "Y");
-                rs = ps.executeQuery();
-                while (rs.next()){
-                    if(rs.getDate("fch_caducidad").before(dateFormat.parse(dateFormat.format(date))) || rs.getDate("fch_caducidad").equals(dateFormat.parse(dateFormat.format(date)))){
-                        contInsuCaducados++;
-                    } else if (rs.getInt("cantidad") < 1){
-                        contInsuAgotados++;
+                if (rolUsuario.equals("Gerente")){
+                    ps.close();
+                    rs.close();
+                    ps = con.prepareStatement("SELECT * FROM insumos WHERE idSede=? AND existencia=?;");
+                    ps.setInt(1, idSedeUsuario);
+                    ps.setString(2, "Y");
+                    rs = ps.executeQuery();
+                    while (rs.next()){
+                        if(rs.getDate("fch_caducidad").before(dateFormat.parse(dateFormat.format(date))) || rs.getDate("fch_caducidad").equals(dateFormat.parse(dateFormat.format(date)))){
+                            contInsuCaducados++;
+                        } else if (rs.getInt("cantidad") < 1){
+                            contInsuAgotados++;
+                        }
                     }
                 }
             }
@@ -463,6 +465,37 @@ public class index extends HttpServlet {
                             contPedidosHoy++;
                         }
                     }
+                } else if (rolUsuario.equals("Cajero")){
+                    ps.close();
+                    rs.close();
+                    ps = con.prepareStatement("SELECT * FROM pedidos WHERE idSede=? AND estado=?;");
+                    ps.setInt(1, idSedeUsuario);
+                    ps.setString(2, "Entregado");
+                    rs = ps.executeQuery();
+                    while (rs.next()){
+                        if (rs.getDate("fch_registro").equals(dateFormat.parse(dateFormat.format(date)))){
+                            contPedidosHoy++;
+                        }
+                    }
+                }
+            }
+            
+            // --------------------- //
+            
+            int contFacturasHoy = 0;
+            if (session.getAttribute("idSedeUsuario") != null){
+                int idSedeUsuario = (int) session.getAttribute("idSedeUsuario");
+                if (rolUsuario.equals("Gerente")){
+                    ps.close();
+                    rs.close();
+                    ps = con.prepareStatement("SELECT * FROM facturas WHERE idSede=?;");
+                    ps.setInt(1, idSedeUsuario);
+                    rs = ps.executeQuery();
+                    while (rs.next()){
+                        if (rs.getDate("fch_registro").equals(dateFormat.parse(dateFormat.format(date)))){
+                            contFacturasHoy++;
+                        }
+                    }
                 }
             }
             
@@ -471,16 +504,18 @@ public class index extends HttpServlet {
             int contUsuaEmpleados = 0;
             if (session.getAttribute("idSedeUsuario") != null){
                 int idSedeUsuario = (int) session.getAttribute("idSedeUsuario");
-                ps.close();
-                rs.close();
-                ps = con.prepareStatement("SELECT * FROM usuarios WHERE idSede=? AND rol!=? AND rol!=? AND existencia=?;");
-                ps.setInt(1, idSedeUsuario);
-                ps.setString(2, "Cliente");
-                ps.setString(3, "AdminS");
-                ps.setString(4, "Y");
-                rs = ps.executeQuery();
-                while (rs.next()){
-                    contUsuaEmpleados++;
+                if (rolUsuario.equals("Gerente")){
+                    ps.close();
+                    rs.close();
+                    ps = con.prepareStatement("SELECT * FROM usuarios WHERE idSede=? AND rol!=? AND rol!=? AND existencia=?;");
+                    ps.setInt(1, idSedeUsuario);
+                    ps.setString(2, "Cliente");
+                    ps.setString(3, "AdminS");
+                    ps.setString(4, "Y");
+                    rs = ps.executeQuery();
+                    while (rs.next()){
+                        contUsuaEmpleados++;
+                    }
                 }
             }
             
@@ -489,15 +524,17 @@ public class index extends HttpServlet {
             int contPqrsfSResponder = 0;
             if (session.getAttribute("idSedeUsuario") != null){
                 int idSedeUsuario = (int) session.getAttribute("idSedeUsuario");
-                ps.close();
-                rs.close();
-                ps = con.prepareStatement("SELECT * FROM pqrsf WHERE idSedeDirigido=? AND respuesta=? AND estado=?;");
-                ps.setInt(1, idSedeUsuario);
-                ps.setString(2, "83S105S110S32S114S101S115S112S117S101S115S116S97");
-                ps.setString(3, "Vacio");
-                rs = ps.executeQuery();
-                while (rs.next()){
-                    contPqrsfSResponder++;
+                if (rolUsuario.equals("Gerente")){
+                    ps.close();
+                    rs.close();
+                    ps = con.prepareStatement("SELECT * FROM pqrsf WHERE idSedeDirigido=? AND respuesta=? AND estado=?;");
+                    ps.setInt(1, idSedeUsuario);
+                    ps.setString(2, "83S105S110S32S114S101S115S112S117S101S115S116S97");
+                    ps.setString(3, "Vacio");
+                    rs = ps.executeQuery();
+                    while (rs.next()){
+                        contPqrsfSResponder++;
+                    }
                 }
             }
             
@@ -520,13 +557,15 @@ public class index extends HttpServlet {
             // --------------------- //
             
             int contSopoPendientesAdmin = 0;
-            ps.close();
-            rs.close();
-            ps = con.prepareStatement("SELECT * FROM soportes WHERE estado=?;");
-            ps.setString(1, "P");
-            rs = ps.executeQuery();
-            while (rs.next()){
-                contSopoPendientesAdmin++;
+            if (rolUsuario.equals("AdminS")){
+                ps.close();
+                rs.close();
+                ps = con.prepareStatement("SELECT * FROM soportes WHERE estado=?;");
+                ps.setString(1, "P");
+                rs = ps.executeQuery();
+                while (rs.next()){
+                    contSopoPendientesAdmin++;
+                }
             }
             
             // --------------------- //
@@ -534,25 +573,28 @@ public class index extends HttpServlet {
             int contUsuaSancionados = 0;
             if (session.getAttribute("idSedeUsuario") != null){
                 int idSedeUsuario = (int) session.getAttribute("idSedeUsuario");
-                ps.close();
-                rs.close();
-                ps = con.prepareStatement("SELECT * FROM usuarios WHERE idSede=? AND existencia=?;");
-                ps.setInt(1, idSedeUsuario);
-                ps.setString(2, "Y");
-                rs = ps.executeQuery();
-                while (rs.next()){
-                    
-                    ps2 = con.prepareStatement("SELECT * FROM sanciones WHERE idUsuario=? AND existencia=?;");
-                    ps2.setInt(1, rs.getInt("idUsuarios"));
-                    ps2.setString(2, "Y");
-                    rs2 = ps2.executeQuery();
-                    if (rs2.next()){
-                        contUsuaSancionados++;
+                if (rolUsuario.equals("Gerente")){
+                    ps.close();
+                    rs.close();
+                    ps = con.prepareStatement("SELECT * FROM usuarios WHERE idSede=? AND existencia=?;");
+                    ps.setInt(1, idSedeUsuario);
+                    ps.setString(2, "Y");
+                    rs = ps.executeQuery();
+                    while (rs.next()){
+
+                        ps2 = con.prepareStatement("SELECT * FROM sanciones WHERE idUsuario=? AND existencia=?;");
+                        ps2.setInt(1, rs.getInt("idUsuarios"));
+                        ps2.setString(2, "Y");
+                        rs2 = ps2.executeQuery();
+                        if (rs2.next()){
+                            contUsuaSancionados++;
+                        }
+                        ps2.close();
+                        rs2.close();
+
                     }
-                    ps2.close();
-                    rs2.close();
-                    
                 }
+                
             }
             
             // --------------------- //
@@ -573,6 +615,7 @@ public class index extends HttpServlet {
             request.setAttribute("estadoInsuCaducados", contInsuCaducados);
             request.setAttribute("estadoPedidosHoy", contPedidosHoy);
             request.setAttribute("estadoPedidosNFinali", contPedidosNFinali);
+            request.setAttribute("estadoFacturasHoy", contFacturasHoy);
             request.setAttribute("estadoUsuaEmpleados", contUsuaEmpleados);
             request.setAttribute("estadoUsuaSancionados", contUsuaSancionados);
             request.setAttribute("estadoPqrsfSResponder", contPqrsfSResponder);

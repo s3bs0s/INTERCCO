@@ -59,6 +59,7 @@ public class RegistrarUsuario extends HttpServlet {
                     request.getRequestDispatcher("index?mensaje=Nee&emailUsu="+email).forward(request, response);
                     System.out.println("ERROR de REGISTRAR el dato de USUARIO.");
                 } else {
+                    System.out.println(email);
                     request.getRequestDispatcher("Usuarios?mensaje=Nee&emailusu="+email).forward(request, response);
                     System.out.println("ERROR de REGISTRAR el dato de USUARIO.");
                 }

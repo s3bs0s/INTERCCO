@@ -15,7 +15,7 @@
         if (rolUsuario.equals("Usuario") || rolUsuario.equals("Cliente")){
             request.getRequestDispatcher("index").forward(request, response);
         } else {
-            if (rolUsuario.equals("Gerente") || rolUsuario.equals("Mesero")){ %>
+            if (rolUsuario.equals("Gerente") || rolUsuario.equals("Mesero") || rolUsuario.equals("AdminS")){ %>
             
                 <div id="pedidosRegistrar">
                     <ul class="breadcrumb">
@@ -277,12 +277,6 @@
                                     </tfoot>
                                     <tbody>
                                         <% for (Pedidos  pedi : listaPedidos) { 
-                                            String numero = String.valueOf(pedi.getSubTotal());
-                                            String resultado = "";
-                                            for (int j = 0, i = numero.length() - 1; i >= 0; i--) {
-                                                resultado = numero.charAt(i) + ((j > 0) && (j % 3 == 0) ? "." : "") + resultado;
-                                                j++;
-                                            }
                                             if (pedi.getNomSede().equals(nomSedeUsuario)){ %>
                                                 <tr>
                                                     <%  EstructuraFYH eFYH = new EstructuraFYH();
@@ -292,7 +286,7 @@
                                                     <td><%= eFYH.estHora(hora, "h")+":"+eFYH.estHora(hora, "m") %></td>
                                                     <td><%= pedi.getNomMesero()%></td>
                                                     <td><%= pedi.getNumMesa() %></td>
-                                                    <td><%= resultado %></td>
+                                                    <td><%= dP.formatNumber(pedi.getSubTotal()) %></td>
                                                     <% if (pedi.getEstado().equals("En espera")){ %>
                                                         <td class="warning"><%= pedi.getEstado() %></td>
                                                     <% } else if (pedi.getEstado().equals("En produccion")){ %>
@@ -452,21 +446,113 @@
             
             <% } else if (rolUsuario.equals("Cocinero")) { %>
             
-                <div id="pedidosListar">
+                <div>
                     <ul class="breadcrumb">
                         <li><a href="index">Inicio</a></li>
-                        <li class="active">Domicilios</li>
+                        <li class="active">Pedidos por Producir</li>
                     </ul>
                     <section class="section-bodys">
-                        <h1><span class="icon-truck"></span> Domicilios (Cajero)</h1>
+                        <% String mens = request.getParameter("mensaje");
+                        if (mens != null){ %>
+                            <% if (mens.equals("NeR")){ %>
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>¡Error!</strong> No se pudo retirar por un error general en las bases de datos, contacte al administrador del sistema.
+                            </div>
+                            <% } else if (mens.equals("NeL")){ %>
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>¡Error!</strong> No se pudo entregar el pedido por un error general en las bases de datos, contacte al administrador del sistema.
+                            </div>
+                            <% } %>
+                        <% } %>
+                        <% ArrayList<Pedidos> listaPedidos = (ArrayList) request.getAttribute("listaPed");
+                        if (listaPedidos.size() > 0){
+                            for (Pedidos  pedi : listaPedidos) { %>
+                                <h1><span class="icon-hour-glass"></span> Pedido en producción</h1>
+                                <div class="pedidosCAJBtnCocinero">
+                                    <button type="button" onclick="window.location = 'PedidoEC?estado=R&idPed=<%= pedi.getIdPedidos() %>'" class="btn">Retirarme<span class="pedidosBtnAlterCocinero">Descarte el Pedido</span></button>
+                                    <button type="button" onclick="window.location = 'PedidoEC?estado=L&idPed=<%= pedi.getIdPedidos() %>'" title="Debe terminar de Produccir los Productos para Entregar el pedido." id="pedidosBtnListoCocinero" class="btn">¡Entregar Pedido!<span class="pedidosBtnAlterCocinero">Siguiente Pedido</span></button>
+                                </div>
+                                <input type="hidden" value="<%= pedi.getDetallesPedidos() %>" id="pedidosProductosCocinero">
+                                <div class="pedidosCAJCarouselCocinero">
+                                    <div class="owl-carousel owl-theme owl-loaded"></div>
+                                </div>
+                            <% }
+                        } else { %>
+                            <h1><span class="icon-switch"></span> No hay pedidos disponibles</h1>
+                        <% } %>
+                    </section>
+                </div>
+            
+            <% } else if (rolUsuario.equals("Cajero")) { %>
+            
+                <div>
+                    <ul class="breadcrumb">
+                        <li><a href="index">Inicio</a></li>
+                        <li class="active">Facturas</li>
+                    </ul>
+                    <section class="section-bodys">
+                    <% String mens = request.getParameter("mensaje");
+                        if (mens != null){ %>
+                            <% if (mens.equals("Y")){ %>
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>¡Perfecto!</strong> El pedido fue registrado con éxito.
+                            </div>
+                            <% } else if (mens.equals("Ne")){ %>
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>¡Error!</strong> El pedido no se pudo registrar por un error general en las bases de datos, contacte al administrador del sistema.
+                            </div>
+                            <% } else if (mens.equals("YActualizar")){ %>
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>¡Perfecto!</strong> El pedido fue actualizado correctamente.
+                            </div>
+                            <% } else if (mens.equals("YCancelar")){ %>
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>¡Perfecto!</strong> El pedido fue cancelado correctamente.
+                            </div>
+                            <% } else if (mens.equals("YDevolver")){ %>
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>¡Perfecto!</strong> El pedido fue devuelto correctamente.
+                            </div>
+                            <% } %>
+                        <% } %>
+                        <%  Date date = new Date();
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            String hoy = dateFormat.format(date);
+                            EstructuraFYH eFYH = new EstructuraFYH();
+                            nomUsuario = "";
+                            idUsuario = 0;
+                            idSedeUsuario = 0;
+                            rolUsuario = "Mesero";
+                            if (session.getAttribute("nomUsuario") == null){
+                                nomUsuario = "Mesero";
+                                idUsuario = 0;
+                            } else {
+                                nomUsuario = (String) session.getAttribute("nomUsuario"); 
+                                idUsuario = (int) session.getAttribute("idUsuario");
+                                idSedeUsuario = (int) session.getAttribute("idSedeUsuario");
+                                rolUsuario = (String) session.getAttribute("rolUsuario");
+                            } 
+                            if (nomSedeUsuario.equals("Vacio")){ %>
+                            <h1><span class="icon-clipboard"></span> Pedidos por Facturas</h1>
+                        <% } else { %>
+                        <h1><span class="icon-clipboard"></span> Pedidos por Facturar, de hoy <%= eFYH.estFechaMeses(hoy, "dd") %> de <%= eFYH.estFechaMeses(hoy, "mm") %></h1>
+                        <% } %>
+                        <% ArrayList<Pedidos> listaPedidos = (ArrayList) request.getAttribute("listaPed"); %>
+                        <div class="pedidosGenerandoFactura"><img src="Estilos/css/ajax-loader.gif" alt="LoaderFactura"></div>
                         <div class="table-responsive">
-                            <table class="tablaListarDomicilios table-bordered table">
+                            <table class="tablaListarPedidosFacturar table-bordered table">
                                 <thead>
                                     <tr>
-                                        <th>Fecha</th>
                                         <th>Hora</th>
-                                        <th>Cliente</th>
-                                        <th>Dirección Entrega</th>
+                                        <th>Mesero</th>
+                                        <th>Mesa</th>
                                         <th>Subtotal</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
@@ -474,87 +560,47 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Fecha</th>
                                         <th>Hora</th>
-                                        <th>Cliente</th>
-                                        <th>Dirección Entrega</th>
+                                        <th>Mesero</th>
+                                        <th>Mesa</th>
                                         <th>Subtotal</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <tr>
-                                        <td>08/10/2018</td>
-                                        <td>14:15PM</td>
-                                        <td>Camilo Lopez</td>
-                                        <td>Calle 45 #67-3</td>
-                                        <td>15.800</td>
-                                        <td class="warning">En espera</td>
-                                        <td class="td-espaciado">
-                                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Confirmar</button>
-                                            <button type="button" data-toggle="modal" data-target="#cancelarModal" class="btn btn-danger"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>08/10/2018</td>
-                                        <td>14:10PM</td>
-                                        <td>Paulina Gomes</td>
-                                        <td>Carrera 80 #45G</td>
-                                        <td>23.150</td>
-                                        <td class="info">En producción</td>
-                                        <td class="td-espaciado">
-                                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Confirmar</button>
-                                            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>08/10/2018</td>
-                                        <td>13:55PM</td>
-                                        <td>Estefania Marquez</td>
-                                        <td>Calle 12 #78 ASUR</td>
-                                        <td>2.000</td>
-                                        <td class="active">Facturado<br>
-                                        (En camino)</td>
-                                        <td class="td-espaciado">
-                                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Confirmar</button>
-                                            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>08/10/2018</td>
-                                        <td>13:45PM</td>
-                                        <td>Sebastian While</td>
-                                        <td>Calle 60 #58-T3</td>
-                                        <td>43.700</td>
-                                        <td class="danger">Cancelado</td>
-                                        <td class="td-espaciado">
-                                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Confirmar</button>
-                                            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>08/10/2018</td>
-                                        <td>13:50PM</td>
-                                        <td>Catalina Santana</td>
-                                        <td>Calle 69 #66-12</td>
-                                        <td>98.000</td>
-                                        <td class="success">Entregado</td>
-                                        <td class="td-espaciado">
-                                            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                            <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Confirmar</button>
-                                            <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
-                                        </td>
-                                    </tr>
+                                    <% for (Pedidos  pedi : listaPedidos) {
+                                        if (pedi.getIdSede()==idSedeUsuario && (pedi.getEstado().equals("Entregado") || pedi.getEstado().equals("Facturado")) && pedi.getFchRegistro().equals(dateFormat.parse(dateFormat.format(date)))){ %>
+                                            <tr>
+                                                <%  String hora = String.valueOf(pedi.getHoraRegistro()); %>
+                                                <td><%= eFYH.estHora(hora, "h")+":"+eFYH.estHora(hora, "m") %></td>
+                                                <td><%= pedi.getNomMesero() %></td>
+                                                <td><%= pedi.getNumMesa() %></td>
+                                                <td><%= dP.formatNumber(pedi.getSubTotal()) %></td>
+                                                <% if (pedi.getEstado().equals("Entregado")){ %>
+                                                    <td class="active">¡Por facturar!</td>
+                                                <% } else if (pedi.getEstado().equals("Facturado")){ %>
+                                                    <td class="active-os">Facturado</td>
+                                                <% } %>
+                                                <td>
+                                                    <div class="td-espaciado">
+                                                        <% if (pedi.getEstado().equals("Entregado")){ %>
+                                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pedidosVerModal" onclick="pedidosVer('<%= rolUsuario %>', '<%= cA.CifrarASCII(pedi.getNomMesero()) %>', '<%= cA.CifrarASCII(pedi.getNomCliente()) %>', '<%= pedi.getNumMesa()%>', '<%= pedi.getSubTotal()%>', '<%= cA.CifrarASCII(pedi.getDetallesPedidos()) %>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                            <button type="button" class="btn btn-active-os" data-toggle="modal" data-target="#pedidoFacturaGModal" onclick="facturarPedido('<%= pedi.getNumMesa() %>', '<%= pedi.getIdPedidos()%>', '<%= cA.CifrarASCII(pedi.getNomMesero()) %>', 'ver')"><span class="icon-clipboard"></span> Facturar</button>
+                                                        <% } else { %>
+                                                            <button type="button" class="btn btn-active-os"><span class="glyphicon glyphicon-download-alt"></span> Descargar Factura</button>
+                                                        <% } %>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <% } 
+                                    } %>
                                 </tbody>
                             </table>
                         </div>
                     </section>
                 </div>
+                <%@include file="pedidosModales.jsp" %>
             
         <% }
     } %>

@@ -7,13 +7,15 @@ public class Facturas {
     private Integer idFacturas;
     private Date fchRegistro;
     private Date horaRegistro;
-    private String tipoI;
-    private String numI;
+    private int idCliente;
     private int importe;
     private int total;
     private String existencia;
-    private String idCajero;
-    private String idSede;
+    private int idCajero;
+    private int idSede;
+    private String NomCliente;
+    private String NomCajero;
+    private String NomSede;
 
     public Facturas() {
     }
@@ -22,12 +24,10 @@ public class Facturas {
         this.idFacturas = idFacturas;
     }
 
-    public Facturas(Integer idFacturas, Date fchRegistro, Date horaRegistro, String tipoI, String numI, int importe, int total, String existencia) {
+    public Facturas(Integer idFacturas, Date fchRegistro, Date horaRegistro, int importe, int total, String existencia) {
         this.idFacturas = idFacturas;
         this.fchRegistro = fchRegistro;
         this.horaRegistro = horaRegistro;
-        this.tipoI = tipoI;
-        this.numI = numI;
         this.importe = importe;
         this.total = total;
         this.existencia = existencia;
@@ -59,22 +59,6 @@ public class Facturas {
         this.horaRegistro = horaRegistro;
     }
 
-    public String getTipoI() {
-        return tipoI;
-    }
-
-    public void setTipoI(String tipoI) {
-        this.tipoI = tipoI;
-    }
-
-    public String getNumI() {
-        return numI;
-    }
-
-    public void setNumI(String numI) {
-        this.numI = numI;
-    }
-
     public int getImporte() {
         return importe;
     }
@@ -99,24 +83,56 @@ public class Facturas {
         this.existencia = existencia;
     }
 
-    public String getIdCajero() {
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public int getIdCajero() {
         return idCajero;
     }
 
-    public void setIdCajero(String idCajero) {
+    public void setIdCajero(int idCajero) {
         this.idCajero = idCajero;
     }
 
-    public String getIdSede() {
+    public int getIdSede() {
         return idSede;
     }
 
-    public void setIdSede(String idSede) {
+    public void setIdSede(int idSede) {
         this.idSede = idSede;
     }
 
     /* Metodos Adicionales para la Vista */
     
+    
+    public String getNomCliente() {
+        return NomCliente;
+    }
+
+    public void setNomCliente(String NomCliente) {
+        this.NomCliente = NomCliente;
+    }
+
+    public String getNomCajero() {
+        return NomCajero;
+    }
+
+    public void setNomCajero(String NomCajero) {
+        this.NomCajero = NomCajero;
+    }
+
+    public String getNomSede() {
+        return NomSede;
+    }
+
+    public void setNomSede(String NomSede) {
+        this.NomSede = NomSede;
+    }
     
     /* Metodos de Apoyo */
     

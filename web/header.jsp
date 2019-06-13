@@ -3,11 +3,13 @@
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.INTERCCO.controlador.General.CifradoASCII"%>
-<%@page language='java' contentType='text/html' errorPage='Error404.jsp' %>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="Estilos/css/swiper.css">
+    <link rel="stylesheet" type="text/css" href="Estilos/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="Estilos/css/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="Estilos/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="Estilos/css/dataTables.bootstrap.css">
     <link rel="stylesheet" type="text/css" href="Estilos/css/sb-admin-2.css">
@@ -220,7 +222,7 @@
                 <div class="menuprin-slogo">
                     <ul>
                         <li><a href="index"><span class="icon-office"></span><span class="me">Inicio</span></a></li>
-                        <li><a href="recibosListar.jsp"><span class="icon-coin-dollar"></span><span class="me">Facturas</span></a></li>
+                        <li><a href="Pedidos"><span class="icon-coin-dollar"></span><span class="me">Facturas</span></a></li>
                         <li><a href="Parametros"><span class="icon-phone"></span><span class="me">Soporte</span></a></li>
                     </ul>
                 </div>
@@ -256,12 +258,12 @@
                     <ul>
                         <li><a href="index"><span class="icon-office"></span><span class="me">Inicio</span></a></li>
                         <li><a href="Pedidos"><span class="icon-clipboard"></span><span class="me">Pedidos</span></a></li>
-                        <li><a href="recibosListar.jsp"><span class="icon-folder-open"></span><span class="me">Recibos</span></a></li>
+                        <li><a href="Facturas"><span class="icon-coin-dollar"></span><span class="me">Facturas</span></a></li>
                         <li><a href="Insumos"><span class="icon-books"></span><span class="me">Insumos</span></a></li>
                         <li><a href="Proveedores"><span class="icon-address-book"></span><span class="me">Proveedores</span></a></li>
                         <li><a href="Usuarios"><span class="icon-users"></span><span class="me">Usuarios</span></a></li>
                         <li><a href="Pqrsfs"><span class="glyphicon glyphicon-share-alt"></span><span class="me">PQRSF</span></a></li>
-                        <li><a href="Auditoria"><span class="icon-stats-dots"></span><span class="me">Logs</span></a></li>
+                        <!--<li><a href="Auditoria"><span class="icon-stats-dots"></span><span class="me">Logs</span></a></li>-->
                         <li><a href="Parametros"><span class="icon-cog"></span><span class="me">Parámetros</span></a></li>
                     </ul>
                 </div>
