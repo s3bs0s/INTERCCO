@@ -217,7 +217,7 @@
                                                                         <div class="td-espaciado">
                                                                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productosVerModal" onClick="productosVerModal('<%= cA.CifrarASCII(prod.getNombreCategoria()) %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>', '<%= prod.getInsumosGasta()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
                                                                             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#productosAGerenteModal" onClick="productosActualizarModal('<%= prod.getIdProductos()%>', '<%= prod.getIdCategoria() %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>', '<%= prod.getInsumosGasta()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#productosEGerenteModal" onClick="productosEliminarModal('<%= prod.getIdProductos()%>', '<%= cA.CifrarASCII(prod.getNombre()) %>')"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                            <button type="button" class="btn btn-danger" onClick="productosEliminarModal('<%= session.getAttribute("genUsuario") %>', '<%= prod.getIdProductos()%>', '<%= cA.CifrarASCII(prod.getNombre()) %>')"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -257,7 +257,7 @@
                                                                 <div class="td-espaciado">
                                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#productosVerModal" onClick="productosVerModal('<%= cA.CifrarASCII(prod.getNombreCategoria()) %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>', '<%= prod.getInsumosGasta()%>');"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
                                                                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#productosAGerenteModal" onClick="productosActualizarModal('<%= prod.getIdProductos()%>' ,'<%= prod.getIdCategoria() %>', '<%= cA.CifrarASCII(prod.getNombre()) %>', '<%= prod.getDescripcion()%>', '<%= prod.getPrecio()%>', '<%= prod.getInsumosGasta()%>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#productosEGerenteModal" onClick="productosEliminarModal('<%= prod.getIdProductos()%>', '<%= cA.CifrarASCII(prod.getNombre()) %>')"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                    <button type="button" class="btn btn-danger" onClick="productosEliminarModal('<%= session.getAttribute("genUsuario") %>', '<%= prod.getIdProductos()%>', '<%= cA.CifrarASCII(prod.getNombre()) %>')"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -307,7 +307,7 @@
                                                                     <td>
                                                                         <div class="td-espaciado">
                                                                             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#categoriasAGerenteModal" onClick="categoriasActualizarModal('<%= cate.getIdCategorias() %>', '<%= cA.CifrarASCII(cate.getNombre()) %>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#categoriasEGerenteModal" onClick="categoriasEliminarModal('<%= cate.getIdCategorias() %>', '<%= cA.CifrarASCII(cate.getNombre()) %>');"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                            <button type="button" class="btn btn-danger" onClick="categoriasEliminarModal('<%= session.getAttribute("genUsuario") %>', '<%= cate.getIdCategorias() %>', '<%= cA.CifrarASCII(cate.getNombre()) %>');"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -341,7 +341,7 @@
                                                                 <td>
                                                                     <div class="td-espaciado">
                                                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#categoriasAGerenteModal" onClick="categoriasActualizarModal('<%= cate.getIdCategorias() %>', '<%= cA.CifrarASCII(cate.getNombre()) %>');"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#categoriasEGerenteModal" onClick="categoriasEliminarModal('<%= cate.getIdCategorias() %>', '<%= cA.CifrarASCII(cate.getNombre()) %>');"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                                        <button type="button" class="btn btn-danger" onClick="categoriasEliminarModal('<%= session.getAttribute("genUsuario") %>', '<%= cate.getIdCategorias() %>', '<%= cA.CifrarASCII(cate.getNombre()) %>');"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
                                                                     </div>
                                                                 </td>
                                                             </tr>

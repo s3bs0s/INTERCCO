@@ -136,14 +136,6 @@ function btnAcceder(){
 
 function validacionAcceder(inpActual,idInpContrario){
     if (idInpContrario === "InpMOPasswordAcceder"){
-        if (!inpActual.value.includes('@succo.com')){
-            if (inpActual.value.includes('@s')){
-                inpActual.value = inpActual.value +'ucco.com';
-            }
-        }
-    }
-    
-    if (idInpContrario === "InpMOPasswordAcceder"){
         var inpC = document.getElementById(idInpContrario);
         if((inpActual.value.includes("@") && (inpActual.value.length >= 10 && inpActual.value.length <= 150)) && (inpC.value.length >= 3 && inpC.value.length <= 20)){
             $('#accBtnAcceder').removeAttr('disabled');

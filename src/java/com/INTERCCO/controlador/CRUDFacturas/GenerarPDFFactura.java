@@ -1,6 +1,5 @@
 package com.INTERCCO.controlador.CRUDFacturas;
 
-import com.INTERCCO.controlador.General.CifradoASCII;
 import com.INTERCCO.controlador.General.DecoracionPesos;
 import com.INTERCCO.modelo.Conexion.ConectaDB;
 import com.itextpdf.text.Chunk;
@@ -200,7 +199,7 @@ public class GenerarPDFFactura {
         cell.setPadding(4);
         tableHeader.addCell(cell);
         
-        cell = new PdfPCell(new Paragraph(new Chunk("DESCRIPCIÓN", fontBold)));
+        cell = new PdfPCell(new Paragraph(new Chunk("DESCRIP.", fontBold)));
         cell.setHorizontalAlignment((int)PdfPCell.ALIGN_CENTER);
         cell.setBorder(PdfPCell.NO_BORDER);
         cell.setBorderWidthTop((float)0.3);
@@ -258,7 +257,7 @@ public class GenerarPDFFactura {
                             cell.setBorder(PdfPCell.NO_BORDER);
                             tableHeader.addCell(cell);
 
-                            cell = new PdfPCell(new Paragraph(new Chunk(rs2.getString("nombre"), fontNormal)));
+                            cell = new PdfPCell(new Paragraph(new Chunk(rs2.getString("nombre").toUpperCase(), fontNormal)));
                             cell.setHorizontalAlignment((int)PdfPCell.ALIGN_CENTER);
                             cell.setBorder(PdfPCell.NO_BORDER);
                             tableHeader.addCell(cell);
@@ -304,7 +303,7 @@ public class GenerarPDFFactura {
                             cell.setBorder(PdfPCell.NO_BORDER);
                             tableHeader.addCell(cell);
 
-                            cell = new PdfPCell(new Paragraph(new Chunk(rs2.getString("nombre"), fontNormal)));
+                            cell = new PdfPCell(new Paragraph(new Chunk(rs2.getString("nombre").toUpperCase(), fontNormal)));
                             cell.setHorizontalAlignment((int)PdfPCell.ALIGN_CENTER);
                             cell.setBorder(PdfPCell.NO_BORDER);
                             tableHeader.addCell(cell);
@@ -364,7 +363,7 @@ public class GenerarPDFFactura {
         // Fila #2
         
         float baseIvaP1 = subtotal * iva;
-        int baseIva = ( (int)baseIvaP1 ) / 100;
+        int baseIva = (int)baseIvaP1 / 100;
         Chunk c1Fila2d1 = new Chunk("I.V.A al "+iva+"%: ", fontBold), c2Fila2d1 = new Chunk("$ "+dP.formatNumber(baseIva), fontNormal);
         Paragraph pFila2d1 = new Paragraph();
         pFila2d1.add(c1Fila2d1);

@@ -163,7 +163,7 @@
                                                     <% if ((insu.getFchCaducidad().before(dateFormat.parse(dateFormat.format(date))) || insu.getFchCaducidad().equals(dateFormat.parse(dateFormat.format(date)))) && !insu.getExistencia().equals("D")) { %>
                                                         <button type="button" onClick="window.location = 'InsumoE?elimIDInsumo='+<%= insu.getIdInsumos()%>;" class="btn btn-purple"><span class="icon-hour-glass"></span> Venció</button>
                                                     <% } else { %>
-                                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#insumoEGerenteModal" onClick="insumoEliminarModal('<%= insu.getIdInsumos()%>', '<%= cA.CifrarASCII(insu.getNombre())%>')"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+                                                        <button type="button" class="btn btn-danger" onClick="insumoEliminarModal('<%= session.getAttribute("genUsuario") %>', '<%= insu.getIdInsumos()%>', '<%= cA.CifrarASCII(insu.getNombre())%>')"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
                                                     <% } %>
                                                 </div>
                                             </td>

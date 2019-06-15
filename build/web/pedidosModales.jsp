@@ -169,7 +169,7 @@
                         <hr>
                         <div>
                             <div>
-                                <p class="verDetalles-titulo">Productos:</p>
+                                <p class="verDetalles-titulo">Productos del Pedido:</p>
                             </div>
                         </div>
                     </div>
@@ -304,9 +304,21 @@
                             <span class="input-group-addon">IDCliente:</span>
                             <input type="text" value="0" id="gfactIDClientePedido" class="form-control">
                         </div>
+                        <div class="verDetalles-caj">
+                            <div>
+                                <div>
+                                    <p class="verDetalles-titulo">Subtotal:</p>
+                                    <p class="verDetalles-contenido" id="gfactSubtotalPedido"></p>
+                                </div>
+                                <div>
+                                    <p class="verDetalles-titulo">Total:</p>
+                                    <p class="verDetalles-contenido" id="gfactTotalPedido"></p>
+                                </div>
+                            </div>
+                        </div>
                         <div class="input-group">
                             <span class="input-group-addon">Efectivo:</span>
-                            <input required type="tel" onkeypress="return acceptNum(event)" onkeyup="formatNumber(this.value,'gfactImporteClientePedido', 'reg'); if(this.value.length>0&&$('#gfactNumClientePedido').val().length>0){$('#gfactBtnGenerarPedido').removeAttr('disabled');}else{$('#gfactBtnGenerarPedido').attr('disabled', '');}" minlength="1" maxlength="11" class="form-control" id="gfactImporteClientePedido" placeholder="Importe de Efectivo del Cliente.">
+                            <input required type="tel" onkeypress="return acceptNum(event)" onkeyup="limiteImporte(this)" minlength="1" maxlength="11" class="form-control" id="gfactImporteClientePedido" placeholder="Importe de Efectivo del Cliente.">
                             <span class="input-group-addon i-obli">*</span>
                         </div>
                         <div class="input-group">

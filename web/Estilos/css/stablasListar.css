@@ -33,7 +33,7 @@
     width:100%;
     display:flex;
     justify-content:center;
-    flex-flow:row nowrap;
+    flex-flow:row wrap;
     margin:20px 0;
     font-family:"Calibri Light", Arial;
     font-size:40px;

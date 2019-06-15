@@ -31,6 +31,8 @@ public class PEDRellenoCartaAJAX extends HttpServlet {
             Connection con = cdb.conectar();
             PreparedStatement ps;
             ResultSet rs;
+            PreparedStatement ps2;
+            ResultSet rs2;
             
             HttpSession session = request.getSession();
             int idSedeUsuario = (int) session.getAttribute("idSedeUsuario");
@@ -70,7 +72,18 @@ public class PEDRellenoCartaAJAX extends HttpServlet {
                         pd.setIdCategoria(rs.getInt("idCategoria"));
                         pd.setNombre(rs.getString("nombre"));
                         pd.setDescripcion(rs.getString("descripcion"));
-                        pd.setPrecio(rs.getInt("precio"));
+                        
+                        ps2 = con.prepareStatement("SELECT * FROM promociones WHERE idProducto=? AND existencia=?;");
+                        ps2.setInt(1, rs.getInt("idProductos"));
+                        ps2.setString(2, "Y");
+                        rs2 = ps2.executeQuery();
+                        if (rs2.next()){
+                            float precioDescuento = rs.getInt("precio") * rs2.getFloat("porcentaje_promo");
+                            pd.setPrecio(rs.getInt("precio") - ( ( (int)precioDescuento ) / 100 ));
+                        } else {
+                            pd.setPrecio(rs.getInt("precio"));
+                        }
+                        
                         listaProSPed.add(pd);
                     }
                 } else {
@@ -79,7 +92,18 @@ public class PEDRellenoCartaAJAX extends HttpServlet {
                     pd.setIdCategoria(rs.getInt("idCategoria"));
                     pd.setNombre(rs.getString("nombre"));
                     pd.setDescripcion(rs.getString("descripcion"));
-                    pd.setPrecio(rs.getInt("precio"));
+                    
+                    ps2 = con.prepareStatement("SELECT * FROM promociones WHERE idProducto=? AND existencia=?;");
+                    ps2.setInt(1, rs.getInt("idProductos"));
+                    ps2.setString(2, "Y");
+                    rs2 = ps2.executeQuery();
+                    if (rs2.next()){
+                        float precioDescuento = rs.getInt("precio") * rs2.getFloat("porcentaje_promo");
+                        pd.setPrecio(rs.getInt("precio") - ( ( (int)precioDescuento ) / 100 ));
+                    } else {
+                        pd.setPrecio(rs.getInt("precio"));
+                    }
+                    
                     listaProSPed.add(pd);
                 }
             }

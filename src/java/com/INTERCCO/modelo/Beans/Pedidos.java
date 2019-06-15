@@ -10,6 +10,7 @@ public class Pedidos {
     private Integer numMesa;
     private String observaciones;
     private Integer subTotal;
+    private Integer Total;
     private String estado;
     private String existencia;
     private Integer idCliente;
@@ -170,6 +171,14 @@ public class Pedidos {
 
     public void setDetallesPedidos(String DetallesPedidos) {
         this.DetallesPedidos = DetallesPedidos;
+    }
+    
+    public Integer getTotal() {
+        return Total;
+    }
+
+    public void setTotal(Integer Total) {
+        this.Total = Total;
     }
     
     /* Metodos de Apoyo */

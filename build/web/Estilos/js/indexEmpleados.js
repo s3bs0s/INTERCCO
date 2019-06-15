@@ -495,6 +495,8 @@ function agregarProductoPedido(method){
             observacion = "Vacio";
         }
         
+        $('html,body').css('overflow', 'hidden');
+        $('#'+method+'VentanaUploadPedidos').css('display', 'flex');
         $.post('PEDGastoInsumosAJAX', {idProducto : infoProducto[0],cantidadProductos : cantidad,operacion : '-'}, function(response){
             if (response === "success"){
                 
@@ -580,6 +582,8 @@ function agregarProductoPedido(method){
                 document.getElementById(method+"CantidadPedidos").value = 1;
                 document.getElementById(method+"ObservacionPedidos").value = "";
                 optionProducto.remove();
+                $('html,body').css('overflow', 'auto');
+                $('#'+method+'VentanaUploadPedidos').css('display', 'none');
             } else {
                 if (document.getElementById(method+"CantidadPedidos").value === "1"){
                     $.confirm({
@@ -625,6 +629,8 @@ function agregarProductoPedido(method){
                     });
                 }
             }
+            $('html,body').css('overflow', 'auto');
+            $('#'+method+'VentanaUploadAGGPedidos').css('display', 'none');
         });
         
     } else {
@@ -634,6 +640,9 @@ function agregarProductoPedido(method){
 function sacarProductoPedido(button, numRow, idSelectProd, nomProducto, method){
     var infoProductoPPArr = document.getElementById(method+numRow+"InputPP").value.split(";");
     var templateOption = '<option value="'+infoProductoPPArr[0]+';'+infoProductoPPArr[1]+';'+infoProductoPPArr[2]+'">'+DescifrarASCII(nomProducto)+'</option>';
+    
+    $('html,body').css('overflow', 'hidden');
+    $('#'+method+'VentanaUploadPedidos').css('display', 'flex');
     $.post('PEDGastoInsumosAJAX', {idProducto : infoProductoPPArr[0],cantidadProductos : infoProductoPPArr[3],operacion : '+'});
     document.getElementById(idSelectProd).insertAdjacentHTML("beforeend",templateOption);
     var campSubtotal = document.getElementById(method+"SubtotalPedidos");
@@ -646,6 +655,8 @@ function sacarProductoPedido(button, numRow, idSelectProd, nomProducto, method){
         document.getElementById("actua"+numRow+"InputPP").value = infoProductoPPArr[0]+";"+infoProductoPPArr[1]+";"+infoProductoPPArr[2]+";"+infoProductoPPArr[3]+";"+infoProductoPPArr[4]+";"+infoProductoPPArr[5]+";"+infoProductoPPArr[6]+";"+infoProductoPPArr[7]+";N";
         $('.actuaTablaListarProductosPedido').DataTable().row($(button).parents('tr')).remove().draw(false);
     }
+    $('html,body').css('overflow', 'auto');
+    $('#'+method+'VentanaUploadPedidos').css('display', 'none');
 }
 function cantProductoPedido(tipoOpe, numRow, method){
     var inpProductoArr = document.getElementById(method+numRow+"InputPP").value.split(";");
@@ -657,6 +668,9 @@ function cantProductoPedido(tipoOpe, numRow, method){
             } else {
                 infoNuevaInp = inpProductoArr[0]+";"+inpProductoArr[1]+";"+inpProductoArr[2]+";"+(parseInt(inpProductoArr[3])-1)+";"+inpProductoArr[4]+";"+(parseInt(inpProductoArr[5])-parseInt(inpProductoArr[2]));
             }
+            
+            $("#"+method+numRow+"BtnMasRowPP").attr('disabled','');
+            $("#"+method+numRow+"BtnMenosRowPP").attr('disabled','');
             $.post('PEDGastoInsumosAJAX', {idProducto : inpProductoArr[0],cantidadProductos : '1',operacion : '+'});
             var campSubtotal = document.getElementById(method+"SubtotalPedidos");
             campSubtotal.value = formatNumberReturn(parseInt(resetNumberReturn(campSubtotal.value))-parseInt(inpProductoArr[2]));
@@ -664,11 +678,14 @@ function cantProductoPedido(tipoOpe, numRow, method){
             document.getElementById(method+numRow+"InputPP").value = infoNuevaInp;
             document.getElementById(method+numRow+"SubtotalRowPP").innerText = formatNumberReturn(parseInt(inpProductoArr[5])-parseInt(inpProductoArr[2]));
             $("#"+method+numRow+"BtnMasRowPP").removeAttr('disabled');
+            $("#"+method+numRow+"BtnMenosRowPP").removeAttr('disabled');
         } else {
             $("#"+method+numRow+"BtnMenosRowPP").attr('disabled','');
         }
     } else {
         if (parseInt(inpProductoArr[3]) < 99){
+            $("#"+method+numRow+"BtnMasRowPP").attr('disabled','');
+            $("#"+method+numRow+"BtnMenosRowPP").attr('disabled','');
             $.post('PEDGastoInsumosAJAX', {idProducto : inpProductoArr[0],cantidadProductos : '1',operacion : '-'}, function(response){
                 if (response === "success"){
                     var infoNuevaInp;
@@ -682,6 +699,7 @@ function cantProductoPedido(tipoOpe, numRow, method){
                     document.getElementById(method+numRow+"CantRowPP").innerText = parseInt(inpProductoArr[3])+1;
                     document.getElementById(method+numRow+"InputPP").value = infoNuevaInp;
                     document.getElementById(method+numRow+"SubtotalRowPP").innerText = formatNumberReturn(parseInt(inpProductoArr[5])+parseInt(inpProductoArr[2]));
+                    $("#"+method+numRow+"BtnMasRowPP").removeAttr('disabled');
                     $("#"+method+numRow+"BtnMenosRowPP").removeAttr('disabled');
                 } else {
                     $.confirm({
@@ -802,16 +820,41 @@ function productoPAggVerModal(method) {
     var idCategoria = selectCategorias.value;
     var nomCategoria = selectCategorias.options[selectCategorias.selectedIndex].text;
     var selectProductos = document.getElementById(method+idCategoria+"C");
-    var infoProducto = selectProductos.value.split(";");
-    var nomProducto = selectProductos.options[selectProductos.selectedIndex].text;
     
-    document.getElementById("verCategoriaProductoPAgg").innerText = nomCategoria;
-    document.getElementById("verProductoProductoPAgg").innerText = nomProducto;
-    document.getElementById("verPrecioProductoPAgg").innerText = "$ "+formatNumberReturn(infoProducto[2]);
-    if (DescifrarASCII(infoProducto[1]) === "Vacio"){
-        document.getElementById("verDescripcionProductoPAgg").innerText = "Sin descripción.";
+    if (selectProductos.value.length > 0){
+        var infoProducto = selectProductos.value.split(";");
+        var nomProducto = selectProductos.options[selectProductos.selectedIndex].text;
+
+        $('#productoPAggVerModal').modal('toggle');
+
+        document.getElementById("verCategoriaProductoPAgg").innerText = nomCategoria;
+        document.getElementById("verProductoProductoPAgg").innerText = nomProducto;
+        document.getElementById("verPrecioProductoPAgg").innerText = "$ "+formatNumberReturn(infoProducto[2]);
+        if (DescifrarASCII(infoProducto[1]) === "Vacio"){
+            document.getElementById("verDescripcionProductoPAgg").innerText = "Sin descripción.";
+        } else {
+            document.getElementById("verDescripcionProductoPAgg").innerText = DescifrarASCII(infoProducto[1]);
+        }
     } else {
-        document.getElementById("verDescripcionProductoPAgg").innerText = DescifrarASCII(infoProducto[1]);
+        $.confirm({
+            animation: 'rotateX',
+            closeAnimation: 'zoom',
+            title: 'No hay Producto!',
+            content: 'Debe elegir un producto para ver su información.',
+            type: 'orange',
+            icon: 'fa fa-warning',
+            typeAnimated: true,
+            closeIconClass: 'fa fa-close',
+            buttons: {
+                tryAgain: {
+                    text: 'Entiendo',
+                    btnClass: 'btn-orange',
+                    action: function(){
+                        
+                    }
+                }
+            }
+        });
     }
 }
 function productoPedidoActualizarModal(numeroRow,
@@ -988,9 +1031,8 @@ $(document).ready(function(){
     if (validate !== null){
         var lS = localStorage;
         lS.setItem("ProductosCocinero", "");
-        
-        $('#pedidosBtnListoCocinero').attr('disabled', '');
         var template = ``;
+        $('#pedidosBtnListoCocinero').attr('disabled', '');
         var arregloDetallesPedidos = validate.value.split(":");
         
         for (var i = 0; i < arregloDetallesPedidos.length; i++) {
@@ -1009,28 +1051,72 @@ $(document).ready(function(){
                         </div>
                         <div class="item-c-body">
                             <p><b>Cantidad de Productos:</b> ${arregloProducto[2]}</p>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>Insumo</th>
-                                    <th>Cantidad</th>
-                                </tr>`;
+                            <table class="tablaListarProductoCocinero${arregloProducto[0]} table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Insumo</th>
+                                        <th>Cantidad</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`;
             
             for (var e = 0; e < arregloDetallesProductos.length; e++) {
                 var arregloDetalleP = arregloDetallesProductos[e].split(";");
-                template += `   <tr>
-                                    <td>${DescifrarASCII(arregloDetalleP[0])}</td>
-                                    <td>${arregloDetalleP[1]+" "+arregloDetalleP[2]}</td>
-                                </tr>`;
+                template += `       <tr>
+                                        <td>${DescifrarASCII(arregloDetalleP[0])}</td>
+                                        <td>${arregloDetalleP[1]+" "+arregloDetalleP[2]}</td>
+                                    </tr>`;
             }
             
-            template += `   </table>
+            template += `       </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>`;
         }
         
         $('.owl-carousel').html(template);
-        $('.owl-carousel').owlCarousel({
+        
+        
+        tablasProductosCocinero(validate.value);
+        
+    }
+});
+function tablasProductosCocinero(arregloDetallesPedidos){
+    var arregloDetallesPedidos = arregloDetallesPedidos.split(":");
+    for (var i = 0; i < arregloDetallesPedidos.length; i++) {
+        var clasificacionDP = arregloDetallesPedidos[i].split("-");
+        var arregloProducto = clasificacionDP[0].split(";");
+
+        $('.tablaListarProductoCocinero'+arregloProducto[0]).DataTable({
+            "order": [[0, "asc"]],
+            "pageLength": 5,
+            "searching": false,
+            language: {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar: _MENU_",
+                "sZeroRecords": "No se encontraron resultados.",
+                "sEmptyTable": "Ningún pedido disponible.",
+                "sInfo": "Mostrando del _START_ al _END_ de _TOTAL_ pedidos",
+                "sInfoEmpty": "Mostrando del 0 al 0 de 0 pedidos",
+                "sInfoPostFix": "",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente.",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente."
+                }
+            }
+        });
+    }
+    $('.owl-carousel').owlCarousel({
             margin:10,
             nav:true,
             dots:true,
@@ -1047,8 +1133,7 @@ $(document).ready(function(){
                 }
             }
         });
-    }
-});
+}
 function estadoProductoCocinero(button, id, estado){
     if (estado === "L"){
         var lS = localStorage;
@@ -1106,6 +1191,19 @@ function estadoProductoCocinero(button, id, estado){
     }
 }
 
+function limiteImporte(input){
+    formatNumber(input.value,'gfactImporteClientePedido', 'reg');
+    
+    if(input.value.length > 0 && $('#gfactNumClientePedido').val().length > 0){
+        if (parseInt(resetNumberReturn(input.value)) >= parseInt(resetNumberReturn( $('#gfactTotalPedido').text() ))){
+            $('#gfactBtnGenerarPedido').removeAttr('disabled');
+        } else {
+            $('#gfactBtnGenerarPedido').attr('disabled', '');
+        }
+    } else {
+        $('#gfactBtnGenerarPedido').attr('disabled', '');
+    }
+}
 function buscarCliente(cedula){
     if (cedula.length > 0){
         $.post('PEDBusquedaClienteAJAX', { cedula }, function(response){
@@ -1119,7 +1217,11 @@ function buscarCliente(cedula){
             }
         });
         if ($('#gfactImporteClientePedido').val().length > 0){
-            $('#gfactBtnGenerarPedido').removeAttr('disabled');
+            if (parseInt(resetNumberReturn( $('#gfactImporteClientePedido').val() )) >= parseInt(resetNumberReturn( $('#gfactTotalPedido').text() ))){
+                $('#gfactBtnGenerarPedido').removeAttr('disabled');
+            } else {
+                $('#gfactBtnGenerarPedido').attr('disabled', '');
+            }
         } else {
             $('#gfactBtnGenerarPedido').attr('disabled', '');
         }
@@ -1132,10 +1234,14 @@ function buscarCliente(cedula){
 function facturarPedido(numMesa,
         idPedido,
         nomMesero,
-        uso){
+        uso,
+        subtotal,
+        total){
     
     if (uso === "ver"){
         $('#gfactBtnGenerarPedido').attr('onclick', "facturarPedido('"+numMesa+"', '"+idPedido+"', '"+nomMesero+"', 'generar')");
+        document.getElementById("gfactSubtotalPedido").innerText = formatNumberReturn(subtotal);
+        document.getElementById("gfactTotalPedido").innerText = formatNumberReturn(total);
     } else {
         $('#pedidoFacturaGModal').modal('toggle');
         $('html,body').css('overflow', 'hidden');
@@ -1143,12 +1249,57 @@ function facturarPedido(numMesa,
         $.post('FacturaG', { numMesa , idPedido , nomMesero , idCliente : $('#gfactIDClientePedido').val() , nomCliente : $('#gfactBusquedaClientePedido').val() , cedulaCliente : $('#gfactNumClientePedido').val() , importe : resetNumberReturn($('#gfactImporteClientePedido').val()) }, function(response){
             if (response.length > 0){
                 window.open("http://localhost:8086/INTERCCO/ArchivosSistema/Facturas/"+response, "Factura", "width=500, height=500");
+                window.location = "Pedidos?mensaje=YFacturar";
+//                window.open("http://succco.jelastic.saveincloud.net/ArchivosSistema/Facturas/"+response, "Factura", "width=500, height=500");
             } else {
                 console.log("Fallo la generación de la Factura.");
             }
             $('html,body').css('overflow', 'auto');
             $('.pedidosGenerandoFactura').css('display', 'none');
         });
+    }
+}
+function verFactura(idFactura){
+    window.open("http://localhost:8086/INTERCCO/ArchivosSistema/Facturas/"+idFactura+".pdf", "Factura", "width=500, height=500");
+}
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="Facturas">
+function facturasVer(nomMesero,
+        nomCajero,
+        nomCliente,
+        mesa,
+        importe,
+        subtotal,
+        total,
+        detallesPedido){
+    
+    document.getElementById('verMeseroFacturas').innerText = DescifrarASCII(nomMesero);
+    document.getElementById('verCajeroFacturas').innerText = DescifrarASCII(nomCajero);
+    document.getElementById('verClienteFacturas').innerText = DescifrarASCII(nomCliente);
+    document.getElementById('verMesaFacturas').innerText = "Mesa "+mesa;
+    document.getElementById('verImporteFacturas').innerText = formatNumberReturn(importe);
+    document.getElementById('verCambioFacturas').innerText = formatNumberReturn(parseInt(importe) - parseInt(total));
+    document.getElementById('verSubtotalFacturas').innerText = formatNumberReturn(subtotal);
+    document.getElementById('verTotalFacturas').innerText = formatNumberReturn(total);
+    
+    detallesPedido = DescifrarASCII(detallesPedido);
+    var arregloDetallesPedido = detallesPedido.split(":");
+    $('.tablaListarProductos').DataTable().clear().draw();
+    
+    for (var i = 0; i < arregloDetallesPedido.length; i++) {
+        var arregloClasificacion = arregloDetallesPedido[i].split("-");
+        var arregloCategoria = arregloClasificacion[0].split(";");
+        var arregloProducto = arregloClasificacion[1].split(";");
+        var arregloDetallePedido = arregloClasificacion[2].split(";");
+        
+        $('.tablaListarProductos').DataTable().row.add( [
+            DescifrarASCII(arregloCategoria[1]),
+            DescifrarASCII(arregloProducto[1]),
+            arregloDetallePedido[1],
+            DescifrarASCII(arregloDetallePedido[2])==="Vacio"?"No tiene":DescifrarASCII(arregloDetallePedido[2]),
+            formatNumberReturn(arregloDetallePedido[3])
+        ] ).draw();
     }
 }
 // </editor-fold>
@@ -1643,11 +1794,32 @@ function productosActualizarModal(idprod,
     validacionExistenciaInsumosP("actua");
     autocompleteInsumosProducto("actua");
 }
-function productosEliminarModal(idprod,
+function productosEliminarModal(generoU,
+        idprod,
         nombre) {
             
-    document.getElementById('elimIDProducto').value = idprod;
-    document.getElementById('elimNombreProducto').innerText = DescifrarASCII(nombre);
+    $.confirm({
+        animation: 'rotateX',
+        closeAnimation: 'zoom',
+        title: '¿Esta Segur'+(generoU==="Masculino"?"o":"a")+' de Eliminar?',
+        content: 'Cuando eliminé el producto <b style="color:#e74c3c;">"'+DescifrarASCII(nombre)+'"</b>, también se eliminarán todas las promociones existentes de él.',
+        type: 'red',
+        icon: 'fa fa-warning',
+        typeAnimated: true,
+        closeIconClass: 'fa fa-close',
+        buttons: {
+            Cancelar: {
+                text: 'Cancelar',
+                btnClass: 'btn-default'
+            }, Eliminar: {
+                text: 'Eliminar',
+                btnClass: 'btn-red',
+                action: function(){
+                    window.location = "ProductoE?elimIDProducto="+idprod;
+                }
+            }
+        }
+    });
 }
 // </editor-fold>
 
@@ -1659,11 +1831,32 @@ function categoriasActualizarModal(idcate,
     document.getElementById('actuaIDCategoria').value = idcate;
     document.getElementById('actuaNombreCategoria').value = DescifrarASCII(nombre);
 }
-function categoriasEliminarModal(idcate,
+function categoriasEliminarModal(generoU,
+        idcate,
         nombre) {
             
-    document.getElementById('elimIDCategoria').value = idcate;
-    document.getElementById('elimNombreCategoria').innerText = DescifrarASCII(nombre);
+    $.confirm({
+        animation: 'rotateX',
+        closeAnimation: 'zoom',
+        title: '¿Esta Segur'+(generoU==="Masculino"?"o":"a")+' de Eliminar?',
+        content: 'Cuando eliminé la categoría <b style="color:#e74c3c;">"'+DescifrarASCII(nombre)+'"</b>, también se eliminarán todos los productos de está más sus promociones.',
+        type: 'red',
+        icon: 'fa fa-warning',
+        typeAnimated: true,
+        closeIconClass: 'fa fa-close',
+        buttons: {
+            Cancelar: {
+                text: 'Cancelar',
+                btnClass: 'btn-default'
+            }, Eliminar: {
+                text: 'Eliminar',
+                btnClass: 'btn-red',
+                action: function(){
+                    window.location = "CategoriaE?elimIDCategoria="+idcate;
+                }
+            }
+        }
+    });
 }
 // </editor-fold>
 
@@ -2047,11 +2240,32 @@ function usuarioVerModal(roleusu,
         $('#usuariosVerModal #verTituloInformacionUsuario').hide();
     }
 }
-function usuarioEliminarModal(idusu,
+function usuarioEliminarModal(generoU,
+        idusu,
         emusu) {
             
-    document.getElementById('elimIDUsuario').value = idusu;
-    document.getElementById('elimEmailUsuario').innerText = DescifrarASCII(emusu);
+    $.confirm({
+        animation: 'rotateX',
+        closeAnimation: 'zoom',
+        title: '¿Esta Segur'+(generoU==="Masculino"?"o":"a")+' de Eliminar?',
+        content: 'Cuando eliminé el usuario <b style="color:#e74c3c;">"'+DescifrarASCII(emusu)+'"</b>, también se eliminarán todas las solicitudes PQRSF de el.',
+        type: 'red',
+        icon: 'fa fa-warning',
+        typeAnimated: true,
+        closeIconClass: 'fa fa-close',
+        buttons: {
+            Cancelar: {
+                text: 'Cancelar',
+                btnClass: 'btn-default'
+            }, Eliminar: {
+                text: 'Eliminar',
+                btnClass: 'btn-red',
+                action: function(){
+                    window.location = "UsuarioE?elimIDUsuario="+idusu;
+                }
+            }
+        }
+    });
 }
 // </editor-fold> 
 
@@ -2193,11 +2407,32 @@ function proveedorVerModal(nombreCOE,
         document.getElementById('verMovilPCProveedor').innerText = DescifrarASCII(movilPC);
     }
 }
-function proveedorEliminarModal(idProveedor,
+function proveedorEliminarModal(generoU,
+        idProveedor,
         nombreCOE) {
             
-    document.getElementById('elimIDProveedor').value = idProveedor;
-    document.getElementById('elimCOEProveedor').innerText = DescifrarASCII(nombreCOE);
+    $.confirm({
+        animation: 'rotateX',
+        closeAnimation: 'zoom',
+        title: '¿Esta Segur'+(generoU==="Masculino"?"o":"a")+' de Eliminar?',
+        content: 'Cuando eliminé el proveedor <b style="color:#e74c3c;">"'+DescifrarASCII(nombreCOE)+'"</b>, también se eliminarán todos los insumos de cada sede proveídos por el.',
+        type: 'red',
+        icon: 'fa fa-warning',
+        typeAnimated: true,
+        closeIconClass: 'fa fa-close',
+        buttons: {
+            Cancelar: {
+                text: 'Cancelar',
+                btnClass: 'btn-default'
+            }, Eliminar: {
+                text: 'Eliminar',
+                btnClass: 'btn-red',
+                action: function(){
+                    window.location = "ProveedorE?elimIDProveedor="+idProveedor;
+                }
+            }
+        }
+    });
 }
 // </editor-fold>
 
@@ -2320,11 +2555,32 @@ function insumoVerModal(referencia,
         document.getElementById('verMovilPCProInsumo').innerText = DescifrarASCII(movilPC);
     }
 }
-function insumoEliminarModal(idinsumo,
+function insumoEliminarModal(generoU,
+        idinsumo,
         nombre) {
             
-    document.getElementById('elimIDInsumo').value = idinsumo;
-    document.getElementById('elimNombreInsumo').innerText = DescifrarASCII(nombre);
+    $.confirm({
+        animation: 'rotateX',
+        closeAnimation: 'zoom',
+        title: '¿Esta Segur'+(generoU==="Masculino"?"o":"a")+' de Eliminar?',
+        content: 'Cuando eliminé el insumo <b style="color:#e74c3c;">"'+DescifrarASCII(nombre)+'"</b>, también se elimina en todos los insumos que gasta cada producto.',
+        type: 'red',
+        icon: 'fa fa-warning',
+        typeAnimated: true,
+        closeIconClass: 'fa fa-close',
+        buttons: {
+            Cancelar: {
+                text: 'Cancelar',
+                btnClass: 'btn-default'
+            }, Eliminar: {
+                text: 'Eliminar',
+                btnClass: 'btn-red',
+                action: function(){
+                    window.location = "InsumoE?elimIDInsumo="+idinsumo;
+                }
+            }
+        }
+    });
 }
 // </editor-fold>
 // </editor-fold>

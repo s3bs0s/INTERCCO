@@ -88,7 +88,7 @@
                                     </div>
                                 </td>
                             <% } else if (pqrsfIndex.getEstado().equals("Cancelado")){ %>
-                                <td class="purple">Cancelado</td>
+                                <td class="active-os">Cancelado</td>
                                 <td>
                                     <div class="td-espaciado">
                                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pqrsfVerModal" onClick="pqrsfVerModal('<%= pqrsfIndex.getFchRegistro()%>', '<%= pqrsfIndex.getHoraRegistro()%>', '<%= pqrsfIndex.getTipoSolicitud()%>', '<%= pqrsfIndex.getDirigidoA()%>', '<%= pqrsfIndex.getConsulta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getNombreInterlocutor())%>', '<%= pqrsfIndex.getRespuesta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getIdSedeDirigido())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
@@ -99,7 +99,7 @@
                                 <td>
                                     <div class="td-espaciado">
                                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pqrsfVerModal" onClick="pqrsfVerModal('<%= pqrsfIndex.getFchRegistro()%>', '<%= pqrsfIndex.getHoraRegistro()%>', '<%= pqrsfIndex.getTipoSolicitud()%>', '<%= pqrsfIndex.getDirigidoA()%>', '<%= pqrsfIndex.getConsulta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getNombreInterlocutor())%>', '<%= pqrsfIndex.getRespuesta()%>', '<%= cAIndexPqrsf.CifrarASCII(pqrsfIndex.getIdSedeDirigido())%>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                        <button type="button" onClick="window.location = 'PqrsfDyC?mensa=Cancelado&idPqrsf='+<%= pqrsfIndex.getIdPqrsf()%>;" class="btn btn-purple"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
+                                        <button type="button" onClick="window.location = 'PqrsfDyC?mensa=Cancelado&idPqrsf='+<%= pqrsfIndex.getIdPqrsf()%>;" class="btn btn-active-os"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
                                     </div>
                                 </td>
                             <% } %>

@@ -16,6 +16,11 @@ public class Facturas {
     private String NomCliente;
     private String NomCajero;
     private String NomSede;
+    private int IdMesero;
+    private int SubTotal;
+    private String NomMesero;
+    private String DetallesPedidos;
+    private int Mesa;
 
     public Facturas() {
     }
@@ -110,6 +115,38 @@ public class Facturas {
     /* Metodos Adicionales para la Vista */
     
     
+    public int getIdMesero() {
+        return IdMesero;
+    }
+
+    public void setIdMesero(int IdMesero) {
+        this.IdMesero = IdMesero;
+    }
+    
+    public String getNomMesero() {
+        return NomMesero;
+    }
+
+    public void setNomMesero(String NomMesero) {
+        this.NomMesero = NomMesero;
+    }
+    
+    public int getMesa() {
+        return Mesa;
+    }
+
+    public void setMesa(int Mesa) {
+        this.Mesa = Mesa;
+    }
+
+    public int getSubTotal() {
+        return SubTotal;
+    }
+
+    public void setSubTotal(int SubTotal) {
+        this.SubTotal = SubTotal;
+    }
+    
     public String getNomCliente() {
         return NomCliente;
     }
@@ -132,6 +169,14 @@ public class Facturas {
 
     public void setNomSede(String NomSede) {
         this.NomSede = NomSede;
+    }
+
+    public String getDetallesPedidos() {
+        return DetallesPedidos;
+    }
+
+    public void setDetallesPedidos(String DetallesPedidos) {
+        this.DetallesPedidos = DetallesPedidos;
     }
     
     /* Metodos de Apoyo */

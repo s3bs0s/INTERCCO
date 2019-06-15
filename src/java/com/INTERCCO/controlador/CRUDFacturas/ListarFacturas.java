@@ -33,6 +33,8 @@ public class ListarFacturas extends HttpServlet {
             ResultSet rs3;
             PreparedStatement ps4;
             ResultSet rs4;
+            PreparedStatement ps5;
+            ResultSet rs5;
 
             ps = con.prepareStatement("SELECT * FROM facturas;");
             rs = ps.executeQuery();
@@ -47,39 +49,87 @@ public class ListarFacturas extends HttpServlet {
                 ft.setIdCajero(rs.getInt("idCajero"));
                 ft.setIdCliente(rs.getInt("idCliente"));
 
-//                ps2 = con.prepareStatement("SELECT * FROM detalles_pedidos WHERE idPedido=? AND existencia=?;");
-//                ps2.setInt(1, rs.getInt("idPedidos"));
-//                ps2.setString(2, "Y");
-//                rs2 = ps2.executeQuery();
-//                String cadenaDetallesP = "";
-//                while (rs2.next()) {
-//                    ps3 = con.prepareStatement("SELECT * FROM productos WHERE idProductos=?;");
-//                    ps3.setInt(1, rs2.getInt("idProducto"));
-//                    rs3 = ps3.executeQuery();
-//                    if (rs3.next()) {
-//                        ps4 = con.prepareStatement("SELECT * FROM categorias WHERE idCategorias=?;");
-//                        ps4.setInt(1, rs3.getInt("idCategoria"));
-//                        rs4 = ps4.executeQuery();
-//                        if (rs4.next()) {
-//
-//                            cadenaDetallesP += rs4.getInt("idCategorias")+";"+cA.CifrarASCII(rs4.getString("nombre"))+"-"+
-//                                    rs3.getInt("idProductos")+";"+cA.CifrarASCII(rs3.getString("nombre"))+";"+rs3.getString("descripcion")+";"+rs3.getInt("precio")+"-"+
-//                                    rs2.getInt("idDetalles_Pedidos")+";"+rs2.getInt("cantidad")+";"+rs2.getString("observacion")+";"+rs2.getInt("sub_total")+":";
-//                            // Categorias: id, nombre -
-//                            // Productos: id, nombre, descripcion, precio -
-//                            // DetallesPedido: id, cantidad, observacion, subtotal :
-//
-//                        }
-//                        ps4.close();
-//                        rs4.close();
-//                    }
-//                    ps3.close();
-//                    rs3.close();
-//                }
-//                cadenaDetallesP = cadenaDetallesP.substring(0, cadenaDetallesP.length() - 1);
-//                pd.setDetallesPedidos(cadenaDetallesP);
-//                ps2.close();
-//                rs2.close();
+                
+                int idPedidos = 0;
+                ps2 = con.prepareStatement("SELECT * FROM pedidos WHERE idFactura=?;");
+                ps2.setInt(1, rs.getInt("idFacturas"));
+                rs2 = ps2.executeQuery();
+                if (rs2.next()) {
+                    ft.setSubTotal(rs2.getInt("sub_total"));
+                    ft.setIdMesero(rs2.getInt("idMesero"));
+                    ft.setMesa(rs2.getInt("num_mesa"));
+                    idPedidos = rs2.getInt("idPedidos");
+                    
+                    ps3 = con.prepareStatement("SELECT nombres FROM usuarios WHERE idUsuarios=?;");
+                    ps3.setInt(1, rs2.getInt("idMesero"));
+                    rs3 = ps3.executeQuery();
+                    if (rs3.next()) {
+                        String nombresUMesero = rs3.getString("nombres");
+
+                        ps3.close();
+                        rs3.close();
+                        ps3 = con.prepareStatement("SELECT apellidos FROM info_usuarios WHERE idUsuario=?;");
+                        ps3.setInt(1, rs2.getInt("idMesero"));
+                        rs3 = ps3.executeQuery();
+                        if (rs3.next()) {
+                            ft.setNomMesero(nombresUMesero+" "+rs3.getString("apellidos"));
+                        }
+                    }
+                    ps3.close();
+                    rs3.close();
+                }
+                ps2.close();
+                rs2.close();
+                
+                
+                ps2 = con.prepareStatement("SELECT * FROM detalles_pedidos WHERE idPedido=? AND existencia=?;");
+                ps2.setInt(1, idPedidos);
+                ps2.setString(2, "Y");
+                rs2 = ps2.executeQuery();
+                String cadenaDetallesP = "";
+                while (rs2.next()) {
+                    ps3 = con.prepareStatement("SELECT * FROM productos WHERE idProductos=?;");
+                    ps3.setInt(1, rs2.getInt("idProducto"));
+                    rs3 = ps3.executeQuery();
+                    if (rs3.next()) {
+                        ps4 = con.prepareStatement("SELECT * FROM categorias WHERE idCategorias=?;");
+                        ps4.setInt(1, rs3.getInt("idCategoria"));
+                        rs4 = ps4.executeQuery();
+                        if (rs4.next()) {
+                            
+                            cadenaDetallesP += rs4.getInt("idCategorias")+";"+cA.CifrarASCII(rs4.getString("nombre"))+"-"+rs3.getInt("idProductos")+";"+cA.CifrarASCII(rs3.getString("nombre"))+";"+rs3.getString("descripcion")+";";
+                                
+                                ps5 = con.prepareStatement("SELECT * FROM promociones WHERE idProducto=? AND existencia=?;");
+                                ps5.setInt(1, rs2.getInt("idProducto"));
+                                ps5.setString(2, "Y");
+                                rs5 = ps5.executeQuery();
+                                if (rs5.next()) {
+                                    float precioDescuento = rs3.getInt("precio") * rs5.getFloat("porcentaje_promo");
+                                    int precioDescuentoFinal = rs3.getInt("precio") - ( (int)precioDescuento / 100 );
+                                    
+                                    cadenaDetallesP += precioDescuentoFinal+"-";
+                                } else {
+                                    cadenaDetallesP += rs3.getInt("precio")+"-";
+                                }
+                                ps5.close();
+                                rs5.close();
+
+                                cadenaDetallesP += rs2.getInt("idDetalles_Pedidos")+";"+rs2.getInt("cantidad")+";"+rs2.getString("observacion")+";"+rs2.getInt("sub_total")+":";
+                                // Categorias: id, nombre -
+                                // Productos: id, nombre, descripcion, precio -
+                                // DetallesPedido: id, cantidad, observacion, subtotal :
+
+                        }
+                        ps4.close();
+                        rs4.close();
+                    }
+                    ps3.close();
+                    rs3.close();
+                }
+                cadenaDetallesP = cadenaDetallesP.substring(0, cadenaDetallesP.length() - 1);
+                ft.setDetallesPedidos(cadenaDetallesP);
+                ps2.close();
+                rs2.close();
 
 
                 ps2 = con.prepareStatement("SELECT nombres FROM usuarios WHERE idUsuarios=?;");
@@ -101,23 +151,27 @@ public class ListarFacturas extends HttpServlet {
                 rs2.close();
 
                 
-//                ps2 = con.prepareStatement("SELECT nombres FROM usuarios WHERE idUsuarios=?;");
-//                ps2.setInt(1, rs.getInt("idCliente"));
-//                rs2 = ps2.executeQuery();
-//                if (rs2.next()) {
-//                    String nombresCliente = rs2.getString("nombres");
-//
-//                    ps2.close();
-//                    rs2.close();
-//                    ps2 = con.prepareStatement("SELECT apellidos FROM info_usuarios WHERE idUsuario=?;");
-//                    ps2.setInt(1, rs.getInt("idCliente"));
-//                    rs2 = ps2.executeQuery();
-//                    if (rs2.next()) {
-//                        ft.setNomCliente(nombresCliente+" "+rs2.getString("apellidos"));
-//                    }
-//                }
-//                ps2.close();
-//                rs2.close();
+                if (rs.getString("idCliente") != null){
+                    ps2 = con.prepareStatement("SELECT nombres FROM usuarios WHERE idUsuarios=?;");
+                    ps2.setInt(1, rs.getInt("idCliente"));
+                    rs2 = ps2.executeQuery();
+                    if (rs2.next()) {
+                        String nombresCliente = rs2.getString("nombres");
+
+                        ps2.close();
+                        rs2.close();
+                        ps2 = con.prepareStatement("SELECT apellidos FROM info_usuarios WHERE idUsuario=?;");
+                        ps2.setInt(1, rs.getInt("idCliente"));
+                        rs2 = ps2.executeQuery();
+                        if (rs2.next()) {
+                            ft.setNomCliente(nombresCliente+" "+rs2.getString("apellidos"));
+                        }
+                    }
+                    ps2.close();
+                    rs2.close();
+                } else {
+                    ft.setNomCliente(rs.getString("identi_cliente"));
+                }
 
 
                 ps2 = con.prepareStatement("SELECT nombre FROM sedes WHERE idSedes=?;");

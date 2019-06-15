@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class EstadosCocineroPedido extends HttpServlet {
 
@@ -19,6 +20,9 @@ public class EstadosCocineroPedido extends HttpServlet {
             String idPedido = request.getParameter("idPed");
             String estado = request.getParameter("estado");
             
+            HttpSession session = request.getSession();
+            String rolUsuario = (String) session.getAttribute("rolUsuario");
+            
             ConectaDB cdb = new ConectaDB();
             Connection con = cdb.conectar();
             PreparedStatement ps;
@@ -26,8 +30,10 @@ public class EstadosCocineroPedido extends HttpServlet {
             ps = con.prepareStatement("UPDATE pedidos SET estado=? WHERE idPedidos=?;");
             if (estado.equals("R")){
                 ps.setString(1, "En espera");
-            } else {
+            } else if (estado.equals("L")) {
                 ps.setString(1, "Entregado");
+            } else {
+                ps.setString(1, "En produccion");
             }
             ps.setInt(2, Integer.parseInt(idPedido));
             int res = ps.executeUpdate();
@@ -36,27 +42,43 @@ public class EstadosCocineroPedido extends HttpServlet {
                 if (estado.equals("R")){
                     request.getRequestDispatcher("index").forward(request, response);
                 } else {
-                    request.getRequestDispatcher("Pedidos").forward(request, response);
+                    if (rolUsuario.equals("Gerente")){
+                        request.getRequestDispatcher("Pedidos?mensaje="+(estado.equals("L")?"YEntregado":"YProduccion")).forward(request, response);
+                    } else {
+                        request.getRequestDispatcher("Pedidos").forward(request, response);
+                    }
                 }
             } else {
                 if (estado.equals("R")){
                     request.getRequestDispatcher("Pedidos?mensaje=NeR").forward(request, response);
                     System.out.println("ERROR de RETIRARSE el dato de PEDIDO.");
                 } else {
-                    request.getRequestDispatcher("Pedidos?mensaje=NeL").forward(request, response);
-                    System.out.println("ERROR de LISTO el dato de PEDIDO.");
+                    if (rolUsuario.equals("Gerente")){
+                        request.getRequestDispatcher("Pedidos?mensaje=Ne").forward(request, response);
+                        System.out.println("ERROR de LISTO el dato de PEDIDO.");
+                    } else {
+                        request.getRequestDispatcher("Pedidos?mensaje=NeL").forward(request, response);
+                        System.out.println("ERROR de LISTO el dato de PEDIDO.");
+                    }
                 }
             }
             cdb.cierraConexion();
             
         } catch (SQLException sql) {
+            HttpSession session = request.getSession();
+            String rolUsuario = (String) session.getAttribute("rolUsuario");
             String estado = request.getParameter("estado");
             if (estado.equals("R")){
                 request.getRequestDispatcher("Pedidos?mensaje=NeR").forward(request, response);
                 System.out.println("ERROR en MySQL RETIRANDOSE los datos de PEDIDOS.");
             } else {
-                request.getRequestDispatcher("Pedidos?mensaje=NeL").forward(request, response);
-                System.out.println("ERROR en MySQL LISTO los datos de PEDIDOS.");
+                if (rolUsuario.equals("Gerente")){
+                    request.getRequestDispatcher("Pedidos?mensaje=Ne").forward(request, response);
+                    System.out.println("ERROR en MySQL LISTO los datos de PEDIDOS.");
+                } else {
+                    request.getRequestDispatcher("Pedidos?mensaje=NeL").forward(request, response);
+                    System.out.println("ERROR en MySQL LISTO los datos de PEDIDOS.");
+                }
             }
             sql.getStackTrace();
         } catch (Exception alle){

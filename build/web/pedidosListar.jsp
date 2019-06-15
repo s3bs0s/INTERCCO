@@ -16,7 +16,7 @@
             request.getRequestDispatcher("index").forward(request, response);
         } else {
             if (rolUsuario.equals("Gerente") || rolUsuario.equals("Mesero") || rolUsuario.equals("AdminS")){ %>
-            
+                
                 <div id="pedidosRegistrar">
                     <ul class="breadcrumb">
                         <li><a href="index">Inicio</a></li>
@@ -25,6 +25,7 @@
                     </ul>
                     <section class="section-rp">
                         <form id="regFormPedidos" action="#" method="POST">
+                            <div id="regVentanaUploadPedidos" class="pedidosVentanaCargando"><img src="Estilos/css/ajax-loader.gif" alt="LoaderFactura"></div>
                             <div id="regCAJProductosPedidos"></div>
                             <article>
 
@@ -57,7 +58,7 @@
                                     </div>
                                     <div class="input-group cont-btn">
                                         <div class="cont-btn-principal">
-                                            <button type="button" data-toggle="modal" data-target="#productoPAggVerModal" onclick="productoPAggVerModal('reg')" class="btn-rp btn btn-ip btn-principal">Información del Producto</button>
+                                            <button type="button" onclick="productoPAggVerModal('reg')" class="btn-rp btn btn-ip btn-principal">Información del Producto</button>
                                         </div>
                                     </div>
                                     <div id="regCJSProductosPedidos" class="input-group"></div>
@@ -114,6 +115,7 @@
                     </ul>
                     <section class="section-rp">
                         <form id="actuaFormPedidos" action="#" method="POST">
+                            <div id="actuaVentanaUploadPedidos" class="pedidosVentanaCargando"><img src="Estilos/css/ajax-loader.gif" alt="LoaderFactura"></div>
                             <div id="actuaCAJProductosPedidos"></div>
                             <article>
 
@@ -149,7 +151,7 @@
                                     </div>
                                     <div class="input-group cont-btn">
                                         <div class="cont-btn-principal">
-                                            <button type="button" data-toggle="modal" data-target="#productoPAggVerModal" onclick="productoPAggVerModal('actua')" class="btn-rp btn btn-ip btn-principal">Información del Producto</button>
+                                            <button type="button" onclick="productoPAggVerModal('actua')" class="btn-rp btn btn-ip btn-principal">Información del Producto</button>
                                         </div>
                                     </div>
                                     <div id="actuaCJSProductosPedidos" class="input-group"></div>
@@ -217,6 +219,16 @@
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     <strong>¡Error!</strong> El pedido no se pudo registrar por un error general en las bases de datos, contacte al administrador del sistema.
                                 </div>
+                                <% } else if (mens.equals("YEntregado")){ %>
+                                <div class="alert alert-success alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>¡Perfecto!</strong> El pedido fue entregado con éxito.
+                                </div>
+                                <% } else if (mens.equals("YProduccion")){ %>
+                                <div class="alert alert-success alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>¡Perfecto!</strong> El pedido esta fue actualizado a producción con éxito.
+                                </div>
                                 <% } else if (mens.equals("YActualizar")){ %>
                                 <div class="alert alert-success alert-dismissible">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -250,6 +262,7 @@
                             <div class="tabla-reg">
                                 <button type="button" id="btnRegistrarPedidos" class="btn">Registrar <span class="tabla-reg-m"><span class="glyphicon glyphicon-plus"></span></span></button>
                             </div>
+                            <div class="pedidosGenerandoFactura"><img src="Estilos/css/ajax-loader.gif" alt="LoaderFactura"></div>
                             <% ArrayList<Pedidos> listaPedidos = (ArrayList) request.getAttribute("listaPed"); %>
                             <div class="table-responsive">
                                 <table class="tablaListarPedidosGerente table-bordered table">
@@ -306,9 +319,17 @@
                                                             <% if (pedi.getEstado().equals("En espera")){ %>
                                                                 <button type="button" class="btn btn-warning" onclick="pedidosActualizar('<%= pedi.getIdPedidos() %>', '<%= pedi.getNumMesa()%>', '<%= pedi.getSubTotal()%>', '<%= cA.CifrarASCII(pedi.getDetallesPedidos()) %>')"><span class="glyphicon glyphicon-edit"></span> Editar</button>
                                                                 <button type="button" class="btn btn-danger" onClick="window.location = 'PedidoC?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
+                                                                <button type="button" class="btn btn-info" onclick="window.location = 'PedidoEC?estado=P&idPed=<%= pedi.getIdPedidos() %>'"><span class="icon-hour-glass"></span> En Producción</button>
+                                                            <% }
+                                                            if (pedi.getEstado().equals("En produccion")){ %>
+                                                                <button type="button" class="btn btn-success" onclick="window.location = 'PedidoEC?estado=L&idPed=<%= pedi.getIdPedidos() %>'"><span class="glyphicon glyphicon-ok"></span> Entregar</button>
                                                             <% }
                                                             if (pedi.getEstado().equals("Entregado")){ %>
-                                                                <button type="button" class="btn btn-active-os" onClick="window.location = 'PedidoD?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-transfer"></span> Devolución</button>
+                                                                <button type="button" class="btn btn-purple" onClick="window.location = 'PedidoD?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-transfer"></span> Devolución</button>
+                                                                <button type="button" class="btn btn-active-os" data-toggle="modal" data-target="#pedidoFacturaGModal" onclick="facturarPedido('<%= pedi.getNumMesa() %>', '<%= pedi.getIdPedidos()%>', '<%= cA.CifrarASCII(pedi.getNomMesero()) %>', 'ver', '<%= pedi.getSubTotal()%>', '<%= pedi.getTotal()%>')"><span class="icon-clipboard"></span> Facturar</button>
+                                                            <% }
+                                                            if (pedi.getEstado().equals("Facturado")){ %>
+                                                                <button type="button" class="btn btn-active-os" onclick="verFactura('<%= pedi.getIdFactura() %>')"><span class="glyphicon glyphicon-download-alt"></span> Ver Factura</button>
                                                             <% } %>
                                                         </div>
                                                     </td>
@@ -415,11 +436,11 @@
                                                     <% } else if (pedi.getEstado().equals("Entregado")){ %>
                                                         <td class="success"><%= pedi.getEstado() %></td>
                                                     <% } else if (pedi.getEstado().equals("Devuelto")){ %>
-                                                        <td class="purple"><%= pedi.getEstado() %></td>
+                                                        <td class="purple">¡<%= pedi.getEstado() %>!</td>
                                                     <% } else if (pedi.getEstado().equals("Cancelado")){ %>
-                                                        <td class="danger"><%= pedi.getEstado() %></td>
+                                                        <td class="danger">¡<%= pedi.getEstado() %>!</td>
                                                     <% } else if (pedi.getEstado().equals("Facturado")){ %>
-                                                        <td class="active-os"><%= pedi.getEstado() %></td>
+                                                        <td class="active-os">¡<%= pedi.getEstado() %>!</td>
                                                     <% } %>
                                                     <td>
                                                         <div class="td-espaciado">
@@ -429,7 +450,7 @@
                                                                 <button type="button" class="btn btn-danger" onClick="window.location = 'PedidoC?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-ban-circle"></span> Cancelar</button>
                                                             <% }
                                                             if (pedi.getEstado().equals("Entregado")){ %>
-                                                                <button type="button" class="btn btn-active-os" onClick="window.location = 'PedidoD?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-transfer"></span> Devolución</button>
+                                                                <button type="button" class="btn btn-active-os" onClick="window.location = 'PedidoD?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-transfer"></span> Devolver</button>
                                                             <% } %>
                                                         </div>
                                                     </td>
@@ -469,18 +490,19 @@
                         <% ArrayList<Pedidos> listaPedidos = (ArrayList) request.getAttribute("listaPed");
                         if (listaPedidos.size() > 0){
                             for (Pedidos  pedi : listaPedidos) { %>
-                                <h1><span class="icon-hour-glass"></span> Pedido en producción</h1>
+                                <h1><span class="icon-hour-glass"></span> Pedido en producción para la Mesa #<%= pedi.getNumMesa() %></h1>
                                 <div class="pedidosCAJBtnCocinero">
                                     <button type="button" onclick="window.location = 'PedidoEC?estado=R&idPed=<%= pedi.getIdPedidos() %>'" class="btn">Retirarme<span class="pedidosBtnAlterCocinero">Descarte el Pedido</span></button>
                                     <button type="button" onclick="window.location = 'PedidoEC?estado=L&idPed=<%= pedi.getIdPedidos() %>'" title="Debe terminar de Produccir los Productos para Entregar el pedido." id="pedidosBtnListoCocinero" class="btn">¡Entregar Pedido!<span class="pedidosBtnAlterCocinero">Siguiente Pedido</span></button>
                                 </div>
                                 <input type="hidden" value="<%= pedi.getDetallesPedidos() %>" id="pedidosProductosCocinero">
                                 <div class="pedidosCAJCarouselCocinero">
+                                    <div class="pedidosTituloCarouselCocinero"><p>Carrusel con los Insumos que contiene cada Producto</p></div>
                                     <div class="owl-carousel owl-theme owl-loaded"></div>
                                 </div>
                             <% }
                         } else { %>
-                            <h1><span class="icon-switch"></span> No hay pedidos disponibles</h1>
+                        <span class="pedidosNoHayCocinero"><span class="icon-switch"></span><span class="me">No hay pedidos Disponibles para Produccir</span></span>
                         <% } %>
                     </section>
                 </div>
@@ -586,9 +608,10 @@
                                                     <div class="td-espaciado">
                                                         <% if (pedi.getEstado().equals("Entregado")){ %>
                                                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pedidosVerModal" onclick="pedidosVer('<%= rolUsuario %>', '<%= cA.CifrarASCII(pedi.getNomMesero()) %>', '<%= cA.CifrarASCII(pedi.getNomCliente()) %>', '<%= pedi.getNumMesa()%>', '<%= pedi.getSubTotal()%>', '<%= cA.CifrarASCII(pedi.getDetallesPedidos()) %>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                            <button type="button" class="btn btn-active-os" data-toggle="modal" data-target="#pedidoFacturaGModal" onclick="facturarPedido('<%= pedi.getNumMesa() %>', '<%= pedi.getIdPedidos()%>', '<%= cA.CifrarASCII(pedi.getNomMesero()) %>', 'ver')"><span class="icon-clipboard"></span> Facturar</button>
+                                                            <button type="button" class="btn btn-active-os" data-toggle="modal" data-target="#pedidoFacturaGModal" onclick="facturarPedido('<%= pedi.getNumMesa() %>', '<%= pedi.getIdPedidos()%>', '<%= cA.CifrarASCII(pedi.getNomMesero()) %>', 'ver', '<%= pedi.getSubTotal()%>', '<%= pedi.getTotal()%>')"><span class="icon-clipboard"></span> Facturar</button>
                                                         <% } else { %>
-                                                            <button type="button" class="btn btn-active-os"><span class="glyphicon glyphicon-download-alt"></span> Descargar Factura</button>
+                                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pedidosVerModal" onclick="pedidosVer('<%= rolUsuario %>', '<%= cA.CifrarASCII(pedi.getNomMesero()) %>', '<%= cA.CifrarASCII(pedi.getNomCliente()) %>', '<%= pedi.getNumMesa()%>', '<%= pedi.getSubTotal()%>', '<%= cA.CifrarASCII(pedi.getDetallesPedidos()) %>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+                                                            <button type="button" class="btn btn-active-os" onclick="verFactura('<%= pedi.getIdFactura() %>')"><span class="glyphicon glyphicon-download-alt"></span> Ver Factura</button>
                                                         <% } %>
                                                     </div>
                                                 </td>

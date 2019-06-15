@@ -45,6 +45,8 @@ public class ListarPedidos extends HttpServlet {
             ResultSet rs3;
             PreparedStatement ps4;
             ResultSet rs4;
+            PreparedStatement ps5;
+            ResultSet rs5;
             
             if (rolUsuario.equals("AdminS") || rolUsuario.equals("Gerente") || rolUsuario.equals("Cajero") || rolUsuario.equals("Mesero")){
                 
@@ -64,6 +66,19 @@ public class ListarPedidos extends HttpServlet {
                     pd.setIdSede(rs.getInt("idSede"));
                     pd.setIdMesero(rs.getInt("idMesero"));
                     pd.setIdCliente(rs.getInt("idCliente"));
+                    
+                    if (rs.getString("idFactura") != null){
+                        pd.setIdFactura(rs.getInt("idFactura"));
+                    }
+                    
+                    ps2 = con.prepareStatement("SELECT porcentaje FROM iva;");
+                    rs2 = ps2.executeQuery();
+                    if (rs2.next()){
+                        float baseIva = rs.getInt("sub_total") * rs2.getFloat("porcentaje");
+                        pd.setTotal(rs.getInt("sub_total") + ( (int)baseIva / 100));
+                    }
+                    ps2.close();
+                    rs2.close();
 
                     ps2 = con.prepareStatement("SELECT * FROM detalles_pedidos WHERE idPedido=? AND existencia=?;");
                     ps2.setInt(1, rs.getInt("idPedidos"));
@@ -79,10 +94,25 @@ public class ListarPedidos extends HttpServlet {
                             ps4.setInt(1, rs3.getInt("idCategoria"));
                             rs4 = ps4.executeQuery();
                             if (rs4.next()) {
+                                
+                                cadenaDetallesP += rs4.getInt("idCategorias")+";"+cA.CifrarASCII(rs4.getString("nombre"))+"-"+rs3.getInt("idProductos")+";"+cA.CifrarASCII(rs3.getString("nombre"))+";"+rs3.getString("descripcion")+";";
+                                
+                                ps5 = con.prepareStatement("SELECT * FROM promociones WHERE idProducto=? AND existencia=?;");
+                                ps5.setInt(1, rs2.getInt("idProducto"));
+                                ps5.setString(2, "Y");
+                                rs5 = ps5.executeQuery();
+                                if (rs5.next()) {
+                                    float precioDescuento = rs3.getInt("precio") * rs5.getFloat("porcentaje_promo");
+                                    int precioDescuentoFinal = rs3.getInt("precio") - ( (int)precioDescuento / 100 );
+                                    
+                                    cadenaDetallesP += precioDescuentoFinal+"-";
+                                } else {
+                                    cadenaDetallesP += rs3.getInt("precio")+"-";
+                                }
+                                ps5.close();
+                                rs5.close();
 
-                                cadenaDetallesP += rs4.getInt("idCategorias")+";"+cA.CifrarASCII(rs4.getString("nombre"))+"-"+
-                                        rs3.getInt("idProductos")+";"+cA.CifrarASCII(rs3.getString("nombre"))+";"+rs3.getString("descripcion")+";"+rs3.getInt("precio")+"-"+
-                                        rs2.getInt("idDetalles_Pedidos")+";"+rs2.getInt("cantidad")+";"+rs2.getString("observacion")+";"+rs2.getInt("sub_total")+":";
+                                cadenaDetallesP += rs2.getInt("idDetalles_Pedidos")+";"+rs2.getInt("cantidad")+";"+rs2.getString("observacion")+";"+rs2.getInt("sub_total")+":";
                                 // Categorias: id, nombre -
                                 // Productos: id, nombre, descripcion, precio -
                                 // DetallesPedido: id, cantidad, observacion, subtotal :
@@ -159,14 +189,16 @@ public class ListarPedidos extends HttpServlet {
                 
                 ArrayList<Pedidos> listaPed = new ArrayList<>();
 
-                ps = con.prepareStatement("SELECT * FROM pedidos WHERE fch_registro=? AND estado=? AND idSede=?;");
+                ps = con.prepareStatement("SELECT * FROM pedidos WHERE fch_registro=? AND (estado=? OR estado=?) AND idSede=?;");
                 ps.setString(1, dateFormat.format(date));
                 ps.setString(2, "En espera");
-                ps.setInt(3, idSedeUsuario);
+                ps.setString(3, "En produccion");
+                ps.setInt(4, idSedeUsuario);
                 rs = ps.executeQuery();
                 if (rs.next()){
                     Pedidos pd = new Pedidos();
                     pd.setIdPedidos(rs.getInt("idPedidos"));
+                    pd.setNumMesa(rs.getInt("num_mesa"));
 
                     ps2 = con.prepareStatement("SELECT * FROM detalles_pedidos WHERE idPedido=? AND existencia=?;");
                     ps2.setInt(1, rs.getInt("idPedidos"));

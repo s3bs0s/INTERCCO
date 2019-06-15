@@ -26,7 +26,6 @@ public class ActualizarPerfilUsuario extends HttpServlet {
             String fchnaci = request.getParameter("perfilFechaNacimientoUsuario");
             String direccion = request.getParameter("perfilDireccionUsuario");
             String sede = request.getParameter("perfilSedeCliente");
-            System.out.println(sede);
             
             ConectaDB cdb = new ConectaDB();
             Connection con = cdb.conectar();
