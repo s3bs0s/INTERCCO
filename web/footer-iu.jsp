@@ -29,8 +29,8 @@
 <% if (session.getAttribute("rolUsuario") == null || session.getAttribute("rolUsuario").equals("Usuario")){ %>
     <script src="Estilos/js/indexUsuario.js"></script>
 <% } else { %>
-    <script type="text/javascript" src="Estilos/js/dataTables.bootstrap.min.js"></script>
-    <script type="text/javascript" src="Estilos/js/dataTablesRUN.min.js"></script>
-    <script src="Estilos/js/indexUsuario.min.js"></script>
-    <script src="Estilos/js/modalPerfil.min.js"></script>
+    <script type="text/javascript" src="Estilos/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="Estilos/js/dataTablesRUN.js"></script>
+    <script src="Estilos/js/indexUsuario.js"></script>
+    <script src="Estilos/js/modalPerfil.js"></script>
 <% } %>

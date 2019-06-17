@@ -628,9 +628,9 @@ function agregarProductoPedido(method){
                         }
                     });
                 }
+                $('html,body').css('overflow', 'auto');
+                $('#'+method+'VentanaUploadPedidos').css('display', 'none');
             }
-            $('html,body').css('overflow', 'auto');
-            $('#'+method+'VentanaUploadAGGPedidos').css('display', 'none');
         });
         
     } else {
@@ -1117,22 +1117,22 @@ function tablasProductosCocinero(arregloDetallesPedidos){
         });
     }
     $('.owl-carousel').owlCarousel({
-            margin:10,
-            nav:true,
-            dots:true,
-            autoWidth:true,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:3
-                },
-                1000:{
-                    items:5
-                }
+        margin:10,
+        nav:true,
+        dots:true,
+        autoWidth:true,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:5
             }
-        });
+        }
+    });
 }
 function estadoProductoCocinero(button, id, estado){
     if (estado === "L"){
@@ -1236,11 +1236,10 @@ function facturarPedido(numMesa,
         nomMesero,
         uso,
         subtotal,
-        total,
-        inicioUrl){
+        total){
     
     if (uso === "ver"){
-        $('#gfactBtnGenerarPedido').attr('onclick', "facturarPedido('"+numMesa+"', '"+idPedido+"', '"+nomMesero+"', 'generar', '"+inicioUrl+"')");
+        $('#gfactBtnGenerarPedido').attr('onclick', "facturarPedido('"+numMesa+"', '"+idPedido+"', '"+nomMesero+"', 'generar')");
         document.getElementById("gfactSubtotalPedido").innerText = formatNumberReturn(subtotal);
         document.getElementById("gfactTotalPedido").innerText = formatNumberReturn(total);
     } else {
@@ -1249,7 +1248,7 @@ function facturarPedido(numMesa,
         $('.pedidosGenerandoFactura').css('display', 'flex');
         $.post('FacturaG', { numMesa , idPedido , nomMesero , idCliente : $('#gfactIDClientePedido').val() , nomCliente : $('#gfactBusquedaClientePedido').val() , cedulaCliente : $('#gfactNumClientePedido').val() , importe : resetNumberReturn($('#gfactImporteClientePedido').val()) }, function(response){
             if (response.length > 0){
-                window.open(inicioUrl+"ArchivosSistema/Facturas/"+response, "Factura", "width=500, height=500");
+                window.open("http://localhost:8086/INTERCCO/ArchivosSistema/Facturas/"+response, "Factura", "width=500, height=500");
                 window.location = "Pedidos?mensaje=YFacturar";
             } else {
                 console.log("Fallo la generación de la Factura.");
@@ -1259,9 +1258,8 @@ function facturarPedido(numMesa,
         });
     }
 }
-function verFactura(idFactura,
-        inicioUrl){
-    window.open(inicioUrl+"ArchivosSistema/Facturas/"+idFactura+".pdf", "Factura", "width=500, height=500");
+function verFactura(idFactura){
+    window.open("http://localhost:8086/INTERCCO/ArchivosSistema/Facturas/"+idFactura+".pdf", "Factura", "width=500, height=500");
 }
 // </editor-fold>
 

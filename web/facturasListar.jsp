@@ -80,7 +80,7 @@
                                             <td>
                                                 <div class="td-espaciado">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#facturasVerModal" onclick="facturasVer('<%= cA.CifrarASCII(fact.getNomMesero()) %>', '<%= cA.CifrarASCII(fact.getNomCajero()) %>', '<%= cA.CifrarASCII(fact.getNomCliente()) %>', '<%= fact.getMesa()%>', '<%= fact.getImporte()%>', '<%= fact.getSubTotal()%>', '<%= fact.getTotal()%>', '<%= cA.CifrarASCII(fact.getDetallesPedidos()) %>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                    <button type="button" class="btn btn-active-os" onclick="verFactura('<%= fact.getIdFacturas() %>', 'http://localhost:8086/INTERCCO/' <%-- 'http://succco.jelastic.saveincloud.net/' --%>)"><span class="glyphicon glyphicon-download-alt"></span> Ver Factura</button>
+                                                    <button type="button" class="btn btn-active-os" onclick="verFactura('<%= fact.getIdFacturas() %>')"><span class="glyphicon glyphicon-download-alt"></span> Ver Factura</button>
                                                 </div>
                                             </td>
                                         </tr>
