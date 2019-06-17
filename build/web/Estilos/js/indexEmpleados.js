@@ -1236,10 +1236,11 @@ function facturarPedido(numMesa,
         nomMesero,
         uso,
         subtotal,
-        total){
+        total,
+        inicioUrl){
     
     if (uso === "ver"){
-        $('#gfactBtnGenerarPedido').attr('onclick', "facturarPedido('"+numMesa+"', '"+idPedido+"', '"+nomMesero+"', 'generar')");
+        $('#gfactBtnGenerarPedido').attr('onclick', "facturarPedido('"+numMesa+"', '"+idPedido+"', '"+nomMesero+"', 'generar', '"+inicioUrl+"')");
         document.getElementById("gfactSubtotalPedido").innerText = formatNumberReturn(subtotal);
         document.getElementById("gfactTotalPedido").innerText = formatNumberReturn(total);
     } else {
@@ -1248,9 +1249,8 @@ function facturarPedido(numMesa,
         $('.pedidosGenerandoFactura').css('display', 'flex');
         $.post('FacturaG', { numMesa , idPedido , nomMesero , idCliente : $('#gfactIDClientePedido').val() , nomCliente : $('#gfactBusquedaClientePedido').val() , cedulaCliente : $('#gfactNumClientePedido').val() , importe : resetNumberReturn($('#gfactImporteClientePedido').val()) }, function(response){
             if (response.length > 0){
-                window.open("http://localhost:8086/INTERCCO/ArchivosSistema/Facturas/"+response, "Factura", "width=500, height=500");
+                window.open(inicioUrl+"ArchivosSistema/Facturas/"+response, "Factura", "width=500, height=500");
                 window.location = "Pedidos?mensaje=YFacturar";
-//                window.open("http://succco.jelastic.saveincloud.net/ArchivosSistema/Facturas/"+response, "Factura", "width=500, height=500");
             } else {
                 console.log("Fallo la generación de la Factura.");
             }
@@ -1259,8 +1259,9 @@ function facturarPedido(numMesa,
         });
     }
 }
-function verFactura(idFactura){
-    window.open("http://localhost:8086/INTERCCO/ArchivosSistema/Facturas/"+idFactura+".pdf", "Factura", "width=500, height=500");
+function verFactura(idFactura,
+        inicioUrl){
+    window.open(inicioUrl+"ArchivosSistema/Facturas/"+idFactura+".pdf", "Factura", "width=500, height=500");
 }
 // </editor-fold>
 

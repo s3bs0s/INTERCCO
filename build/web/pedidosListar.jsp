@@ -219,6 +219,11 @@
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     <strong>¡Error!</strong> El pedido no se pudo registrar por un error general en las bases de datos, contacte al administrador del sistema.
                                 </div>
+                                <% } else if (mens.equals("YFacturar")){ %>
+                                <div class="alert alert-success alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>¡Facturado!</strong> El pedido fue facturado correctamente.
+                                </div>
                                 <% } else if (mens.equals("YEntregado")){ %>
                                 <div class="alert alert-success alert-dismissible">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -326,10 +331,10 @@
                                                             <% }
                                                             if (pedi.getEstado().equals("Entregado")){ %>
                                                                 <button type="button" class="btn btn-purple" onClick="window.location = 'PedidoD?idPed='+<%= pedi.getIdPedidos()%>;"><span class="glyphicon glyphicon-transfer"></span> Devolución</button>
-                                                                <button type="button" class="btn btn-active-os" data-toggle="modal" data-target="#pedidoFacturaGModal" onclick="facturarPedido('<%= pedi.getNumMesa() %>', '<%= pedi.getIdPedidos()%>', '<%= cA.CifrarASCII(pedi.getNomMesero()) %>', 'ver', '<%= pedi.getSubTotal()%>', '<%= pedi.getTotal()%>')"><span class="icon-clipboard"></span> Facturar</button>
+                                                                <button type="button" class="btn btn-active-os" data-toggle="modal" data-target="#pedidoFacturaGModal" onclick="facturarPedido('<%= pedi.getNumMesa() %>', '<%= pedi.getIdPedidos()%>', '<%= cA.CifrarASCII(pedi.getNomMesero()) %>', 'ver', '<%= pedi.getSubTotal()%>', '<%= pedi.getTotal()%>', 'http://localhost:8086/INTERCCO/')"><span class="icon-clipboard"></span> Facturar</button>
                                                             <% }
                                                             if (pedi.getEstado().equals("Facturado")){ %>
-                                                                <button type="button" class="btn btn-active-os" onclick="verFactura('<%= pedi.getIdFactura() %>')"><span class="glyphicon glyphicon-download-alt"></span> Ver Factura</button>
+                                                                <button type="button" class="btn btn-active-os" onclick="verFactura('<%= pedi.getIdFactura() %>', 'http://localhost:8086/INTERCCO/' <%-- 'http://succco.jelastic.saveincloud.net/' --%>)"><span class="glyphicon glyphicon-download-alt"></span> Ver Factura</button>
                                                             <% } %>
                                                         </div>
                                                     </td>
@@ -532,6 +537,11 @@
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <strong>¡Perfecto!</strong> El pedido fue actualizado correctamente.
                             </div>
+                            <% } else if (mens.equals("YFacturar")){ %>
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong>¡Facturado!</strong> El pedido fue facturado correctamente.
+                            </div>
                             <% } else if (mens.equals("YCancelar")){ %>
                             <div class="alert alert-success alert-dismissible">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -608,10 +618,10 @@
                                                     <div class="td-espaciado">
                                                         <% if (pedi.getEstado().equals("Entregado")){ %>
                                                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pedidosVerModal" onclick="pedidosVer('<%= rolUsuario %>', '<%= cA.CifrarASCII(pedi.getNomMesero()) %>', '<%= cA.CifrarASCII(pedi.getNomCliente()) %>', '<%= pedi.getNumMesa()%>', '<%= pedi.getSubTotal()%>', '<%= cA.CifrarASCII(pedi.getDetallesPedidos()) %>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                            <button type="button" class="btn btn-active-os" data-toggle="modal" data-target="#pedidoFacturaGModal" onclick="facturarPedido('<%= pedi.getNumMesa() %>', '<%= pedi.getIdPedidos()%>', '<%= cA.CifrarASCII(pedi.getNomMesero()) %>', 'ver', '<%= pedi.getSubTotal()%>', '<%= pedi.getTotal()%>')"><span class="icon-clipboard"></span> Facturar</button>
+                                                            <button type="button" class="btn btn-active-os" data-toggle="modal" data-target="#pedidoFacturaGModal" onclick="facturarPedido('<%= pedi.getNumMesa() %>', '<%= pedi.getIdPedidos()%>', '<%= cA.CifrarASCII(pedi.getNomMesero()) %>', 'ver', '<%= pedi.getSubTotal()%>', '<%= pedi.getTotal()%>', 'http://localhost:8086/INTERCCO/')"><span class="icon-clipboard"></span> Facturar</button>
                                                         <% } else { %>
                                                             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pedidosVerModal" onclick="pedidosVer('<%= rolUsuario %>', '<%= cA.CifrarASCII(pedi.getNomMesero()) %>', '<%= cA.CifrarASCII(pedi.getNomCliente()) %>', '<%= pedi.getNumMesa()%>', '<%= pedi.getSubTotal()%>', '<%= cA.CifrarASCII(pedi.getDetallesPedidos()) %>')"><span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-                                                            <button type="button" class="btn btn-active-os" onclick="verFactura('<%= pedi.getIdFactura() %>')"><span class="glyphicon glyphicon-download-alt"></span> Ver Factura</button>
+                                                            <button type="button" class="btn btn-active-os" onclick="verFactura('<%= pedi.getIdFactura() %>', 'http://localhost:8086/INTERCCO/' <%-- 'http://succco.jelastic.saveincloud.net/' --%>)"><span class="glyphicon glyphicon-download-alt"></span> Ver Factura</button>
                                                         <% } %>
                                                     </div>
                                                 </td>

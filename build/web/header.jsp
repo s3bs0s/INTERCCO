@@ -7,18 +7,18 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="Estilos/css/swiper.css">
-    <link rel="stylesheet" type="text/css" href="Estilos/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="Estilos/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="Estilos/css/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css" href="Estilos/css/owl.theme.default.min.css">
-    <link rel="stylesheet" type="text/css" href="Estilos/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="Estilos/css/dataTables.bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="Estilos/css/sb-admin-2.css">
-    <link rel="stylesheet" type="text/css" href="Estilos/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="Estilos/css/sbodys.css">
-    <link rel="stylesheet" type="text/css" href="Estilos/css/sfooter.css">
-    <link rel="stylesheet" type="text/css" href="Estilos/css/sheader.css">
-    <link rel="stylesheet" type="text/css" href="Estilos/css/smodales.css">
-    <link rel="stylesheet" type="text/css" href="Estilos/css/stablasListar.css">
+    <link rel="stylesheet" type="text/css" href="Estilos/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="Estilos/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="Estilos/css/sb-admin-2.min.css">
+    <link rel="stylesheet" type="text/css" href="Estilos/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="Estilos/css/sbodys.min.css">
+    <link rel="stylesheet" type="text/css" href="Estilos/css/sfooter.min.css">
+    <link rel="stylesheet" type="text/css" href="Estilos/css/sheader.min.css">
+    <link rel="stylesheet" type="text/css" href="Estilos/css/smodales.min.css">
+    <link rel="stylesheet" type="text/css" href="Estilos/css/stablasListar.min.css">
     <link rel="stylesheet" type="text/css" href="Estilos/fonts/fonts.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     

@@ -332,7 +332,7 @@
 
                         <div class="input-group cont-btn">
                             <div class="cont-btn-principal">
-                                <button disabled data-dismiss="modal" type="button" id="gfactBtnGenerarPedido" class="btn-modal btn btn-principal">Generar Factura</button>
+                                <button disabled type="button" id="gfactBtnGenerarPedido" class="btn-modal btn btn-principal">Generar Factura</button>
                             </div>
                             <div class="cont-btns-secundario">
                                 <button data-dismiss="modal" type="button" class="btn-modal btn btn-secundario">Cancelar</button>
